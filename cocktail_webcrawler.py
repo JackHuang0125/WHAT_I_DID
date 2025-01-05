@@ -67,3 +67,4 @@ for index in df.index:
     # 更新 DataFrame 中的值
     df.loc[index, "Ingredients"] = cleaned
 
+print(df)
