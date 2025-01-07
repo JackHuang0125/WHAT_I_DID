@@ -7,3 +7,6 @@
 [submodule "mywebsite/mywebsite/mywebsite/mywebsite/hugo-PaperMod"]
 	path = mywebsite/mywebsite/mywebsite/mywebsite/hugo-PaperMod
 	url = https://github.com/adityatelange/hugo-PaperMod.git
+[submodule "mywebsite/themes/hextra"]
+	path = mywebsite/themes/hextra
+	url = https://github.com/imfing/hextra.git
