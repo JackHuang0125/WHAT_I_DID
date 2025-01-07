@@ -1,4 +1,0 @@
-baseURL = 'https://example.org/'
-languageCode = 'zh-TW'
-title = 'JackHuang'
-theme = 'hugo-PaperMod'
