@@ -1,0 +1,9 @@
+[submodule "mywebsite/mywebsite/hugo-PaperMod"]
+	path = mywebsite/mywebsite/hugo-PaperMod
+	url = https://github.com/adityatelange/hugo-PaperMod.git
+[submodule "mywebsite/mywebsite/themes/hugo-PaperMod"]
+	path = mywebsite/mywebsite/themes/hugo-PaperMod
+	url = https://github.com/adityatelange/hugo-PaperMod.git
+[submodule "mywebsite/mywebsite/mywebsite/mywebsite/hugo-PaperMod"]
+	path = mywebsite/mywebsite/mywebsite/mywebsite/hugo-PaperMod
+	url = https://github.com/adityatelange/hugo-PaperMod.git
