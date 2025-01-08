@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cocktail Recommendation</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        select, button { font-size: 16px; padding: 10px; margin: 5px 0; width: 100%; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+    <script>
+        function showRecommendations() {
+            const cocktailName = document.getElementById('cocktailSelect').value;
+            const recommendations = JSON.parse(document.getElementById('data').textContent)[cocktailName];
+            const tableBody = document.getElementById('recommendationsBody');
+            tableBody.innerHTML = '';
+            recommendations.forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                });
+                tableBody.appendChild(tr);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Cocktail Recommendation System</h1>
+        <label for="cocktailSelect">Select a Cocktail:</label>
+        <select id="cocktailSelect" onchange="showRecommendations()">
+            
+            <option value="Mojito">Mojito</option>
+            
+            <option value="Old Cuban">Old Cuban</option>
+            
+            <option value="Caipirinha">Caipirinha</option>
+            
+            <option value="Mai Tai">Mai Tai</option>
+            
+        </select>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cocktail</th>
+                    <th>Similarity Score</th>
+                </tr>
+            </thead>
+            <tbody id="recommendationsBody"></tbody>
+        </table>
+        <div style="display:none;" id="data">{'Mojito': [['Old Cuban', 0.85], ['Caipirinha', 0.78], ['Mai Tai', 0.65]], 'Old Cuban': [['Mojito', 0.85], ['Caipirinha', 0.82], ['Mai Tai', 0.7]], 'Caipirinha': [['Old Cuban', 0.82], ['Mojito', 0.78], ['Mai Tai', 0.68]], 'Mai Tai': [['Old Cuban', 0.7], ['Caipirinha', 0.68], ['Mojito', 0.65]]}</div>
+    </div>
+</body>
+</html>
