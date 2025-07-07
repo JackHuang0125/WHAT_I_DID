@@ -1,7 +1,7 @@
 library(GAPR)
 library(readr)
 
-bbc = read.csv('filtered_doc_token_matrix.csv', check.names = FALSE, stringsAsFactors = FALSE)
+bbc = read.csv('filtered_doc_token_matrix2.csv', check.names = FALSE, stringsAsFactors = FALSE)
 token_names_original <- colnames(bbc)
 
 respond = GAP(
@@ -13,7 +13,7 @@ respond = GAP(
     row.flip = 'r2e',  
     col.flip = "r2e",
     border = TRUE,
-    PNGfilename = 'token_gap_heatmap.png',
+    PNGfilename = 'token_gap_heatmap2.png',
     show.plot = TRUE,
     exp.column_order = TRUE,
     exp.col_prox = TRUE
@@ -24,9 +24,7 @@ colprox <- as.matrix(respond$col_prox)
 # 設定輸出檔名與圖片尺寸（單位為像素）
 # png("bbc_gap_heatmap3.png", width = 1200, height = 1200)
 # 繪圖（請將 rowprox 換成你的矩陣變數名稱）
-# heatmap(colprox, 
-        # col = colorRampPalette(c("white", "yellow", "red"))(100),
-        # main = "GAP Heatmap of BBC Token Correlations")
+# heatmap(colprox, col = colorRampPalette(c("white", "yellow", "red"))(100), main = "GAP Heatmap of BBC Token Correlations")
 # 關閉圖形設備，完成儲存
 # dev.off()
 
@@ -42,7 +40,7 @@ token_cluster <- cutree(hclust(as.dist(1 - colprox)), k = 5)
 
 if(length(token_names) == length(token_cluster)) {
   token_to_topic <- data.frame(token = token_names, topic = token_cluster)
-  write.csv(token_to_topic, "r_token_to_topic.csv", row.names = FALSE)
+  write.csv(token_to_topic, "r_token_to_topic2.csv", row.names = FALSE)
   cat("✅ 成功產生 token_to_topic.csv\n")
 } else {
   cat("❌ token_names 還是空的，請檢查 GAP 前的欄名是否傳進去\n")
