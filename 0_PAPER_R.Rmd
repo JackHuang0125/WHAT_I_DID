@@ -1,19 +1,17 @@
 library(GAPR)
 library(readr)
 
-bbc = read.csv('filtered_doc_token_matrix2.csv', check.names = FALSE, stringsAsFactors = FALSE)
+bbc = read.csv('篩選各topic的tfidf前30.csv', check.names = FALSE, stringsAsFactors = FALSE)
 token_names_original <- colnames(bbc)
 
 respond = GAP(
     data = bbc,
     row.prox = 'pearson',
     col.prox = 'pearson',
-    row.order = 'r2e',
-    col.order = 'r2e',
-    row.flip = 'r2e',  
-    col.flip = "r2e",
+    row.order = 'original',
+    col.order = 'average',
     border = TRUE,
-    PNGfilename = 'token_gap_heatmap2.png',
+    PNGfilename = 'token_gap_heatmap.png',
     show.plot = TRUE,
     exp.column_order = TRUE,
     exp.col_prox = TRUE
@@ -40,9 +38,8 @@ token_cluster <- cutree(hclust(as.dist(1 - colprox)), k = 5)
 
 if(length(token_names) == length(token_cluster)) {
   token_to_topic <- data.frame(token = token_names, topic = token_cluster)
-  write.csv(token_to_topic, "r_token_to_topic2.csv", row.names = FALSE)
+  write.csv(token_to_topic, "篩選各topic的tfidf前30的token分配主題.csv", row.names = FALSE)
   cat("✅ 成功產生 token_to_topic.csv\n")
 } else {
   cat("❌ token_names 還是空的，請檢查 GAP 前的欄名是否傳進去\n")
 }
-
