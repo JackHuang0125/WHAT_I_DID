@@ -1,7 +1,7 @@
 library(GAPR)
 library(readr)
 
-bbc = read.csv('篩選各topic的tfidf前30.csv', check.names = FALSE, stringsAsFactors = FALSE)
+bbc = read.csv('0.8_5的tfidf前15.csv', check.names = FALSE, stringsAsFactors = FALSE)
 token_names_original <- colnames(bbc)
 
 respond = GAP(
@@ -11,7 +11,7 @@ respond = GAP(
     row.order = 'original',
     col.order = 'average',
     border = TRUE,
-    PNGfilename = 'token_gap_heatmap.png',
+    PNGfilename = '0.8_5的tfidf前15的GAP.png',
     show.plot = TRUE,
     exp.column_order = TRUE,
     exp.col_prox = TRUE
@@ -38,8 +38,24 @@ token_cluster <- cutree(hclust(as.dist(1 - colprox)), k = 5)
 
 if(length(token_names) == length(token_cluster)) {
   token_to_topic <- data.frame(token = token_names, topic = token_cluster)
-  write.csv(token_to_topic, "篩選各topic的tfidf前30的token分配主題.csv", row.names = FALSE)
+  write.csv(token_to_topic, "0.8_5的tfidf前15的token分配主題.csv", row.names = FALSE)
   cat("✅ 成功產生 token_to_topic.csv\n")
 } else {
   cat("❌ token_names 還是空的，請檢查 GAP 前的欄名是否傳進去\n")
 }
+
+token_names <- token_names_original[token_order]
+token_names
+
+# 假設你看到第一群是第 1~12 個、第二群是 13~25 個……
+token_cluster <- rep(NA, length(token_names))
+token_cluster[1:15] <- 4
+token_cluster[16:27] <- 2
+token_cluster[28:41] <- 5
+token_cluster[42:54] <- 1
+token_cluster[55:68] <- 3
+
+token_to_topic <- data.frame(token = token_names, topic = token_cluster)
+write.csv(token_to_topic, "0.8_5的tfidf前15手動分群.csv", row.names = FALSE)
+
+token_to_topic
