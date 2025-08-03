@@ -1,0 +1,82 @@
+library(GAPR)
+library(readr)
+
+bbc <- read_delim("C:/Users/USER/Downloads/reddata_no_y.txt", delim = "\t", col_names = TRUE, show_col_types = FALSE)
+
+bbc <- as.data.frame(lapply(bbc, function(x) as.numeric(as.character(x))))
+
+n_original <- rownames(bbc)
+x_original <- colnames(bbc)
+
+respond = GAP(
+    data = bbc,
+    row.prox = 'pearson',
+    col.prox = 'pearson',
+    row.order = 'average',
+    col.order = 'average',
+    border = TRUE,
+    PNGfilename = 'redwine的GAP.png',
+    show.plot = TRUE,
+    exp.row_order = TRUE,
+    exp.row_prox = TRUE
+)
+
+rowprox <- as.matrix(respond$row_prox)
+doc_order <- respond$row_order
+doc_numbers <- doc_numbers_original[doc_order]
+doc_order
+# 分群：可視需要切成 K 群（例：2 群）
+doc_cluster <- cutree(hclust(as.dist(1 - rowprox)), k = 6)
+
+doc_numbers[doc_cluster == 1]
+doc_numbers[doc_cluster == 2]
+
+gap_cluster_df <- data.frame(filename = doc_numbers, gap_cluster = doc_cluster)
+write.csv(gap_cluster_df, "gap_redwine_clusters.csv", row.names = FALSE)
+cat("✅ GAP 分群結果已儲存為 gap_redwine_clusters.csv\n")
+
+rowprox <- as.matrix(respond$row_prox)
+
+# 若沒有列名，先造一份
+if (is.null(rownames(rowprox))) {
+  labels <- paste0("doc_", seq_len(nrow(rowprox)))
+  rownames(rowprox) <- labels
+  colnames(rowprox) <- labels
+}
+
+hc <- hclust(as.dist(1 - rowprox))
+doc_cluster <- cutree(hc, k = 6)
+
+doc_numbers <- setNames(rownames(rowprox), rownames(rowprox))  # 顯示用
+group1 <- doc_numbers[names(doc_cluster)[doc_cluster == 1]]
+group2 <- doc_numbers[names(doc_cluster)[doc_cluster == 2]]
+group3 <- doc_numbers[names(doc_cluster)[doc_cluster == 3]]
+group4 <- doc_numbers[names(doc_cluster)[doc_cluster == 4]]
+group5 <- doc_numbers[names(doc_cluster)[doc_cluster == 5]]
+group6 <- doc_numbers[names(doc_cluster)[doc_cluster == 6]]
+
+length(group1)
+length(group2)
+length(group3)
+length(group4)
+length(group5)
+length(group6)
+
+# 假設這時候 rowprox、doc_cluster 都已建立
+stopifnot(!is.null(rownames(rowprox)))
+stopifnot(identical(names(doc_cluster), rownames(rowprox)))
+
+# 若你希望 filename 就是 rownames(rowprox)
+doc_numbers <- setNames(rownames(rowprox), rownames(rowprox))
+
+gap_cluster_df <- data.frame(
+  filename    = names(doc_cluster),      # 與 rownames(rowprox) 等長且同序
+  gap_cluster = as.integer(doc_cluster), # 轉成整數以利外部處理
+  stringsAsFactors = FALSE
+)
+
+# 依群組、再依檔名排序（可選）
+gap_cluster_df <- gap_cluster_df[order(gap_cluster_df$gap_cluster, gap_cluster_df$filename), ]
+
+write.csv(gap_cluster_df, "gap_redwine_clusters.csv", row.names = FALSE)
+cat("GAP 分群結果已儲存為 gap_redwine_clusters.csv\n")

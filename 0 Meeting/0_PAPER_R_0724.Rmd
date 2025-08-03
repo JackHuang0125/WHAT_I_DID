@@ -1,7 +1,7 @@
 library(GAPR)
 library(readr)
 
-bbc = read.csv('C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/tf_top1000.csv', check.names = FALSE, stringsAsFactors = FALSE)
+bbc = read.csv('C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/sport_tech_tf_top1000.csv', check.names = FALSE, stringsAsFactors = FALSE)
 token_names_original <- colnames(bbc)
 
 respond = GAP(
