@@ -1,21 +1,21 @@
 library(GAPR)
 library(readr)
 
-bbc <- read_delim("C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/cancer_no_y.csv", delim = "\t", col_names = TRUE, show_col_types = FALSE)
+bank <- read_delim("C:/Users/USER/Documents/GitHub/psychic-spoon/DataSet/bbank_no_y.csv", delim = "\t", col_names = TRUE, show_col_types = FALSE)
 
-bbc <- as.data.frame(lapply(bbc, function(x) as.numeric(as.character(x))))
+bank <- as.data.frame(lapply(bank, function(x) as.numeric(as.character(x))))
 
-n_original <- rownames(bbc)
-x_original <- colnames(bbc)
+n_original <- rownames(bank)
+x_original <- colnames(bank)
 
 respond = GAP(
-    data = bbc,
-    row.prox = 'pearson',
-    col.prox = 'pearson',
+    data = bank,
+    row.prox = 'jaccard',
+    col.prox = 'jaccard',
     row.order = 'average',
     col.order = 'average',
     border = TRUE,
-    PNGfilename = 'cancer的GAP.png',
+    PNGfilename = 'bank的GAP.png',
     show.plot = TRUE,
     exp.row_order = TRUE,
     exp.row_prox = TRUE
@@ -26,7 +26,7 @@ doc_order <- respond$row_order
 doc_numbers <- n_original[doc_order]
 doc_order
 # 分群：可視需要切成 K 群（例：2 群）
-doc_cluster <- cutree(hclust(as.dist(1 - rowprox)), k = 2)
+doc_cluster <- cutree(hclust(as.dist(1 - rowprox)), k = 8)
 
 doc_numbers[doc_cluster == 1]
 doc_numbers[doc_cluster == 2]
