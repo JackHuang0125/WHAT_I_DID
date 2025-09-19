@@ -1,0 +1,76 @@
+\documentclass[a4paper, 12pt]{article}  %set doc type and font size
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{amsmath} % 提供進階數學環境與公式排版
+
+\setCJKmainfont{標楷體}
+\setmainfont{Times New Roman} 
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\title{09/18 Advanced Statistics HW}
+\author{黃丞暘　611211106}
+\date{}
+\begin{document}
+\maketitle % 顯示標題區塊
+
+\section*{Q1: $A(\eta)=-n\ln p_0=n\ln[1+\displaystyle\sum_{i=1}^s(e^{\eta_i})]$}
+Since  $X_i {\sim}Multinomial(n;\ p_1,\ p_2,\ ...,\ p_s)$, it follows that   
+$$p(X=x)=\frac{n!}{\displaystyle\prod_{i=0}^sx_i!}\prod_{i=0}^sp_i^{x_i}$$ 
+and 
+$\displaystyle\sum_{i=0}^sx_i=n$, 
+$\displaystyle\sum_{i=0}^sp_i=1$. 
+Moreover, we define $\eta_i=\ln\frac{p_i}{p_0}$, then the pmf can be written as 
+
+\begin{align*}
+p(X=x)
+=\frac{n!}{\displaystyle\prod_{i=0}^sx_i!}\prod_{i=0}^sp_i^{x_i}
+=\frac{n!}{\displaystyle\prod_{i=0}^sx_i!}p_0^{x_0}\prod_{i=1}^sp_i^{x_i}
+=\frac{n!}{\displaystyle\prod_{i=0}^sx_i!}p_0^{n-\sum_{i=1}^sx_i}\prod_{i=1}^s(p_0e^{\eta_i})^{x_i},
+\end{align*}
+where
+\[
+\begin{aligned}
+p_0^{n-\sum_{i=1}^sx_i}
+&= \exp\left\{(n-\sum_{i=1}^sx_i)\ln p_0\right\}=\exp\left\{n\ln{p_0}-(\sum_{i=1}^sx_i)\ln{p_0}\right\}, \\
+\prod_{i=1}^s (p_0 e^{\eta_i})^{x_i}
+&= \exp\left\{\sum_{i=1}^s\eta_ix_i+(\sum_{i=1}^sx_i)\ln{p_0}\right\}.
+\end{aligned}
+\]
+Then we have
+$$
+p(X=x)=\underbrace{\frac{n!}{\displaystyle\prod_{i=0}^sx_i!}}_{h(x)}
+\exp\left\{\sum_{i=1}^s\underbrace{\eta_i x_i}_{\eta_i T_i(x)}
++\underbrace{n\ln p_0}_{-A(\eta)}\right\}
+$$
+Therefor, $A(\eta)=-n\ln{p_0}=-n\ln \frac{1}{1+\sum_{i=1}^s e^{\eta_i}}=n\ln (1+\displaystyle\sum_{i=1}^se^{\eta_i})$
+where $\eta_i=\ln\frac{p_i}{p_0}
+\implies p_i=p_0e^{\eta_i}
+\implies \displaystyle p_0+\sum_{i=1}^sp_0e^{\eta_i}=1
+\implies p_0=(1+\sum_{i=1}^se^{\eta_i})^{-1}$
+
+\section*{Q2: $X_i \overset{iid}{\sim} N(\mu, \sigma^2)$
+, $f_X(x)$: joint density belongs to exponential family, Natureal parameter $\eta$ = ?
+Natural parameter space ? $T(x)$ = ?}
+
+
+
+\section*{Q3: $E(X_i)=np_i, Cov(X_i, X_j)=
+\begin{cases}
+np_i(1-p_i) &if　i=j \\
+-np_ip_j &if　i\not=j 
+\end{cases}$}
+
+Since Q1, we know that $A(\eta)=n\ln (1+\displaystyle\sum_{i=1}^se^{\eta_i})$ and $p_i=\frac{e^{\eta_i}}{1+\sum_{i=1}^se^{\eta_i}}$
+
+\[
+E[X_i] = \frac{\partial A}{\partial \eta_i}=n\frac{e^{\eta_i}}{1+\sum_{i=1}^s e^{\eta_i}}=np_i
+\]
+
+\[
+Cov(X_i, X_j)=\frac{\partial^2 A}{\partial \eta_i \partial \eta_j}= \text{two cases about}　i\not=j　\text{and}　i=j
+\]
+
+for $i \not = j$
+\end{document}
