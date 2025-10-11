@@ -1,0 +1,221 @@
+%----------------------------------------------------------------------------------------
+%	封包與文檔配置
+%----------------------------------------------------------------------------------------
+
+% 設定字型為11pt (可換成：8pt、9pt、10pt、11pt (默認)、12pt、14pt、17pt 或 20pt)
+% 設定顯示比例為4:3 (可換成：1610、149、54、43 (默認) 或 32)
+% 若有設定動畫，且要輸出記得加上 handout，避免列印過多相似的頁面。
+\documentclass[12pt, aspectratio=43]{beamer} 
+
+\input{結構設定.tex} % 載入封包與文檔配置
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	封面頁及簡報資訊
+%----------------------------------------------------------------------------------------
+
+% [] 內為顯示於外框中的文字，{} 則是封面上的文字。
+
+% 簡報名稱
+\title[Meeting 1015]{\Huge{Meeting 1015}} 
+
+% 簡報子名稱
+\subtitle{} 
+
+% 作者
+\author[黃丞暘]{黃丞暘}
+
+% 機構
+\institute[國立東華大學]{\normalsize 國立東華大學 應用數學統計所} 
+
+% 日期
+\date[\today]{\today}
+
+
+\begin{frame}
+	\titlepage % 將上方資訊輸出成封面頁
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	目錄
+%----------------------------------------------------------------------------------------
+
+\begin{frame}{\textbf{目錄}}
+	\tableofcontents % 將所有節及子節的內容輸出成表
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%   資料介紹
+%----------------------------------------------------------------------------------------
+
+% (動畫)字會若隱若現的顯示
+\beamersetuncovermixins{\opaqueness<1->{45}}{\opaqueness<1->{95}} 
+
+%----------------------------------------------------------------------------------------
+
+\section{資料介紹}
+
+%----------------------------------------------------------------------------------------
+
+\linespread{1}  %此行以後，皆為1倍行高
+\begin{frame}[<+>]{\textbf{資料介紹}} % [<+>] 會自動以動畫呈現，就不用一直輸入 \pause。
+\linespread{1.5} %此行以後，皆為1.5倍行高
+
+    SECOM
+	
+	% 垂直距離的空格 (另外有\medskip, \smallskip, \vspace{?em})
+    \bigskip 
+	 
+	 % 動畫出現至此的指令
+	% \pause 
+	
+    \begin{itemize}[] % 封包 itemize 的 item
+      \item 樣本數 1567
+      \item 變數 Time／x1／x2／...／x590／PassFail
+        \begin{enumerate}[] % 同一層：四個子項目並齊
+          \item Features: 591, Y: PassFail (binary classification)
+          \item Time: 2008-07-19 11:55:00
+          \item PassFail: Pass $\to$ 0, Fail $\to$ 1 (14:1)
+          \item Missing values: 41951
+        \end{enumerate}
+    \end{itemize}
+    
+	 % \alert{Econometrics} is a \textbf{statistical} method used to \textit{estimate} the economic relationship,
+	 % test economic theories, and evaluate the effects of government or business policies.
+	 	
+	% \bigskip 
+
+	% 引用名言
+	% \begin{quote}
+	% 	Pure mathematics is, in its way, the poetry of logical ideas.\\
+	% 	(純粹數學，就其本質而言，是邏輯思想的詩篇。)\\
+	% 	--- Albert Einstein (愛因斯坦)
+	% \end{quote}
+	
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	文獻回顧I
+%----------------------------------------------------------------------------------------
+
+\section{文獻回顧I}
+
+%----------------------------------------------------------------------------------------
+
+\linespread{1}  
+\begin{frame}[<+>]{\textbf{文獻回顧I}}
+\linespread{1.5} 
+
+	\begin{itemize}[] 
+		\item Lai ( 2002 )
+		\begin{enumerate}[] 
+			\item 方法
+                \begin{enumerate}[] % 同一層：子項目並齊
+                    \item Data preprocessing
+                    \item KNN-imputation
+                    \item Random forest features selection
+                    \item imbalance - SMOTE to 1:1
+                    \item 0.8 training, 0.2 testing by decision tree
+                \end{enumerate}
+			\item 結果
+                \begin{enumerate}[] 
+                    \item Best: ACC 86.94\%, FAR 9.22\% 
+                    \item 反查 Fail 節點
+                \end{enumerate}
+		\end{enumerate}
+	\end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	研究動機
+%----------------------------------------------------------------------------------------
+
+\section{研究動機}
+
+%----------------------------------------------------------------------------------------
+
+\linespread{1}
+\begin{frame}{\textbf{研究動機}}
+\linespread{1.5}
+
+	\begin{itemize}[]
+		\item K-folds cross validation
+		\begin{enumerate}[]
+			\item Robust performance
+                % \begin{enumerate}[] % 同一層：四個子項目並齊
+                    % \item Data preprocessing
+                % \end{enumerate}
+		\end{enumerate}
+	\end{itemize}
+
+    \begin{itemize}[]
+		\item $y = \hat{f}(x)$
+		\begin{enumerate}[] % 封包 enumerate 的 item，[] 中不輸入東西。
+			\item Important features
+                % \begin{enumerate}[] % 同一層：四個子項目並齊
+                    % \item Data preprocessing
+                % \end{enumerate}
+		\end{enumerate}
+	\end{itemize}
+	% \begin{block}{\textbf{定義}} 
+	% 	一個二次可微分的實數函數$f\left(x\right)$稱為一個凸函數(convex function)，
+	% 	若$f^{\,\prime\prime}\!\left(x\right)\ge0$對所有$x$；
+	% 	同理若$f^{\,\prime\prime}\!\left(x\right)\le0$對所有$x$，
+	% 	則稱為凹函數(concave function)。
+	% \end{block}
+	
+	% \begin{block}{\textbf{證明}} 
+	% 	若要在證明的方塊後加入實心正方形，
+	% 	可以輸入$\backslash$hfill\$$\backslash$blacksquare\$，
+ %        就如你現在所看到這樣。
+	% 	\hfill$\blacksquare$
+	% \end{block}
+	
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	參考資料
+%----------------------------------------------------------------------------------------
+
+\section{參考資料}
+
+%----------------------------------------------------------------------------------------
+
+\linespread{1}  %此行以後，皆為1倍行高
+\begin{frame}{\textbf{參考資料}}
+\linespread{1.5} %此行以後，皆為1.5倍行高
+
+\footnotesize
+
+\begin{thebibliography}{99} 
+
+	\bibitem[Li-Fu Lai (2022)]{中文文獻範例} % 引注時顯示的名稱
+		Li-Fu Lai (2022)。 % 作者 (年份)
+		\newblock 使用KNN和決策樹方法對填補缺失值的製造數據進行失效預測和原因追蹤分析 % 文章名稱
+		
+\end{thebibliography}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	結束頁
+%----------------------------------------------------------------------------------------
+
+\section*{結束頁}
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}[plain] % 產生無外框的頁面
+	\begin{center}
+		{\Huge The End}
+		\bigskip\bigskip 
+		
+		{\LARGE Questions  \&  Comments}
+	\end{center}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 
