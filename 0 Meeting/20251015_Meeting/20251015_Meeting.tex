@@ -1,63 +1,84 @@
-%----------------------------------------------------------------------------------------
-%	封包與文檔配置
-%----------------------------------------------------------------------------------------
+\documentclass[12pt,aspectratio=43]{beamer}
 
-% 設定字型為11pt (可換成：8pt、9pt、10pt、11pt (默認)、12pt、14pt、17pt 或 20pt)
-% 設定顯示比例為4:3 (可換成：1610、149、54、43 (默認) 或 32)
-% 若有設定動畫，且要輸出記得加上 handout，避免列印過多相似的頁面。
-\documentclass[12pt, aspectratio=43]{beamer} 
+% 自訂字體的封包
+\usepackage{fontspec}
 
-\input{結構設定.tex} % 載入封包與文檔配置
+% 導入圖形與表格的封包
+\usepackage{graphicx}
+\usepackage{booktabs}
 
-\begin{document}
+ % 提供進階數學環境與公式排版
+\usepackage{mathtools, amsmath, amsfonts, amsthm, latexsym} 
 
-%----------------------------------------------------------------------------------------
-%	封面頁及簡報資訊
-%----------------------------------------------------------------------------------------
+%% 設定中文字體
+\usepackage{xeCJK}
+\setCJKmainfont[AutoFakeBold=3.5 , AutoFakeSlant=0.2]{標楷體}
+\setmainfont{Times New Roman}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
 
-% [] 內為顯示於外框中的文字，{} 則是封面上的文字。
+% 自訂字體顏色的封包
+\usepackage{color} 
 
-% 簡報名稱
-\title[Meeting 1015]{\Huge{Meeting 1015}} 
+% 圖表自動編號的封包
+\usepackage{caption} 
 
-% 簡報子名稱
-\subtitle{} 
+% 序列標號
+\usepackage{enumerate} 
 
-% 作者
-\author[黃丞暘]{黃丞暘}
+%% 設定自動編號
+\setbeamertemplate{caption}[numbered]
 
-% 機構
-\institute[國立東華大學]{\normalsize 國立東華大學 應用數學統計所} 
-
-% 日期
-\date[\today]{\today}
-
-
-\begin{frame}
-	\titlepage % 將上方資訊輸出成封面頁
-\end{frame}
-
-%----------------------------------------------------------------------------------------
-%	目錄
-%----------------------------------------------------------------------------------------
-
-\begin{frame}{\textbf{目錄}}
-	\tableofcontents % 將所有節及子節的內容輸出成表
-\end{frame}
-
-%----------------------------------------------------------------------------------------
-%   資料介紹
-%----------------------------------------------------------------------------------------
+%% 自訂顏色
+\definecolor{Myblue}{RGB}{57,108,144}
+\definecolor{Default_Blue}{RGB}{52,51,171}
 
 % (動畫)字會若隱若現的顯示
 \beamersetuncovermixins{\opaqueness<1->{45}}{\opaqueness<1->{95}} 
 
-%----------------------------------------------------------------------------------------
+% 設定中文的標籤
+\renewcommand{\figurename}{圖} 
+\renewcommand{\tablename}{表} 
 
+% 排版形式 
+\mode<presentation>{
+\usetheme{Berlin}
+% enumerate 及 item 的形狀
+\setbeamertemplate{itemize items}[triangle]
+% 調整外框形式的字體大小
+\setbeamerfont{headline}{size=\scriptsize}
+\setbeamerfont{footline}{size=\scriptsize}
+% 取消右下方的跳轉工具列
+\setbeamertemplate{navigation symbols}{} 
+% 自定義2：清除外框下緣但僅出頁碼
+\setbeamertemplate{footline}[page number] 
+% 顏色主題
+\usecolortheme{dove}
+% 設定頁面邊界
+\setbeamersize{text margin left=0.6cm, text margin right=0.6cm}
+\special{papersize=\the\paperwidth,\the\paperheight}
+\providecommand{\tabularnewline}{\\}
+}
+
+\title{Meeting 1015}
+\author{黃丞暘}
+\institute{國立東華大學應數統計所}
+\date{\today}
+
+\begin{document}
+
+% 封面
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% --- 目錄 ---
+\begin{frame}{\textbf{目錄}}
+  \tableofcontents
+\end{frame}
+
+%   資料介紹
 \section{資料介紹}
-
-%----------------------------------------------------------------------------------------
-
 \linespread{1}  %此行以後，皆為1倍行高
 \begin{frame}[<+>]{\textbf{資料介紹}} % [<+>] 會自動以動畫呈現，就不用一直輸入 \pause。
 \linespread{1.5} %此行以後，皆為1.5倍行高
@@ -80,29 +101,11 @@
           \item Missing values: 41951
         \end{enumerate}
     \end{itemize}
-    
-	 % \alert{Econometrics} is a \textbf{statistical} method used to \textit{estimate} the economic relationship,
-	 % test economic theories, and evaluate the effects of government or business policies.
-	 	
-	% \bigskip 
-
-	% 引用名言
-	% \begin{quote}
-	% 	Pure mathematics is, in its way, the poetry of logical ideas.\\
-	% 	(純粹數學，就其本質而言，是邏輯思想的詩篇。)\\
-	% 	--- Albert Einstein (愛因斯坦)
-	% \end{quote}
-	
 \end{frame}
 
-%----------------------------------------------------------------------------------------
-%	文獻回顧I
-%----------------------------------------------------------------------------------------
 
+%	--- 文獻回顧I ---
 \section{文獻回顧I}
-
-%----------------------------------------------------------------------------------------
-
 \linespread{1}  
 \begin{frame}[<+>]{\textbf{文獻回顧I}}
 \linespread{1.5} 
@@ -125,16 +128,10 @@
                 \end{enumerate}
 		\end{enumerate}
 	\end{itemize}
-
 \end{frame}
 
-%----------------------------------------------------------------------------------------
-%	研究動機
-%----------------------------------------------------------------------------------------
-
+% --- 研究動機 ---
 \section{研究動機}
-
-%----------------------------------------------------------------------------------------
 
 \linespread{1}
 \begin{frame}{\textbf{研究動機}}
@@ -143,46 +140,28 @@
 	\begin{itemize}[]
 		\item K-folds cross validation
 		\begin{enumerate}[]
-			\item Robust performance
-                % \begin{enumerate}[] % 同一層：四個子項目並齊
-                    % \item Data preprocessing
-                % \end{enumerate}
+      \item Split to training\&testing first    
+      \item Robust performance
 		\end{enumerate}
 	\end{itemize}
 
-    \begin{itemize}[]
-		\item $y = \hat{f}(x)$
-		\begin{enumerate}[] % 封包 enumerate 的 item，[] 中不輸入東西。
-			\item Important features
-                % \begin{enumerate}[] % 同一層：四個子項目並齊
-                    % \item Data preprocessing
-                % \end{enumerate}
+	\begin{itemize}[]
+		\item Metric
+		\begin{enumerate}[]
+			\item ACC, FAR, Sensitivity, Specificity
 		\end{enumerate}
 	\end{itemize}
-	% \begin{block}{\textbf{定義}} 
-	% 	一個二次可微分的實數函數$f\left(x\right)$稱為一個凸函數(convex function)，
-	% 	若$f^{\,\prime\prime}\!\left(x\right)\ge0$對所有$x$；
-	% 	同理若$f^{\,\prime\prime}\!\left(x\right)\le0$對所有$x$，
-	% 	則稱為凹函數(concave function)。
-	% \end{block}
-	
-	% \begin{block}{\textbf{證明}} 
-	% 	若要在證明的方塊後加入實心正方形，
-	% 	可以輸入$\backslash$hfill\$$\backslash$blacksquare\$，
- %        就如你現在所看到這樣。
-	% 	\hfill$\blacksquare$
-	% \end{block}
-	
+    
+  \begin{itemize}[]
+		\item $y = \hat{f}(x)$
+		\begin{enumerate}[]
+			\item Important features
+		\end{enumerate}
+	\end{itemize}
 \end{frame}
 
-%----------------------------------------------------------------------------------------
-%	參考資料
-%----------------------------------------------------------------------------------------
-
+% --- 參考資料 ---
 \section{參考資料}
-
-%----------------------------------------------------------------------------------------
-
 \linespread{1}  %此行以後，皆為1倍行高
 \begin{frame}{\textbf{參考資料}}
 \linespread{1.5} %此行以後，皆為1.5倍行高
@@ -199,13 +178,8 @@
 
 \end{frame}
 
-%----------------------------------------------------------------------------------------
-%	結束頁
-%----------------------------------------------------------------------------------------
-
-\section*{結束頁}
-
-%----------------------------------------------------------------------------------------
+% --- 結束 ---
+\section*{結束}
 
 \begin{frame}[plain] % 產生無外框的頁面
 	\begin{center}
@@ -215,7 +189,4 @@
 		{\LARGE Questions  \&  Comments}
 	\end{center}
 \end{frame}
-
-%----------------------------------------------------------------------------------------
-
-\end{document} 
+\end{document}
