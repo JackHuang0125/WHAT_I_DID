@@ -1,6 +1,6 @@
-PWD c:\Users\USER\Documents\GitHub\psychic-spoon\0 Meeting\test
+PWD c:\Users\USER\Documents\GitHub\psychic-spoon\0 Meeting\20251015_Meeting
 INPUT C:\Users\USER\AppData\Local\MiKTeX\miktex\data\le\xetex\xelatex.fmt
-INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 Meeting\test\20251015_Meeting.tex
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 Meeting\20251015_Meeting\20251015_Meeting.tex
 OUTPUT 20251015_Meeting.log
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\beamer\beamer.cls
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\beamer\beamer.cls
