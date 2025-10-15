@@ -1,0 +1,204 @@
+\documentclass[12pt,aspectratio=43]{beamer}
+
+% 自訂字體的封包
+\usepackage{fontspec}
+
+% 導入圖形與表格的封包
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+ % 提供進階數學環境與公式排版
+\usepackage{mathtools, amsmath, amsfonts, amsthm, latexsym} 
+
+%% 設定中文字體
+\usepackage{xeCJK}
+\setCJKmainfont[AutoFakeBold=3.5 , AutoFakeSlant=0.2]{標楷體}
+\setmainfont{Times New Roman}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+% 自訂字體顏色的封包
+\usepackage{color} 
+
+% 圖表自動編號的封包
+\usepackage{caption} 
+
+% 序列標號
+\usepackage{enumerate} 
+
+%% 設定自動編號
+\setbeamertemplate{caption}[numbered]
+
+%% 自訂顏色
+\definecolor{Myblue}{RGB}{57,108,144}
+\definecolor{Default_Blue}{RGB}{52,51,171}
+
+% (動畫)字會若隱若現的顯示
+\beamersetuncovermixins{\opaqueness<1->{45}}{\opaqueness<1->{95}} 
+
+% 設定中文的標籤
+\renewcommand{\figurename}{圖} 
+\renewcommand{\tablename}{表} 
+
+% 排版形式 
+\mode<presentation>{
+\usetheme{Berlin}
+% enumerate 及 item 的形狀
+\setbeamertemplate{itemize items}[triangle]
+% 調整外框形式的字體大小
+\setbeamerfont{headline}{size=\scriptsize}
+\setbeamerfont{footline}{size=\scriptsize}
+% 取消右下方的跳轉工具列
+\setbeamertemplate{navigation symbols}{} 
+% 自定義2：清除外框下緣但僅出頁碼
+\setbeamertemplate{footline}[page number] 
+% 顏色主題
+\usecolortheme{dove}
+% 設定頁面邊界
+\setbeamersize{text margin left=0.6cm, text margin right=0.6cm}
+\special{papersize=\the\paperwidth,\the\paperheight}
+\providecommand{\tabularnewline}{\\}
+}
+
+\title{Meeting 1015}
+\author{黃丞暘}
+\institute{國立東華大學應數統計所}
+\date{\today}
+
+\begin{document}
+
+% 封面
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% --- 目錄 ---
+\begin{frame}{\textbf{目錄}}
+  \tableofcontents
+\end{frame}
+
+%	--- 文獻回顧I ---
+\section{文獻回顧I}
+\linespread{1}
+
+\begin{frame}[<+>]{\textbf{文獻回顧I}}
+\linespread{1.5}
+	\begin{itemize}
+		\item Lai ( 2002 )
+		\begin{enumerate}
+			\item 方法
+                \begin{enumerate}
+                    \item Data preprocessing
+                    \item KNN-imputation
+                    \item Random forest features selection
+                    \item imbalance - SMOTE to 1:1
+                      \only<7>{%
+                        \begin{center}
+                          \includegraphics[width=0.65\textwidth]{C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251015_Meeting/SMOTE_AFTER.png}
+                          \captionof{figure}{SMOTE after}
+                        \end{center}
+                      }
+                    \item<8-> 0.8 training, 0.2 testing by decision tree
+                \end{enumerate}
+    \item<9-> 結果
+                \begin{enumerate}
+                    \item<10-> Best: ACC 86.94\%, FAR 9.22\%
+                    \item<11-> 反查 Fail 節點
+                \end{enumerate}
+    \end{enumerate}
+  \end{itemize} 
+\end{frame}
+
+\section{文獻回顧I}
+
+\begin{frame}[<+>]{\textbf{文獻回顧I}}
+\linespread{1.5}
+
+\begin{itemize}
+  \item Lai (2002)
+  \begin{enumerate}
+    \item 方法
+      \begin{enumerate}
+        \item Data preprocessing
+        \item KNN-imputation
+        \item Random forest features selection
+        \item imbalance - SMOTE to 1:1
+
+        % ======= 第二階段：只顯示圖片 =======
+        \only<6>{%
+          \begin{center}
+            \includegraphics[width=0.65\textwidth]{C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251015_Meeting/SMOTE_AFTER.png}
+            \captionof{figure}{SMOTE after}
+          \end{center}
+        }
+
+        % ======= 第三階段：回到原內容 =======
+        \item<7-> 0.8 training, 0.2 testing by decision tree
+      \end{enumerate}
+
+    \item<8-> 結果
+      \begin{enumerate}
+        \item<9-> Best: ACC 86.94\%, FAR 9.22\%
+        \item<10-> 反查 Fail 節點
+      \end{enumerate}
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+% --- Frame 1: 圖片出現前的內容 ---
+\begin{frame}[<+>]{\textbf{文獻回顧I}}
+\linespread{1.5}
+  \begin{itemize}
+    \item Lai (2002)
+    \begin{enumerate}
+      \item 方法
+      \begin{enumerate}
+        \item Data preprocessing
+        \item KNN-imputation
+        \item Random forest features selection
+        \item imbalance - SMOTE to 1:1
+      \end{enumerate}
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+% --- Frame 2: 獨立顯示圖片 ---
+\begin{frame}{\textbf{文獻回顧I} (SMOTE 示意圖)}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251015_Meeting/SMOTE_AFTER.png}
+    \caption{SMOTE after}
+  \end{figure}
+\end{frame}
+
+% --- Frame 3: 接續圖片之後的內容 ---
+\begin{frame}[<+>]{\textbf{文獻回顧I}}
+\linespread{1.5}
+  \begin{itemize}
+    \item Lai (2002)
+    \begin{enumerate}
+      \item 方法
+      \begin{enumerate}
+        % --- 以下項目沒有 < > 標籤 ---
+        % 這代表它們在這一頁出現時，會立即顯示 (通常是淡化狀態)
+        % 作為動畫的背景/上下文
+        \item Data preprocessing
+        \item KNN-imputation
+        \item Random forest features selection
+        \item imbalance - SMOTE to 1:1
+
+        % --- 動畫從這裡開始 ---
+        % 第一個 <+-> 標籤，代表按下「下一步」後，才會出現的第一個新項目
+        \item<+-> 0.8 training, 0.2 testing by decision tree
+      \end{enumerate}
+      % 後續的動畫會依序播放
+      \item<+-> 結果
+      \begin{enumerate}
+        \item<+-> Best: ACC 86.94\%, FAR 9.22\%
+        \item<+-> 反查 Fail 節點
+      \end{enumerate}
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\end{document}
