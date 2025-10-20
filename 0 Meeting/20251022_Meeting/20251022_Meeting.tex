@@ -5,6 +5,8 @@
 
 % 導入圖形與表格的封包
 \usepackage{graphicx}
+\graphicspath{{./20251022_Meeting}}
+
 \usepackage{booktabs}
 
 % 排列多個子圖形的封包
@@ -84,43 +86,32 @@
   \titlepage
 \end{frame}
 
-% --- 目錄 ---
+% 目錄
 \begin{frame}{\textbf{目錄}}
   \tableofcontents
 \end{frame}
 
-%   資料介紹
-\section{資料介紹}
-\linespread{1}  %此行以後，皆為1倍行高
-\begin{frame}[<+>]{\textbf{資料介紹}} % [<+>] 會自動以動畫呈現，就不用一直輸入 \pause。
-\linespread{1.5} %此行以後，皆為1.5倍行高
+% 研究動機 
+\section{研究動機}
 
-    SECOM
-	
-	% 垂直距離的空格 (另外有\medskip, \smallskip, \vspace{?em})
-    \bigskip 
-	 
-	 % 動畫出現至此的指令
-	% \pause 
-	
-    \begin{itemize}[] % 封包 itemize 的 item
-      \item 樣本數 1567
-      \item 變數 Time／x1／x2／...／x590／PassFail
-        \begin{enumerate}[] % 同一層：四個子項目並齊
-          \item Features: 591, Y: PassFail (binary classification)
-          \item Time: 2008-07-19 11:55:00
-          \item PassFail: Pass $\to$ 0, Fail $\to$ 1 (14:1)
-          \item Missing values: 41951
-        \end{enumerate}
-    \end{itemize}
+\begin{frame}[<+>]{\textbf{研究動機}}
+\linespread{1.5}
+  Semiconductor Manufacturing Process
+  \begin{itemize}
+    \item Robust performance can be trust
+  \end{itemize}
+  \begin{itemize}
+    \item High dimension
+  \end{itemize}
+  \begin{itemize}
+    \item Find the $y = \hat{f}(x)$
+  \end{itemize}
 \end{frame}
 
-
-%	--- 文獻回顧I ---
+%	文獻回顧I
 \section{文獻回顧I}
-\linespread{1}
 
-% --- Frame 1: 圖片出現前的內容 ---
+% Frame 1
 \begin{frame}[<+>]{\textbf{文獻回顧I}}
 \linespread{1.5}
   \begin{itemize}
@@ -137,23 +128,17 @@
   \end{itemize}
 \end{frame}
 
-% --- Frame 2: 獨立顯示圖片 ---
+% Frame 2
 \begin{frame}{\textbf{文獻回顧I-方法} (SMOTE)}
-\centering
-\begin{columns}[T,onlytextwidth]
-  \column{0.5\textwidth}
-  \centering
-  \includegraphics[width=\linewidth]{C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251015_Meeting/SMOTE_BEFORE.png}\\
-  {\scriptsize SMOTE before}
-
-  \column{0.5\textwidth}
-  \centering
-  \includegraphics[width=\linewidth]{C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251015_Meeting/SMOTE_AFTER.png}\\
-  {\scriptsize SMOTE after}
-\end{columns}
+\linespread{1.5}
+  \medskip	% 垂直距離的空格 (\medskip, \smallskip, \vspace{?em})
+  \begin{figure}
+    \centering
+    \includegraphics[scale=0.45]{SMOTE_A_B.png}
+  \end{figure}
 \end{frame}
 
-% --- Frame 3: 接續圖片之後的內容 ---
+% Frame 3
 \begin{frame}{\textbf{文獻回顧I}}
 \linespread{1.5}
   \begin{itemize}
@@ -161,14 +146,10 @@
     \begin{enumerate}
       \item 方法
       \begin{enumerate}
-        % --- 以下項目沒有 < > 標籤 ---
-        % 這代表它們在這一頁出現時，會立即顯示 (通常是淡化狀態)
-        % 作為動畫的背景/上下文
         \item Data preprocessing
         \item KNN-imputation
         \item Random forest features selection
         \item imbalance - SMOTE to 1:1
-
         % --- 動畫從這裡開始 ---
         % 第一個 <+-> 標籤，代表按下「下一步」後，才會出現的第一個新項目
         \item<+-> 0.8 training, 0.2 testing by decision tree
@@ -183,42 +164,86 @@
   \end{itemize}
 \end{frame}
 
-
-% --- 研究動機 ---
-\section{研究動機}
-
-\linespread{1}
-\begin{frame}{\textbf{研究動機}}
-\linespread{1.5}
-
-	\begin{itemize}[]
-		\item K-folds cross validation
-		\begin{enumerate}[]
-      \item Split to training\&testing first    
-      \item Robust performance
-		\end{enumerate}
-	\end{itemize}
-
-	\begin{itemize}[]
-		\item Metric
-		\begin{enumerate}[]
-			\item ACC, FAR, Sensitivity, Specificity
-		\end{enumerate}
-	\end{itemize}
-    
-  \begin{itemize}[]
-		\item $y = \hat{f}(x)$
-		\begin{enumerate}[]
-			\item Important features
-		\end{enumerate}
-	\end{itemize}
+% Frame 4
+\begin{frame}{\textbf{文獻回顧I}}
+\vspace{0.8em} 
+反查節點	
+  \medskip
+  \begin{figure}
+    \centering % 置中
+    \includegraphics[scale=0.35]{深度6樹.png}
+  \end{figure}
 \end{frame}
 
-% --- 研究結果 ---
+% Frame 5
+\begin{frame}{\textbf{文獻回顧I}}
+\vspace{0.8em} 
+反查節點	
+  \medskip
+  \begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{特徵對照.png}\\
+    \includegraphics[scale=0.1]{3層.png}
+  \end{figure}
+\end{frame}
+
+% 研究方法
+\section{研究方法}
+\begin{frame}[<+>]{\textbf{研究方法}}
+\linespread{1.5}
+  \begin{itemize}[]
+    \item 前處理
+      \begin{enumerate}[]
+        \item vote in features selection
+      \end{enumerate}
+    \item 機器學習模型
+      \begin{enumerate}[]
+        \item XGboost, RandomForest, DecisionTree, SVM
+      \end{enumerate}
+    \item 
+  \end{itemize}
+\end{frame}
+
+% 研究資料
+\section{研究資料}
+
+\begin{frame}[<+>]{\textbf{研究資料}}
+\linespread{1.5}
+SECOM
+  \smallskip 
+	% 動畫出現至此的指令
+	% \pause 
+  \begin{itemize}[] % 封包 itemize 的 item
+    \item 樣本數 1567
+    \item 變數 Time／x1／x2／...／x590／PassFail
+      \begin{enumerate}[] % 同一層：四個子項目並齊
+        \item Features: 591, Y: PassFail (binary classification)
+        \item Time: 2008/01/08 - 2008/12/10
+        \item PassFail: Pass $\to$ 0, Fail $\to$ 1 (14:1)
+        \item Missing values: 41951, every cols at least 1 
+      \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{研究資料}} % [<+>] 會自動以動畫呈現，就不用一直輸入 \pause。
+\linespread{1.5} %此行以後，皆為1.5倍行高
+	
+	% 垂直距離的空格 (另外有\medskip, \smallskip, \vspace{?em})
+  \medskip
+    
+  \begin{figure}
+  \centering % 置中
+  \includegraphics[scale=0.4]{yieldrate.png}\\ % 導入圖片並調整大小
+      % 記得調整\parbox的寬度
+      \parbox{0.9\textwidth}{\scriptsize} 
+  \end{figure}
+	
+\end{frame}
+
+% 研究結果
 \section{研究結果}
 
-\linespread{1}
-\begin{frame}{\textbf{研究結果}( Decision Tree（Test）$k=223$ )}
+\begin{frame}{\textbf{研究結果}}
 \linespread{1.0}
 
 \begin{columns}[T,onlytextwidth]
@@ -251,7 +276,7 @@
   % ===== 右欄：圖 =====
   \column{0.52\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251015_Meeting/validACC.png}
+  \includegraphics[width=\linewidth]{C:/Users/No/Documents/GitHub/psychic-spoon/0 Meeting/20251015_Meeting/validACC.png}
   % 若需要圖編號與標題，解除下面註解（需 capt-of）
   % \captionof{figure}{Validation accuracy across $k$}
 
@@ -263,32 +288,27 @@
 \begin{frame}{\textbf{研究結果}}
 \linespread{1.5}
 	
-	\begin{figure}
-		\centering % 置中
-		\includegraphics[scale=0.3]{C:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251015_Meeting/PCA.png}\\ % 導入圖片並調整大小
-        % 記得調整\parbox的寬度
-        \parbox{0.9\textwidth}{\scriptsize} % 調整位置並輸入資料來源
-		% \caption{} % 圖片名稱
-	\end{figure}
+	% \begin{figure}
+	% 	\centering % 置中
+	% 	\includegraphics[scale=0.3]{C:/Users/No/Documents/GitHub/psychic-spoon/0 Meeting/20251015_Meeting/PCA.png}\\ % 導入圖片並調整大小
+	% 	% \caption{} % 圖片名稱
+	% \end{figure}
 
 \end{frame}
 
 % --- 參考資料 ---
 \section{參考資料}
-\linespread{1}  %此行以後，皆為1倍行高
+
 \begin{frame}{\textbf{參考資料}}
-\linespread{1.5} %此行以後，皆為1.5倍行高
+\linespread{1.5}
 
 \footnotesize
 
-\begin{thebibliography}{99} 
-
-	\bibitem[Li-Fu Lai (2022)]{中文文獻範例} % 引注時顯示的名稱
-		Li-Fu Lai (2022)。 % 作者 (年份)
-		\newblock 使用KNN和決策樹方法對填補缺失值的製造數據進行失效預測和原因追蹤分析 % 文章名稱
-		
-\end{thebibliography}
-
+  \begin{thebibliography}{99} 
+    \bibitem[Li-Fu Lai (2022)]{中文文獻範例} % 引注時顯示的名稱
+      Li-Fu Lai (2022) % 作者 (年份)
+      \newblock 使用KNN和決策樹方法對填補缺失值的製造數據進行失效預測和原因追蹤分析 % 文章名稱
+  \end{thebibliography}
 \end{frame}
 
 % --- 結束 ---
@@ -298,7 +318,7 @@
 	\begin{center}
 		{\Huge The End}
 		\bigskip\bigskip 
-		
+
 		{\LARGE Questions  \&  Comments}
 	\end{center}
 \end{frame}
