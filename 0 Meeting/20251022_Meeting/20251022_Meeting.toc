@@ -1,6 +1,6 @@
 \beamer@sectionintoc {1}{研究動機}{3}{0}{1}
 \beamer@sectionintoc {2}{文獻回顧I}{6}{0}{2}
 \beamer@sectionintoc {3}{研究方法}{19}{0}{3}
-\beamer@sectionintoc {4}{研究資料}{24}{0}{4}
-\beamer@sectionintoc {5}{研究結果}{31}{0}{5}
-\beamer@sectionintoc {6}{參考資料}{33}{0}{6}
+\beamer@sectionintoc {4}{研究資料}{25}{0}{4}
+\beamer@sectionintoc {5}{研究結果}{32}{0}{5}
+\beamer@sectionintoc {6}{參考資料}{34}{0}{6}
