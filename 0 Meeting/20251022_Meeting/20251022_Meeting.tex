@@ -249,7 +249,7 @@ SECOM
 % 研究結果
 \section{研究結果}
 
-\begin{frame}{\textbf{研究結果}}
+\begin{frame}{\textbf{研究結果 I}}
 \linespread{1}
 
 f(X) = f(significant linear features, $(X_1)^2, (X_2)^2, ..., (X_p)^2$)
@@ -318,7 +318,7 @@ f(X) = f(significant linear features, $(X_1)^2, (X_2)^2, ..., (X_p)^2$)
 \end{frame}
 
 
-\begin{frame}{\textbf{研究結果}}
+\begin{frame}{\textbf{研究結果 II}}
 	
 \small
 \setlength{\tabcolsep}{6pt}
@@ -339,6 +339,52 @@ XGB & 180 & 0.928972 & 1.000000 & 0.920382 & 0.017065 \\
 
 \end{frame}
 
+
+\begin{frame}{\textbf{研究結果 II}}
+  \begin{columns}[T,onlytextwidth]
+  \column{0.5\textwidth}
+    \begin{block}{DT}
+    {\footnotesize
+    \setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.15}
+    \begin{tabular}{c|cc}
+             & \textbf{Pred 0} & \textbf{Pred 1} \\ \hline
+    \textbf{True 0} & 204 & 89 \\
+    \textbf{True 1} & 12  & 9  \\
+    \end{tabular}}
+    \end{block}
+
+    \begin{block}{RF}
+    {\footnotesize
+    \setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.15}
+    \begin{tabular}{c|cc}
+             & \textbf{Pred 0} & \textbf{Pred 1} \\ \hline
+    \textbf{True 0} & 277 & 16 \\
+    \textbf{True 1} & 15  & 6  \\
+    \end{tabular}}
+    \end{block}
+
+  \column{0.5\textwidth}
+    \begin{block}{SVC}
+    {\footnotesize
+    \setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.15}
+    \begin{tabular}{c|cc}
+             & \textbf{Pred 0} & \textbf{Pred 1} \\ \hline
+    \textbf{True 0} & 284 & 9 \\
+    \textbf{True 1} & 19  & 2 \\
+    \end{tabular}}
+    \end{block}
+
+    \begin{block}{XGB}
+    {\footnotesize
+    \setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.15}
+    \begin{tabular}{c|cc}
+             & \textbf{Pred 0} & \textbf{Pred 1} \\ \hline
+    \textbf{True 0} & 288 & 5 \\
+    \textbf{True 1} & 20  & 1 \\
+    \end{tabular}}
+    \end{block}
+\end{columns}
+\end{frame}
 % --- 參考資料 ---
 \section{參考資料}
 
