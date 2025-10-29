@@ -33,6 +33,8 @@
 
 % 可指定表格排版的封包
 \usepackage{array}
+\usepackage{makecell}
+\usepackage{booktabs}
 
 % 翻轉表格的封包
 \usepackage{lscape} 
@@ -98,13 +100,9 @@
 \linespread{1.5}
   Semiconductor Manufacturing Process
   \begin{itemize}
-    \item Robust performance can be trust
-  \end{itemize}
-  \begin{itemize}
-    \item High dimension
-  \end{itemize}
-  \begin{itemize}
-    \item Find the $y = \hat{f}(x)$
+    \item Unbox $y=\hat{f}$
+    \item Other imbalanced solution (not SMOTE)
+    \item Fitted model like NR, LR, SVM, RF, XGB
   \end{itemize}
 \end{frame}
 
@@ -115,17 +113,133 @@
   \begin{itemize}[]
     \item 前處理
       \begin{enumerate}[]
-        \item vote in features selection
+        \item Imbalanced
+      \end{enumerate}
+    \item 分群
+      \begin{enumerate}[]
+        \item KMeans, LDA, HDBSCAN
       \end{enumerate}
     \item 機器學習模型
       \begin{enumerate}[]
         \item XGboost, RandomForest, DecisionTree, SVM
       \end{enumerate}
-    \item 
   \end{itemize}
 \end{frame}
 
-% --- 參考資料 ---
+% 研究結果
+\section{研究結果}
+
+\begin{frame}{\textbf{研究結果 I}}
+\setlength{\parskip}{10pt}
+{\Large
+  \setlength{\baselineskip}{45pt}
+  \parbox{\linewidth}{\raggedright $PCA　|　x_1,...x_{590}$}}
+    \begin{figure}
+      \hspace{5pt}
+      \includegraphics[scale=0.55]{PCA1.png}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{\textbf{研究結果 II}}
+\setlength{\parskip}{10pt}
+{\Large
+  \setlength{\baselineskip}{45pt}
+  \parbox{\linewidth}{\raggedright $PCA　|　x_1,...x_{590}$ in loadings}}
+    \begin{figure}
+      \hspace{5pt}
+      \includegraphics[scale=0.4]{PCAloadings.png}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{\textbf{研究結果 III}}
+\setlength{\parskip}{10pt}
+{\Large
+  \setlength{\baselineskip}{45pt}
+  \parbox{\linewidth}{\raggedright $PCA　|　x_1,...x_{590}$ in arrows}}
+    \begin{figure}
+      \hspace{5pt}
+      \includegraphics[scale=0.4]{PCAarrows.png}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{\textbf{研究結果 IV}}
+\setlength{\parskip}{10pt}
+{\Large
+  \setlength{\baselineskip}{45pt}
+  \parbox{\linewidth}{\raggedright $PCA　|　\{x_1,...x_{590} + y\} $ }}
+
+  y*weight (w=15)
+    \begin{figure}
+      \hspace{5pt}
+      \includegraphics[scale=0.47]{PCA2.png}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{\textbf{研究結果 IV}}
+\setlength{\parskip}{10pt}
+{\Large
+  \setlength{\baselineskip}{45pt}
+  \parbox{\linewidth}{\raggedright $PCA　|　\{x_1,...x_{590} + y\} $ }}
+
+  y*weight (w=30)
+    \begin{figure}
+      \hspace{5pt}
+      \includegraphics[scale=0.47]{PCA3.png}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{\textbf{研究結果 V}}
+  
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{} l l l @{}}
+\toprule
+\textbf{模型設定} & \textbf{cluster sizes} & \textbf{交叉表（$y \times$ cluster）} \\
+\midrule
+KMeans &
+\{0: 5,\; 1: 1562\} &
+\makecell[l]{%
+\begin{tabular}{r|cc}
+ & 0 & 1 \\ \hline
+$y=0$ & 1 & 103 \\
+$y=1$ & 4 & 1459 \\
+\end{tabular}
+} \\
+\addlinespace
+PCA + KMeans &
+\{0: 1563,\; 1: 4\} &
+\makecell[l]{%
+\begin{tabular}{r|cc}
+ & 0 & 1 \\ \hline
+$y=0$ & 1460 & 3 \\
+$y=1$ & 103  & 1 \\
+\end{tabular}
+} \\
+\addlinespace
+$y$ 訊息 + KMeans &
+\{0: 104,\; 1: 1463\} &
+\makecell[l]{%
+\begin{tabular}{r|cc}
+ & 0 & 1 \\ \hline
+$y=0$ & 104 & 0 \\
+$y=1$ & 0   & 1463 \\
+\end{tabular}
+} \\
+\bottomrule
+\end{tabular}
+
+\end{table}
+
+
+\end{frame}
+% 參考資料
 \section{參考資料}
 
 \begin{frame}{\textbf{參考資料}}
