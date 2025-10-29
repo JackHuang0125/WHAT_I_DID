@@ -1,27 +1,24 @@
 # Fdb version 4
-["xdvipdfmx"] 1761114533.42415 "20251029_Meeting.xdv" "20251029_Meeting.pdf" "20251029_Meeting" 1761114533.77693 0
-  "20251029_Meeting.xdv" 1761114533 572148 b08ad3bb8072a6c607a467c150c6dd61 "xelatex"
+["xdvipdfmx"] 1761580246.01236 "20251029_Meeting.xdv" "20251029_Meeting.pdf" "20251029_Meeting" 1761580246.45624 0
+  "20251029_Meeting.xdv" 1761580245 39080 62afe5c22413af78d0a161a19869e743 "xelatex"
   (generated)
   "20251029_Meeting.pdf"
   (rewritten before read)
-["xelatex"] 1761114529.67289 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251029_Meeting/20251029_Meeting.tex" "20251029_Meeting.xdv" "20251029_Meeting" 1761114533.77144 0
-  "20251029_Meeting.aux" 1761114533 5222 7ff986d5d427f773068743708a5a2ef1 "xelatex"
-  "20251029_Meeting.nav" 1761114533 2881 656624e18e35e5a9c5a1c74970b9f5de "xelatex"
-  "20251029_Meeting.out" 1761114533 514 d7c53cbd4565b987c43b54e3386a38a6 "xelatex"
-  "20251029_Meeting.tex" 1761114529 11201 aea04e2544888cc43c2461adc7473df2 ""
-  "20251029_Meeting.toc" 1761114533 293 3b203a2acb688bfc1cceea7cf3223b16 "xelatex"
+["xelatex"] 1761580243.62253 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251029_Meeting/20251029_Meeting.tex" "20251029_Meeting.xdv" "20251029_Meeting" 1761580246.44133 0
+  "20251029_Meeting.aux" 1761580245 2489 f6f20ff20b40c51501198d4f8c19c285 "xelatex"
+  "20251029_Meeting.nav" 1761580245 1359 732c3244a61d3c7b19f9ea0161a339f6 "xelatex"
+  "20251029_Meeting.out" 1761580245 284 05474a8ceea98f1341a7c8ed550ca28a "xelatex"
+  "20251029_Meeting.tex" 1761580241 3675 0e18ca60f628eaa9bd9168c390ac5013 ""
+  "20251029_Meeting.toc" 1761580245 144 fe2c0754daf6456911d1e4a35b35d9da "xelatex"
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1233951854 916 f87d7c45f9c908e672703b83b72241a3 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam5.tfm" 1233951854 924 9904cf1d39e9767e7a3622f2a125a565 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam7.tfm" 1233951854 928 2dc8d444221b7a635bb58038579b861a ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1233951854 908 2921f8a10601f252058503cc6570e581 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1233951854 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1233951854 940 228d6584342e91276bf566bcf9716b83 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmex10.tfm" 1136765053 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi10.tfm" 1136765053 1528 abec98dbc43e172678c11b3b9031252a ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi12.tfm" 1136765053 1524 4414a8315f39513458b80dfc63bff03a ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi6.tfm" 1136765053 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi8.tfm" 1136765053 1520 eccf95517727cb11801f4f1aee3a21b4 ""
@@ -33,9 +30,7 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/latex-fonts/lasy10.tfm" 1136765053 520 82a3d37183f34b6eb363a161dfc002c2 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/latex-fonts/lasy5.tfm" 1136765053 520 d082ac03a1087bc1ec2a06e24a9f68c0 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/latex-fonts/lasy6.tfm" 1136765053 520 4889cce2180234b97cad636b6039c722 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/latex-fonts/lasy7.tfm" 1136765053 520 a74c6ed8cb48679fdc3ea874d9d34a7e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/latex-fonts/lasy8.tfm" 1136765053 520 7bb3abb160b19e0ed6ac404bb59052b7 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/generic/atbegshi/atbegshi.sty" 1575571100 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/generic/bigintcalc/bigintcalc.sty" 1576433602 40635 c40361e206be584d448876bba8a64a3b ""
@@ -223,7 +218,7 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251029_Meeting/20251029_Meeting.tex" 1761114529 11201 aea04e2544888cc43c2461adc7473df2 ""
+  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251029_Meeting/20251029_Meeting.tex" 1761580241 3675 0e18ca60f628eaa9bd9168c390ac5013 ""
   (generated)
   "20251029_Meeting.aux"
   "20251029_Meeting.log"
