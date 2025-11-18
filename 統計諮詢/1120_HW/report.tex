@@ -96,7 +96,7 @@
 {
 \Large
 \parbox{\linewidth}{\raggedright \textbf{問題}\\
-評估三種身體測量對體脂肪的邊際效應與貢獻}
+三種身體測量對體脂肪的邊際效應與貢獻？}
 }
 
 \vspace*{2cm}
@@ -277,7 +277,7 @@ Midarm (cm)  & 104.606 \\
 {
 \Large
 \parbox{\linewidth}{\raggedright \textbf{問題}\\
-評估三種媒體預算對產品銷售量的邊際效應與貢獻}
+三種媒體預算對產品銷售量的邊際效應與貢獻？}
 }
 
 \vspace*{2cm}
@@ -376,7 +376,7 @@ newspaper    &  -0.0010 &  0.0059 & -0.1767 & 0.0000 \\
 \begin{itemize}
 \setlength{\itemsep}{10pt}
 \item 電視和廣播對銷售的估計穩定且顯著的正向邊際效應
-\item 報紙的估計不穩定且邊際效應近乎為0
+\item 報紙則是估計不穩定且邊際效應近乎為0
 \end{itemize}
 
 \end{frame}
@@ -394,7 +394,7 @@ newspaper    &  -0.0010 &  0.0059 & -0.1767 & 0.0000 \\
 \end{figure}
 
 \begin{itemize}
-\item 固定其他兩個變數下，三種廣告中，以TV和Radio的增加仍能提升銷售量，報紙則幾乎沒有影響
+\item 固定其他兩個變數下，以電視和廣播的預算增加仍能提升銷售量，報紙則幾乎沒有影響
 \end{itemize}
 
 \end{frame}
@@ -456,7 +456,7 @@ newspaper & 1.145 \\
 {
 \Large
 \parbox{\linewidth}{\raggedright \textbf{問題}\\
-年齡越高，五年內存活的機率是否越低}
+年齡愈高，存活至少五年的機率是否愈低？}
 }
 
 \vspace*{2cm}
@@ -464,7 +464,7 @@ newspaper & 1.145 \\
 % 目的
 {
 \Large \parbox{\linewidth}{\raggedright \textbf{目的}\\
-找出年齡與五年內存機率的相關性}
+找出年齡與存活至少五年之機率的關係}
 }
 }
 \end{frame}
@@ -486,9 +486,24 @@ newspaper & 1.145 \\
     \setlength{\itemsep}{6pt}
     \item 樣本數：205（黑色素瘤臨床資料）
     \item 研究變數：$X_1$：age
-    \item 目標變數：$Y_i=1$ if 五年內存活，$Y_i=0$ if 五年內死亡
+    \item 目標變數：$Y_i=1$ if 存活至少五年，$Y_i=0$ if 存活不到五年
   \end{enumerate}
 \end{itemize}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{c c c c c c c c c}
+\hline
+ID & time & status & sex & age & year & thickness & ulcer & Surv5yr\\
+\hline
+1 & 10 & 3 & 1 & 76 & 1972 & 6.76 & 1 & 0 \\
+2 & 30 & 3 & 1 & 56 & 1968 & 0.65 & 0 & 0 \\
+3 & 35 & 2 & 1 & 41 & 1977 & 1.34 & 0 & 0 \\
+\hline
+\end{tabular}
+\end{table}
+
 
 \end{frame}
 
