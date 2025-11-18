@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Research motivation}{3}{0}{1}
+\beamer@sectionintoc {2}{Research method}{4}{0}{2}
+\beamer@sectionintoc {3}{Results}{5}{0}{3}
+\beamer@sectionintoc {4}{References}{13}{0}{4}

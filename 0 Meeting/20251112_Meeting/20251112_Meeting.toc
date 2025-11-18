@@ -1,3 +1,0 @@
-\beamer@sectionintoc {1}{研究動機}{3}{0}{1}
-\beamer@sectionintoc {2}{研究方法}{4}{0}{2}
-\beamer@sectionintoc {3}{參考資料}{5}{0}{3}
