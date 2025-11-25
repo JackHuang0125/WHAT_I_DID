@@ -1,0 +1,105 @@
+\documentclass[12pt,aspectratio=43]{beamer}
+
+% 自訂字體的封包
+\usepackage{fontspec}
+
+% 導入圖形與表格的封包
+\usepackage{graphicx}
+\graphicspath{{./20251119_Meeting}}
+
+\usepackage{booktabs}
+
+% 排列多個子圖形的封包
+\usepackage{subfigure} 
+
+ % 提供進階數學環境與公式排版
+\usepackage{mathtools, amsmath, amsfonts, amsthm, latexsym} 
+
+%% 設定中文字體
+\usepackage{xeCJK}
+\setCJKmainfont[AutoFakeBold=3.5 , AutoFakeSlant=0.2]{標楷體}
+\setmainfont{Times New Roman}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+% 自訂字體顏色的封包
+\usepackage{color} 
+
+% 圖表自動編號的封包
+\usepackage{caption} 
+
+% 允許表格的一格能多列呈現的封包
+\usepackage{multirow} 
+
+% 可指定表格排版的封包
+\usepackage{array}
+
+% 翻轉表格的封包
+\usepackage{lscape} 
+
+% 序列標號
+\usepackage{enumerate} 
+
+%% 設定自動編號
+\setbeamertemplate{caption}[numbered]
+
+%% 自訂顏色
+\definecolor{Myblue}{RGB}{57,108,144}
+\definecolor{Default_Blue}{RGB}{52,51,171}
+
+% (動畫)字會若隱若現的顯示
+\beamersetuncovermixins{\opaqueness<1->{45}}{\opaqueness<1->{95}} 
+
+% 設定中文的標籤
+\renewcommand{\figurename}{圖} 
+\renewcommand{\tablename}{表} 
+
+% 排版形式 
+\mode<presentation>{
+\usetheme{Berlin}
+% enumerate 及 item 的形狀
+\setbeamertemplate{itemize items}[triangle]
+% 調整外框形式的字體大小
+\setbeamerfont{headline}{size=\scriptsize}
+\setbeamerfont{footline}{size=\scriptsize}
+% 取消右下方的跳轉工具列
+\setbeamertemplate{navigation symbols}{} 
+% 自定義2：清除外框下緣但僅出頁碼
+\setbeamertemplate{footline}[page number] 
+% 顏色主題
+\usecolortheme{dove}
+% 設定頁面邊界
+\setbeamersize{text margin left=0.6cm, text margin right=0.6cm}
+\special{papersize=\the\paperwidth,\the\paperheight}
+\providecommand{\tabularnewline}{\\}
+}
+
+\title{Meeting 1119}
+\author{黃丞暘}
+\institute{國立東華大學應數統計所}
+\date{November 19, 2025}
+
+\begin{document}
+
+% 封面
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% 目錄
+\begin{frame}{\textbf{Index}}
+  \tableofcontents
+\end{frame}
+
+% --- 結束 ---
+\section*{結束}
+
+\begin{frame}[plain] % 產生無外框的頁面
+	\begin{center}
+		{\Huge The End}
+		\bigskip\bigskip 
+
+		{\LARGE Questions  \&  Comments}
+	\end{center}
+\end{frame}
+\end{document}ㄒ
