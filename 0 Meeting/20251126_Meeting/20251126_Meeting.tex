@@ -161,7 +161,7 @@ $$}
 	\includegraphics[width=\linewidth]{PCA0r1.png}
 \end{minipage}
 \hspace{0.3em}
-\begin{minipage}{0.5\linewidth}
+\begin{minipage}{0.55\linewidth}
 	\centering
 	\includegraphics[width=\linewidth]{PCA01.png}
 \end{minipage}
@@ -187,7 +187,7 @@ $$}
 	\includegraphics[width=\linewidth]{PCA0r2.png}
 \end{minipage}
 \hspace{0.3em}
-\begin{minipage}{0.5\linewidth}
+\begin{minipage}{0.55\linewidth}
 	\centering
 	\includegraphics[width=\linewidth]{PCA02.png}
 \end{minipage}
@@ -389,7 +389,7 @@ $$
 	\includegraphics[width=\linewidth]{PCA0r3.png}
 \end{minipage}
 \hspace{0.3em}
-\begin{minipage}{0.5\linewidth}
+\begin{minipage}{0.55\linewidth}
 	\centering
 	\includegraphics[width=\linewidth]{PCA1.png}
 \end{minipage}
@@ -582,6 +582,119 @@ $$
 
 \end{frame}
 
+\begin{frame}{\textbf{Results V}　{PCA + KMeans, 3 clusters}}
+\linespread{0.9}
+
+\begin{center}
+\begin{minipage}{0.3\linewidth}
+	\centering
+	\includegraphics[width=\linewidth]{PCA0r3.png}
+\end{minipage}
+\hspace{0.3em}
+\begin{minipage}{0.55\linewidth}
+	\centering
+	\includegraphics[width=\linewidth]{PCA2.png}
+\end{minipage}
+\end{center}
+
+\small{$$
+\begin{array}{c|ccc}
+\text{cluster} & 0 & 1 & 2\\
+\hline
+y=0 & 592 & 327 & 511\\
+y=1 & 49 & 19 & 27 \\
+\end{array}
+$$}
+
+\end{frame}
+
+\begin{frame}{\textbf{Results V}　{Training in cluster 0}}
+\linespread{0.9}
+{\small
+\begin{figure}[h]
+\centering
+
+%---------------------- 第一列 ----------------------
+\begin{minipage}{0.28\linewidth}
+\raggedright
+{\small LR}
+$$
+\small
+\begin{bmatrix}
+100 & 19 \\
+6  & 4
+\end{bmatrix}
+$$
+\end{minipage}
+\begin{minipage}{0.28\linewidth}
+\raggedright
+{\small SVM}
+$$
+\small
+\begin{bmatrix}
+119 & 0 \\
+10  & 0
+\end{bmatrix}
+$$
+\end{minipage}
+\begin{minipage}{0.28\linewidth}
+\raggedright
+{\small DT}
+$$
+\small
+\begin{bmatrix}
+99 & 20 \\
+8  & 2
+\end{bmatrix}
+$$
+\end{minipage}
+
+\vspace{0.5em}
+
+%---------------------- 第二列 ----------------------
+\begin{minipage}{0.28\linewidth}
+\raggedright
+{\small RF}
+$$
+\small
+\begin{bmatrix}
+118 & 1 \\
+10  & 0
+\end{bmatrix}
+$$
+\end{minipage}
+\begin{minipage}{0.28\linewidth}
+\raggedright
+{\small XGB}
+$$
+\small
+\begin{bmatrix}
+115 & 4 \\
+10  & 0
+\end{bmatrix}
+$$
+\end{minipage}
+
+\end{figure}
+}
+
+%---------------------- 第三列：Summary ----------------------
+{\small
+Summary
+$$
+\begin{array}{l|cc}
+\text{model} & \text{ACC} & \text{FAR} \\
+\hline
+\text{LR} & 0.8765 & 0.0903 \\
+\text{SVM} & 0.9568 & 0.0000 \\
+\text{DT} & 0.8457 & 0.1226\\
+\text{RF} & 0.9568 & 0.0000 \\
+\text{XGB} & 0.9568 & 0.000 \\
+\end{array}
+$$
+}
+
+\end{frame}
 
 % --- 結束 ---
 \section*{結束}
