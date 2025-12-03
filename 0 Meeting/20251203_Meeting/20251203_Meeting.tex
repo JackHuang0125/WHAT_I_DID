@@ -154,7 +154,6 @@ $$}
 \linespread{0.9}
 
 {\small
-Summary
 $$
 \begin{array}{l|ccc}
 \text{model} 
@@ -308,6 +307,81 @@ $$
 \end{array}
 $$
 }
+
+\end{frame}
+
+\begin{frame}{\textbf{Results IV}　{PCA + AgglomerativeC, 2 clusters}}
+\linespread{0.9}
+
+\begin{center}
+\begin{minipage}{0.3\linewidth}
+	\centering
+	\includegraphics[width=\linewidth]{PCA0r3.png}
+\end{minipage}
+\hspace{0.3em}
+\begin{minipage}{0.55\linewidth}
+	\centering
+	\includegraphics[width=\linewidth]{PCA11.png}
+\end{minipage}
+\end{center}
+
+\small{$$
+\begin{array}{c|cccc}
+\text{cluster} & 0 & 1 \\
+\hline
+y=0 & 822 & 608 \\
+y=1 & 37 & 58 \\
+\end{array}
+$$}
+
+\end{frame}
+
+\begin{frame}{\textbf{Results IV}　{ns=10, 5-folds cv - mean}}
+\linespread{0.9}
+
+{\small
+$$
+\begin{array}{l|ccc|ccc}
+\text{model} 
+& \text{$C_0$ACC} & \text{$C_0$FAR} & \text{$C_0$ROCAU} 
+& \text{$C_1$ACC} & \text{$C_1$FAR} & \text{$C_1$ROCAU}\\
+\hline
+\text{LR}  & *0.8906 & *0.0766 & 0.5403 & 0.8259 & 0.1200 & *0.5688\\
+\text{SVM} & *0.9569 & 0.0000 & 0.5000 & 0.9129 & *0.0016 & *0.5075\\
+\text{DT}  & *0.8917 & *0.0766 & *0.5563 & 0.8048 & *0.1383 & *0.5339\\
+\text{RF}  & *0.9581 & 0.0000 & *0.5125 & 0.9099 & *0.0033 & 0.4984\\
+\text{XGB} & *0.9593 & 0.0136 & *0.5268 & 0.9024 & 0.0214 & *0.5401\\
+\end{array}
+$$
+}
+
+\end{frame}
+
+\begin{frame}
+
+$$
+\begin{array}{c|cc}
+        & \text{Pass} & \text{Fail} \\ \hline
+\text{All}     & 0.937705 & 0.062295 \\
+\text{Outlier} & 0.928571 & 0.071429
+\end{array}
+$$
+
+$$
+\begin{array}{c|rrr}
+\text{Feature} & \text{mean}_{\text{all}} & \text{mean}_{\text{out}} & z_{\text{mean,out}} \\ \hline
+x80  & 0.002938   & 0.028386   &  1.128814 \\
+x60  & 2.592655   &10.330188   &  0.968735 \\
+x104 &-0.009867   &-0.007076   &  0.917956 \\
+x39  &86.820432   &87.185567   &  0.883545 \\
+x511 &54.871962   &85.931150   &  0.846847 \\
+x76  &-0.006494   &-0.023774   & -0.791008 \\
+x56  &2855.748253 &2874.928571 &  0.748401 \\
+x29  &69.610802   &67.144440   & -0.726280 \\
+x274 &20.157059   &22.708264   &  0.671723 \\
+x412 & 2.612735   & 2.932202   &  0.580779 \\
+\end{array}
+$$
 
 \end{frame}
 
