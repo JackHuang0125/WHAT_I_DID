@@ -98,10 +98,18 @@
 \linespread{1.5}
   Semiconductor Manufacturing Process
   \begin{itemize}
-    \item 
+    \item Given the fitted model $y=\hat{f}$
+    \begin{enumerate}[]
+      \item Describe what $hat{f}$ is when $x$ belongs to neighbors of $X_0$ for some “interesting” $X_0$
+
+    \end{enumerate}
   \end{itemize}
   \begin{itemize}
-    \item 
+    \item 研究  $\hat f(x),\quad x \in \mathcal{N}(X_0)$ 以理解模型在局部的解釋性、結構。
+    \begin{enumerate}[]
+      \item 建構 \(\hat f\) 的方法（回歸或機器學習），使用鄰近資料 \((y_k, x_k)\) 建立局部模型
+    \end{enumerate}
+
   \end{itemize}
 \end{frame}
 
@@ -115,39 +123,50 @@
   \end{itemize}
   \begin{itemize}[]
     \item Decide a $x_k$(p dimension) from neighbors of $X_0$ to do the regression
+  \begin{enumerate}[]
+
+    \item 在每個 cluster 抽幾個代表點 X₀，例如：
+
+1. cluster center（在 PCA 空間的重心，找最近的樣本）
+
+2. y=1 且預測機率高的點
+
+3. 預測錯誤的點（不穩定區）
+  \end{enumerate}
+
   \end{itemize}
 \end{frame}
 
 % 結果
 \section{Resulut - What I do this time}
 
-\begin{frame}{\textbf{Results I}　{PCA + KMeans, 2 clusters}}
+\begin{frame}{\textbf{Results I}　{SMOTE + PCA + KMeans}}
 \linespread{0.9}
 
-% \begin{center}
-% \begin{minipage}{0.3\linewidth}
-% 	\centering
-% 	\includegraphics[width=\linewidth]{PCA0r3.png}
-% \end{minipage}
-% \hspace{0.3em}
-% \begin{minipage}{0.55\linewidth}
-% 	\centering
-% 	\include/graphics[width=\linewidth]{PCA1.png}
-% \end{minipage}
-% \end{center}
+\begin{center}
+  \begin{minipage}{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{pca.png}
+  \end{minipage}
+  \hspace{0.3em}
+  \begin{minipage}{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{pca2.png}
+  \end{minipage}
+\end{center}
 
 \small{$$
 \begin{array}{c|cc}
 \text{cluster} & 0 & 1 \\
 \hline
-y=0 & 660 & 770 \\
-y=1 & 58  & 37 \\
+y=0 & 743 & 687 \\
+y=1 & 205 & 510 \\
 \end{array}
 $$}
 
 \end{frame}
 
-\begin{frame}{\textbf{Results I}　{ns=10, 5-folds cv - mean}}
+\begin{frame}{\textbf{Results I}　{5-folds cv - mean}}
 \linespread{0.9}
 
 {\small
@@ -172,11 +191,11 @@ $$
 & \text{$C_0$ACC} & \text{$C_0$FAR} & \text{$C_0$ROCAU} 
 & \text{$C_1$ACC} & \text{$C_1$FAR} & \text{$C_1$ROCAU}\\
 \hline
-\text{LR}  & 0.8315 & 0.1152 & *0.5545 & *0.9009 & *0.0649 & *0.5586\\
-\text{SVM} & 0.9178 & 0.0015 & 0.4992 & *0.9542 & 0.0000 & 0.5000\\
-\text{DT}  & *0.8273 & 0.1258 & *0.5848 & *0.8934 & *0.0753 & *0.5802\\
-\text{RF}  & 0.9151 & 0.0045 & 0.4977 & *0.9554 & 0.0000 & *0.5143\\
-\text{XGB} & 0.9081 & 0.0197 & *0.5341 & *0.9554 & *0.0013 & *0.5261\\
+\text{LR}  & *0.9219 & *0.0942 & *0.9431 & *0.9131 & 0.1456 & *0.9233\\
+\text{SVM} & *0.9895 & *0.0013 & *0.9774 & *0.9883 & 0.0044 & *0.9870\\
+\text{DT}  & *0.9114 & *0.0686 & *0.8852 & *0.8622 & 0.1716 & *0.8681\\
+\text{RF}  & *0.9631 & 0.0000 & *0.9146 & *0.9749 & *0.0014 & *0.9708\\
+\text{XGB} & *0.9799 & 0.0000 & *0.9537 & *0.9741 & 0.0248 & *0.9739\\
 \end{array}
 $$
 }
