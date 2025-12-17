@@ -5,7 +5,7 @@
 
 % 導入圖形與表格的封包
 \usepackage{graphicx}
-\graphicspath{{./20251210_Meeting}}
+\graphicspath{{./20251217_Meeting}}
 
 \usepackage{booktabs}
 
@@ -13,7 +13,7 @@
 \usepackage{subfigure} 
 
  % 提供進階數學環境與公式排版
-\usepackage{mathtools, amsmath, amsfonts, amsthm, latexsym} 
+\usepackage{mathtools, amsmath, amsfonts, amsthm, latexsym}
 
 %% 設定中文字體
 \usepackage{xeCJK}
@@ -74,10 +74,10 @@
 \providecommand{\tabularnewline}{\\}
 }
 
-\title{Meeting 1210}
+\title{Meeting 1217}
 \author{黃丞暘}
 \institute{國立東華大學應數統計所}
-\date{December 10, 2025}
+\date{December 17, 2025}
 
 \begin{document}
 
@@ -92,9 +92,9 @@
 \end{frame}
 
 % DISCUSSION 
-\section{12.03 Discussion}
+\section{12.17 Discussion}
 
-\begin{frame}{\textbf{12.03 Discussion}}
+\begin{frame}{\textbf{12.17 Discussion}}
 \linespread{1.5}
   Semiconductor Manufacturing Process
   \begin{itemize}
@@ -105,18 +105,18 @@
     \end{enumerate}
   \end{itemize}
   \begin{itemize}
-    \item 研究  $\hat f(x),\quad x \in \mathcal{N}(X_0)$ 以理解模型在局部的解釋性、結構。
+    \item 研究  $\hat f(x)$，$x \in \mathcal{N}(X_0)$，觀察模型在local的解釋性、結構
     \begin{enumerate}[]
-      \item 建構 \(\hat f\) 的方法（回歸或機器學習），使用鄰近資料 \((y_k, x_k)\) 建立局部模型
+      \item 建構 \(\hat f\) 的方法（迴歸、機器學習），使用鄰近資料 \((y_k, x_k)\) 建立local
     \end{enumerate}
 
   \end{itemize}
 \end{frame}
 
 % TO DO
-\section{12.03 Todo}
+\section{12.17 Todo}
 
-\begin{frame}{\textbf{12.03 Todo}}
+\begin{frame}{\textbf{12.17 Todo}}
 \linespread{1.5}
   \begin{itemize}[]
     \item Do the SMOTE before PCA after delete outliers
@@ -138,7 +138,7 @@
 \end{frame}
 
 % 結果
-\section{Resulut - What I do this time}
+\section{Results - What I did this time}
 
 \begin{frame}{\textbf{Results I}　{SMOTE + PCA + KMeans}}
 \linespread{0.9}
@@ -201,6 +201,16 @@ $$
 }
 \end{frame}
 
+\begin{frame}{\textbf{Results II} {Build a surrogate model}}
+\linespread{1.5}
+
+  \begin{itemize}
+    \item Given a design point $x_0$
+    \item Generate 擾動的 points $x_k = x_0 + \varepsilon_k$, where $\varepsilon_k \sim N(0, \sigma^2 I)$
+    \item 代入 black-box model: $y_k = \hat{f}(x_k)$
+    \item Fit a simple local model $g(x; x_0)$ on $\{(x_k, y_k)\}$ s.t. $\hat{f}(x) \approx g(x; x_0)$ near $x_0$. 
+  \end{itemize}
+\end{frame}
 % --- 結束 ---
 \section*{結束}
 

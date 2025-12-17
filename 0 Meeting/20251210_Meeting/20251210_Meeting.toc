@@ -1,3 +1,0 @@
-\beamer@sectionintoc {1}{12.03 Discussion}{3}{0}{1}
-\beamer@sectionintoc {2}{12.03 Todo}{4}{0}{2}
-\beamer@sectionintoc {3}{Resulut - What I do this time}{5}{0}{3}
