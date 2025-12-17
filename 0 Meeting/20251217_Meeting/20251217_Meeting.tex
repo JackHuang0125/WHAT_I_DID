@@ -203,7 +203,7 @@ $$
 
 \begin{frame}{\textbf{Results II} {Build a surrogate model}}
 \linespread{1.5}
-
+Reference: \href{https://ucinlp.github.io/files/papers/lime-naacl16demo.pdf}{Ribeiro et al.(2016)}
   \begin{itemize}
     \item Given a design point $x_0$
     \item Generate 擾動的 points $x_k = x_0 + \varepsilon_k$, where $\varepsilon_k \sim N(0, \sigma^2 I)$
@@ -211,6 +211,39 @@ $$
     \item Fit a simple local model $g(x; x_0)$ on $\{(x_k, y_k)\}$ s.t. $\hat{f}(x) \approx g(x; x_0)$ near $x_0$. 
   \end{itemize}
 \end{frame}
+
+\begin{frame}{\textbf{Results II}　{No SMOTE}}
+
+\begin{center}
+  \begin{minipage}{0.82\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{local0.png}
+  \end{minipage}
+  \hspace{0.3em}
+  \begin{minipage}{0.35\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{localpvsR0.png}
+  \end{minipage}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{\textbf{Results II}　{SMOTE}}
+
+\begin{center}
+  \begin{minipage}{0.82\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{local1.png}
+  \end{minipage}
+  \hspace{0.3em}
+  \begin{minipage}{0.35\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{localpvsR1.png}
+  \end{minipage}
+\end{center}
+
+\end{frame}
+
 % --- 結束 ---
 \section*{結束}
 
