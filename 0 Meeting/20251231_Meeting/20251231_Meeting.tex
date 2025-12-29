@@ -144,7 +144,7 @@ Semiconductor Manufacturing Process
     \item \textbf{Choose other $x_0$}
     \begin{enumerate}[]
       \item 選擇 $\hat p(x_0)\approx 0.5$ 的點，作為local的解釋地標
-      \item 對$x_0$做local surrogate（生成$x_{\ell}=x_0+\epsilon_{\ell}$），計算$y_{\ell}=\hat{f}_c(x_{\ell})$
+      \item 對$x_0$做local surrogate（生成$x_{\ell}=x_0+\varepsilon_{\ell}$），計算$y_{\ell}=\hat{f}_c(x_{\ell})$
       ，最後fit模型$\hat{\hat{g}}$
     \end{enumerate}
   \end{itemize}
@@ -190,10 +190,11 @@ $$}
 \linespread{1.5}
 Reference: \href{https://ucinlp.github.io/files/papers/lime-naacl16demo.pdf}{Ribeiro et al.(2016)}
   \begin{itemize}
-    \item Given a design point $x_0$
-    \item Generate 擾動的 points $x_k = x_0 + \varepsilon_k$, where $\varepsilon_k \sim N(0, \sigma^2 I)$
-    \item 代入 black-box model: $y_k = \hat{f}(x_k)$
-    \item Fit a simple local model $g(x; x_0)$ on $\{(x_k, y_k)\}$ s.t. $\hat{f}(x) \approx g(x; x_0)$ near $x_0$. 
+    \item 給定一個設計點 $x_0$
+    \item 生成局部擾動樣本：$x_{\ell}=x_0+\varepsilon_{\ell}$，其中 $\varepsilon_{\ell}\sim N(0,\sigma^2 I)$
+    \item 代入對應的 cluster black-box：$y_{\ell}=\hat f_c(x_{\ell})$
+    \item 以 $\{(x_{\ell},y_{\ell})\}$ 擬合簡單的 local surrogate $\hat{\hat g}$，
+          使得在 $x_0$ 鄰域內 $\hat f_c(x)\approx \hat{\hat g}(x;x_0)$
   \end{itemize}
 \end{frame}
 
