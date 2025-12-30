@@ -186,36 +186,60 @@ $$}
 
 \end{frame}
 
-\begin{frame}{\textbf{Results II} {Build a surrogate model}}
-\linespread{1.5}
-Reference: \href{https://ucinlp.github.io/files/papers/lime-naacl16demo.pdf}{Ribeiro et al.(2016)}
+\begin{frame}{Separate and build local surrogate models}
+\linespread{1.2}
   \begin{itemize}
-    \item 給定一個設計點 $x_0$
+    \item 以 PCA+KMeans 將樣本分群，得到 $c\in\{0,1\}$；在各群內分別訓練 black-box $\hat f_c$
+    \item 給定屬於群 $c$ 的設計點 $x_0$
     \item 生成局部擾動樣本：$x_{\ell}=x_0+\varepsilon_{\ell}$，其中 $\varepsilon_{\ell}\sim N(0,\sigma^2 I)$
     \item 代入對應的 cluster black-box：$y_{\ell}=\hat f_c(x_{\ell})$
-    \item 以 $\{(x_{\ell},y_{\ell})\}$ 擬合簡單的 local surrogate $\hat{\hat g}$，
-          使得在 $x_0$ 鄰域內 $\hat f_c(x)\approx \hat{\hat g}(x;x_0)$
+    \item 以 $\{(x_{\ell},y_{\ell})\}$ fit local surrogate $\hat g(\cdot;x_0)$，
+          使得在 $x_0$ 附近內 $\hat f_c(x)\approx \hat g(x;x_0)$
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{Results II}　{SMOTE}}
+\begin{frame}{\textbf{Results II}　{f\_logistic\& g\_decision}}
+\begin{center}
+  \begin{minipage}{0.33\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{c=0_f_logistic&g_decision.png} 
+    cluster = 0
+  \end{minipage}
+  \begin{minipage}{0.33\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{c=1_f_logistic&g_decision.png}
+    cluster = 1
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{c=0&1_f_logistic&g_decision.png}
+    cluster = 0 \& 1 overlap
+  \end{minipage}
+\end{center}
+\end{frame}
+
+\begin{frame}{\textbf{Results III}　{Other ML for $\hat{\hat{g}}$}}
 
 \begin{center}
-  \begin{minipage}{0.35\linewidth}
+  \begin{minipage}{0.33\linewidth}
     \centering
     \includegraphics[width=\linewidth]{localpvsR1.png} 
     $\hat{f}$ is logistic\\
     $\hat{\hat{g}}$ is linear
   \end{minipage}
-  \hspace{0.3em}
-  \begin{minipage}{0.35\linewidth}
+  \begin{minipage}{0.33\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{f_logistic&g_decision.png}
+    $\hat{f}$ is logistic\\
+    $\hat{\hat{g}}$ is decision
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{f_XGB&g_logistic.png}
     $\hat{f}$ is logistic\\
     $\hat{\hat{g}}$ is XGBoost
   \end{minipage}
 \end{center}
-
 \end{frame}
 
 % --- 結束 ---
