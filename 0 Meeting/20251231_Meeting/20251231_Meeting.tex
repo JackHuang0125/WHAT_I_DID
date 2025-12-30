@@ -121,7 +121,7 @@ Semiconductor Manufacturing Process
   \item \textbf{討論 local $R^2$ 與 $\hat p(x_0)$ 的關係}
   \begin{enumerate}[]
     \item local $R^2$ 衡量的是 local surrogate $\hat{\hat{g}}$對黑箱 $\hat f$ 的局部擬合度
-    \item 因此 $\hat p(x_0)\approx 0.5$ 時 local $R^2$ 仍可很高並不矛盾；若在 $\hat p(x_0)\to 0/1$ （黑箱更確定時）， local $R^2$ 下降，表示目前的局部模型$\hat{\hat{g}}$在那些區域不足以逼近$\hat{f}$，需要更強的$\hat{\hat{g}}$
+    \item 因此 $\hat p(x_0)\approx 0.5$ 時的 local $R^2$ 很高並不矛盾；若在 $\hat p(x_0)\to 0/1$ （黑箱更確定時）， local $R^2$ 下降，表示目前的局部模型$\hat{\hat{g}}$在那些區域不足以逼近$\hat{f}$，需要更強的$\hat{\hat{g}}$
   \end{enumerate}
 \end{itemize}
 
@@ -150,9 +150,9 @@ Semiconductor Manufacturing Process
   \end{itemize}
 
   \begin{itemize}
-    \item \textbf{Try other ML as $\hat f$}
+    \item \textbf{Try other ML as $\hat{\hat g}$}
     \begin{enumerate}[]
-      \item 使用 Random Forest 與 XGBoost 作為 black-box
+      \item 使用Logistic作為black-box，XGBoost作為$\hat{\hat g}$
     \end{enumerate}
   \end{itemize}
 \end{frame}
@@ -201,14 +201,18 @@ Reference: \href{https://ucinlp.github.io/files/papers/lime-naacl16demo.pdf}{Rib
 \begin{frame}{\textbf{Results II}　{SMOTE}}
 
 \begin{center}
-  \begin{minipage}{0.82\linewidth}
+  \begin{minipage}{0.35\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{local1.png}
+    \includegraphics[width=\linewidth]{localpvsR1.png} 
+    $\hat{f}$ is logistic\\
+    $\hat{\hat{g}}$ is linear
   \end{minipage}
   \hspace{0.3em}
   \begin{minipage}{0.35\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{localpvsR1.png}
+    \includegraphics[width=\linewidth]{f_XGB&g_logistic.png}
+    $\hat{f}$ is logistic\\
+    $\hat{\hat{g}}$ is XGBoost
   \end{minipage}
 \end{center}
 
