@@ -1,0 +1,249 @@
+% 若要使用中文，請編譯環境設定為 XeLaTeX，不然預設的環境不支援中文，方法如下
+% 	1. 如果使用 TeXstudio，在上方選單 Option > Configure TeXstudio > Build > Compiler 選擇 XeLaTeX
+% 	2. 如果使用 Overleaf，參考
+% 	   https://jinzhou.netlify.app/posts/how-to-set-overleaf-chinese/
+% 
+% 更多 LaTeX 上的操作可以參考
+% https://jinzhou.netlify.app/tags/latex/
+
+% Compiler: XeLaTex
+\documentclass[12pt,a4paper,oneside]{book} 
+
+% page simple, no headings 
+\pagestyle{plain}
+
+% set chinese
+\usepackage{xeCJK}
+\xeCJKsetup{AutoFakeBold=true, AutoFakeSlant=true}
+\setmainfont{Times New Roman}
+\setCJKmainfont{標楷體}
+
+% indent each sentence
+\usepackage{indentfirst}
+
+% math tools
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+% object position
+\usepackage{float}
+
+% graphic
+\usepackage{graphicx}
+
+% table
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{diagbox}
+\usepackage{multirow}
+
+% background
+\usepackage{background}
+\backgroundsetup{scale = 1, angle = 0, opacity = 0.2,
+	contents = {\includegraphics[height = 6cm]{img/NDHU_logo.png}}}
+\newcommand\deactivateBG{\backgroundsetup{contents={}}}
+
+% url, make table of content link
+\usepackage{hyperref}
+
+% reference
+\usepackage{natbib}
+
+% change "table" to "表"
+\renewcommand{\tablename}{表}
+% change "figur" to "圖"
+\renewcommand{\figurename}{圖}
+
+% rotating figure
+\usepackage{rotating}
+
+% put pdf page
+\usepackage{pdfpages}
+
+% comment
+\usepackage{comment}
+
+\begin{document}
+	\begin{titlepage}
+		% deactivate background
+		\deactivateBG
+		\begin{center}
+			\vspace{115pt} 
+			
+			\renewcommand{\baselinestretch}{1.5}
+			
+			{\LARGE 
+				國立東華大學 \, 應用數學系 \\
+				統計碩士班 \\ 
+				碩士論文 \\ 
+				指導教授：曹振海 \, 博士 \\ 
+			}
+			
+			\vspace{20pt}
+			
+			\renewcommand{\baselinestretch}{1}
+			
+			{\LARGE \bfseries 中文論文標題 \\ }
+			
+			{\large \bfseries \itshape English Title \\ } 
+			
+			\vspace{40pt}
+			
+			\includegraphics[height=6cm]{img/NDHU_logo.png} 
+			
+			\vspace{0.5cm}
+			
+			\renewcommand{\baselinestretch}{1.5}
+			{\LARGE 
+				研究生：黃丞暘 \, 撰 \\
+				中華民國 115 年 7 月 \\ 
+			}
+		\end{center}
+	\end{titlepage}
+	
+	% no page number
+	\thispagestyle{empty} 
+	% mage a empty page
+	\mbox{} 
+	\newpage 
+	
+	% 審定書
+	% 改成你你需要放置的 PDF 文件
+	\includepdf[pages=-]{pdf/原創性聲明書.pdf}
+	\newpage 
+	
+	% no page number
+	\thispagestyle{empty} 
+	% mage a empty page
+	\mbox{} 
+	\newpage 
+	
+	% no page number
+	\thispagestyle{empty} 
+	\begin{center}
+		\section*{致謝}
+	\end{center}
+	
+	這裡就是寫致謝內容
+		
+	\vfill
+	
+	\hfill 國立東華大學應用數學系統計碩士班 \, 黃丞暘 \, 謹致 
+	
+	\hfill 民國 115 年 7 月
+	
+	\newpage 
+	
+	% no page number
+	\thispagestyle{empty} 
+	% mage a empty page
+	\mbox{} 
+	\newpage 
+	
+	% no page number
+	\thispagestyle{empty} 
+	\begin{center}
+		\section*{摘要}
+	\end{center}
+	
+	論文摘要在這裡
+	
+	% put to bottom
+	\vfill
+	\textbf{關鍵字：} 關鍵字1、關鍵字2、關鍵字3
+	\newpage 
+	
+	% no page number
+	\thispagestyle{empty} 
+	% mage a empty page
+	\mbox{} 
+	\newpage 
+	
+	% no page number
+	\thispagestyle{empty} 
+	\begin{center}
+		\section*{Abstract}
+	\end{center}
+	
+	English Abstract
+	
+	% put to bottom
+	\vfill
+	\textbf{Keywords:} keyword 1, keyword 2, keyword 3 
+	\newpage 
+	
+	% no page number
+	\thispagestyle{empty} 
+	% mage a empty page
+	\mbox{} 
+	\newpage 
+	
+	% no page number
+	\thispagestyle{empty} 
+	% table of contents
+	\tableofcontents 
+	\newpage 
+	
+	% no page number
+	\thispagestyle{empty} 
+	% mage a empty page
+	\mbox{} 
+	\newpage 
+	
+	% page number
+	\mainmatter 
+	\chapter{緒論}
+	
+	這邊放幾個常用功能 \label{a link}
+	
+	\begin{enumerate}
+		\item 引用 \texttt{cite}，例如 \cite{bleiLatentDirichletAllocation2003}，這會讀取 \texttt{references.bib} 裡面的資料。
+		
+		\item 圖 \texttt{figure}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/confusion_matrix.png}
+			\caption{範例圖片}
+			\label{fig:confusion_matrix}
+		\end{figure}
+		
+		\item 表 \texttt{table}
+		
+		\begin{table}[H]
+			\centering 
+			\begin{tabular}{|l|c|r|}
+				\hline
+				\diagbox{左下}{右上} & col 1 & col 2 \\ \hline
+				row 1 & tabular 的參數有 l, r, c 與 | & l, c, r 分別表示靠左、中、右 \\ \hline
+				row 2 & | 表示一條水平分割線 & 而內文的 hline 則是水平分割線 \\ \hline
+			\end{tabular}
+			\caption{資料範例}
+			\label{tab:data_example}
+		\end{table}
+		
+		\item 內文連結 \texttt{ref}，例如 \ref{fig:confusion_matrix}
+	\end{enumerate}
+	
+	\section{動機}
+	
+	\section{章節說明} 
+	
+	\subsection{更細的章節分支}
+	
+	\chapter{資料準備}
+	
+	\chapter{結果}
+	
+	\chapter{結論}
+	
+	\section{總結}
+	
+	\section{未來工作}
+	
+	% 引用
+	\bibliographystyle{astats}
+	\bibliography{references}
+	
+\end{document}
