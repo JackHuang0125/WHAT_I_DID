@@ -414,6 +414,15 @@ INPUT .\pca.png
 INPUT .\pca2.png
 INPUT .\pca2.png
 INPUT .\pca2.png
+INPUT .\c=0_f_logistic&g_linear.png
+INPUT .\c=0_f_logistic&g_linear.png
+INPUT .\c=0_f_logistic&g_linear.png
+INPUT .\c=1_f_logistic&g_linear.png
+INPUT .\c=1_f_logistic&g_linear.png
+INPUT .\c=1_f_logistic&g_linear.png
+INPUT .\c=0&1_f_logistic&g_linear.png
+INPUT .\c=0&1_f_logistic&g_linear.png
+INPUT .\c=0&1_f_logistic&g_linear.png
 INPUT .\c=0_f_logistic&g_decision.png
 INPUT .\c=0_f_logistic&g_decision.png
 INPUT .\c=0_f_logistic&g_decision.png

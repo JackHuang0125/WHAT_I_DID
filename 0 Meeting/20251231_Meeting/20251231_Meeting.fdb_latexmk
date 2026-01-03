@@ -1,15 +1,15 @@
 # Fdb version 4
-["xdvipdfmx"] 1767114688.09723 "20251231_Meeting.xdv" "20251231_Meeting.pdf" "20251231_Meeting" 1767114688.68242 0
-  "20251231_Meeting.xdv" 1767114687 103872 b2cda53f37bed5f23232acb91718f01a "xelatex"
+["xdvipdfmx"] 1767423695.51866 "20251231_Meeting.xdv" "20251231_Meeting.pdf" "20251231_Meeting" 1767423696.48204 0
+  "20251231_Meeting.xdv" 1767423695 119860 b95d3381833cf8e3c03e9e849731be43 "xelatex"
   (generated)
   "20251231_Meeting.pdf"
   (rewritten before read)
-["xelatex"] 1767114686.03531 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251231_Meeting/20251231_Meeting.tex" "20251231_Meeting.xdv" "20251231_Meeting" 1767114688.67657 0
-  "20251231_Meeting.aux" 1767114687 3118 ec362587316257f4353f50b5db386fda "xelatex"
-  "20251231_Meeting.nav" 1767114687 1763 5602accd34c7dab8e989d03cd8dca54b "xelatex"
-  "20251231_Meeting.out" 1767114687 492 e535bba58be42a38769c5399b54d57ab "xelatex"
-  "20251231_Meeting.tex" 1767114685 7348 418fb03615be75b9d3c07c9a771f1572 ""
-  "20251231_Meeting.toc" 1767114687 164 09b80671d1bba8f77b7940081c90fb14 "xelatex"
+["xelatex"] 1767423692.12187 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251231_Meeting/20251231_Meeting.tex" "20251231_Meeting.xdv" "20251231_Meeting" 1767423696.47226 0
+  "20251231_Meeting.aux" 1767423695 3290 3006a2c135255d121caec9a9daf0873f "xelatex"
+  "20251231_Meeting.nav" 1767423695 1857 b1e3d45e20fb2c5c6c51e55b9901b516 "xelatex"
+  "20251231_Meeting.out" 1767423695 492 e535bba58be42a38769c5399b54d57ab "xelatex"
+  "20251231_Meeting.tex" 1767423691 7968 e4b4ee5d80e696573388175cfbebfea4 ""
+  "20251231_Meeting.toc" 1767423695 164 09b80671d1bba8f77b7940081c90fb14 "xelatex"
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -220,10 +220,13 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251231_Meeting/20251231_Meeting.tex" 1767114685 7348 418fb03615be75b9d3c07c9a771f1572 ""
-  "c=0&1_f_logistic&g_decision.png" 1767111902 27488 ffe07b7b2ddddbb6032aee2c52cff87e ""
-  "c=0_f_logistic&g_decision.png" 1767111611 23305 28f65aad6f28a52912a9c7143522ed4f ""
-  "c=1_f_logistic&g_decision.png" 1767111619 22908 110578c5e2c0a9196eeff1232e38b4f5 ""
+  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 Meeting/20251231_Meeting/20251231_Meeting.tex" 1767423691 7968 e4b4ee5d80e696573388175cfbebfea4 ""
+  "c=0&1_f_logistic&g_decision.png" 1767423618 31118 9ab5afbd6b1db7c7f0a463aa1680b6d6 ""
+  "c=0&1_f_logistic&g_linear.png" 1767423682 29253 e768e4fee4b8c9843ebce8d59ac69005 ""
+  "c=0_f_logistic&g_decision.png" 1767421388 23425 9019c2759cabb2170b5a66c79defe964 ""
+  "c=0_f_logistic&g_linear.png" 1767422664 24282 28ba251eccd8a87b04d1061057142e05 ""
+  "c=1_f_logistic&g_decision.png" 1767421396 22867 5e3bb420c25a58d03cce27c967e8a81d ""
+  "c=1_f_logistic&g_linear.png" 1767422675 22264 42031a9f33729a620e3b828d05475261 ""
   "f_XGB&g_logistic.png" 1767102645 16886 091695da087628e24d513aaf137aa7d6 ""
   "f_logistic&g_decision.png" 1767104401 20518 e63103b5eb19e26cb9791a0ea47ad6c8 ""
   "localpvsR1.png" 1765948239 19851 ced24bc07a9fd1e0d0270f0a90147b45 ""
