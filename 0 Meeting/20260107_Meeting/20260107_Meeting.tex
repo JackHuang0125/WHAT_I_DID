@@ -189,7 +189,7 @@ $$}
 \begin{frame}{Separate and build local surrogate models}
 \linespread{1.2}
   \begin{itemize}
-    \item 以 PCA+KMeans 將樣本分群，得到 $c\in\{0,1\}$；在各群內分別訓練 black-box $\hat f_c$
+    \item 以（標準化後、經 SMOTE 平衡的）資料 PCA+KMeans 將樣本分群，得到 $c\in\{0,1\}$；在各群內分別訓練 black-box $\hat f_c$
     \item 給定屬於群 $c$ 的設計點 $x_0$
     \item 生成局部擾動樣本：$x_{\ell}=x_0+\varepsilon_{\ell}$，其中 $\varepsilon_{\ell}\sim N(0,\sigma^2 I)$
     \item 代入對應的 cluster black-box：$y_{\ell}=\hat f_c(x_{\ell})$
@@ -218,7 +218,7 @@ $$}
 \end{center}
 \end{frame}
 
-\begin{frame}{\textbf{Results II}　{f\_logistic\& g\_decision}}
+\begin{frame}{\textbf{Results III}　{f\_logistic\& g\_decision}}
 \begin{center}
   \begin{minipage}{0.33\linewidth}
     \centering
@@ -238,7 +238,7 @@ $$}
 \end{center}
 \end{frame}
 
-\begin{frame}{\textbf{Results II}　{f\_logistic\& g\_xgb}}
+\begin{frame}{\textbf{Results IV}　{f\_logistic\& g\_xgb}}
 \begin{center}
   \begin{minipage}{0.33\linewidth}
     \centering
@@ -258,8 +258,31 @@ $$}
 \end{center}
 \end{frame}
 
+\begin{frame}{\textbf{Results V}　{f\_xgb\& g\_tree}}
+\begin{center}
+  \begin{minipage}{0.33\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{c=1_f_xgb&g_tree.png} 
+    \tiny{cluster = 0}
+  \end{minipage}
+  \begin{minipage}{0.33\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{c=1_f_xgb&g_tree.png}
+    \tiny{cluster = 1}
+  \end{minipage}
+  \begin{minipage}{0.33\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{c=0&1_f_xgb&g_tree.png}
+    \tiny{cluster = 0 \& 1}
+  \end{minipage}
+    \begin{minipage}{0.5\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{c=0&1_f_xgb&g_tree_tree.png}
+  \end{minipage}
+\end{center}
+\end{frame}
 
-\begin{frame}{\textbf{Results III}　{Other ML for $\hat{\hat{g}}$}}
+\begin{frame}{\textbf{Results VI}　{Other ML for $\hat{\hat{g}}$}}
 
 \begin{center}
   \begin{minipage}{0.33\linewidth}
@@ -282,6 +305,7 @@ $$}
   \end{minipage}
 \end{center}
 \end{frame}
+
 
 % --- 結束 ---
 \section*{結束}
