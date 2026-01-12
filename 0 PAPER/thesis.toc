@@ -1,22 +1,33 @@
 \contentsline {chapter}{\numberline {1}緒論}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}背景與動機}{2}{section.1.1}%
-\contentsline {section}{\numberline {1.2}章節說明}{2}{section.1.2}%
-\contentsline {chapter}{\numberline {2}研究資料}{3}{chapter.2}%
-\contentsline {section}{\numberline {2.1}資料背景}{3}{section.2.1}%
-\contentsline {section}{\numberline {2.2}資料前處理}{3}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}缺失值}{3}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}異常值}{3}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}類別不平衡}{3}{subsection.2.2.3}%
-\contentsline {chapter}{\numberline {3}研究方法}{4}{chapter.3}%
-\contentsline {section}{\numberline {3.1}流程}{4}{section.3.1}%
-\contentsline {section}{\numberline {3.2}分群}{4}{section.3.2}%
-\contentsline {section}{\numberline {3.3}黑箱模型}{4}{section.3.3}%
-\contentsline {section}{\numberline {3.4}局部擾動}{4}{section.3.4}%
-\contentsline {section}{\numberline {3.5}局部模型}{4}{section.3.5}%
-\contentsline {chapter}{\numberline {4}結果}{5}{chapter.4}%
-\contentsline {section}{\numberline {4.1}分群結果}{5}{section.4.1}%
-\contentsline {section}{\numberline {4.2}黑箱預測}{5}{section.4.2}%
-\contentsline {section}{\numberline {4.3}關鍵案例分析}{5}{section.4.3}%
-\contentsline {chapter}{\numberline {5}結論}{6}{chapter.5}%
-\contentsline {section}{\numberline {5.1}總結}{6}{section.5.1}%
-\contentsline {section}{\numberline {5.2}未來工作}{6}{section.5.2}%
+\contentsline {section}{\numberline {1.1}研究背景與動機}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}研究問題與既有方法限制}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}研究目的與方法概述}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}研究貢獻}{2}{section.1.4}%
+\contentsline {section}{\numberline {1.5}章節介紹}{3}{section.1.5}%
+\contentsline {chapter}{\numberline {2}研究資料}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}資料背景}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}資料前處理}{4}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}目標變數與資料切分單位}{5}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}極端值處理（PCA 空間）}{5}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}缺失值（Missingness）與特徵保留規則}{5}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}低資訊特徵（Low-information features）}{5}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}重複特徵（Duplicate columns）}{5}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}類別不平衡}{6}{subsection.2.2.6}%
+\contentsline {chapter}{\numberline {3}研究方法}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}流程與問題設定}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}分群}{8}{section.3.2}%
+\contentsline {section}{\numberline {3.3}黑箱模型}{8}{section.3.3}%
+\contentsline {section}{\numberline {3.4}局部擾動（Lattice cube）}{8}{section.3.4}%
+\contentsline {section}{\numberline {3.5}局部模型（Local surrogate）}{9}{section.3.5}%
+\contentsline {section}{\numberline {3.6}實驗設計與交叉驗證}{9}{section.3.6}%
+\contentsline {section}{\numberline {3.7}評估指標}{9}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}黑箱分類效能}{9}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}局部代理擬合品質}{10}{subsection.3.7.2}%
+\contentsline {chapter}{\numberline {4}研究結果}{11}{chapter.4}%
+\contentsline {section}{\numberline {4.1}分群結果}{11}{section.4.1}%
+\contentsline {section}{\numberline {4.2}黑箱預測}{11}{section.4.2}%
+\contentsline {section}{\numberline {4.3}關鍵案例分析}{11}{section.4.3}%
+\contentsline {section}{\numberline {4.4}討論與限制}{11}{section.4.4}%
+\contentsline {chapter}{\numberline {5}結論}{12}{chapter.5}%
+\contentsline {section}{\numberline {5.1}總結}{12}{section.5.1}%
+\contentsline {section}{\numberline {5.2}未來工作}{12}{section.5.2}%
