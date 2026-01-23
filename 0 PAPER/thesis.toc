@@ -25,16 +25,16 @@
 \contentsline {section}{\numberline {3.6}黑箱模型}{8}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}極限梯度提升(Extreme Gradient Boosting)}{8}{subsection.3.6.1}%
 \contentsline {section}{\numberline {3.7}局部擾動（Lattice cube）}{9}{section.3.7}%
-\contentsline {section}{\numberline {3.8}局部模型（Local surrogate）}{9}{section.3.8}%
-\contentsline {section}{\numberline {3.9}實驗設計與交叉驗證}{9}{section.3.9}%
-\contentsline {section}{\numberline {3.10}評估指標}{9}{section.3.10}%
-\contentsline {subsection}{\numberline {3.10.1}黑箱分類效能}{10}{subsection.3.10.1}%
-\contentsline {subsection}{\numberline {3.10.2}局部代理擬合品質}{10}{subsection.3.10.2}%
-\contentsline {chapter}{\numberline {4}研究結果}{11}{chapter.4}%
-\contentsline {section}{\numberline {4.1}分群結果}{11}{section.4.1}%
-\contentsline {section}{\numberline {4.2}黑箱預測}{11}{section.4.2}%
-\contentsline {section}{\numberline {4.3}關鍵案例分析}{11}{section.4.3}%
-\contentsline {section}{\numberline {4.4}討論與限制}{11}{section.4.4}%
-\contentsline {chapter}{\numberline {5}結論}{12}{chapter.5}%
-\contentsline {section}{\numberline {5.1}總結}{12}{section.5.1}%
-\contentsline {section}{\numberline {5.2}未來工作}{12}{section.5.2}%
+\contentsline {section}{\numberline {3.8}局部模型（Local surrogate）}{10}{section.3.8}%
+\contentsline {section}{\numberline {3.9}實驗設計與交叉驗證}{11}{section.3.9}%
+\contentsline {section}{\numberline {3.10}評估指標}{11}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}黑箱分類效能}{11}{subsection.3.10.1}%
+\contentsline {subsection}{\numberline {3.10.2}局部代理擬合品質}{11}{subsection.3.10.2}%
+\contentsline {chapter}{\numberline {4}研究結果}{12}{chapter.4}%
+\contentsline {section}{\numberline {4.1}分群結果}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}黑箱預測}{13}{section.4.2}%
+\contentsline {section}{\numberline {4.3}關鍵案例分析}{13}{section.4.3}%
+\contentsline {section}{\numberline {4.4}討論與限制}{13}{section.4.4}%
+\contentsline {chapter}{\numberline {5}結論}{14}{chapter.5}%
+\contentsline {section}{\numberline {5.1}總結}{14}{section.5.1}%
+\contentsline {section}{\numberline {5.2}未來工作}{14}{section.5.2}%
