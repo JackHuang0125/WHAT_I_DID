@@ -282,6 +282,24 @@
 	存在明顯的類別不平衡。且存在缺失值問題，整體缺失率為 4.54\%，但缺失分佈不均，部分特徵缺失筆數極高，單一特徵最高缺失達 1429 筆（91.19\%）
 	 ，且有 20 個特徵之缺失筆數超過 1000 筆（占樣本數 63.82\% 以上）。本研究的目的在於：在高維、缺失嚴重且類別不平衡的情
 	 境下，先以分群切分資料結構，再以黑箱分類模型學習品質結果，並在群內建立局部 linear surrogate 以描述可解釋的分析（後續章節說明）。
+	\begin{table}[H]
+	\centering
+	\caption{資料格式示意（僅顯示前 3 與後 3 個特徵；中間以 \dots 省略）}
+	\resizebox{\linewidth}{!}{%
+	\begin{tabular}{r l r r r c r r r r}
+	\toprule
+	idx & Time & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
+	\midrule
+	1 & 2008-07-19 11:55:00 & 3030.9300 & 2564.0000 & 2187.7333 & \dots & NaN    & NaN    & NaN     & -1 \\
+	2 & 2008-07-19 12:32:00 & 3095.7800 & 2465.1400 & 2230.4222 & \dots & 0.0201 & 0.0060 & 208.2045 & -1 \\
+	3 & 2008-07-19 13:17:00 & 2932.6100 & 2559.9400 & 2186.4111 & \dots & 0.0484 & 0.0148 & 82.8602  &  1 \\
+	4 & 2008-07-19 14:43:00 & 2988.7200 & 2479.9000 & 2199.0333 & \dots & 0.0149 & 0.0044 & 73.8432  & -1 \\
+	5 & 2008-07-19 15:22:00 & 3032.2400 & 2502.8700 & 2233.3667 & \dots & 0.0149 & 0.0044 & 73.8432  & -1 \\
+	\bottomrule
+	\end{tabular}%
+	}
+	\label{tab:data-preview}
+	\end{table}
 
 	\section{資料前處理}
 	本節說明資料清理與特徵處理流程。
@@ -327,55 +345,89 @@
 	\item 以分類效能與局部擬合指標彙整結果，並進行關鍵案例分析。
 	\end{enumerate}
 
-	\section{資料處理與分群標記建立流程}
-	本研究將原始資料記為 $D_1$。
+	\section{整體方法流程：分群式黑箱建模與區塊式全格點局部代理檢定}
+
+	本研究以原始資料集 $D$ 為起點，
 	由於資料呈現高維度、缺失嚴重且類別不平衡等特性，
 	若直接以距離為基礎進行分群，
 	群中心容易受到少數極端點與多數類別主導，
 	造成分群結構不穩定，
 	且少數類別在分群目標中被弱化。
+	
+	因此，
+	先提升分群的穩定性並使少數類別在分群過程中具有足夠影響，
+	再於各群內訓練黑箱模型，
+	以區塊式全格點擾動在有興趣的局部附近建立局部線性代理模型，
+	產生各特徵的係數與顯著性檢定（p-value）排序，
+	用於解釋黑箱模型在該局部區域中的決策方式。
 
-	為提升分群的穩定性並使少數類別在分群過程中具有足夠影響，
-	本研究採以下流程建立最終分群標記，
-	並將分群結果回填至真實樣本資料以供後續建模使用：
+	\subsection{資料前處理與分群標記建立}
 
 	\begin{enumerate}
-	\item \textbf{初步降維與分群（$D_1$）}：
-	對 $D_1$ 進行 PCA 投影至二維平面，
-	並於該平面以 k-means 進行初步分群，
-	用於檢視資料幾何結構與辨識極端樣本。
-	
-	\item \textbf{極端樣本剔除（得到 $D_2$）}：
-	於 PCA 二維平面中，
-	依主成分座標之門檻規則辨識遠離主要資料雲之樣本並予以剔除，
-	得到去除極端樣本後的資料 $D_2$。
-	此步驟目的在於避免少數遠離點拉動 k-means 群中心位置，
-	影響後續分群結構。
+	\item \textbf{初步資料前處理與降維}：
+	先對特徵進行三類清理：移除缺失過多之欄位、移除近乎常數/低變異欄位、移除重複欄位。
+	接著以 KNN imputation 補齊缺失值，
+	並以標準化將資料映射至同一尺度空間，
+	接著投影至 PCA 二維空間，
+	依主成分座標門檻規則辨識遠離主要資料集之樣本並剔除，
+	以降低極端點對後續距離結構與分群質心估計的扭曲。
 
-	\item \textbf{以 SMOTE 調整類別權重（得到 $D_3$）}：
-	由於 $D_2$ 之目標類別分佈高度不平衡，
+	\item \textbf{SMOTE 用於分群表徵塑形（建立 $D_{\text{cluster}}$）}：
+	由於目標類別分佈高度不平衡，
 	若直接以 k-means 最小化群內平方誤差，
 	分群結果傾向由多數類別主導。
-	因此本研究於 $D_2$ 上使用 SMOTE 產生少數類別的合成樣本，
-	得到類別較為平衡之資料 $D_3$。
+	因此剔除極端樣本後，
+	再對資料重複一次前處理與標準化，
+	並於該資料使用 SMOTE 產生少數類別的合成樣本，
 	需注意，
 	SMOTE 僅用於調整分群時的樣本分佈（等價於調整類別在距離目標中的權重），
 	並不作為後續分類模型之訓練資料來源。
 
-	\item \textbf{在 $D_3$ 上建立最終分群（取得質心與群標記規則）}：
-	對 $D_3$ 進行 PCA 與 k-means 分群，
-	取得分群質心（或其對應的指派規則），
+	\item \textbf{在 SMOTE 空間進行 PCA+k-means 取得分群規則}：
+	在 $X_{\text{smote}}$ 上進行 PCA（以累積解釋變異比門檻保留主成分），
+	再以 k-means 分為兩群，
+	取得分群質心與指派規則。
+	此規則反映在平衡化密度下的幾何結構，
 	使分群結果能反映少數類別在資料結構中的區域性特徵，
 	而不被多數類別完全主導。
 
-	\item \textbf{移除合成樣本並回到真實資料（$D_2$ 含 clusters）}：
-	將 $D_3$ 中由 SMOTE 生成之合成樣本移除，
-	回到真實樣本資料 $D_2$，
-	並以先前在 $D_3$ 所建立之分群質心/指派規則，
-	為 $D_2$ 中每一筆真實樣本賦予群標記，
-	得到最終資料 $D_2(\text{含 clusters})$，
-	供後續黑箱模型與群內局部代理模型建構使用。
+	\item \textbf{移除合成樣本並回填群標記至真實資料}：
+	將合成樣本移除，
+	僅保留真實樣本對應的群標記，
+	得到真實資料集 $D_{\text{real}}$ 及其分群標記向量 $c$，
+	供後續各群內黑箱建模與局部代理分析使用。
 	\end{enumerate}
+
+	\subsection{各群內黑箱模型訓練與 OOF 機率估計}
+
+	\begin{enumerate}
+	\item \textbf{各群內交叉驗證（OOF 機率）}：
+	對每一群 $c \in {0,1}$，取該群真實樣本 $(X_c, y_c)$，以 stratified $K$-fold 進行交叉驗證。每一折中僅對訓練子集施作 SMOTE 以提升少數類別可分性，驗證子集不做重抽樣，並以該折訓練之模型輸出驗證子集的預測機率。彙整各折驗證輸出得到每筆真實樣本的 out-of-fold 機率 $\hat{p}_{\text{oof}}$，用於後續挑選局部分析中心點。
+
+	\item \textbf{各群最終黑箱模型（用於局部代理取樣）}：
+	在每一群的全體真實樣本上重訓一個最終黑箱分類器 $f_c$（本流程中採用 XGBoost classifier），作為後續局部格點擾動時的黑箱查詢函數，輸出 $f_c(x)$ 或 $P(y=1\mid x)$。
+	\end{enumerate}
+
+	\subsection{中心點 $x_0$ 選取與區塊式全格點局部代理}
+
+	\begin{enumerate}
+	\item \textbf{群內中心點選取（以邊界附近樣本聚合）}：
+	對每一群，使用該群真實樣本的 $\hat{p}*{\text{oof}}$，挑選機率最接近決策邊界（例如 $0.5$）的前 $t$ 筆樣本索引集合。將這些樣本的標準化特徵向量取平均，得到該群的局部分析中心點 $x*{0,c}$，以降低單點噪聲並使中心點落於模型邊界附近的代表性區域。
+
+	\item \textbf{區塊式全格點擾動（blockwise full grid）}：
+	由於特徵維度高，若在全維度建立 $(2k+1)^p$ 的格點會造成組合爆炸。本研究採用區塊策略：將 $p$ 維特徵切成多個 block，每次僅在 block 內的 $q$ 維特徵做全格點擾動，其餘特徵固定於 $x_{0,c}$。
+	對 block 內每個維度，設定步長 $\delta$ 與半徑層數 $k$，形成 ${-k,\ldots,k}^q$ 的整數位移集合，並映射為 $X_{\text{block}}=\delta\cdot \text{offsets}$。每個格點對應一筆擾動後輸入 $x$，送入黑箱模型 $f_c$ 取得輸出 $y=f_c(x)$。
+
+	\item \textbf{串流累積 sufficient statistics 的 OLS 擬合}：
+	為避免一次建立全格點資料造成記憶體爆炸，採用 chunk 方式串流生成格點並累積 OLS 所需的充分統計量：$X^\top X$, $X^\top y$, $y^\top y$, $\sum y$。在處理完該 block 的全部格點後，以累積量直接解出局部線性模型參數 $\beta$，並計算 SSE、$R^2$、adjusted $R^2$、AIC/BIC、係數標準誤、t 值與 p 值。
+
+	\item \textbf{特徵層級顯著性彙整與排序}：
+	對每個 block 的每一個特徵，將其局部線性係數與 p-value 彙整成一張特徵重要度表，並依 p-value（及輔助的 $|\beta|$）排序，得到該群在中心點附近的局部解釋結果。
+	\end{enumerate}
+
+	\subsection{評估一致性與資料洩漏控制}
+
+	凡涉及參數估計或結構學習之步驟（標準化、PCA、k-means、SMOTE、以及各群黑箱模型訓練）需置於訓練資料或交叉驗證訓練折內完成；驗證/測試資料僅套用訓練端估計所得之轉換、群指派規則與模型參數，以避免資料洩漏造成的評估偏誤。
 
 	為避免評估偏誤，
 	凡涉及參數估計或結構學習之步驟（如標準化、PCA、k-means 與 SMOTE）僅可在訓練資料（或交叉驗證之訓練折）上進行，
@@ -542,23 +594,217 @@
 
 
 	\chapter{研究結果}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.5\linewidth]{img/pca.png}
-			\caption{PCA}
-			\label{fig:confusion_matrix}
-		\end{figure}
-
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.5\linewidth]{img/pca2.png}
-			\caption{PCA}
-			\label{fig:confusion_matrix}
-		\end{figure}
-
 	\section{分群結果}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/原始data做pca+kmeans.png}
+			\caption{原始data做pca+kmeans}
+			\label{fig:原始data做pca+kmeans}
+		\end{figure}
+		$$
+		\begin{array}{c|cc}
+			\text{cluster} & 0 & 1 \\
+			\hline
+			y=0 & 1460 & 3 \\
+			y=1 & 103  & 1 \\
+		\end{array}
+		$$
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的原始data.png}
+			\caption{移除outlier做pca+kmeans的原始data}
+			\label{fig:移除outlier做pca+kmeans的原始data}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的原始data含y.png}
+			\caption{移除outlier做pca+kmeans的原始data含y}
+			\label{fig:移除outlier做pca+kmeans的原始data含y}
+		\end{figure}
+		$$
+		\begin{array}{c|cc}
+			\text{cluster} & 0 & 1 \\
+			\hline
+			y=0 & 660 & 770 \\
+			y=1 & 58  & 37 \\
+		\end{array}
+		$$
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
+			\caption{移除outlier做pca+kmeans的SMOTEdata}
+			\label{fig:移除outlier做pca+kmeans的SMOTEdata}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata含y.png}
+			\caption{移除outlier做pca+kmeans的SMOTEdata含y}
+			\label{fig:移除outlier做pca+kmeans的SMOTEdata含y}
+		\end{figure}
+		$$
+		\begin{array}{c|cc}
+			\text{cluster} & 0 & 1 \\
+			\hline
+			y=0 & 743 & 687 \\
+			y=1 & 205  & 510 \\
+		\end{array}
+		$$
+
+		$$
+		\begin{array}{c|cc}
+			\text{cluster} & 0 & 1 \\
+			\hline
+			y=0 & 743 & 687 \\
+			y=1 & 29  & 66 \\
+		\end{array}
+		$$
+	\begin{table}[H]
+		\centering
+		\caption{資料格式示意（僅顯示前 3 與後 3 個特徵；中間以 \dots 省略）}
+		\resizebox{\linewidth}{!}{%
+		\begin{tabular}{r r r r c r r r r}
+		\toprule
+		idx & x1 & x2 & x3 & \dots & x588 & x589 & x590 & cluster \\
+		\midrule
+		1 & 0.2164 & 0.8565 & -0.4346 & \dots & -0.1409 & -0.0501 & 0.2015 & 1 \\
+		2 & 1.0940 & -0.3748 & 1.0208 & \dots & 0.4219 & 0.2582 & 1.1679 & 1 \\
+		3 & -1.1142 & 0.8060 & -0.4796 & \dots & 3.6316 & 3.3164 & -0.1717 & 1 \\
+		4 & -0.3548 & -0.1909 & -0.0493 & \dots & -0.1678 & -0.2979 & -0.2681 & 1 \\
+		5 & 0.2341 & 0.0952 & 1.1212 & \dots & -0.1678 & -0.2979 & -0.2681 & 1 \\
+		\bottomrule
+		\end{tabular}%
+		}
+		\label{tab:smotedata}
+	\end{table}
+
 	\section{黑箱預測}
+	\begin{table}[H]
+		\centering
+		\caption{Black-box classification performance (OOF) by cluster.}
+		\label{tab:blackbox_oof_by_cluster}
+		\begin{tabular}{lrrrrr}
+		\hline
+		group & $n$ & pos\_rate($y{=}1$) & ACC & FAR & Recall \\
+		\hline
+		ALL       & 1525 & 0.0623 & 0.9239 & 0.0245 & 0.1474 \\
+		cluster\_0 &  772 & 0.0376 & 0.9560 & 0.0121 & 0.1379 \\
+		cluster\_1 &  753 & 0.0876 & 0.8911 & 0.0378 & 0.1515 \\
+		\hline
+		\end{tabular}
+	\end{table}
+
+	\noindent\textbf{Confusion matrix} (rows=true $[0,1]$, cols=pred $[0,1]$)
+
+	\begin{table}[H]
+	\centering
+	\caption{Confusion matrix (ALL).}
+	\label{tab:cm_all}
+	\begin{tabular}{lrr}
+	\hline
+	& pred 0 & pred 1 \\
+	\hline
+	true 0 & 1395 & 35 \\
+	true 1 & 81   & 14 \\
+	\hline
+	\end{tabular}
+	\end{table}
+
+	\begin{table}[H]
+	\centering
+	\caption{Confusion matrix (cluster\_0).}
+	\label{tab:cm_c0}
+	\begin{tabular}{lrr}
+	\hline
+	& pred 0 & pred 1 \\
+	\hline
+	true 0 & 734 & 9 \\
+	true 1 & 25  & 4 \\
+	\hline
+	\end{tabular}
+	\end{table}
+
+	\begin{table}[H]
+	\centering
+	\caption{Confusion matrix (cluster\_1).}
+	\label{tab:cm_c1}
+	\begin{tabular}{lrr}
+	\hline
+	& pred 0 & pred 1 \\
+	\hline
+	true 0 & 661 & 26 \\
+	true 1 & 56  & 10 \\
+	\hline
+	\end{tabular}
+	\end{table}
+
 	\section{關鍵案例分析}
+	本節針對分群後之資料，彙整各群用於「局部線性代理模型（local surrogate）」建構的關鍵案例（中心點）索引（index）。所列索引係指完成資料清理與重設索引（\texttt{reset\_index(drop=True)}）後之列序號，用於確保後續的局部格點抽樣、分段（block-wise）線性回歸估計、係數與顯著性（$p$-value）排序等流程具可重現性。
+
+	對第 $c$ 群，將其關鍵案例索引集合記為 $\mathcal{I}_c=\{i_1,\dots,i_m\}$，其中每個 $i$ 對應一筆樣本 $x^{(i)}$，並以該樣本作為局部代理模型之中心點 $x_0$。由於本研究的「關鍵案例清單」在目前輸出中各群僅提供 $m=10$ 筆（未達規劃之 30 筆），因此本節先完整列示現有可用之全部索引，並保留擴充至每群 30 筆之彈性，供後續以相同準則增補。
+
+	\subsection{群 0（cluster\_0）}
+	群 0 的關鍵案例索引如表 \ref{tab:topfeat_c0}。此群之中心點黑箱輸出機率（在本次彙整結果中為固定值）為
+	\[
+	p_{\text{oof}}(x_0)=0.500756,\qquad p_{\text{final}}(x_0)=0.086943,
+	\]
+	後續所有局部線性係數與顯著性估計均以表中索引對應之 $x_0$ 為起點建立局部樣本並計算。
+
+	\begin{table}[H]
+	\centering
+	\caption{Cluster 0 重要特徵（依 $|\hat\beta|$ 排序，Top 10）}
+	\label{tab:topfeat_c0}
+	\begin{tabular}{r l r r r r}
+		\toprule
+		rank\_p & feature & coef & $R^2_{\text{block}}$ & p \\
+		\midrule
+		1  & x112 & -0.098230 & 0.861 & 0.000 \\
+		2  & x130 & +0.080726 & 0.730 & 0.000 \\
+		3  & x489 & -0.074666 & 0.892 & 0.000 \\
+		4  & x69  & -0.071716 & 0.896 & 0.000 \\
+		5  & x557 & -0.056932 & 0.792 & 0.000 \\
+		6  & x551 & -0.050496 & 0.750 & 0.000 \\
+		7  & x36  & -0.044920 & 0.746 & 0.000 \\
+		8  & x337 & +0.038257 & 0.767 & 0.000 \\
+		9  & x369 & -0.038089 & 0.749 & 0.000 \\
+		10 & x282 & -0.035327 & 0.647 & 0.000 \\
+		\bottomrule
+	\end{tabular}
+	\end{table}
+
+
+	\subsection{群 1（cluster\_1）}
+	群 1 的關鍵案例索引如表 \ref{tab:topfeat_c1}。此群之中心點黑箱輸出機率（在本次彙整結果中為固定值）為
+	\[
+	p_{\text{oof}}(x_0)=0.494366,\qquad p_{\text{final}}(x_0)=0.025957,
+	\]
+	後續局部代理模型之分段線性估計與特徵顯著性排序皆以表中索引對應之中心點 $x_0$ 為基準進行。
+
+	\begin{table}[H]
+	\centering
+	\caption{Cluster 1 重要特徵（依 $|\hat\beta|$ 排序，Top 10）}
+	\label{tab:topfeat_c1}
+	\begin{tabular}{r l r r r r}
+		\toprule
+		rank\_p & feature & coef & $R^2_{\text{block}}$ & p \\
+		\midrule
+		1  & x1   & -0.036000 & 0.834 & 0.000 \\
+		2  & x576 & -0.024446 & 0.627 & 0.000 \\
+		3  & x585 & +0.020591 & 0.744 & 0.000 \\
+		4  & x123 & -0.020540 & 0.787 & 0.000 \\
+		5  & x127 & +0.017246 & 0.787 & 0.000 \\
+		6  & x64  & +0.016939 & 0.446 & 0.000 \\
+		7  & x324 & -0.016182 & 0.684 & 0.000 \\
+		8  & x87  & +0.015838 & 0.697 & 0.000 \\
+		9  & x176 & +0.015564 & 0.891 & 0.000 \\
+		10 & x118 & -0.014974 & 0.707 & 0.000 \\
+		\bottomrule
+	\end{tabular}
+	\end{table}
+
+
+	\noindent
+	總結而言，本節提供各群用於局部線性代理模型之中心點索引，作為「關鍵案例」的可重現輸入介面；後續若需將每群案例數擴充至 30 筆，僅需在相同分群與相同選取準則下對 $\mathcal{I}_c$ 進行增補，即可不改動下游的局部建模與統計檢定流程。
+
 	\section{討論與限制}
 
 
