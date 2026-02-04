@@ -275,13 +275,25 @@
 	\chapter{研究資料}
 
 	\section{資料背景}
-	本研究使用半導體製程量測資料－SECOM作為分析對象，源自(McCann, M., et al, 2010)。
-	資料以單一樣本為單位，共 1567 筆；
+	\label{sec:databackground}
+	本研究使用半導體製程量測資料－SECOM作為分析對象，
+	源自(McCann, M., et al, 2010)。
+	資料以單一樣本為單位，
+	共 1567 筆；
 	每筆樣本包含一個時間欄位（Time, 範圍自 2008-01-08 02:02:00 至 2008-12-10 18:47:00）、590 個已匿名化的量測變項（以 $x1$ 至 $x590$ 表示），
-	以及一個品質結果欄位（二元變數，Pass/Fail）作為目標變數，其中Fail（$-$1）共1463 筆（93.36\%），Pass（1）共 104 筆（6.64\%），
-	存在明顯的類別不平衡。且存在缺失值問題，整體缺失率為 4.54\%，但缺失分佈不均，部分特徵缺失筆數極高，單一特徵最高缺失達 1429 筆（91.19\%）
-	 ，且有 20 個特徵之缺失筆數超過 1000 筆（占樣本數 63.82\% 以上）。本研究的目的在於：在高維、缺失嚴重且類別不平衡的情
-	 境下，先以分群切分資料結構，再以黑箱分類模型學習品質結果，並在群內建立局部 linear surrogate 以描述可解釋的分析（後續章節說明）。
+	以及一個品質結果欄位（二元變數，Pass/Fail）作為目標變數，其中Fail（$-$1）共1463 筆（93.36\%），
+	Pass（1）共 104 筆（6.64\%），
+	存在明顯的類別不平衡，
+	同時存在缺失值問題，
+	整體缺失率為 4.54\%，
+	但缺失分佈不均，
+	部分特徵缺失筆數極高，
+	單一特徵最高缺失達 1429 筆（91.19\%），
+	且有 20 個特徵之缺失筆數超過 1000 筆（占樣本數 63.82\% 以上）。
+	本研究的目的在於：在高維、缺失嚴重且類別不平衡的情境下，
+	先以分群切分資料結構，
+	再在各群建立黑箱分類模型，
+	並在群內建立局部 linear surrogate 以描述可解釋的分析（後續章節說明）。
 	\begin{table}[H]
 	\centering
 	\caption{資料格式示意（僅顯示前 3 與後 3 個特徵；中間以 \dots 省略）}
@@ -305,17 +317,36 @@
 	本節說明資料清理與特徵處理流程。
 
 	\subsection{目標變數與資料切分單位}
-	為方便辨識將目標欄位Pass（1）、Fail（$-$1），轉為Pass（1）、Fail（0）。時間欄位 Time 不作為模型特徵，於建模前移除。
+	為方便辨識將目標欄位Pass（1）、Fail（$-$1），轉為Pass（1）、Fail（0）。
+	時間欄位 Time 不作為模型特徵，
+	於建模前移除。
 
-	\subsection{缺失值與特徵保留}
-	製程量測資料常見大量缺失，本研究資料亦不例外。為避免高度缺失的特徵在直接補值後造成誤差，
-	本研究以「單一特徵的缺失筆數」作為篩選指標，先移除缺失筆數高於門檻的特徵；
-	同時，亦發現特徵中出現近乎常數或取值種類極少的欄位，對分類模型貢獻有限，
-	以「特徵的不同數值」作為篩選指標，移除特徵數值種類低於門檻的特徵。
+	\subsection{缺失值}
+	如同第 \ref{sec:databackground} 節所述，
+	本研究資料有高度缺失的狀況。
+	為避免高度缺失的特徵在補值後造成誤差，
+	本研究以「單一特徵的缺失筆數」作為篩選指標，
+	先移除缺失筆數高於 1000 筆的特徵；
 
-	\subsection{重複特徵}
-	為避免模型被冗餘特徵影響，本研究以欄位（特徵）完全相同作為判準並移除，只保留首次出現者。
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{img/missingvalue.png}
+			\caption{missingvalue}
+			\label{fig:missingvalue}
+		\end{figure}
 
+	\subsection{少數類別特徵}
+	同時，
+	亦發現少數特徵的值為單一或僅數個常數的欄位，
+	我們認為這些特徵對分類模型的影響有限，
+	並以「特徵的不同數值」作為篩選指標，
+	移除特徵值種類低於門檻的特徵。
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{img/uniquevalue.png}
+			\caption{uniquevalue}
+			\label{fig:uniquevalue}
+		\end{figure}
 	\subsection{補值}
 	保留上述處理在門檻內的特徵後，再進行補值。此處採用 KNN 補值（KNNImputer），以鄰近樣本的距離加權估計缺失值，
 	使補值結果可反映整體資料結構，具有足夠變異的特徵供後續建模。
@@ -324,9 +355,54 @@
 	資料為高維且單位不一致，若以原始空間判別離群點並不穩定；因此先以 PCA 投影至二維平面觀察整體樣貌，
 	並在 PCA 平面上以明確門檻規則移除極端點。移除後重新編號樣本索引，以確保後續分群與交叉驗證索引一致。
 
-	\subsection{類別不平衡}
-	前面有提到資料存在類別不平衡的問題，Fail（$-$1）共1463 筆，佔整體的93.36\%，Pass（1）共 104 筆，佔整體的6.64\%，為避免模型分類偏向多數類別，
-	於訓練折內採用重抽樣策略（如 SMOTE）及其放置位置（僅限訓練資料內），以避免資料洩漏。
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/未移除outlier做pca.png}
+			\caption{未移除outlier做pca}
+			\label{fig:未移除outlier做pca}
+		\end{figure}
+	如圖 \ref{fig:未移除outlier做pca} 所示，
+	資料清理後，
+	在未移除我們認為的極端值之前，
+	二維主成分明顯被少數點拉開，
+	我們懷疑這是資料存在極端值，
+	導致資料在計算投影矩陣被少數極端值影響，
+	而產生差距，
+	且分群後的真實資料的類別明顯分布不均，
+	會影響後續各群的建模結果
+
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的原始data.png}
+			\caption{移除outlier做pca+kmeans的原始data}
+			\label{fig:移除outlier做pca+kmeans的原始data}
+		\end{figure}
+	我們根據圖 \ref{fig:未移除outlier做pca+kmeans}，
+	於資料重新讀取後，
+	直接刪除主成分 $PC1>10$ 和 $PC2>10$ 的樣本點，
+	重複同樣的資料前處理、降維、分群的步驟，
+	便如圖 \ref{fig:移除outlier做pca+kmeans的原始data}，
+	此時樣本點不受到極端值劇烈的影響，
+	且 $y=1$ （Fail）的樣本點仍存在
+
+	\subsection{前處理後之最終資料集}
+
+		\begin{table}[H]
+		\centering
+		\caption{資料前處理後之特徵矩陣預覽（僅顯示前 3 與後 3 個特徵）}
+		\begin{tabular}{r r r r c r r r}
+		\toprule
+		idx & x1 & x2 & x3 & \dots & x588 & x589 & x590 \\
+		\midrule
+		0 & 0.216411 & 0.856549 & -0.434551 & \dots & -0.140893 & -0.050083 & 0.201450 \\
+		1 & 1.094037 & -0.374751 & 1.020782  & \dots & 0.421933  & 0.258167  & 1.167895 \\
+		2 & -1.114171 & 0.805982 & -0.479627 & \dots & 3.631596  & 3.316370  & -0.171694 \\
+		3 & -0.354825 & -0.190915 & -0.049316 & \dots & -0.167828 & -0.297870 & -0.268061 \\
+		4 & 0.234139 & 0.095176 & 1.121165  & \dots & -0.167828 & -0.297870 & -0.268061 \\
+		\bottomrule
+		\end{tabular}
+		\label{tab:data-preview}
+		\end{table}
 
 
 	\chapter{研究方法}
@@ -362,7 +438,7 @@
 	用於解釋黑箱模型在該局部區域中的決策方式。
 
 	\subsection{資料前處理與分群標記建立}
-
+	\label{sec:pipeline_clusterlabel}
 	\begin{enumerate}
 	\item \textbf{初步資料前處理與降維}：
 	先對特徵進行三類清理：移除缺失過多之欄位、移除近乎常數/低變異欄位、移除重複欄位。
@@ -478,6 +554,9 @@
 	以調整分群時的樣本分佈，
 	並不作為後續分類模型之訓練資料來源。
 	
+	前面有提到資料存在類別不平衡的問題，Fail（$-$1）共1463 筆，佔整體的93.36\%，Pass（1）共 104 筆，佔整體的6.64\%，為避免模型分類偏向多數類別，
+	於訓練折內採用重抽樣策略（如 SMOTE）及其放置位置（僅限訓練資料內），以避免資料洩漏。
+
 	\section{黑箱模型}
 	本研究使用梯度提升樹模型作為黑箱分類器，
 	於各群內分別訓練以捕捉非線性關係；
@@ -574,33 +653,47 @@
 	並可再依 $S(\cdot)$ 轉回原始尺度進行詮釋。
 
 	\section{實驗設計與交叉驗證}
-	本研究將資料切分為訓練集與測試集，
-	測試集不參與模型訓練；
-	並於訓練集進行 $K$ 折交叉驗證以估計泛化能力，
-	同時固定隨機種子以確保結果可重現。
-	分群後之評估採「群內交叉驗證」：對每一群 $c$ 的樣本索引集合分別進行分層抽樣交叉驗證，
-	並彙整各群之 out-of-fold（OOF）預測機率與混淆矩陣。
+	本研究將資料分群後，
+	在各群內切分為訓練集與測試集，
+	於訓練集進行 $K$ 折交叉驗證以訓練黑箱模型，
+	測試集則不參與模型訓練。
+	每一折的測試集均會經由黑箱模型輸出 $\hat{y}^b(x_{test})$ 的機率，
+	我們藉由此機率提出 $\hat{y}^b \approx 0.5$ 的格子點作為集合，
+	並取此集合的x平均，
+	作為後續建立 local surrogate 時，
+	所使用的中心點，
 
 	\section{評估指標}
 	本研究評估分為兩類：黑箱分類效能與局部代理擬合品質。
 
 	\subsection{黑箱分類效能}
-	% 以混淆矩陣（TN, FP, FN, TP）彙整分類結果，並計算 Accuracy、Precision、Recall、F1-score，以及以機率輸出計算 ROC-AUC。
-	% 此外同時呈現整體 OOF 與各群 OOF 的混淆矩陣，以比較分群前後及群間差異。
+	本研究以混淆矩陣（TN, FP, FN, TP）彙整黑箱分類結果，
+	並以此計算分類效能指標，包含 Accuracy、False Alarm Rate 與 ROC-AUC。
+	其中 Accuracy 與 False Alarm Rate 定義如下：
+	$$
+	\mathrm{Accuracy}=\frac{TP+TN}{TP+TN+FP+FN},
+	\qquad
+	\mathrm{False\ Alarm\ Rate}=\frac{FP}{FP+TN}
+	$$
+	ROC-AUC 則以模型輸出機率 $\hat{p}(x)$ 於不同門檻下所形成之 ROC 曲線面積表示。
+	此外，本研究同時呈現整體與各群的混淆矩陣，以比較整體模型與分群後模型表現之差異。
 
 	\subsection{局部代理擬合品質}
-	% 以局部資料 $(z(m),y^{\text{bb}}(m))$ 評估代理模型對黑箱輸出的近似程度，指標包含 $R^2$、Adjusted $R^2$、AIC、BIC 與 SSE。
-	% 當不同 $(k,\delta)$ 或局部樣本數設定改變時，以相同指標比較局部近似的穩定性。
+	以局部資料 $(z(m),y^{\text{bb}}(m))$ 評估代理模型對黑箱輸出的近似程度，
+	指標包含 $R^2$ 與 SSE。
+	當不同 $(k,\delta)$ 或局部樣本數設定改變時，以相同指標比較局部近似的穩定性。
 
 
 	\chapter{研究結果}
 	\section{分群結果}
+
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.5\linewidth]{img/原始data做pca+kmeans.png}
-			\caption{原始data做pca+kmeans}
-			\label{fig:原始data做pca+kmeans}
+			\includegraphics[width=0.5\linewidth]{img/未移除outlier做pca+kmeans.png}
+			\caption{未移除outlier做pca+kmeans}
+			\label{fig:未移除outlier做pca+kmeans}
 		\end{figure}
+
 		$$
 		\begin{array}{c|cc}
 			\text{cluster} & 0 & 1 \\
@@ -611,16 +704,28 @@
 		$$
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的原始data.png}
-			\caption{移除outlier做pca+kmeans的原始data}
-			\label{fig:移除outlier做pca+kmeans的原始data}
+			\includegraphics[width=0.5\linewidth]{img/未移除outlier做pca+kmeans的SMOTEdata.png}
+			\caption{未移除outlier做pca+kmeans的SMOTEdata}
+			\label{fig:未移除outlier做pca+kmeans的SMOTEdata}
 		\end{figure}
+		$$
+		\begin{array}{c|cc}
+			\text{cluster} & 0 & 1 \\
+			\hline
+			y=0 & 1438 & 25 \\
+			y=1 & 1365  & 98 \\
+		\end{array}
+		$$
+
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的原始data含y.png}
 			\caption{移除outlier做pca+kmeans的原始data含y}
 			\label{fig:移除outlier做pca+kmeans的原始data含y}
 		\end{figure}
+	
+
+
 		$$
 		\begin{array}{c|cc}
 			\text{cluster} & 0 & 1 \\
@@ -650,6 +755,13 @@
 		\end{array}
 		$$
 
+	我們對資料實施SMOTE，
+	是為了讓資料在做降維與分群時，
+	可抓到少數類別樣本點的資訊，
+	因此分群後的結果，
+	我們推測應資料應同時具有Pass和Fail的資訊，
+	並且後續的建模僅用原始的資料點，
+	而不包含經由SMOTE的生成點
 		$$
 		\begin{array}{c|cc}
 			\text{cluster} & 0 & 1 \\
@@ -680,15 +792,15 @@
 	\section{黑箱預測}
 	\begin{table}[H]
 		\centering
-		\caption{Black-box classification performance (OOF) by cluster.}
+		\caption{Black-box classification performance (OOF) overall and by cluster.}
 		\label{tab:blackbox_oof_by_cluster}
-		\begin{tabular}{lrrrrr}
+		\begin{tabular}{lrrrr}
 		\hline
-		group & $n$ & pos\_rate($y{=}1$) & ACC & FAR & Recall \\
+		group & $n$ & ACC & FAR & ROC-AUC \\
 		\hline
-		ALL       & 1525 & 0.0623 & 0.9239 & 0.0245 & 0.1474 \\
-		cluster\_0 &  772 & 0.0376 & 0.9560 & 0.0121 & 0.1379 \\
-		cluster\_1 &  753 & 0.0876 & 0.8911 & 0.0378 & 0.1515 \\
+		ALL       & 1525 & 0.9318 & 0.0126 & 0.6767 \\
+		cluster\_0 &  772 & 0.9560 & 0.0081 & 0.6912 \\
+		cluster\_1 &  753 & 0.8912 & 0.0349 & 0.6724 \\
 		\hline
 		\end{tabular}
 	\end{table}
@@ -697,45 +809,46 @@
 
 	\begin{table}[H]
 	\centering
-	\caption{Confusion matrix (ALL).}
+	\caption{Confusion matrix (ALL), mean over 5 folds.}
 	\label{tab:cm_all}
 	\begin{tabular}{lrr}
 	\hline
 	& pred 0 & pred 1 \\
 	\hline
-	true 0 & 1395 & 35 \\
-	true 1 & 81   & 14 \\
+	true 0 & 282.4 & 3.6 \\
+	true 1 & 17.2  & 1.8 \\
 	\hline
 	\end{tabular}
 	\end{table}
 
 	\begin{table}[H]
 	\centering
-	\caption{Confusion matrix (cluster\_0).}
+	\caption{Confusion matrix (cluster\_0), mean over 5 folds.}
 	\label{tab:cm_c0}
 	\begin{tabular}{lrr}
 	\hline
 	& pred 0 & pred 1 \\
 	\hline
-	true 0 & 734 & 9 \\
-	true 1 & 25  & 4 \\
+	true 0 & 147.4 & 1.2 \\
+	true 1 & 5.6   & 0.2 \\
 	\hline
 	\end{tabular}
 	\end{table}
 
 	\begin{table}[H]
 	\centering
-	\caption{Confusion matrix (cluster\_1).}
+	\caption{Confusion matrix (cluster\_1), mean over 5 folds.}
 	\label{tab:cm_c1}
 	\begin{tabular}{lrr}
 	\hline
 	& pred 0 & pred 1 \\
 	\hline
-	true 0 & 661 & 26 \\
-	true 1 & 56  & 10 \\
+	true 0 & 132.6 & 4.8 \\
+	true 1 & 11.6   & 1.6 \\
 	\hline
 	\end{tabular}
 	\end{table}
+
 
 	\section{關鍵案例分析}
 	本節針對分群後之資料，彙整各群用於「局部線性代理模型（local surrogate）」建構的關鍵案例（中心點）索引（index）。所列索引係指完成資料清理與重設索引（\texttt{reset\_index(drop=True)}）後之列序號，用於確保後續的局部格點抽樣、分段（block-wise）線性回歸估計、係數與顯著性（$p$-value）排序等流程具可重現性。
