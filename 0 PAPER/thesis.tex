@@ -601,9 +601,8 @@
 	則以中心點 $z_\ell$（$\ell\in\{0,1\}$）生成之局部設計點為
 	$$z_\ell(m)=z_\ell+\delta m,\quad m\in\mathcal{M}.$$
 	故完整的格子點有 $(2k+1)^p$ ，
-	再映射回原始空間
 	$$x_\ell(m)=S^{-1}\!\bigl(z_\ell(m)\bigr),$$
-	並以黑箱模型計算局部標記
+	並以黑箱模型計算該點的機率值
 	$$y^{\text{bb}}_\ell(m)=\hat{p}_c\!\bigl(x_\ell(m)\bigr).$$
 	
 	由於本研究特徵維度的 $p=459$ ，
@@ -612,7 +611,7 @@
 	於現有的實驗環境下難以枚舉所有格子點，
 	因此本研究採下列方式控制局部樣本數並降低計算成本：
 	\begin{enumerate}
-	\item \textbf{Stagewise 分段建模}：
+	\item \textbf{抽樣}：
 	由於完整格子點有 $(2k+1)^p$ 個，
 	在高維情況下不可行。
 	本研究將特徵依固定順序分段（blockwise）處理。
