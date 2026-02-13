@@ -39,6 +39,7 @@
 \newlabel{tab:data-preview}{{2.1}{2}{資料格式示意（僅顯示前 3 與後 3 個特徵；中間以 \dots 省略）}{table.2.1}{}}
 \pgfsyspdfmark {pgfid18}{4736286}{50644704}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}資料前處理}{3}{section.2.2}\protected@file@percent }
+\newlabel{sec:資料處理}{{2.2}{3}{資料前處理}{section.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}目標變數與資料切分單位}{3}{subsection.2.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}缺失值}{3}{subsection.2.2.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces missingvalue}}{3}{figure.2.1}\protected@file@percent }
@@ -56,87 +57,84 @@
 \newlabel{fig:移除outlier做pca}{{2.4}{5}{移除outlier做pca}{figure.2.4}{}}
 \pgfsyspdfmark {pgfid21}{4736286}{50644704}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.6}前處理後之最終資料集}{6}{subsection.2.2.6}\protected@file@percent }
+\newlabel{sec:最終資料集}{{2.2.6}{6}{前處理後之最終資料集}{subsection.2.2.6}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces 資料前處理後之特徵矩陣預覽（僅顯示前 3 與後 3 個特徵）}}{6}{table.2.2}\protected@file@percent }
 \newlabel{tab:data-preview}{{2.2}{6}{資料前處理後之特徵矩陣預覽（僅顯示前 3 與後 3 個特徵）}{table.2.2}{}}
 \pgfsyspdfmark {pgfid22}{4736286}{50644704}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}研究流程}{7}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}研究方法與流程}{7}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}流程細部}{7}{section.3.1}\protected@file@percent }
 \pgfsyspdfmark {pgfid23}{4736286}{50644704}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}資料前處理與分群標記建立}{8}{subsection.3.1.1}\protected@file@percent }
-\newlabel{sec:pipeline_clusterlabel}{{3.1.1}{8}{資料前處理與分群標記建立}{subsection.3.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}資料降維與分群}{8}{subsection.3.1.1}\protected@file@percent }
+\newlabel{sec:pipeline_clusterlabel}{{3.1.1}{8}{資料降維與分群}{subsection.3.1.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}各群內黑箱模型訓練與 OOF 機率估計}{8}{subsection.3.1.2}\protected@file@percent }
 \pgfsyspdfmark {pgfid24}{4736286}{50644704}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}中心點 $x_0$ 選取與區塊式全格點局部代理}{9}{subsection.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}評估一致性與資料洩漏控制}{9}{subsection.3.1.4}\protected@file@percent }
 \pgfsyspdfmark {pgfid25}{4736286}{50644704}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}評估一致性與資料洩漏控制}{10}{subsection.3.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}研究方法}{10}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}分群}{10}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}k-平均演算法(k-means)}{10}{subsection.4.1.1}\protected@file@percent }
 \pgfsyspdfmark {pgfid26}{4736286}{50644704}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}研究方法}{11}{chapter.4}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}分群}{11}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}k-平均演算法(k-means)}{11}{subsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}黑箱模型}{11}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}極限梯度提升(Extreme Gradient Boosting)}{11}{subsection.4.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}局部擾動（Lattice cube）}{11}{section.4.3}\protected@file@percent }
 \pgfsyspdfmark {pgfid27}{4736286}{50644704}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}重抽樣}{12}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}合成少數過度取樣技術(Synthesized Minority Oversampling Technique)}{12}{subsection.4.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}黑箱模型}{12}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}極限梯度提升(Extreme Gradient Boosting)}{12}{subsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}局部模型（Local surrogate）}{12}{section.4.4}\protected@file@percent }
 \pgfsyspdfmark {pgfid28}{4736286}{50644704}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}局部擾動（Lattice cube）}{13}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}實驗設計與交叉驗證}{13}{section.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}評估指標}{13}{section.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}黑箱分類效能}{13}{subsection.4.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}局部代理擬合品質}{13}{subsection.4.6.2}\protected@file@percent }
 \pgfsyspdfmark {pgfid29}{4736286}{50644704}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}局部模型（Local surrogate）}{14}{section.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}實驗設計與交叉驗證}{14}{section.4.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.7}評估指標}{14}{section.4.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.1}黑箱分類效能}{14}{subsection.4.7.1}\protected@file@percent }
-\pgfsyspdfmark {pgfid30}{4736286}{50644704}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.2}局部代理擬合品質}{15}{subsection.4.7.2}\protected@file@percent }
-\pgfsyspdfmark {pgfid31}{4736286}{50644704}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}研究結果}{16}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}研究結果}{14}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}分群結果}{16}{section.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces 未移除outlier做pca+kmeans}}{16}{figure.5.1}\protected@file@percent }
-\newlabel{fig:未移除outlier做pca+kmeans}{{5.1}{16}{未移除outlier做pca+kmeans}{figure.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}分群結果}{14}{section.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces 未移除outlier做pca+kmeans}}{14}{figure.5.1}\protected@file@percent }
+\newlabel{fig:未移除outlier做pca+kmeans}{{5.1}{14}{未移除outlier做pca+kmeans}{figure.5.1}{}}
+\pgfsyspdfmark {pgfid30}{4736286}{50644704}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces 未移除outlier做pca+kmeans的SMOTEdata}}{15}{figure.5.2}\protected@file@percent }
+\newlabel{fig:未移除outlier做pca+kmeans的SMOTEdata}{{5.2}{15}{未移除outlier做pca+kmeans的SMOTEdata}{figure.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces 移除outlier做pca+kmeans的原始data含y}}{15}{figure.5.3}\protected@file@percent }
+\newlabel{fig:移除outlier做pca+kmeans的原始data含y}{{5.3}{15}{移除outlier做pca+kmeans的原始data含y}{figure.5.3}{}}
+\pgfsyspdfmark {pgfid31}{4736286}{50644704}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces 移除outlier做pca+kmeans的SMOTEdata}}{16}{figure.5.4}\protected@file@percent }
+\newlabel{fig:移除outlier做pca+kmeans的SMOTEdata}{{5.4}{16}{移除outlier做pca+kmeans的SMOTEdata}{figure.5.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces 移除outlier做pca+kmeans的SMOTEdata含y}}{16}{figure.5.5}\protected@file@percent }
+\newlabel{fig:移除outlier做pca+kmeans的SMOTEdata含y}{{5.5}{16}{移除outlier做pca+kmeans的SMOTEdata含y}{figure.5.5}{}}
 \pgfsyspdfmark {pgfid32}{4736286}{50644704}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces 未移除outlier做pca+kmeans的SMOTEdata}}{17}{figure.5.2}\protected@file@percent }
-\newlabel{fig:未移除outlier做pca+kmeans的SMOTEdata}{{5.2}{17}{未移除outlier做pca+kmeans的SMOTEdata}{figure.5.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces 移除outlier做pca+kmeans的原始data含y}}{17}{figure.5.3}\protected@file@percent }
-\newlabel{fig:移除outlier做pca+kmeans的原始data含y}{{5.3}{17}{移除outlier做pca+kmeans的原始data含y}{figure.5.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces 資料格式示意（僅顯示前 3 與後 3 個特徵；中間以 \dots  省略）}}{17}{table.5.1}\protected@file@percent }
+\newlabel{tab:smotedata}{{5.1}{17}{資料格式示意（僅顯示前 3 與後 3 個特徵；中間以 \dots 省略）}{table.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}黑箱預測}{17}{section.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Black-box classification performance (OOF) overall and by cluster.}}{17}{table.5.2}\protected@file@percent }
+\newlabel{tab:blackbox_oof_by_cluster}{{5.2}{17}{Black-box classification performance (OOF) overall and by cluster}{table.5.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Confusion matrix (ALL), mean over 5 folds.}}{17}{table.5.3}\protected@file@percent }
+\newlabel{tab:cm_all}{{5.3}{17}{Confusion matrix (ALL), mean over 5 folds}{table.5.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Confusion matrix (cluster\_0), mean over 5 folds.}}{17}{table.5.4}\protected@file@percent }
+\newlabel{tab:cm_c0}{{5.4}{17}{Confusion matrix (cluster\_0), mean over 5 folds}{table.5.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces Confusion matrix (cluster\_1), mean over 5 folds.}}{17}{table.5.5}\protected@file@percent }
+\newlabel{tab:cm_c1}{{5.5}{17}{Confusion matrix (cluster\_1), mean over 5 folds}{table.5.5}{}}
 \pgfsyspdfmark {pgfid33}{4736286}{50644704}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces 移除outlier做pca+kmeans的SMOTEdata}}{18}{figure.5.4}\protected@file@percent }
-\newlabel{fig:移除outlier做pca+kmeans的SMOTEdata}{{5.4}{18}{移除outlier做pca+kmeans的SMOTEdata}{figure.5.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces 移除outlier做pca+kmeans的SMOTEdata含y}}{18}{figure.5.5}\protected@file@percent }
-\newlabel{fig:移除outlier做pca+kmeans的SMOTEdata含y}{{5.5}{18}{移除outlier做pca+kmeans的SMOTEdata含y}{figure.5.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}關鍵案例分析}{18}{section.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}群 0（cluster\_0）}{18}{subsection.5.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.6}{\ignorespaces Cluster 0 重要特徵（依 $|\hat  \beta |$ 排序，Top 10）}}{18}{table.5.6}\protected@file@percent }
+\newlabel{tab:topfeat_c0}{{5.6}{18}{Cluster 0 重要特徵（依 $|\hat \beta |$ 排序，Top 10）}{table.5.6}{}}
 \pgfsyspdfmark {pgfid34}{4736286}{50644704}
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces 資料格式示意（僅顯示前 3 與後 3 個特徵；中間以 \dots  省略）}}{19}{table.5.1}\protected@file@percent }
-\newlabel{tab:smotedata}{{5.1}{19}{資料格式示意（僅顯示前 3 與後 3 個特徵；中間以 \dots 省略）}{table.5.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}黑箱預測}{19}{section.5.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Black-box classification performance (OOF) overall and by cluster.}}{19}{table.5.2}\protected@file@percent }
-\newlabel{tab:blackbox_oof_by_cluster}{{5.2}{19}{Black-box classification performance (OOF) overall and by cluster}{table.5.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Confusion matrix (ALL), mean over 5 folds.}}{19}{table.5.3}\protected@file@percent }
-\newlabel{tab:cm_all}{{5.3}{19}{Confusion matrix (ALL), mean over 5 folds}{table.5.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Confusion matrix (cluster\_0), mean over 5 folds.}}{19}{table.5.4}\protected@file@percent }
-\newlabel{tab:cm_c0}{{5.4}{19}{Confusion matrix (cluster\_0), mean over 5 folds}{table.5.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces Confusion matrix (cluster\_1), mean over 5 folds.}}{19}{table.5.5}\protected@file@percent }
-\newlabel{tab:cm_c1}{{5.5}{19}{Confusion matrix (cluster\_1), mean over 5 folds}{table.5.5}{}}
-\pgfsyspdfmark {pgfid35}{4736286}{50644704}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}關鍵案例分析}{20}{section.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}群 0（cluster\_0）}{20}{subsection.5.3.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.6}{\ignorespaces Cluster 0 重要特徵（依 $|\hat  \beta |$ 排序，Top 10）}}{20}{table.5.6}\protected@file@percent }
-\newlabel{tab:topfeat_c0}{{5.6}{20}{Cluster 0 重要特徵（依 $|\hat \beta |$ 排序，Top 10）}{table.5.6}{}}
-\pgfsyspdfmark {pgfid36}{4736286}{50644704}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}群 1（cluster\_1）}{21}{subsection.5.3.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.7}{\ignorespaces Cluster 1 重要特徵（依 $|\hat  \beta |$ 排序，Top 10）}}{21}{table.5.7}\protected@file@percent }
-\newlabel{tab:topfeat_c1}{{5.7}{21}{Cluster 1 重要特徵（依 $|\hat \beta |$ 排序，Top 10）}{table.5.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}討論與限制}{21}{section.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}群 1（cluster\_1）}{19}{subsection.5.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.7}{\ignorespaces Cluster 1 重要特徵（依 $|\hat  \beta |$ 排序，Top 10）}}{19}{table.5.7}\protected@file@percent }
+\newlabel{tab:topfeat_c1}{{5.7}{19}{Cluster 1 重要特徵（依 $|\hat \beta |$ 排序，Top 10）}{table.5.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}討論與限制}{19}{section.5.4}\protected@file@percent }
 \bibstyle{astats}
 \bibdata{references}
-\pgfsyspdfmark {pgfid37}{4736286}{50644704}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}結論}{22}{chapter.6}\protected@file@percent }
+\pgfsyspdfmark {pgfid35}{4736286}{50644704}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}結論}{20}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}總結}{22}{section.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}未來工作}{22}{section.6.2}\protected@file@percent }
-\pgfsyspdfmark {pgfid38}{4736286}{50644704}
-\gdef \@abspage@last{38}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}總結}{20}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}未來工作}{20}{section.6.2}\protected@file@percent }
+\pgfsyspdfmark {pgfid36}{4736286}{50644704}
+\gdef \@abspage@last{36}
