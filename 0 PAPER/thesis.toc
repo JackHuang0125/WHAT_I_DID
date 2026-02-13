@@ -16,23 +16,16 @@
 \contentsline {chapter}{\numberline {3}研究方法與流程}{7}{chapter.3}%
 \contentsline {section}{\numberline {3.1}流程細部}{7}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}資料降維與分群}{8}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}各群內黑箱模型訓練}{9}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}中心點 $x_0$ 選取與區塊式全格點局部代理}{10}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.2}黑箱模型訓練}{9}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}中心點選取與局部生成格子點適配模型}{10}{subsection.3.1.3}%
 \contentsline {subsection}{\numberline {3.1.4}評估一致性與資料洩漏控制}{11}{subsection.3.1.4}%
-\contentsline {chapter}{\numberline {4}研究方法}{12}{chapter.4}%
-\contentsline {section}{\numberline {4.1}局部擾動（Lattice cube）}{12}{section.4.1}%
-\contentsline {section}{\numberline {4.2}局部模型（Local surrogate）}{13}{section.4.2}%
-\contentsline {section}{\numberline {4.3}實驗設計與交叉驗證}{13}{section.4.3}%
-\contentsline {section}{\numberline {4.4}評估指標}{14}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}黑箱分類效能}{14}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}局部代理擬合品質}{14}{subsection.4.4.2}%
-\contentsline {chapter}{\numberline {5}研究結果}{15}{chapter.5}%
-\contentsline {section}{\numberline {5.1}分群結果}{15}{section.5.1}%
-\contentsline {section}{\numberline {5.2}黑箱預測}{18}{section.5.2}%
-\contentsline {section}{\numberline {5.3}關鍵案例分析}{19}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}群 0（cluster\_0）}{19}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}群 1（cluster\_1）}{20}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}討論與限制}{20}{section.5.4}%
-\contentsline {chapter}{\numberline {6}結論}{21}{chapter.6}%
-\contentsline {section}{\numberline {6.1}總結}{21}{section.6.1}%
-\contentsline {section}{\numberline {6.2}未來工作}{21}{section.6.2}%
+\contentsline {chapter}{\numberline {4}研究結果}{12}{chapter.4}%
+\contentsline {section}{\numberline {4.1}分群結果}{12}{section.4.1}%
+\contentsline {section}{\numberline {4.2}黑箱預測}{15}{section.4.2}%
+\contentsline {section}{\numberline {4.3}關鍵案例分析}{16}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}群 0（cluster\_0）}{16}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}群 1（cluster\_1）}{17}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}討論與限制}{17}{section.4.4}%
+\contentsline {chapter}{\numberline {5}結論}{18}{chapter.5}%
+\contentsline {section}{\numberline {5.1}總結}{18}{section.5.1}%
+\contentsline {section}{\numberline {5.2}未來工作}{18}{section.5.2}%
