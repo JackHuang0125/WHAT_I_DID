@@ -447,44 +447,91 @@
 	\label{sec:pipeline_clusterlabel}
 	\begin{enumerate}
 
-	\item \textbf{合成少數過度取樣技術用於降維與分群}：
+	\item \textbf{合成少數過度取樣技術用於降維}：
+
 	由於目標類別分佈高度不平衡，
-	若直接對資料 \ref{sec:最終資料集} 降維並分群，
-	分群結果傾向由多數類別主導。
-	因此對該資料使用合成少數過度取樣技術（SMOTE）產生少數類別的合成樣本，
+	若直接對資料 \ref{sec:最終資料集} 降維，
+	降維結果傾向由多數類別的資料訊息主導。
+	因此對該資料使用合成少數過度取樣技術（SMOTE）產生少數類別的合成樣本。
 	
 	合成少數過度取樣技術(Synthesized Minority Oversampling Technique, SMOTE)是在機器學習中解決數據類別不平衡問題的常見方法，
 	透過生成新的合成少數類別樣本來平衡數據集，
-	核心概念在利用少數類樣本的鄰近樣本，並在彼此之間插值產生新的樣本點
-	本研究中，
-	SMOTE所生成的資料僅用於降維與分群時，
-	將少數類別資料增至於與多數類別資料
-	以調整分群時的樣本分佈，
-	並不作為後續分類模型之訓練資料來源。
+	核心概念在利用少數類樣本的鄰近樣本，並在彼此之間插值產生新的樣本點。
 
-	\item \textbf{在 SMOTE 空間進行 PCA+k-means 取得分群規則}：
-	在 $X_{\text{smote}}$ 上進行 PCA（以累積解釋變異比門檻保留主成分），
-	再以 k-means 分為兩群，
+	在使用 SMOTE 將少數類別資料增至於與多數類別資料相近比例，
+	可達到在降維與分群不完全受到多數類別的資料的訊息影響，
+	以調整隱藏在資料訊息中的樣本分佈，
+	接著再使用 PCA 做降維，
+	如圖 \ref{fig:移除outlier做pca的SMOTEdata}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca的SMOTEdata.png}
+			\caption{移除outlier做pca的SMOTEdata}
+			\label{fig:移除outlier做pca的SMOTEdata}
+		\end{figure}
+
+	\item \textbf{分群後移除合成樣本供後續建模使用}：
+
+	本研究採用k-平均演算法(k-means)做分群以處理資料異質性，
+	將資料依特徵空間的結構切分為數個子群，
+	使後續黑箱模型可在群內學習較一致的決策邊界。
+
+	k-平均演算法(k-means)是機器學習的非監督式分群方法，
+	將數據集劃分為$k$個不同的群組(clusters)，
+	目標為使群內平方誤差最小，
+	使群內資料點相對集中、群間差異相對明顯，
+	其做法為給定群數$k$以及自資料點中隨機選取群中心的情況下，
+	不斷進行：
+	(1)將每個資料點指派至最近的群中心；
+	(2)更新群中心為群內資料點的平均值，直到收斂。
+	本研究以手肘法（elbow method）評估不同群數 $k$ 下之群內平方誤差（within-cluster sum of squares, WCSS），
+	選取誤差下降趨勢開始趨緩之轉折點作為群數，
+	最終採用 $k=2$ 進行分群。
 	取得分群質心與指派規則。
 	此規則反映在平衡化密度下的幾何結構，
 	使分群結果能反映少數類別在資料結構中的區域性特徵，
 	而不被多數類別完全主導。
-
-	\item \textbf{移除合成樣本並回填群標記至真實資料}：
-	將合成樣本移除，
-	僅保留真實樣本對應的群標記，
-	得到真實資料集 $D_{\text{real}}$ 及其分群標記向量 $c$，
-	供後續各群內黑箱建模與局部代理分析使用。
+	分群結果如圖 \ref{fig:移除outlier做pca+kmeans的SMOTEdata}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
+			\caption{移除outlier做pca+kmeans的SMOTEdata}
+			\label{fig:移除outlier做pca+kmeans的SMOTEdata}
+		\end{figure}
+	而在本研究中，
+	會將合成樣本移除，
+	僅保留真實資料集及其類別標記，
+	供後續各群內黑箱建模使用。
 	\end{enumerate}
 
-	\subsection{各群內黑箱模型訓練與 OOF 機率估計}
+	\subsection{各群內黑箱模型訓練}
 
 	\begin{enumerate}
-	\item \textbf{各群內交叉驗證（OOF 機率）}：
+	\item \textbf{各群內交叉驗證得機率）}：
+
 	對每一群 $c \in {0,1}$，取該群真實樣本 $(X_c, y_c)$，以 stratified $K$-fold 進行交叉驗證。每一折中僅對訓練子集施作 SMOTE 以提升少數類別可分性，驗證子集不做重抽樣，並以該折訓練之模型輸出驗證子集的預測機率。彙整各折驗證輸出得到每筆真實樣本的 out-of-fold 機率 $\hat{p}_{\text{oof}}$，用於後續挑選局部分析中心點。
 
 	\item \textbf{各群最終黑箱模型（用於局部代理取樣）}：
 	在每一群的全體真實樣本上重訓一個最終黑箱分類器 $f_c$（本流程中採用 XGBoost classifier），作為後續局部格點擾動時的黑箱查詢函數，輸出 $f_c(x)$ 或 $P(y=1\mid x)$。
+	本研究使用梯度提升樹模型作為黑箱分類器，
+	於各群內分別訓練以捕捉非線性關係；
+	黑箱模型輸出為類別機率，
+	用於後續局部代理模型的近似目標。
+	黑箱模型於第 $c$ 群定義為 $f_c:\mathbb{R}^p \rightarrow [0,1]$，其輸出
+	\[
+	\hat{p}_c(x)=f_c(x)=P(y=1\mid x,c)
+	\]
+	並以 $\hat{y}=\mathbb{I}(\hat{p}_c(x)\ge t)$ 產生分類結果，其中 $t$ 為分類門檻。
+
+	極限梯度提升（Extreme Gradient Boosting, XGBoost）為監督式學習方法，
+	基於梯度提升決策樹（Gradient Boosting Decision Tree），
+	可用於解決迴歸與分類問題，
+	以加法模型逐步疊加弱學習器（決策樹），
+	並透過損失函數的梯度資訊進行更新，
+	同時引入多種優化以提升效能與模型泛化能力。
+	在本研究中，XGboost用於SECOM製程量測資料的二元分類，
+	在分群後於各群內分別訓練一個模型 $f_c$，
+	同時獲得群內的分類機率輸出至後續局部代理模型使用。	
 	\end{enumerate}
 
 	\subsection{中心點 $x_0$ 選取與區塊式全格點局部代理}
@@ -515,51 +562,6 @@
 
 
 	\chapter{研究方法}
-
-
-	\section{分群}
-	本研究採用分群以處理資料異質性，
-	將原始樣本依特徵空間的結構切分為多個子群，
-	使後續黑箱模型可在群內學習較一致的決策邊界。
-	令分群演算法輸出 $c_i$ 為第 $i$ 筆樣本之群標記，
-	並以 $X_c=\{x_i: c_i=c\}$ 表示第 $c$ 群之樣本集合。
-	\subsection{k-平均演算法(k-means)}
-	k-平均演算法(k-means)是機器學習的非監督式分群方法，
-	將數據集劃分為$k$個不同的群組(clusters)，
-	目標為使群內平方誤差最小，
-	使群內資料點相對集中、群間差異相對明顯，
-	其做法為給定群數$k$以及自資料點中隨機選取群中心的情況下，
-	不斷進行：
-	(1)將每個資料點指派至最近的群中心；
-	(2)更新群中心為群內資料點的平均值，直到收斂。
-	本研究以手肘法（elbow method）評估不同群數 $k$ 下之群內平方誤差（within-cluster sum of squares, WCSS），
-	選取誤差下降趨勢開始趨緩之轉折點作為群數，
-	最終採用 $k=2$ 進行分群。
-	
-	前面有提到資料存在類別不平衡的問題，Fail（$-$1）共1463 筆，佔整體的93.36\%，Pass（1）共 104 筆，佔整體的6.64\%，為避免模型分類偏向多數類別，
-	於訓練折內採用重抽樣策略（如 SMOTE）及其放置位置（僅限訓練資料內），以避免資料洩漏。
-
-	\section{黑箱模型}
-	本研究使用梯度提升樹模型作為黑箱分類器，
-	於各群內分別訓練以捕捉非線性關係；
-	黑箱模型輸出為類別機率，
-	用於後續局部代理模型的近似目標。
-	黑箱模型於第 $c$ 群定義為 $f_c:\mathbb{R}^p \rightarrow [0,1]$，其輸出
-	\[
-	\hat{p}_c(x)=f_c(x)=P(y=1\mid x,c)
-	\]
-	並以 $\hat{y}=\mathbb{I}(\hat{p}_c(x)\ge t)$ 產生分類結果，其中 $t$ 為分類門檻。
-
-	\subsection{極限梯度提升(Extreme Gradient Boosting)}
-	極限梯度提升（XGBoost）為監督式學習方法，
-	基於梯度提升決策樹（Gradient Boosting Decision Tree），
-	可用於解決迴歸與分類問題，
-	以加法模型逐步疊加弱學習器（決策樹），
-	並透過損失函數的梯度資訊進行更新，
-	同時引入多種優化以提升效能與模型泛化能力。
-	在本研究中，XGboost用於SECOM製程量測資料的二元分類，
-	在分群後於各群內分別訓練一個模型 $f_c$，
-	同時獲得群內的分類機率輸出至後續局部代理模型使用。
 
 	\section{局部擾動（Lattice cube）}
 
@@ -751,9 +753,9 @@
 		\hline
 		group & $n$ & ACC & FAR & ROC-AUC \\
 		\hline
-		ALL       & 1525 & 0.9318 & 0.0126 & 0.6767 \\
-		cluster\_0 &  772 & 0.9560 & 0.0081 & 0.6912 \\
-		cluster\_1 &  753 & 0.8912 & 0.0349 & 0.6724 \\
+		ALL       & 1525 & 0.9318 & 0.0126 & 0.6745 \\
+		cluster\_0 &  676 & 0.9039 & 0.0226 & 0.6996 \\
+		cluster\_1 &  849 & 0.9482 & 0.0099 & 0.6266 \\
 		\hline
 		\end{tabular}
 	\end{table}
@@ -782,8 +784,8 @@
 	\hline
 	& pred 0 & pred 1 \\
 	\hline
-	true 0 & 147.4 & 1.2 \\
-	true 1 & 5.6   & 0.2 \\
+	true 0 & 121.0 & 2.8 \\
+	true 1 & 10.2   & 1.2 \\
 	\hline
 	\end{tabular}
 	\end{table}
@@ -796,8 +798,8 @@
 	\hline
 	& pred 0 & pred 1 \\
 	\hline
-	true 0 & 132.6 & 4.8 \\
-	true 1 & 11.6   & 1.6 \\
+	true 0 & 160.6 & 1.6 \\
+	true 1 & 7.2   & 0.4 \\
 	\hline
 	\end{tabular}
 	\end{table}

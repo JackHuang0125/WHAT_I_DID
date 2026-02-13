@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex thesis"] 1770971297.18291 "thesis.aux" "thesis.bbl" "thesis" 1770971405.88235 0
+["bibtex thesis"] 1770974866.75119 "thesis.aux" "thesis.bbl" "thesis" 1770974870.90351 0
   "./astats.bst" 1766938478 25549 e3d0f1ab4ae55e777f7352db30e2c6f7 ""
   "./references.bib" 1766938478 1170 90590cffb29b4363c1a0aadff1d23a48 ""
-  "thesis.aux" 1770971404 12662 1d0cd5567c7536f6edea26f9f23188a3 "xelatex"
+  "thesis.aux" 1770974868 12692 1960fee3a00d209fd26ee43f719ac1d1 "xelatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["xdvipdfmx"] 1770971404.88574 "thesis.xdv" "thesis.pdf" "thesis" 1770971405.88732 0
-  "thesis.xdv" 1770971404 243084 c636d2df72ba454e59dad0d9234fe326 "xelatex"
+["xdvipdfmx"] 1770974869.69415 "thesis.xdv" "thesis.pdf" "thesis" 1770974870.91031 0
+  "thesis.xdv" 1770974868 236672 07a27642700665e61ddb83681244aaa6 "xelatex"
   (generated)
   "thesis.pdf"
   (rewritten before read)
-["xelatex"] 1770971402.56486 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" "thesis.xdv" "thesis" 1770971405.88272 0
+["xelatex"] 1770974867.00332 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" "thesis.xdv" "thesis" 1770974870.90378 0
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -180,22 +180,23 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" 1770971401 36205 cb89fc48c1562dd7d61419e4c8b58cf2 ""
+  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" 1770974865 35994 f802ffadc37788a9c8af0df694ade826 ""
   "img/NDHU_logo.png" 1766938478 188926 57d150a335f603bec77dda0e8786a7bd ""
   "img/missingvalue.png" 1770008020 31469 414b4407db9fba5918e1cb52a6e8f6fd ""
   "img/uniquevalue.png" 1770008737 12840 a4f5b055ac5c0baf62862a8678b76e82 ""
   "img/未移除outlier做pca+kmeans.png" 1770018864 32466 8b5831500866118d72389a1ec3111830 ""
   "img/未移除outlier做pca+kmeans的SMOTEdata.png" 1770018745 32764 97e1020827aa20810d28e69e66d4e2a1 ""
   "img/未移除outlier做pca.png" 1770096028 21408 0bb309adef0cacf7ccaa287589d4a084 ""
-  "img/移除outlier做pca+kmeans的SMOTEdata.png" 1767677689 126341 27d985e3a10f13043323d00ec13ba585 ""
+  "img/移除outlier做pca+kmeans的SMOTEdata.png" 1770974575 136107 60ec0c9afa3feb846fe4f9e802c5017b ""
   "img/移除outlier做pca+kmeans的SMOTEdata含y.png" 1767677689 130785 f010c35707a3ef30747170d033d212e2 ""
   "img/移除outlier做pca+kmeans的原始data含y.png" 1769437022 100001 54a869b925228dfffbeeab723b9c47f2 ""
   "img/移除outlier做pca.png" 1770860017 39585 de28109539833b2bf89b87225f909b01 ""
-  "thesis.aux" 1770971404 12662 1d0cd5567c7536f6edea26f9f23188a3 "xelatex"
-  "thesis.bbl" 1770971297 54 644c51d86f43488906f29305195f1859 "bibtex thesis"
-  "thesis.out" 1770971404 4827 d4bff78c732d699dda1208e19ec2d342 "xelatex"
-  "thesis.tex" 1770971401 36205 cb89fc48c1562dd7d61419e4c8b58cf2 ""
-  "thesis.toc" 1770971404 3510 88c6996df3217535a4cd60d2eb1d3cfd "xelatex"
+  "img/移除outlier做pca的SMOTEdata.png" 1770973003 58637 ff5a1c06a4e4b83da435e1bb0ea6ca80 ""
+  "thesis.aux" 1770974868 12692 1960fee3a00d209fd26ee43f719ac1d1 "xelatex"
+  "thesis.bbl" 1770974866 54 644c51d86f43488906f29305195f1859 "bibtex thesis"
+  "thesis.out" 1770974868 4178 05560689a4cca376a77f26222a5a072b "xelatex"
+  "thesis.tex" 1770974865 35994 f802ffadc37788a9c8af0df694ade826 ""
+  "thesis.toc" 1770974868 3139 c32006f2c121e2e5caab538bcc86e947 "xelatex"
   (generated)
   "thesis.aux"
   "thesis.log"
