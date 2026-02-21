@@ -1,3 +1,38 @@
 \begin{thebibliography}{xx}
 
+\harvarditem{Chen \harvardand\ Guestrin}{2016}{ChenGuestrin2016}
+Chen, T. \harvardand\ Guestrin, C.  \harvardyearleft 2016\harvardyearright ,
+  Xgboost: A scalable tree boosting system, {\em in} `Proceedings of the 22nd
+  ACM SIGKDD International Conference on Knowledge Discovery and Data Mining
+  (KDD)', pp.~785--794.
+
+\harvarditem{Lai}{2002}{Lai2002}
+Lai, L.-F.  \harvardyearleft 2002\harvardyearright , Use knn and decision tree
+  methods to perform failure prediction and cause tracking analysis on
+  manufacturing data with imputed values, Master's thesis, National Chung Hsing
+  University.
+
+\harvarditem{Lundberg \harvardand\ Lee}{2017}{Lundberg2017}
+Lundberg, S.~M. \harvardand\ Lee, S.-I.  \harvardyearleft 2017\harvardyearright
+  , A unified approach to interpreting model predictions, {\em in} `Advances in
+  Neural Information Processing Systems'.
+
+\harvarditem{Park et~al.}{2024}{Park2024}
+Park, H.~J. et~al.  \harvardyearleft 2024\harvardyearright , `Study on data
+  preprocessing for machine learning based on semiconductor manufacturing
+  processes', {\em Sensors} {\bf 24}(17),~5461.
+
+\harvarditem[Ribeiro et~al.]{Ribeiro, Singh \harvardand\
+  Guestrin}{2016}{Ribeiro2016}
+Ribeiro, M.~T., Singh, S. \harvardand\ Guestrin, C.  \harvardyearleft
+  2016\harvardyearright , ``why should i trust you?'': Explaining the
+  predictions of any classifier, {\em in} `Proceedings of the 22nd ACM SIGKDD
+  International Conference on Knowledge Discovery and Data Mining (KDD)',
+  pp.~1135--1144.
+
+\harvarditem{{UCI Machine Learning Repository}}{2008}{UCISECOM2008}
+{UCI Machine Learning Repository}  \harvardyearleft 2008\harvardyearright ,
+  `Secom', \url{https://archive.ics.uci.edu/ml/datasets/SECOM}.
+\newblock Accessed: 2026-02-21.
+
 \end{thebibliography}
