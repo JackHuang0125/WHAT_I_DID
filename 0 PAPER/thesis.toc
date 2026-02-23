@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {2.2.2}缺失值}{6}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.2.3}少數類別特徵}{6}{subsection.2.2.3}%
 \contentsline {subsection}{\numberline {2.2.4}補值}{7}{subsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.2.5}極端值處理}{7}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.5}極端值處理}{8}{subsection.2.2.5}%
 \contentsline {subsection}{\numberline {2.2.6}前處理後之最終資料集}{9}{subsection.2.2.6}%
 \contentsline {chapter}{\numberline {3}研究方法與流程}{10}{chapter.3}%
 \contentsline {section}{\numberline {3.1}流程大綱}{10}{section.3.1}%

@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex thesis"] 1771688940.07935 "thesis.aux" "thesis.bbl" "thesis" 1771688943.69527 0
+["bibtex thesis"] 1771865182.51597 "thesis.aux" "thesis.bbl" "thesis" 1771865186.09973 0
   "./astats.bst" 1766938478 25549 e3d0f1ab4ae55e777f7352db30e2c6f7 ""
   "./references.bib" 1771679737 1812 01de15a76c48adf70cce3e8ab207bccf ""
-  "thesis.aux" 1771688942 11653 d7b694026ae6badb8235190142b792c4 "xelatex"
+  "thesis.aux" 1771865184 11659 48ca662723c5d60e0afa21ee82855236 "xelatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["xdvipdfmx"] 1771688942.78469 "thesis.xdv" "thesis.pdf" "thesis" 1771688943.70033 0
-  "thesis.xdv" 1771688942 271008 a5310c9ec9ed3c5bf24c613e232fa73e "xelatex"
+["xdvipdfmx"] 1771865185.17578 "thesis.xdv" "thesis.pdf" "thesis" 1771865186.10448 0
+  "thesis.xdv" 1771865184 280980 dfb8e8eb06edffe4e437731b3fa15eaa "xelatex"
   (generated)
   "thesis.pdf"
   (rewritten before read)
-["xelatex"] 1771688940.3194 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" "thesis.xdv" "thesis" 1771688943.69548 0
+["xelatex"] 1771865182.73424 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" "thesis.xdv" "thesis" 1771865186.09992 0
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -180,7 +180,7 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" 1771688937 36025 3bfee90e84236ea68bc038575fdb56d5 ""
+  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" 1771865179 38026 d6b20c3c32ee7e9b6176218de69a247a ""
   "img/NDHU_logo.png" 1766938478 188926 57d150a335f603bec77dda0e8786a7bd ""
   "img/missingvalue.png" 1770008020 31469 414b4407db9fba5918e1cb52a6e8f6fd ""
   "img/uniquevalue.png" 1770008737 12840 a4f5b055ac5c0baf62862a8678b76e82 ""
@@ -189,11 +189,11 @@
   "img/移除outlier做pca+kmeans的移除合成data.png" 1771144573 111829 a7cfe91e66cc4ca835fd68b667ec08de ""
   "img/移除outlier做pca.png" 1770860017 39585 de28109539833b2bf89b87225f909b01 ""
   "img/移除outlier做pca的SMOTEdata.png" 1770973003 58637 ff5a1c06a4e4b83da435e1bb0ea6ca80 ""
-  "thesis.aux" 1771688942 11653 d7b694026ae6badb8235190142b792c4 "xelatex"
-  "thesis.bbl" 1771688940 1833 dc5a97b21551775e29ac2bc4d13f0983 "bibtex thesis"
-  "thesis.out" 1771688942 3232 62b4d2f5df5ff43f4d0e7bba7072f2ab "xelatex"
-  "thesis.tex" 1771688937 36025 3bfee90e84236ea68bc038575fdb56d5 ""
-  "thesis.toc" 1771688942 2512 44c2788823997bf15e976b7ae1ab3591 "xelatex"
+  "thesis.aux" 1771865184 11659 48ca662723c5d60e0afa21ee82855236 "xelatex"
+  "thesis.bbl" 1771865182 1833 dc5a97b21551775e29ac2bc4d13f0983 "bibtex thesis"
+  "thesis.out" 1771865184 3232 62b4d2f5df5ff43f4d0e7bba7072f2ab "xelatex"
+  "thesis.tex" 1771865179 38026 d6b20c3c32ee7e9b6176218de69a247a ""
+  "thesis.toc" 1771865184 2512 5946dc8e29ee5dcf565bd056ffd53f8d "xelatex"
   (generated)
   "thesis.aux"
   "thesis.log"
