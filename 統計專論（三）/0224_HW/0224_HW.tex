@@ -54,16 +54,16 @@
 
 % 排版形式 
 \mode<presentation>{
-\usetheme{CambridgeUS}
-%	外框形式
-\useoutertheme{shadow}
+\usetheme{Berlin}
 % enumerate 及 item 的形狀
 \setbeamertemplate{itemize items}[triangle]
 % 調整外框形式的字體大小
 \setbeamerfont{headline}{size=\scriptsize}
 \setbeamerfont{footline}{size=\scriptsize}
 % 取消右下方的跳轉工具列
-\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{navigation symbols}{}
+% 取消上方導覽列（headline）
+\setbeamertemplate{headline}{}
 % 自定義2：清除外框下緣但僅出頁碼
 \setbeamertemplate{footline}[page number] 
 % 顏色主題
@@ -86,98 +86,51 @@
   \titlepage
 \end{frame}
 
-% 問題
-\begin{frame}[t]{\textbf{問題}} 
-\setlength{\parskip}{2pt}
-{\Large
-  \setlength{\baselineskip}{20pt}
-  \parbox{\linewidth}{\raggedright 如何縮短住院天數，並提升病人採用新療法的意願？}}
-\begin{itemize}
-  \item 目標一：平均住院天數\textbf{降至15天以內}
-  \item 目標二：新療法採用率\textbf{相對提升至少25\%}
-\end{itemize}
-\begin{figure}
-  \includegraphics[scale=0.55]{Q.png}
-\end{figure}
+% 目錄
+\begin{frame}{\textbf{目錄}}
+  \tableofcontents
 \end{frame}
 
-% 資料與方法
-\begin{frame}{\textbf{資料與方法}}
+% 韋伯分配
+\section{Weibull Distribution}
 \linespread{1.5}
 
-\begin{itemize}[]
-  \item 研究資料：某醫院所收集的 200 位病人住院紀錄
-  \item 研究方法：
-  \begin{enumerate}[]
-    \item Welch t-test比較新舊療法在住院天數的差異
-    \item ANOVA比較合併症程度、年齡區間對住院天數的影響
-  \end{enumerate}
-  \item 研究流程：
-    \begin{figure}
-      \hspace{-1cm}
-      \includegraphics[scale=0.8]{流程.png}
-    \end{figure}
-  
-\end{itemize}
-
+\subsection{Definition}
+\begin{frame}[t]{\textbf{Weibull Distribution} -- Definition}
+  \begin{itemize}
+    \item parameter: 尺度（scale） $a>0$，形狀(shape) $b>0$
+    \item pdf: $$ f(x;a,b)=\frac{b}{a}\left(\frac{x}{a}\right)^{b-1}\exp\!\left[-\left(\frac{x}{a}\right)^b\right],\quad x\ge 0 $$
+    \item cdf: $$ F(x)=1-\exp\!\left[-\left(\frac{x}{a}\right)^b\right] $$
+  \end{itemize}
 \end{frame}
 
-% 結果I
-\begin{frame}[t]{\textbf{結果I}}
-\setlength{\parskip}{4pt}
-
-{\Large
-  \setlength{\baselineskip}{20pt}
-  \parbox{\linewidth}{\raggedright 新療法平均住院天數顯著低於舊療法約3.5天}}
-
-\vspace{6pt} 
-
-{\small
-  \hfill $p < 0.001$, \quad 95\% CI = [−4.73, −2.25]}
-
-    \begin{figure}
-      \hspace{-10pt}
-    %   \includegraphics[scale=0.63]{boxplot.png}
-    \end{figure}
-
+\subsection{Properties}
+\begin{frame}[t]{\textbf{Weibull Distribution} -- Properties}
+  ...
 \end{frame}
 
-% 結果II
-\begin{frame}[t]{\textbf{結果II}}
-\setlength{\parskip}{4pt}
-{\Large
-  \setlength{\baselineskip}{20pt}
-  \parbox{\linewidth}{\raggedright 年長且合併症中重度者的住院天數明顯更久}}
-  \medskip \\
-  統計結果顯示年齡與合併症交互作用顯著
-    \begin{figure}
-      \hspace{-0.5cm}
-    %   \includegraphics[scale=0.6]{result2.png}
-    \end{figure}
+\subsection{Appliance}
+\begin{frame}[t]{\textbf{Weibull Distribution} -- Appliance}
+  ...
 \end{frame}
 
-% 建議與改善
-\begin{frame}{\textbf{建議與改善}}
+% 卜瓦松分配
+\section{Poisson Distribution}
 \linespread{1.5}
 
-\begin{itemize}
-  \item 風險
-  \begin{enumerate}
-    \item 病人認為醫療費用太高
-    \item 新療法設備與技術成本較高
-  \end{enumerate}
-  \item 建議
-  \begin{enumerate}
-    \item 用數字說服病人
-    \item 進行內部培訓
-    \item 配合醫療保險
-  \end{enumerate}
-  \item 下一步
-    \begin{enumerate}
-    \item 建立健保給付制度（2026年3月 XX部門）
-    \item 積極推廣，再評估（2026年6月 XX部門）
-  \end{enumerate}
-\end{itemize}
+\subsection{Definition}
+\begin{frame}[t]{\textbf{Poisson Distribution} -- Definition}
+  ...
+\end{frame}
+
+\subsection{Properties}
+\begin{frame}[t]{\textbf{Poisson Distribution} -- Properties}
+  ...
+\end{frame}
+
+\subsection{Appliance}
+\begin{frame}[t]{\textbf{Poisson Distribution} -- Appliance}
+  ...
 \end{frame}
 
 % END
