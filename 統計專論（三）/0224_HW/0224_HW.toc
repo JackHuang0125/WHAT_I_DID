@@ -1,8 +1,6 @@
 \beamer@sectionintoc {1}{Weibull Distribution}{3}{0}{1}
-\beamer@subsectionintoc {1}{1}{Definition}{3}{0}{1}
-\beamer@subsectionintoc {1}{2}{Properties}{4}{0}{1}
-\beamer@subsectionintoc {1}{3}{Appliance}{5}{0}{1}
-\beamer@sectionintoc {2}{Poisson Distribution}{6}{0}{2}
-\beamer@subsectionintoc {2}{1}{Definition}{6}{0}{2}
-\beamer@subsectionintoc {2}{2}{Properties}{7}{0}{2}
-\beamer@subsectionintoc {2}{3}{Appliance}{8}{0}{2}
+\beamer@subsectionintoc {1}{1}{PDF \& Parameters}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Reliability \& Hazard}{4}{0}{1}
+\beamer@sectionintoc {2}{Poisson Distribution}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{PMF \& Parameter}{5}{0}{2}
+\beamer@subsectionintoc {2}{2}{Mean \& Variance}{6}{0}{2}

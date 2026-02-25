@@ -7,6 +7,9 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 
+% 導入多張圖片動畫撥放
+\usepackage{animate}
+
 % 排列多個子圖形的封包
 \usepackage{subfigure} 
 
@@ -91,46 +94,86 @@
   \tableofcontents
 \end{frame}
 
+
 % 韋伯分配
 \section{Weibull Distribution}
+\subsection{PDF \& Parameters}
+\begin{frame}[t]{\textbf{Weibull Distribution} -- PDF \& Parameters}
 \linespread{1.5}
 
-\subsection{Definition}
-\begin{frame}[t]{\textbf{Weibull Distribution} -- Definition}
+{\Large 常用來描述產品的壽命／故障時間}
   \begin{itemize}
-    \item parameter: 尺度（scale） $a>0$，形狀(shape) $b>0$
-    \item pdf: $$ f(x;a,b)=\frac{b}{a}\left(\frac{x}{a}\right)^{b-1}\exp\!\left[-\left(\frac{x}{a}\right)^b\right],\quad x\ge 0 $$
-    \item cdf: $$ F(x)=1-\exp\!\left[-\left(\frac{x}{a}\right)^b\right] $$
+    \item pdf: $ f(x;a,b)=\frac{b}{a}\left(\frac{x}{a}\right)^{b-1}\exp\!\left[-\left(\frac{x}{a}\right)^b\right],\quad x\ge 0 $
+    \begin{enumerate}[]
+        \item $a$ 決定尺度（scale），$b$ 決定形狀（shape）
+        \item Note: 當 $a>0, b=1 \Rightarrow f(x)=\frac{1}{a}e^{-x/a}$ , 即指數分配
+    \end{enumerate}
+    \begin{figure}
+        \vspace{0.2cm}
+        \includegraphics[scale=0.4]{Exponentialpdf.png}
+    \end{figure}
+    \vspace{-0.2cm}
+    % \item cdf: $ F(x)=1-\exp\!\left[-\left(\frac{x}{a}\right)^b\right] $
   \end{itemize}
+愈高表示愈多樣本會在該時間x附近失效；\\往右愈低表示愈晚失效的樣本愈少
 \end{frame}
 
-\subsection{Properties}
-\begin{frame}[t]{\textbf{Weibull Distribution} -- Properties}
-  ...
+\subsection{Reliability \& Hazard}
+\begin{frame}[t]{\textbf{Weibull Distribution} -- Reliability \& Hazard}
+  \begin{itemize}
+    \item Reliability(存活率)：$ S(x)=\exp\!\left[-\left(\frac{x}{a}\right)^b\right] $
+    \item Hazard rate(失效率)：$ h(x)=\frac{f(x)}{S(x)}=\frac{b}{a}\left(\frac{x}{a}\right)^{b-1} $
+    \begin{itemize}
+        \item $b<1$：$h(x)$ 隨時間下降（早期失效），用愈久愈不容易壞
+        \item $b=1$：$h(x)$ 為常數（隨機失效），即指數分配
+        \item $b>1$：$h(x)$ 隨時間上升（磨耗失效），用愈久愈容易壞
+    \end{itemize}
+  \end{itemize}
+\begin{figure}
+    % \includegraphics[scale=0.4]{Weibullpdf.png}
+    \animategraphics[controls,loop,width=0.6\linewidth]{12}{weibull_anim/frames/frame_}{001}{060}
+\end{figure}
 \end{frame}
 
-\subsection{Appliance}
-\begin{frame}[t]{\textbf{Weibull Distribution} -- Appliance}
-  ...
-\end{frame}
 
 % 卜瓦松分配
 \section{Poisson Distribution}
+\subsection{PMF \& Parameter}
+\begin{frame}[t]{\textbf{Poisson Distribution} -- PMF \& Parameter}
 \linespread{1.5}
 
-\subsection{Definition}
-\begin{frame}[t]{\textbf{Poisson Distribution} -- Definition}
-  ...
+{\Large 常用來描述「固定時間/固定區域內」事件發生的次數}
+  \begin{itemize}
+    \item pmf: $ P(X=k;\lambda)=\frac{\lambda^{k}e^{-\lambda}}{k!},\quad k=0,1,2,\ldots,\ \lambda>0 $
+    \begin{enumerate}[]
+        \item $\lambda$ 為平均發生次數（rate / intensity），同時也是期望值
+        \item 事件之間假設彼此獨立，且在短時間內同時發生多次的機率很小
+    \end{enumerate}
+    \begin{figure}
+        \vspace{0.2cm}
+        % \includegraphics[scale=0.42]{PoissonPMF.png}
+    \end{figure}
+    \vspace{-0.2cm}
+  \end{itemize}
+
+$k$ 越大表示同一段時間內發生次數越多；$\lambda$ 越大整體分布向右移且更分散
 \end{frame}
 
-\subsection{Properties}
-\begin{frame}[t]{\textbf{Poisson Distribution} -- Properties}
-  ...
-\end{frame}
-
-\subsection{Appliance}
-\begin{frame}[t]{\textbf{Poisson Distribution} -- Appliance}
-  ...
+\subsection{Mean \& Variance}
+\begin{frame}[t]{\textbf{Poisson Distribution} -- Mean \& Variance}
+  \begin{itemize}
+    \item mean(期望值)：$ \mathbb{E}[X]=\lambda $
+    \item variance(變異數)：$ \mathrm{Var}(X)=\lambda $
+    \begin{itemize}
+        \item $\lambda$ 小：大多集中在 $k=0,1,2$（事件不常發生）
+        \item $\lambda$ 中等：最高點在 $\lfloor \lambda \rfloor$ 附近（最常見次數接近平均）
+        \item $\lambda$ 大：分布更寬、右移（平均次數更高且波動更大）
+    \end{itemize}
+  \end{itemize}
+\begin{figure}
+    % \includegraphics[scale=0.45]{PoissonCompare.png}
+    % \animategraphics[controls,loop,width=0.6\linewidth]{12}{poisson_anim/frames/frame_}{001}{060}
+\end{figure}
 \end{frame}
 
 % END
