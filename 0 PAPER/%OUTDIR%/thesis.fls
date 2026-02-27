@@ -1,7 +1,7 @@
 PWD c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER
 INPUT C:\Users\USER\AppData\Local\MiKTeX\miktex\data\le\xetex\xelatex.fmt
 INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\thesis.tex
-OUTPUT thesis.log
+OUTPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.log
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\base\book.cls
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\base\book.cls
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\base\bk12.clo
@@ -269,17 +269,17 @@ INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\setspace\setspace.st
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\setspace\setspace.sty
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\comment\comment.sty
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\comment\comment.sty
-INPUT .\thesis.aux
-INPUT .\thesis.aux
-INPUT thesis.aux
-OUTPUT thesis.aux
-INPUT .\thesis.out
-INPUT .\thesis.out
-INPUT thesis.out
-INPUT thesis.out
-INPUT .\thesis.out
-INPUT .\thesis.out
-OUTPUT thesis.out
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.aux
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.aux
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.aux
+OUTPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.aux
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.out
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.out
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.out
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.out
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.out
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.out
+OUTPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.out
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\pdflscape\pdflscape.sty
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\pdflscape\pdflscape.sty
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\pdflscape\pdflscape-nometadata.sty
@@ -289,7 +289,7 @@ INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\graphics\lscape.sty
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
-OUTPUT thesis.xdv
+OUTPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.xdv
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
@@ -323,9 +323,9 @@ INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
-INPUT .\thesis.toc
-INPUT .\thesis.toc
-INPUT thesis.toc
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.toc
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.toc
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.toc
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi12.tfm
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi8.tfm
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi6.tfm
@@ -353,7 +353,7 @@ INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
-OUTPUT thesis.toc
+OUTPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.toc
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
@@ -408,15 +408,6 @@ INPUT .\img\移除outlier做pca的SMOTEdata.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
-INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmib10.tfm
-INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmmib8.tfm
-INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmmib6.tfm
-INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbsy10.tfm
-INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmbsy8.tfm
-INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmbsy6.tfm
-INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
-INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx8.tfm
-INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx6.tfm
 INPUT .\img\移除outlier做pca+kmeans的SMOTEdata.png
 INPUT .\img\移除outlier做pca+kmeans的SMOTEdata.png
 INPUT .\img\移除outlier做pca+kmeans的SMOTEdata.png
@@ -450,15 +441,15 @@ INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
-INPUT .\thesis.bbl
-INPUT .\thesis.bbl
-INPUT thesis.bbl
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.bbl
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.bbl
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.bbl
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
 INPUT .\img\NDHU_logo.png
-INPUT thesis.aux
-INPUT .\thesis.out
-INPUT .\thesis.out
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.aux
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.out
+INPUT c:\Users\USER\Documents\GitHub\psychic-spoon\0 PAPER\%OUTDIR%\thesis.out

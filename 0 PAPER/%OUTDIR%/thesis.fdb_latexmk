@@ -1,39 +1,34 @@
 # Fdb version 4
-["bibtex thesis"] 1772208497.64469 "thesis.aux" "thesis.bbl" "thesis" 1772208558.11364 0
+["bibtex %OUTDIR%/thesis"] 1772163879.92565 "%OUTDIR%/thesis.aux" "%OUTDIR%/thesis.bbl" "%OUTDIR%/thesis" 1772164836.14172 0
+  "%OUTDIR%/thesis.aux" 1772164834 11659 fd6588ac480a66019ca3214be6de9524 "xelatex"
   "./astats.bst" 1766938478 25549 e3d0f1ab4ae55e777f7352db30e2c6f7 ""
   "./references.bib" 1771944986 1862 64ef9e8233b02e2ad38e3c431909e0b7 ""
-  "thesis.aux" 1772208556 11705 2a1642c67934f49c05739aa8b8249ba2 "xelatex"
   (generated)
-  "thesis.bbl"
-  "thesis.blg"
+  "%OUTDIR%/thesis.bbl"
+  "%OUTDIR%/thesis.blg"
   (rewritten before read)
-["xdvipdfmx"] 1772208557.22159 "thesis.xdv" "thesis.pdf" "thesis" 1772208558.11875 0
-  "thesis.xdv" 1772208556 285756 4ae1e9411334bd1ecb481f1938c2f239 "xelatex"
+["xdvipdfmx"] 1772164835.19793 "%OUTDIR%/thesis.xdv" "thesis.pdf" "thesis" 1772164836.1482 0
+  "%OUTDIR%/thesis.xdv" 1772164834 280876 d4ce237e25ccd8b98f1ff7394b8e2ef1 "xelatex"
   (generated)
   "thesis.pdf"
   (rewritten before read)
-["xelatex"] 1772208554.90203 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" "thesis.xdv" "thesis" 1772208558.11389 0
+["xelatex"] 1772164832.6817 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" "%OUTDIR%/thesis.xdv" "thesis" 1772164836.14228 0
+  "%OUTDIR%/thesis.aux" 1772164834 11659 fd6588ac480a66019ca3214be6de9524 "xelatex"
+  "%OUTDIR%/thesis.bbl" 1772163880 1833 ed1c60f7528c8137194114cab77105af "bibtex %OUTDIR%/thesis"
+  "%OUTDIR%/thesis.out" 1772164834 3232 62b4d2f5df5ff43f4d0e7bba7072f2ab "xelatex"
+  "%OUTDIR%/thesis.toc" 1772164834 2512 5946dc8e29ee5dcf565bd056ffd53f8d "xelatex"
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1233951848 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm" 1233951848 1120 200be8b775682cdf80acad4be5ef57e4 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmmib6.tfm" 1233951848 1516 a3bf6a5e7ec4401b1f52092dfaaed242 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmmib8.tfm" 1233951848 1528 dab402b9d3774ca98baa037071cee7ae ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1233951854 916 f87d7c45f9c908e672703b83b72241a3 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam7.tfm" 1233951854 928 2dc8d444221b7a635bb58038579b861a ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1233951854 908 2921f8a10601f252058503cc6570e581 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1233951854 940 228d6584342e91276bf566bcf9716b83 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbsy10.tfm" 1136765053 1116 4e6ba9d7914baa6482fd69f67d126380 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx12.tfm" 1136765053 1324 c910af8c371558dc20f2d7822f66fe64 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx6.tfm" 1136765053 1344 8a0be4fe4d376203000810ad4dc81558 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx8.tfm" 1136765053 1332 1fde11373e221473104d6cc5993f046e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmex10.tfm" 1136765053 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi12.tfm" 1136765053 1524 4414a8315f39513458b80dfc63bff03a ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi6.tfm" 1136765053 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi8.tfm" 1136765053 1520 eccf95517727cb11801f4f1aee3a21b4 ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmib10.tfm" 1136765053 1524 554068197b70979a55370e6c6495f441 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmr10.tfm" 1136765053 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmr12.tfm" 1136765053 1288 655e228510b4c2a1abe905c368440826 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmr6.tfm" 1136765053 1300 b62933e007d01cfd073f79b963c01526 ""
@@ -189,7 +184,7 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" 1772208554 39113 d91918e967d36c453ff8a583418acc23 ""
+  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" 1772164832 37946 41ffa36d039c6bf2a39aee64ac38b244 ""
   "img/NDHU_logo.png" 1766938478 188926 57d150a335f603bec77dda0e8786a7bd ""
   "img/missingvalue.png" 1770008020 31469 414b4407db9fba5918e1cb52a6e8f6fd ""
   "img/uniquevalue.png" 1770008737 12840 a4f5b055ac5c0baf62862a8678b76e82 ""
@@ -198,15 +193,11 @@
   "img/移除outlier做pca+kmeans的移除合成data.png" 1771144573 111829 a7cfe91e66cc4ca835fd68b667ec08de ""
   "img/移除outlier做pca.png" 1770860017 39585 de28109539833b2bf89b87225f909b01 ""
   "img/移除outlier做pca的SMOTEdata.png" 1770973003 58637 ff5a1c06a4e4b83da435e1bb0ea6ca80 ""
-  "thesis.aux" 1772208556 11705 2a1642c67934f49c05739aa8b8249ba2 "xelatex"
-  "thesis.bbl" 1772208497 1833 ed1c60f7528c8137194114cab77105af "bibtex thesis"
-  "thesis.out" 1772208556 3232 62b4d2f5df5ff43f4d0e7bba7072f2ab "xelatex"
-  "thesis.tex" 1772208554 39113 d91918e967d36c453ff8a583418acc23 ""
-  "thesis.toc" 1772208556 2512 5946dc8e29ee5dcf565bd056ffd53f8d "xelatex"
+  "thesis.tex" 1772164832 37946 41ffa36d039c6bf2a39aee64ac38b244 ""
   (generated)
-  "thesis.aux"
-  "thesis.log"
-  "thesis.out"
-  "thesis.toc"
-  "thesis.xdv"
+  "%OUTDIR%/thesis.aux"
+  "%OUTDIR%/thesis.log"
+  "%OUTDIR%/thesis.out"
+  "%OUTDIR%/thesis.toc"
+  "%OUTDIR%/thesis.xdv"
   (rewritten before read)
