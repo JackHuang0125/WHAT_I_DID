@@ -411,7 +411,7 @@
 	
 	\begin{table}[H]
 		\centering
-		\caption{原始資料}
+		\caption{SECOM 原始資料集摘要}
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r l r r r c r r r r}
 		\toprule
@@ -448,7 +448,7 @@
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\linewidth]{img/missingvalue.png}
-			\caption{missingvalue}
+			\caption{SECOM 原始資料各變數缺失值筆數分佈}
 			\label{fig:missingvalue}
 		\end{figure}
 
@@ -461,7 +461,7 @@
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\linewidth]{img/uniquevalue.png}
-			\caption{uniquevalue}
+			\caption{SECOM 原始資料各變數相異值數量分佈}
 			\label{fig:uniquevalue}
 		\end{figure}
 	\subsection{補值}
@@ -524,7 +524,7 @@
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.5\linewidth]{img/未移除outlier做pca.png}
-			\caption{未移除outlier做pca}
+			\caption{未移除 PCA 極端值的原始資料之 PCA 投影結果}
 			\label{fig:未移除outlier做pca}
 		\end{figure}
 	如圖 \ref{fig:未移除outlier做pca} 所示，
@@ -544,13 +544,13 @@
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca.png}
-			\caption{移除outlier做pca}
+			\caption{移除 PCA 極端值後的原始資料之 PCA 投影結果}
 			\label{fig:移除outlier做pca}
 		\end{figure}
 	其分佈較均勻，
 	可顯示資料在投影與距離結構上受到極端值干擾的程度降低。
 
-	\subsection{前處理後之最終資料集}
+	\subsection{前處理後最終資料集摘要}
 	\label{sec:最終資料集}
 	
 	完成特徵清理、缺失處理與極端值移除後，
@@ -640,7 +640,7 @@
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca的SMOTEdata.png}
-			\caption{移除極端值後的 SMOTE 資料之 PCA 投影結果}
+			\caption{移除 PCA 極端值後的 SMOTE 資料之 PCA 投影結果}
 			\label{fig:移除outlier做pca的SMOTEdata}
 		\end{figure}
 	
@@ -671,7 +671,7 @@
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
-			\caption{移除outlier做pca+kmeans的SMOTEdata}
+			\caption{移除 PCA 極端值後的 SMOTE 資料在 PCA 空間之分群結果}
 			\label{fig:移除outlier做pca+kmeans的SMOTEdata}
 		\end{figure}
 	另外，
@@ -805,62 +805,63 @@
 	導致難以形成可辨識的群集之風險。
 	依 \ref{sec:資料降維與分群} 的步驟2，
 	本研究在完成分群後，
-	隨即移除 SMOTE 所合成的樣本移除，
+	隨即移除 SMOTE 所合成的樣本，
 	後續的建模僅用真實資料集，
 	而不包含經由 SMOTE 合成的樣本集。
-
-	如表 \ref{tab:分群黑箱} 可知，
+	其移除後在 PCA 空間分群後的視覺化結果如圖 \ref{fig:移除outlier做pca+kmeans的移除合成data} 。
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的移除合成data.png}
+			\caption{移除 PCA 極端值與合成樣本後的原始資料在 PCA 空間之分群結果}
+			\label{fig:移除outlier做pca+kmeans的移除合成data}
+		\end{figure}
+	如表 \ref{tab:五折交叉驗證黑箱} 可知，
 	尚未分群的時，
-	單一模型於整體資料（ALL, $n=1525$）的評估，
-	平均 $ACC=0.9285$ 、 $FAR=0.0175$ 、 $ROC-AUC=0.6566$ ，
+	單一模型於整體資料（ALL, $n=1525$）的平均評估為
+	$ACC=0.9272$、$FAR=0.0189$、$ROC\text{-}AUC=0.6636$ ，
 	進一步將樣本分為兩群後，
-	各群模型的平均表現：
+	各群模型的平均表現如下：
 	
-	$cluster_0$（$n=676$）之 $ROC-AUC=0.7038$ （相對整體提升 0.0472），
-	$FAR=0.0452$（相對整體增加 0.0277）、$ACC=0.8876$；相對地
+	$cluster\_0$（$n=676$）之 $ROC\text{-}AUC=0.6974$（相對整體提升 $0.0338$），
+	$FAR=0.0468$（相對整體增加 $0.0279$）、$ACC=0.8847$；相對地
 	
-	$cluster_1$（$n=849$）之 $ROC-AUC=0.6193$ （相對整體降低 0.0373），
-	$FAR=0.0111$（相對整體增加 0.0064）、$ACC=0.9470$，
+	$cluster\_1$（$n=849$）之 $ROC\text{-}AUC=0.6266$（相對整體降低 $0.0370$），
+	$FAR=0.0099$（相對整體降低 $0.0090$）、$ACC=0.9482$。
 	
 	此結果顯示整體資料中存在呈現明顯異質性，
-	尤其是兩群之 $FAR$ 相差約 $0.0452/0.0111\approx 4.07$ 倍，
+	尤其是兩群之 $FAR$ 相差約 $0.0468/0.0099\approx 4.73$ 倍，
 	顯示不同群之錯誤回報程度與可分類程度（以 AUC 衡量）並不一致；
 	若僅以未分群的單一平均指標呈現，
 	將掩蓋高誤報率群體（$cluster_0$）的存在。
 
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的移除合成data.png}
-			\caption{移除outlier做pca+kmeans的移除合成data}
-			\label{fig:移除outlier做pca+kmeans的移除合成data}
-		\end{figure}
+
 	
 		\begin{table}[H]
 			\centering
-			\caption{Cluster 與 $y$ 的列聯表}
+			\caption{分群後的各群之真實目標類別數目}
 			\label{tab:分群黑箱}
 			\begin{tabular}{|c|c|c|}
 			\hline
-			\textbf{cluster} & \textbf{0} & \textbf{1} \\
+			\textbf{群} & \textbf{0} & \textbf{1} \\
 			\hline
-			$y=0$ & 619 & 811 \\
+			$Pass$ & 619 & 811 \\
 			\hline
-			$y=1$ & 57  & 38 \\
+			$Fail$ & 57  & 38 \\
 			\hline
 			\end{tabular}
 		\end{table}
 
 		\begin{table}[H]
 			\centering
-			\caption{Black-box classification performance overall and by cluster.}
-			\label{tab:blackbox_oof_by_cluster}
+			\caption{黑箱模型分類之表現：全體與分群比較}
+			\label{tab:五折交叉驗證黑箱}
 			\begin{tabular}{lrrrr}
 			\hline
 			group & $n$ & ACC & FAR & ROC-AUC \\
 			\hline
-			ALL       & 1525 & 0.9285 & 0.0175 & 0.6566 \\
-			cluster\_0 &  676 & 0.8876 & 0.0452 & 0.7038 \\
-			cluster\_1 &  849 & 0.947 & 0.0111 & 0.6193 \\
+			全體       & 1525 & 0.9272 & 0.0189 & 0.6636 \\
+			群 0 &  676 & 0.8847 & 0.0468 & 0.6974 \\
+			群 1 &  849 & 0.9482 & 0.0099 & 0.6266 \\
 			\hline
 			\end{tabular}
 		\end{table}
@@ -873,8 +874,8 @@
 			\hline
 			& pred 0 & pred 1 \\
 			\hline
-			true 0 & 282.4 & 3.6 \\
-			true 1 & 17.2  & 1.8 \\
+			true 0 & 280.6 & 5.4 \\
+			true 1 & 16.8  & 2.2 \\
 			\hline
 			\end{tabular}
 		\end{table}
@@ -887,8 +888,8 @@
 			\hline
 			& pred 0 & pred 1 \\
 			\hline
-			true 0 & 121.0 & 2.8 \\
-			true 1 & 10.2   & 1.2 \\
+			true 0 & 118.0 & 5.8 \\
+			true 1 & 9.8   & 1.6 \\
 			\hline
 			\end{tabular}
 		\end{table}
@@ -915,23 +916,39 @@
 	我們以 $\lvert p_{\text{test}}-0.5\rvert$ 由小到大排序，
 	選取最接近 $0.5$ 的前 5 個樣本點（global\_idx：82、225、44、144、345），其部分特徵、真實標籤 $y_{\text{true}}$ 與黑箱輸出 $p_{\text{test}}$ 如表~\ref{tab:cluster0_near05}。
 
-		\begin{table}[htbp]
+		\begin{table}[H]
 			\centering
 			\caption{Cluster 0：5-fold out of fold 測試集中黑箱輸出最接近 0.5 的前五個樣本點（示例特徵）}
 			\label{tab:cluster0_near05}
 			\begin{tabular}{rrrrcrrrrc}
 			\hline
-			global\_idx & x1 & x2 & x3 & \dots & x588 & x589 & x590 & $y_{\text{true}}$ & $p_{\text{test}}$ \\
+			global\_idx & x1 & x2 & \dots & x589 & x590 & $y_{\text{true}}$ & $p_{\text{test}}$ \\
 			\hline
-			82  & -0.921323 & -0.263777 &  0.689715 & \dots &  0.671448 &  1.057470 &  0.172921 & 0 & 0.498364 \\
-			225 &  0.794818 & -1.815294 &  1.487459 & \dots & -0.564783 & -0.332622 & -0.154877 & 0 & 0.516134 \\
-			44  &  0.367305 &  2.479558 &  0.205618 & \dots &  0.592057 &  0.779451 &  0.095199 & 0 & 0.481022 \\
-			144 & -1.446410 & -0.375622 &  0.731760 & \dots & -0.553441 & -0.610641 & -0.546260 & 0 & 0.527558 \\
-			345 & -0.439136 & -2.580404 & -0.059922 & \dots & -0.587466 & -0.402127 &  0.549533 & 0 & 0.470658 \\
+			82  & -0.921323 & -0.263777 & \dots &  1.057470 &  0.172921 & 0 & 0.4984 \\
+			225 &  0.794818 & -1.815294 & \dots & -0.332622 & -0.154877 & 0 & 0.5161 \\
+			44  &  0.367305 &  2.479558 & \dots &  0.779451 &  0.095199 & 0 & 0.4810 \\
+			144 & -1.446410 & -0.375622 & \dots & -0.610641 & -0.546260 & 0 & 0.5276 \\
+			345 & -0.439136 & -2.580404 & \dots & -0.402127 &  0.549533 & 0 & 0.4707 \\
 			\hline
 			\end{tabular}
 		\end{table}
 
+		\begin{table}[H]
+			\centering
+			\caption{Cluster 1：5-fold out of fold 測試集中黑箱輸出最接近 0.5 的前五個樣本點（示例特徵）}
+			\label{tab:cluster1_near05}
+			\begin{tabular}{rrrrcrrrrc}
+			\hline
+			global\_idx & x1 & x2 & \dots & x588 & x589 & x590 & $y_{\text{true}}$ & $p_{\text{test}}$ \\
+			\hline
+			1158 & -0.978433 &  0.898024 & \dots & -0.666857 & -0.645393 & -0.554204 & 0 & 0.4930 \\
+			990  &  0.747317 &  0.821800 & \dots &  0.115711 & -0.089356 & -0.360851 & 0 & 0.5139 \\
+			1361 &  0.514817 &  0.252607 & \dots & -0.054413 &  0.223414 & -0.494009 & 1 & 0.5218 \\
+			1189 &  0.575310 & -0.470903 & \dots & -0.349293 &  0.014901 &  0.332787 & 1 & 0.4738 \\
+			1187 &  0.760444 & -0.100990 & \dots & -0.587466 & -0.714898 & -0.478764 & 0 & 0.5287 \\
+			\hline
+			\end{tabular}
+		\end{table}
 	為了在決策邊界附近建立局部刻劃的參考中心點，
 	我們取上述 5 個樣本在標準化特徵空間的特徵向量平均，
 	定義
