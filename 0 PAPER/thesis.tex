@@ -866,47 +866,47 @@
 			\end{tabular}
 		\end{table}
 
-		\begin{table}[H]
-			\centering
-			\caption{Confusion matrix (ALL), mean over 5 folds.}
-			\label{tab:cm_all}
-			\begin{tabular}{lrr}
-			\hline
-			& pred 0 & pred 1 \\
-			\hline
-			true 0 & 280.6 & 5.4 \\
-			true 1 & 16.8  & 2.2 \\
-			\hline
-			\end{tabular}
-		\end{table}
+		% \begin{table}[H]
+		% 	\centering
+		% 	\caption{Confusion matrix (ALL), mean over 5 folds.}
+		% 	\label{tab:cm_all}
+		% 	\begin{tabular}{lrr}
+		% 	\hline
+		% 	& pred 0 & pred 1 \\
+		% 	\hline
+		% 	true 0 & 280.6 & 5.4 \\
+		% 	true 1 & 16.8  & 2.2 \\
+		% 	\hline
+		% 	\end{tabular}
+		% \end{table}
 
-		\begin{table}[H]
-			\centering
-			\caption{Confusion matrix (cluster\_0), mean over 5 folds.}
-			\label{tab:cm_c0}
-			\begin{tabular}{lrr}
-			\hline
-			& pred 0 & pred 1 \\
-			\hline
-			true 0 & 118.0 & 5.8 \\
-			true 1 & 9.8   & 1.6 \\
-			\hline
-			\end{tabular}
-		\end{table}
+		% \begin{table}[H]
+		% 	\centering
+		% 	\caption{Confusion matrix (cluster\_0), mean over 5 folds.}
+		% 	\label{tab:cm_c0}
+		% 	\begin{tabular}{lrr}
+		% 	\hline
+		% 	& pred 0 & pred 1 \\
+		% 	\hline
+		% 	true 0 & 118.0 & 5.8 \\
+		% 	true 1 & 9.8   & 1.6 \\
+		% 	\hline
+		% 	\end{tabular}
+		% \end{table}
 
-		\begin{table}[H]
-			\centering
-			\caption{Confusion matrix (cluster\_1), mean over 5 folds.}
-			\label{tab:cm_c1}
-			\begin{tabular}{lrr}
-			\hline
-			& pred 0 & pred 1 \\
-			\hline
-			true 0 & 160.6 & 1.6 \\
-			true 1 & 7.2   & 0.4 \\
-			\hline
-			\end{tabular}
-		\end{table}
+		% \begin{table}[H]
+		% 	\centering
+		% 	\caption{Confusion matrix (cluster\_1), mean over 5 folds.}
+		% 	\label{tab:cm_c1}
+		% 	\begin{tabular}{lrr}
+		% 	\hline
+		% 	& pred 0 & pred 1 \\
+		% 	\hline
+		% 	true 0 & 160.6 & 1.6 \\
+		% 	true 1 & 7.2   & 0.4 \\
+		% 	\hline
+		% 	\end{tabular}
+		% \end{table}
 
 	\section{分群黑箱的預測}
 
@@ -918,11 +918,11 @@
 
 		\begin{table}[H]
 			\centering
-			\caption{Cluster 0：5-fold out of fold 測試集中黑箱輸出最接近 0.5 的前五個樣本點（示例特徵）}
+			\caption{群 0 的黑箱輸出最接近 0.5 的前五個樣本摘要}
 			\label{tab:cluster0_near05}
 			\begin{tabular}{rrrrcrrrrc}
 			\hline
-			global\_idx & x1 & x2 & \dots & x589 & x590 & $y_{\text{true}}$ & $p_{\text{test}}$ \\
+			樣本編號 & x1 & x2 & \dots & x589 & x590 & $y_{\text{true}}$ & $p_{\text{test}}$ \\
 			\hline
 			82  & -0.921323 & -0.263777 & \dots &  1.057470 &  0.172921 & 0 & 0.4984 \\
 			225 &  0.794818 & -1.815294 & \dots & -0.332622 & -0.154877 & 0 & 0.5161 \\
@@ -935,17 +935,17 @@
 
 		\begin{table}[H]
 			\centering
-			\caption{Cluster 1：5-fold out of fold 測試集中黑箱輸出最接近 0.5 的前五個樣本點（示例特徵）}
+			\caption{群 1 的黑箱輸出最接近 0.5 的前五個樣本點摘要}
 			\label{tab:cluster1_near05}
 			\begin{tabular}{rrrrcrrrrc}
 			\hline
-			global\_idx & x1 & x2 & \dots & x588 & x589 & x590 & $y_{\text{true}}$ & $p_{\text{test}}$ \\
+			樣本編號 & x1 & x2 & \dots & x589 & x590 & $y_{\text{true}}$ & $p_{\text{test}}$ \\
 			\hline
-			1158 & -0.978433 &  0.898024 & \dots & -0.666857 & -0.645393 & -0.554204 & 0 & 0.4930 \\
-			990  &  0.747317 &  0.821800 & \dots &  0.115711 & -0.089356 & -0.360851 & 0 & 0.5139 \\
-			1361 &  0.514817 &  0.252607 & \dots & -0.054413 &  0.223414 & -0.494009 & 1 & 0.5218 \\
-			1189 &  0.575310 & -0.470903 & \dots & -0.349293 &  0.014901 &  0.332787 & 1 & 0.4738 \\
-			1187 &  0.760444 & -0.100990 & \dots & -0.587466 & -0.714898 & -0.478764 & 0 & 0.5287 \\
+			1158 & -0.978433 &  0.898024 & \dots & -0.645393 & -0.554204 & 0 & 0.4930 \\
+			990  &  0.747317 &  0.821800 & \dots & -0.089356 & -0.360851 & 0 & 0.5139 \\
+			1361 &  0.514817 &  0.252607 & \dots &  0.223414 & -0.494009 & 1 & 0.5218 \\
+			1189 &  0.575310 & -0.470903 & \dots &  0.014901 &  0.332787 & 1 & 0.4738 \\
+			1187 &  0.760444 & -0.100990 & \dots & -0.714898 & -0.478764 & 0 & 0.5287 \\
 			\hline
 			\end{tabular}
 		\end{table}
@@ -967,17 +967,44 @@
 			\label{tab:cluster0_gridpoints_yblackbox}
 			\begin{tabular}{rrrrcrrrc}
 			\hline
-			x1 & x2 & x3 & \dots & x588 & x589 & x590 & $y_{\text{true}}$ & $y_{\text{blackbox}}$ \\
+			x1 & x2 & \dots & x589 & x590 & $y_{\text{blackbox}}$ \\
 			\hline
-			-0.328949 & -0.511108 &  0.610926 & \dots & -0.088437 &  0.098306 &  0.023303 & -- & 0.966755 \\
-			-0.528949 & -0.411108 &  0.610926 & \dots &  0.011563 & -0.001694 &  0.223303 & -- & 0.940804 \\
-			-0.528949 & -0.711108 &  0.710926 & \dots & -0.088437 &  0.098306 &  0.123303 & -- & 0.983204 \\
-			-0.328949 & -0.711108 &  0.710926 & \dots & -0.088437 &  0.098306 &  0.123303 & -- & 0.889116 \\
-			-0.228949 & -0.611108 &  0.710926 & \dots & -0.088437 &  0.098306 &  0.123303 & -- & 0.881310 \\
+			-0.328949 & -0.511108 & \dots & 0.098306 &  0.023303 & 0.966755 \\
+			-0.528949 & -0.411108 & \dots & -0.001694 &  0.223303 & 0.940804 \\
+			-0.528949 & -0.711108 & \dots & 0.098306 &  0.123303 & 0.983204 \\
+			-0.328949 & -0.711108 & \dots & 0.098306 &  0.123303 & 0.889116 \\
+			-0.228949 & -0.611108 & \dots & 0.098306 &  0.123303 & 0.881310 \\
 			\hline
 			\end{tabular}
 		\end{table}
 
+		\begin{table}[H]
+			\centering
+			\caption{Cluster 0 的黑箱輸出最接近 1 的前二個樣本點摘要}
+			\label{tab:cluster0_near1_top2}
+			\begin{tabular}{rrrrcrrrc}
+			\hline
+			樣本編號 & x1 & x2 & \dots & x589 & x590 & $y_{\text{true}}$ & $p_{\text{test}}$ \\
+			\hline
+			348 & -1.887997 & 0.224832 & \dots & 1.717764 & 1.004471 & 0 & 0.975609 \\
+			212 & -0.692748 & 1.225590 & \dots & 1.787268 & 0.824068 & 1 & 0.848101 \\
+			\hline
+			\end{tabular}
+		\end{table}
+
+		\begin{table}[H]
+			\centering
+			\caption{群 1 的五折測試集中黑箱輸出最接近 1 的前二個樣本點摘要}
+			\label{tab:cluster1_near1_top2}
+			\begin{tabular}{rrrrcrrrc}
+			\hline
+			樣本編號 & x1 & x2 & \dots & x589 & x590 & $y_{\text{true}}$ & $p_{\text{test}}$ \\
+			\hline
+			1326 & 2.015375 & -0.306746 & \dots & -0.958164 & -0.602983 & 1 & 0.846026 \\
+			1056 & 0.045893 & -0.705555 & \dots & -0.054604	& -0.222966 & 0 & 0.843086 \\
+			\hline
+			\end{tabular}
+		\end{table}
 
 	\section{關鍵案例分析}
 
