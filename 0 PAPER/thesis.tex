@@ -283,45 +283,48 @@
 	使品質預測不僅只看分類結果的好壞，
 	亦能轉為對製程判斷與改善上具有參考價值的資訊。
 
-	\section{研究問題與既有方法限制}
-	本研究以 UCI Machine Learning Repository 之 SEmi COnductor Manufacturing (SECOM)資料集作為研究素材 \cite{UCISECOM2008} 。
+	\section{文獻回顧與研究問題}
+	本研究以 \cite{UCISECOM2008}
+	% UCI Machine Learning Repository 
+	的 SEmi COnductor Manufacturing (SECOM)資料集作為研究素材。
 	該資料集提供半導體製程量測變數，
 	並對各樣本標記 Pass 或 Fail 的二元類別。
-	資料除了具有高維度與高缺失值等等特性外，
+	\cite{Park2024} 提到該資料除了具有高維度與高缺失值等等特性外，
 	不同樣本亦可能對應不同的製程狀態，
 	使資料在統計分佈上呈現異質性。
-	因此常做為製程品質預測與前處理方法的基準資料集 \cite{Park2024}。
+	因此常做為製程品質預測與前處理方法的基準資料集。
 
 	在既有的研究中，
-	賴利夫（Lai, 2022）以 SECOM 為例，
+	\cite{Lai2022} 以 SECOM 為例，
 	透過補值、特徵篩選與決策樹建立分類模型，
-	並利用決策樹的節點結構追溯影響模型分類的關鍵變數 \cite{Lai2022}，
+	並利用決策樹的節點結構追溯影響模型分類的關鍵變數，
 	此類方法的優點是模型本身具可解釋性，
 	但是當使用的資料量不大且形態呈現高維變量時，
 	單以少數層數的決策樹作為可解釋模型的表達能力可能不足，
 	因此實務上常改用表現較強的黑箱模型作為分類基準。
 
 	例如樹模型與梯度提升方法常在高維度的資料上取得較佳表現，
-	其中以 XGBoost 為代表的梯度提升樹模型常被作為高維度資料的強基準分類模型 \cite{ChenGuestrin2016}。
+	其中以 \cite{ChenGuestrin2016} 提出的 Extreme Gradient Boosting(XGBoost) 為代表的梯度提升樹模型常被作為高維度資料的強基準分類模型。
 	然而，
 	僅追求預測準確度不足以支援實務上的決策；
 	當模型為黑箱時，
 	仍需額外方法說明單一樣本被分類時的特徵的依據。
 
 	而在可解釋性方法層面，
-	SHAP 建立在合作賽局理論的 Shapley value 觀點上，
+	\cite{LundbergLee2017} 以合作賽局理論的 Shapley value 為基礎提出 SHapley Additive exPlanations(SHAP)，
 	將單一樣本分類分解為各特徵貢獻度的加法表示，
 	同時可用於整體樣本的彙整比較。
 	並可用於黑箱模型的事後解釋，
-	以量化特徵對預測輸出的影響 \cite{Lundberg2017}。
+	以量化特徵對預測輸出的影響 。
 	可以應用於不同的數據類型，
 	包括文字、表格資料和影像。
 	
-	LIME 則以「局部可解釋」為目標，
+	\cite{Ribeiro2016} 提出（Local Interpretable Model-agnostic Explanations(LIME) ，
+	以「局部可解釋」為目標，
 	在欲解釋樣本附近生成擾動樣本，
 	並以距離為權重給予相鄰的樣本較高權重，
 	再以簡單的線性模型近似黑箱在局部的分類行為，
-	以提供單一樣本被分類時的局部解釋 \cite{Ribeiro2016}。
+	以提供單一樣本被分類時的局部解釋。
 
 	然而，
 	在製程資料的高維與異質性的情況下，

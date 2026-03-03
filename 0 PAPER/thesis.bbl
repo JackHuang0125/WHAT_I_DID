@@ -3,24 +3,22 @@
 \harvarditem{Chen \harvardand\ Guestrin}{2016}{ChenGuestrin2016}
 Chen, T. \harvardand\ Guestrin, C.  \harvardyearleft 2016\harvardyearright ,
   Xgboost: A scalable tree boosting system, {\em in} `Proceedings of the 22nd
-  ACM SIGKDD International Conference on Knowledge Discovery and Data Mining
-  (KDD)', pp.~785--794.
+  ACM SIGKDD International Conference on Knowledge Discovery and Data Mining',
+  pp.~785--794.
+\newblock https://doi.org/10.1145/2939672.2939785.
 
-\harvarditem{Lai}{2022}{Lai2022}
-Lai, L.-F.  \harvardyearleft 2022\harvardyearright , Use knn and decision tree
-  methods to perform failure prediction and cause tracking analysis on
-  manufacturing data with imputed values, Master's thesis, National Chung Hsing
-  University.
+\harvarditem{Lundberg \harvardand\ Lee}{2017}{LundbergLee2017}
+Lundberg, S. \harvardand\ Lee, S.  \harvardyearleft 2017\harvardyearright , `A
+  unified approach to interpreting model predictions', arXiv:1705.07874.
+\newblock arXiv. https://doi.org/10.48550/arXiv.1705.07874.
 
-\harvarditem{Lundberg \harvardand\ Lee}{2017}{Lundberg2017}
-Lundberg, S.~M. \harvardand\ Lee, S.-I.  \harvardyearleft 2017\harvardyearright
-  , A unified approach to interpreting model predictions, {\em in} `Advances in
-  Neural Information Processing Systems'.
-
-\harvarditem{Park et~al.}{2024}{Park2024}
-Park, H.~J. et~al.  \harvardyearleft 2024\harvardyearright , `Study on data
-  preprocessing for machine learning based on semiconductor manufacturing
-  processes', {\em Sensors} {\bf 24}(17),~5461.
+\harvarditem[Park et~al.]{Park, Koo, Yang, Han \harvardand\
+  Nam}{2024}{Park2024}
+Park, H., Koo, Y., Yang, H., Han, Y. \harvardand\ Nam, C.  \harvardyearleft
+  2024\harvardyearright , `Study on data preprocessing for machine learning
+  based on semiconductor manufacturing processes', {\em Sensors} {\bf
+  24}(17),~5461.
+\newblock https://doi.org/10.3390/s24175461.
 
 \harvarditem[Ribeiro et~al.]{Ribeiro, Singh \harvardand\
   Guestrin}{2016}{Ribeiro2016}
@@ -34,5 +32,10 @@ Ribeiro, M.~T., Singh, S. \harvardand\ Guestrin, C.  \harvardyearleft
 {UCI Machine Learning Repository}  \harvardyearleft 2008\harvardyearright ,
   `Secom', \url{https://archive.ics.uci.edu/ml/datasets/SECOM}.
 \newblock Accessed: 2026-02-21.
+
+\harvarditem{賴立夫}{2022}{Lai2022}
+賴立夫  \harvardyearleft 2022\harvardyearright , 使用 knn
+  和決策樹方法對填補缺失值的製造數據進行失效預測和原因追蹤分析,
+  碩士論文, 國立中興大學應用數學系.
 
 \end{thebibliography}
