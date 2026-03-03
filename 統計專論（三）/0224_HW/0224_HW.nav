@@ -10,8 +10,8 @@
 \headcommand {\slideentry {1}{1}{1}{3/3}{PDF \& Parameters}{0}}
 \headcommand {\beamer@framepages {3}{3}}
 \headcommand {\beamer@subsectionpages {3}{3}}
-\headcommand {\beamer@subsectionentry {0}{1}{2}{4}{Reliability \& Hazard}}
-\headcommand {\slideentry {1}{2}{1}{4/4}{Reliability \& Hazard}{0}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{4}{PDF \& b}}
+\headcommand {\slideentry {1}{2}{1}{4/4}{PDF \& b}{0}}
 \headcommand {\beamer@framepages {4}{4}}
 \headcommand {\beamer@sectionpages {3}{4}}
 \headcommand {\beamer@subsectionpages {4}{4}}
@@ -21,10 +21,10 @@
 \headcommand {\slideentry {2}{1}{1}{5/5}{PMF \& Properties}{0}}
 \headcommand {\beamer@framepages {5}{5}}
 \headcommand {\beamer@subsectionpages {5}{5}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{6}{PMF \& Lambda}}
-\headcommand {\slideentry {2}{2}{1}{6/6}{PMF \& Lambda}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{6}{PMF \& $\lambda $}}
+\headcommand {\slideentry {2}{2}{1}{6/6}{PMF \& $\lambda $}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\slideentry {2}{2}{2}{7/7}{PMF \& Lambda}{0}}
+\headcommand {\slideentry {2}{2}{2}{7/7}{PMF \& $\lambda $}{0}}
 \headcommand {\beamer@framepages {7}{7}}
 \headcommand {\beamer@partpages {1}{7}}
 \headcommand {\beamer@subsectionpages {6}{7}}
