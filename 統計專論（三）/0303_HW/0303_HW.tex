@@ -1,0 +1,82 @@
+\documentclass[a4paper, 12pt]{article}  %set doc type and font size
+\usepackage{fontspec}
+
+% math tools
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+% set chinese
+\usepackage{xeCJK}
+\xeCJKsetup{AutoFakeBold=true, AutoFakeSlant=true}
+\setmainfont{Times New Roman}
+\setCJKmainfont{標楷體}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\title{Chapter 2　Homework Assignment}
+\author{黃丞暘　611211106}
+\date{}
+\begin{document}
+\maketitle % 顯示標題區塊
+
+\section*{Problem 1: Transformations and Standardization}
+Let $X$ be a continuous random variable.
+\begin{enumerate}
+\item Prove $\operatorname{Var}(aX+b)=a^{2}\operatorname{Var}(X)$
+
+Sol.
+\begin{align*}
+Var(aX+b)
+&=E[(aX+b)^2]-E[(aX+b)]^2 \\
+&=E[a^2X^2+2abX+b^2]-[aE(X)+b]^2 \\
+&=a^2E[X^2]+2abE[X]+b^2-(a^2E[X]^2+2abE[X]+b^2) \\
+&=a^2(E[X^2]-E[X]^2) \\
+&=a^2Var(X)
+\end{align*}
+
+\item Let $Y=\frac{X-\mu}{\sigma}$. Show that ${E}[Y]=0$ and $\operatorname{Var}(Y)=1$
+
+Sol.
+
+Let $\mu=E[X],\ \sigma=\sqrt{\operatorname{Var}(X)}>0$
+
+$E[Y]=E\!\left[\frac{X-\mu}{\sigma}\right]=\frac{1}{\sigma}\big(E[X]-\mu\big)=\frac{1}{\sigma}(\mu-\mu)=0$
+
+$Var(Y)=Var(\frac{1}{\sigma}X-\frac{\mu}{\sigma})=\left(\frac{1}{\sigma}\right)^2Var(X-\mu)=\frac{1}{\sigma^2}Var(X)=\frac{1}{\sigma^2}\sigma^2=1$
+
+
+\item If $X\sim \mathrm{Exp}(\lambda)$  derive the CDF and verify the memoryless property.
+
+Sol.
+
+CDF:
+$F_X(x)=P(X\le x)=\int_{0}^{x}\lambda e^{-\lambda t}\,dt =\left[-e^{-\lambda t}\right]_{0}^{x}=1-e^{-\lambda x}$
+
+Thus
+$$
+F_X(x)=
+\begin{cases}
+    0, & x<0 \\
+    1-e^{-\lambda x}, & x\ge 0
+\end{cases}
+$$
+
+Let $s,t\ge 0$. Then
+
+$$P(X>s+t\mid X>s)=\frac{P(X>s+t)}{P(X>s)}=\frac{e^{-\lambda(s+t)}}{e^{-\lambda s}}=e^{-\lambda t}=P(X>t)$$
+
+Hence the exponential distribution is memoryless.
+
+\end{enumerate}
+
+\section*{Problem 2: Normal Sampling Theory}
+
+
+\section*{Problem 3: Discrete Structure and Limits}
+
+
+\section*{Problem 4: Mixtures and Overdispersion}
+
+
+\end{document}
