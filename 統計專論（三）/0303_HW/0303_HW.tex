@@ -24,7 +24,7 @@
 \section*{Problem 1: Transformations and Standardization}
 Let $X$ be a continuous random variable.
     \begin{enumerate}
-    \item Prove $\operatorname{Var}(aX+b)=a^{2}\operatorname{Var}(X)$.
+    \item Prove $Var(aX+b)=a^{2}Var(X)$.
 
     Sol.
     \begin{align*}
@@ -36,11 +36,11 @@ Let $X$ be a continuous random variable.
     &=a^2Var(X)
     \end{align*}
 
-    \item Let $Y=\frac{X-\mu}{\sigma}$. Show that ${E}[Y]=0$ and $\operatorname{Var}(Y)=1$.
+    \item Let $Y=\frac{X-\mu}{\sigma}$. Show that ${E}[Y]=0$ and $Var(Y)=1$.
 
     Sol.
 
-    Let $\mu=E[X],\ \sigma=\sqrt{\operatorname{Var}(X)}>0$, therefore
+    Let $\mu=E[X],\ \sigma=\sqrt{Var(X)}>0$, therefore
     $$E[Y]=E\!\left[\frac{X-\mu}{\sigma}\right]=\frac{1}{\sigma}\big(E[X]-\mu\big)=\frac{1}{\sigma}(\mu-\mu)=0,$$
     $$Var(Y)=Var(\frac{1}{\sigma}X-\frac{\mu}{\sigma})=\left(\frac{1}{\sigma}\right)^2Var(X-\mu)=\frac{1}{\sigma^2}Var(X)=\frac{1}{\sigma^2}\sigma^2=1.$$
 
@@ -62,6 +62,8 @@ Let $X$ be a continuous random variable.
     Hence the exponential distribution is memoryless.
 
     \end{enumerate}
+
+    \textbf{SPC Link}: Why is standardization fundamental in control limits?
 
 \section*{Problem 2: Normal Sampling Theory}
 Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
@@ -127,9 +129,11 @@ Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
 
     \end{enumerate}
 
+    \textbf{SPC Link}: Known vs unknown σ changes limits.
+
 \section*{Problem 3: Discrete Structure and Limits}
     \begin{enumerate}
-        \item Derive $E[X]$, $\operatorname{Var}(X)$ for $X \sim \mathrm{Bin}(n,p)$.
+        \item Derive $E[X]$, $Var(X)$ for $X \sim \mathrm{Bin}(n,p)$.
         
         Sol.
 
@@ -156,30 +160,16 @@ Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
         \item Give an SPC context favoring Poisson modeling.
         
         Sol.
+        
+        在統計製程管制當中，Poisson 分配最常被用來描述在固定時間或固定區域內，某事件發生的次數
 
-        \textbf{SPC context (count-of-events / defects).}
-        In a manufacturing line, monitor the number of defects (or occurrences) in each fixed inspection unit, e.g.
-        \begin{itemize}
-        \item the number of pinholes per $1\,\text{m}^2$ of metal sheet,
-        \item the number of solder-bridge defects per printed circuit board,
-        \item the number of particles (contaminants) per wafer,
-        \item the number of scratches per $10\,\text{cm}$ of glass edge,
-        \item the number of customer complaints per day (service SPC).
-        \end{itemize}
+        例如，在半導體製程產線中，工程師檢查每片晶片，並記錄晶片表面上的缺陷數量。
 
-        \textbf{Why Poisson is favored.}
-        Let $N$ be the count in each unit. A Poisson model is appropriate when:
-        \begin{enumerate}
-        \item events are \emph{rare} within a unit (small probability per opportunity),
-        \item events occur \emph{independently} across disjoint subregions/time slices,
-        \item the \emph{rate} is approximately constant within the unit.
-        \end{enumerate}
-        Then $N\approx \mathrm{Pois}(\lambda)$, so $\mathbb{E}[N]=\operatorname{Var}(N)=\lambda$,
-        and standard SPC tools include the \emph{$c$-chart} (constant area/size) and \emph{$u$-chart}
-        (varying area/size, using defects per unit).
-
+        令 $X$ 為每片晶片的缺陷數量，若缺陷在晶片表上隨機且彼此間獨立，且在固定區域內的缺陷發生數近似於常數，
+        令 $\lambda$ 為每片晶片的平均缺陷數，
+        則 $$X \sim \mathrm{Poisson}(\lambda)\Rightarrow P(X=x)=\frac{e^{-\lambda}\lambda^x}{x!},\ x=0,1,2,\dots$$
+        
     \end{enumerate}
-
 
 \section*{Problem 4: Mixtures and Overdispersion}
     \begin{enumerate}
@@ -231,7 +221,37 @@ Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
 
         \item Explain why mixtures increase variance.
         
+        Sol.
+
+        混合分配會使變異數增加，乃至於 Law of total variance ：
+        $$Var(X)=E\left[Var(X\mid \theta)\right]+Var\left(E[X\mid \theta]\right).$$
+        其中第一項是「抽樣變異」（Sampling variation），描述在參數 $\theta$ 固定時的隨機波動；
+        第二項是「異質性變異」（Heterogeneity effect），描述在參數 $\theta$ 隨機時而引入的額外波動。
+
+        若不混合，此時 $\theta$ 為常數，則 $E[X\mid \theta]$ 為常數，
+        因此
+        $$Var\left(E[X\mid \theta]\right)=0\Rightarrow Var(X)=E\left[Var(X\mid \theta)\right].$$
+        若混合，此時 $\theta$ 為隨機變數且會影響 $E[X\mid\theta]$，則
+        $$Var\left(E[X\mid \theta]\right)>0\Rightarrow Var(X)=E\left[Var(X\mid \theta)\right]+Var\left(E[X\mid \theta]\right)>E\!\left[Var(X\mid \theta)\right].$$
+        因此混合會增加異質性變異，使得總變異數膨脹（Overdispersion）。
+
+        以 Problem 4 的 Poisson–Gamma mixture 為例
+
+        已知 $$E[X \mid \Lambda]=Var(X \mid \Lambda)=\Lambda,　E[\Lambda]=\frac{\alpha}{\beta},　Var(\Lambda)=\frac{\alpha}{\beta^{2}}$$
+        可得
+        \begin{align*}
+            Var(X)
+            &=E\left[Var(X\mid \Lambda)\right]+Var\left(E[X\mid \Lambda]\right) \\
+            &=E[\Lambda]+Var(\Lambda) \\
+            &=\frac{\alpha}{\beta}+\frac{\alpha}{\beta^{2}}
+        \end{align*}
+        我們知道
+        $$E[X]=E\big(E[X \mid \Lambda]\big)=E[\Lambda]=\frac{\alpha}{\beta}.$$
+        因此
+        $$Var(X)=E[X]+\frac{\alpha}{\beta^{2}}>E[X].$$
+        總結來說，對於一個 Poisson 分配，其變異數等於期望值，但經過 Poisso-Gamma 的混和分配後，造成變異數大於期望值，亦即變異數膨脹。
     \end{enumerate}
 
+    \textbf{SPC Link}: Overdispersion violates p-chart assumptions.
 
 \end{document}
