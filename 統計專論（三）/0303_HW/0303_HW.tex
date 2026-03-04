@@ -40,32 +40,25 @@ Let $X$ be a continuous random variable.
 
     Sol.
 
-    Let $\mu=E[X],\ \sigma=\sqrt{\operatorname{Var}(X)}>0$
-
-    $E[Y]=E\!\left[\frac{X-\mu}{\sigma}\right]=\frac{1}{\sigma}\big(E[X]-\mu\big)=\frac{1}{\sigma}(\mu-\mu)=0$
-
-    $Var(Y)=Var(\frac{1}{\sigma}X-\frac{\mu}{\sigma})=\left(\frac{1}{\sigma}\right)^2Var(X-\mu)=\frac{1}{\sigma^2}Var(X)=\frac{1}{\sigma^2}\sigma^2=1$
-
+    Let $\mu=E[X],\ \sigma=\sqrt{\operatorname{Var}(X)}>0$, therefore
+    $$E[Y]=E\!\left[\frac{X-\mu}{\sigma}\right]=\frac{1}{\sigma}\big(E[X]-\mu\big)=\frac{1}{\sigma}(\mu-\mu)=0,$$
+    $$Var(Y)=Var(\frac{1}{\sigma}X-\frac{\mu}{\sigma})=\left(\frac{1}{\sigma}\right)^2Var(X-\mu)=\frac{1}{\sigma^2}Var(X)=\frac{1}{\sigma^2}\sigma^2=1.$$
 
     \item If $X\sim \mathrm{Exp}(\lambda)$  derive the CDF and verify the memoryless property.
 
     Sol.
 
-    CDF:
-    $F_X(x)=P(X\le x)=\int_{0}^{x}\lambda e^{-\lambda t}\,dt =\left[-e^{-\lambda t}\right]_{0}^{x}=1-e^{-\lambda x}$
-
+    CDF: $$F_X(x)=P(X\le x)=\int_{0}^{x}\lambda e^{-\lambda t}\,dt =\left[-e^{-\lambda t}\right]_{0}^{x}=1-e^{-\lambda x}.$$
     Thus
     $$
     F_X(x)=
     \begin{cases}
         0, & x<0 \\
         1-e^{-\lambda x}, & x\ge 0
-    \end{cases}
+    \end{cases}.
     $$
     Let $s,t\ge 0$. Then
-
-    $$P(X>s+t\mid X>s)=\frac{P(X>s+t)}{P(X>s)}=\frac{e^{-\lambda(s+t)}}{e^{-\lambda s}}=e^{-\lambda t}=P(X>t)$$
-
+    $$P(X>s+t\mid X>s)=\frac{P(X>s+t)}{P(X>s)}=\frac{e^{-\lambda(s+t)}}{e^{-\lambda s}}=e^{-\lambda t}=P(X>t).$$
     Hence the exponential distribution is memoryless.
 
     \end{enumerate}
@@ -78,12 +71,9 @@ Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
         Sol.
 
         $\bar{X}=\frac{\sum_{i=1}^n X_i}{n}=\frac{X_1+X_2+\dots +X_n}{n}$, then 
-        
-        $E[\bar{X}]=\frac{E[X_1+X_2+\dots +X_n]}{n}=\frac{n\mu}{n}=\mu$
-        
-        $Var(\bar{X})=\frac{Var[X_1+X_2+\dots +X_n]}{n^2}=\frac{n\sigma^2}{n^2}=\frac{\sigma^2}{n}$
-
-        Hence $\bar{X}\sim N\left(\mu,\frac{\sigma^2}{n}\right).$
+        $$E[\bar{X}]=\frac{E[X_1+X_2+\dots +X_n]}{n}=\frac{n\mu}{n}=\mu,$$
+        $$Var(\bar{X})=\frac{Var[X_1+X_2+\dots +X_n]}{n^2}=\frac{n\sigma^2}{n^2}=\frac{\sigma^2}{n}.$$
+        Hence $$\bar{X}\sim N\left(\mu,\frac{\sigma^2}{n}\right).$$
 
         \item Show $\dfrac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}$.
         
@@ -107,59 +97,140 @@ Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
         \end{align*}
 
         Then divide by $\sigma^2$:
-        $$\sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2=\sum_{i=1}^n\left(\frac{X_i-\bar X}{\sigma}\right)^2+\left(\frac{\bar X-\mu}{\sigma/\sqrt n}\right)^2.$$
+        $$\sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2=\sum_{i=1}^n\left(\frac{X_i-\bar X}{\sigma}\right)^2+\left(\frac{\bar X-\mu}{\sigma /\sqrt n}\right)^2.$$
         Let
-        $$U=\sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2,　V=\sum_{i=1}^n\left(\frac{X_i-\bar X}{\sigma}\right)^2,　W=\left(\frac{\bar X-\mu}{\sigma/\sqrt n}\right)^2.$$
+        $$U=\sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2,　V=\sum_{i=1}^n\left(\frac{X_i-\bar X}{\sigma}\right)^2,　W=\left(\frac{\bar X-\mu}{\sigma /\sqrt n}\right)^2.$$
         Then $U=V+W$, and we can know
         $$U=\sum_{i=1}^n Z_i^2 \sim \chi^2_n,　V=\frac{1}{\sigma^2}\sum_{i=1}^n (X_i-\bar X)^2=\frac{(n-1)S^2}{\sigma^2},$$
-        also $\bar X\sim N(\mu,\sigma^2/n)$, hence $$\frac{\bar X-\mu}{\sigma/\sqrt n}\sim N(0,1)\Rightarrow W\sim\chi^2_1.$$
+        also $\bar X\sim N(\mu,\sigma^2/n)$, hence $$\frac{\bar X-\mu}{\sigma /\sqrt n}\sim N(0,1)\Rightarrow W\sim\chi^2_1.$$
         By (1) and $W$ is a function of $\bar X$ while
         $V=\frac{(n-1)S^2}{\sigma^2}$ is a function of $S^2$, we have $$V\perp \!\!\! \perp W.$$
         From $U=V+W$ and independence, we have $$M_U(t)=M_V(t)\,M_W(t).$$
-        By (4), we have $$(1-2t)^{-n/2}=M_U(t)=M_V(t)\,(1-2t)^{-1/2}\Rightarrow M_V(t)=(1-2t)^{-(n-1)/2}$$
-        Since $M_V(t)$ is the mgf of $\chi^2_{n-1}$.
-
-        Finally, $V=\frac{(n-1)S^2}{\sigma^2}\sim \chi^2_{n-1}.$
+        By (4), we have $$(1-2t)^{-n/2}=M_U(t)=M_V(t)\,(1-2t)^{-1/2}\Rightarrow M_V(t)=(1-2t)^{-(n-1)/2}.$$
+        Since $M_V(t)$ is the mgf of $\chi^2_{n-1}$, finally, $$V=\frac{(n-1)S^2}{\sigma^2}\sim \chi^2_{n-1}.$$
 
         \item Deduce $T=\frac{\bar{X}-\mu}{S/\sqrt{n}} \sim t_{n-1}$.
         
         Sol.
         
-        Let $Z=\frac{\bar X-\mu}{\sigma/\sqrt n}\sim N(0,1)$. From Q2, we know and let $U=\frac{(n-1)S^2}{\sigma^2}\sim \chi^2_{n-1}.$
+        Let $Z=\frac{\bar X-\mu}{\sigma /\sqrt n}\sim N(0,1)$. From Q2, we know and let $U=\frac{(n-1)S^2}{\sigma^2}\sim \chi^2_{n-1}.$
 
-        Because         Therefore $$T=\frac{\bar X-\mu}{S/\sqrt n}=\frac{\bar X-\mu}{\sigma/\sqrt n}\cdot \frac{\sigma}{S}= Z\cdot \frac{\sigma}{S}$$
-
-        \[
-        \frac{\sigma}{S}
-        =\left(\frac{S^2}{\sigma^2}\right)^{-1/2}
-        =\left(\frac{U}{n-1}\right)^{-1/2}
-        =\sqrt{\frac{n-1}{U}}.
-        \]
-        所以
-        \[
-        T = \frac{Z}{\sqrt{U/(n-1)}}.
-        \]
-        依 $t$ 分佈定義：若 $Z\sim N(0,1)$、$U\sim\chi^2_\nu$ 且獨立，則
-        \[
-        \frac{Z}{\sqrt{U/\nu}}\sim t_\nu.
-        \]
-        取 $\nu=n-1$，得
+        Compute
+        \begin{align*}
+        T=\frac{\bar X-\mu}{S/\sqrt n}=\frac{(\bar X-\mu)/(\sigma /\sqrt n)}{(S/\sqrt n)/(\sigma /\sqrt n)}=\frac{Z}{S/\sigma}
+        &=\frac{Z}{\sqrt{(S/\sigma)^2}} \\
+        &=\frac{Z}{\sqrt{(n-1)S^2/(n-1)\sigma^2}} \\
+        &=\frac{Z}{\sqrt{U/(n-1)}}
+        \end{align*}
+        Because of the definition of $t$-distribution：if $Z\sim N(0,1)$、$U\sim\chi^2_\nu$ and $Z\perp \!\!\! \perp U$，then $$\frac{Z}{\sqrt{U/\nu}}\sim t_\nu.$$
+        In conclusion, $$T=\frac{\bar X-\mu}{S/\sqrt n}=\frac{Z}{\sqrt{U/(n-1)}}\sim t_{n-1}$$
 
     \end{enumerate}
 
 \section*{Problem 3: Discrete Structure and Limits}
     \begin{enumerate}
         \item Derive $E[X]$, $\operatorname{Var}(X)$ for $X \sim \mathrm{Bin}(n,p)$.
+        
+        Sol.
+
+        Let $K_i\stackrel{iid}{\sim}\mathrm{Bernoulli}(p)$, we compute
+        $$E[K_i]=1\times p+0\times (1-p)=p,$$
+        $$E[K_i]^2=1^2\times p+0^2\times (1-p)=p,$$
+        $$Var(K_i)=p-p^2=p(1-p).$$
+        
+        Since $X=\sum_{i=1}^n K_i$. Therefore,
+        $$E[X]=E\!\left[\sum_{i=1}^n K_i\right]=\sum_{i=1}^n E[K_i]=\sum_{i=1}^n p=np,$$
+        $$Var(X)=Var\left(\sum_{i=1}^n K_i\right)=\sum_{i=1}^n Var(K_i)=\sum_{i=1}^n p(1-p)=np(1-p).$$
+        
         \item Prove the Poisson limit of Binomial.
+        
+        Sol.
+
+        Let $X_n\sim \mathrm{Bin}(n,p)$ with $np\to \lambda >0$ as $n\to\infty$ and $p\to 0$.
+        $$P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}.$$
+        We compute
+        $$\binom{n}{k}p^k=\frac{n(n-1)\cdots(n-k+1)}{k!}p^k=\frac{1}{k!}\left(\prod_{j=0}^{k-1}\frac{n-j}{n}\right)(np)^k\to\frac{1}{k!}\lambda^k,　\text{as}　　n\to\infty,$$
+        $$(1-p)^{n-k}=(1-p)^n(1-p)^{-k}=\left[\left(1-p\right)^{1/p}\right]^{np}(1-p)^{-k}\to e^{-\lambda}\cdot 1,　\text{as}　　n\to\infty.$$
+        In conclusion, $$P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}\to \frac{e^{-\lambda}\lambda^k}{k!},　\text{as}　　n\to\infty.$$
+
         \item Give an SPC context favoring Poisson modeling.
+        
+        Sol.
+
+        \textbf{SPC context (count-of-events / defects).}
+        In a manufacturing line, monitor the number of defects (or occurrences) in each fixed inspection unit, e.g.
+        \begin{itemize}
+        \item the number of pinholes per $1\,\text{m}^2$ of metal sheet,
+        \item the number of solder-bridge defects per printed circuit board,
+        \item the number of particles (contaminants) per wafer,
+        \item the number of scratches per $10\,\text{cm}$ of glass edge,
+        \item the number of customer complaints per day (service SPC).
+        \end{itemize}
+
+        \textbf{Why Poisson is favored.}
+        Let $N$ be the count in each unit. A Poisson model is appropriate when:
+        \begin{enumerate}
+        \item events are \emph{rare} within a unit (small probability per opportunity),
+        \item events occur \emph{independently} across disjoint subregions/time slices,
+        \item the \emph{rate} is approximately constant within the unit.
+        \end{enumerate}
+        Then $N\approx \mathrm{Pois}(\lambda)$, so $\mathbb{E}[N]=\operatorname{Var}(N)=\lambda$,
+        and standard SPC tools include the \emph{$c$-chart} (constant area/size) and \emph{$u$-chart}
+        (varying area/size, using defects per unit).
+
     \end{enumerate}
 
 
 \section*{Problem 4: Mixtures and Overdispersion}
     \begin{enumerate}
         \item Show Poisson--Gamma $\Rightarrow$ Negative Binomial.
+        
+        Sol.
+
+        Let $X\mid \Lambda=\lambda \sim \mathrm{Pois}(\lambda)$ and $\Lambda \sim \mathrm{Gamma}(\alpha,\beta)$ for $\alpha,　\beta>0$, i.e.
+        $$f_\Lambda(\lambda)=\frac{e^{-\beta\lambda}\beta^\alpha}{\Gamma(\alpha)}\lambda^{\alpha-1},　\lambda>0.$$
+        Then $$f_{X\mid \Lambda}(x\mid \lambda)=\frac{e^{-\lambda}\lambda^x}{x!},　 x=0,1,2,\dots$$
+        So we can compute
+        \begin{align*}
+        P(X=x)
+        &=\int_0^\infty f_{X\mid \Lambda}(x\mid \lambda)f_\Lambda(\lambda)\,d\lambda \\
+        &=\int_0^\infty \frac{e^{-\lambda}\lambda^x}{x!}\cdot
+        \frac{e^{-\beta\lambda}\beta^\alpha}{\Gamma(\alpha)}\lambda^{\alpha-1}d\lambda \\
+        &=\frac{\beta^\alpha}{x!\,\Gamma(\alpha)}
+        \int_0^\infty \lambda^{x+\alpha-1}e^{-(\beta+1)\lambda}\,d\lambda.
+        \end{align*}
+        Use $\int_0^\infty \lambda^{t-1}e^{-k\lambda}\,d\lambda=\frac{\Gamma(t)}{k^t}$ with $t=x+\alpha$ and $k=\beta+1$:
+        \begin{align*}
+            P(X=x)
+            &=\frac{\beta^\alpha}{x!\Gamma(\alpha)}\cdot \frac{\Gamma(x+\alpha)}{(\beta+1)^{x+\alpha}} \\
+            &=\frac{\Gamma(x+\alpha)}{\Gamma(\alpha)x!}\cdot \left(\frac{\beta}{\beta+1}\right)^\alpha \left(\frac{1}{\beta+1}\right)^x.
+        \end{align*}
+        Let
+        $$p=\frac{\beta}{\beta+1},　1-p=\frac{1}{\beta+1},　p\in[0, 1].$$
+        Therefore $$P(X=x)=\frac{\Gamma(x+\alpha)}{\Gamma(\alpha)x!}p^{\alpha}(1-p)^x,　x=0,1,2,\dots$$
+        It is the pmf of a Negative Binomial distribution: $$X\sim \mathrm{NegBin}(\alpha,p)　\text{for number of failures}　x　\text{before}　\alpha　\text{successes}$$
+
         \item Show Beta--Binomial via marginalization.
+        
+        Sol.
+
+        Let $$X\mid P=p \sim \mathrm{Bin}(n,p),　P\sim \mathrm{Beta}(\alpha,\beta),　\alpha,\beta>0,$$
+        where$$f_P(p)=\frac{1}{B(\alpha, \beta)}p^{\alpha-1}(1-p)^{\beta-1},　0<p<1,$$
+        and $$B(\alpha,\beta)=\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}.$$
+        Also,$$P_{X\mid P}(x\mid p)=\binom{n}{x}p^x(1-p)^{n-x},　x=0,1,\dots,n.$$
+        Then we compute
+        \begin{align*}
+        P(X=x)
+        &=\int_0^1 P_{X\mid P}(x\mid p)f_P(p)dp \\
+        &=\int_0^1 \binom{n}{x}p^x(1-p)^{n-x}\cdot \frac{1}{B(\alpha,\beta)}p^{\alpha-1}(1-p)^{\beta-1}dp \\
+        &=\binom{n}{x}\frac{1}{B(\alpha,\beta)}\int_0^1 p^{x+\alpha-1}(1-p)^{n-x+\beta-1}dp \\
+        &=\binom{n}{x}\frac{B(x+\alpha,\ n-x+\beta)}{B(\alpha,\beta)} \\
+        &=\binom{n}{x}\frac{\Gamma(x+\alpha)\Gamma(n-x+\beta)}{\Gamma(n+\alpha+\beta)}\cdot \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)},　x=0,1,\dots,n.
+        \end{align*}
+        It is the Beta--Binomial pmf.
+
         \item Explain why mixtures increase variance.
+        
     \end{enumerate}
 
 
