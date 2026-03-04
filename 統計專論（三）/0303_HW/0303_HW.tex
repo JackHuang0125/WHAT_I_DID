@@ -17,66 +17,150 @@
 \title{Chapter 2　Homework Assignment}
 \author{黃丞暘　611211106}
 \date{}
+
 \begin{document}
 \maketitle % 顯示標題區塊
 
 \section*{Problem 1: Transformations and Standardization}
 Let $X$ be a continuous random variable.
-\begin{enumerate}
-\item Prove $\operatorname{Var}(aX+b)=a^{2}\operatorname{Var}(X)$
+    \begin{enumerate}
+    \item Prove $\operatorname{Var}(aX+b)=a^{2}\operatorname{Var}(X)$.
 
-Sol.
-\begin{align*}
-Var(aX+b)
-&=E[(aX+b)^2]-E[(aX+b)]^2 \\
-&=E[a^2X^2+2abX+b^2]-[aE(X)+b]^2 \\
-&=a^2E[X^2]+2abE[X]+b^2-(a^2E[X]^2+2abE[X]+b^2) \\
-&=a^2(E[X^2]-E[X]^2) \\
-&=a^2Var(X)
-\end{align*}
+    Sol.
+    \begin{align*}
+    Var(aX+b)
+    &=E[(aX+b)^2]-E[(aX+b)]^2 \\
+    &=E[a^2X^2+2abX+b^2]-[aE(X)+b]^2 \\
+    &=a^2E[X^2]+2abE[X]+b^2-(a^2E[X]^2+2abE[X]+b^2) \\
+    &=a^2(E[X^2]-E[X]^2) \\
+    &=a^2Var(X)
+    \end{align*}
 
-\item Let $Y=\frac{X-\mu}{\sigma}$. Show that ${E}[Y]=0$ and $\operatorname{Var}(Y)=1$
+    \item Let $Y=\frac{X-\mu}{\sigma}$. Show that ${E}[Y]=0$ and $\operatorname{Var}(Y)=1$.
 
-Sol.
+    Sol.
 
-Let $\mu=E[X],\ \sigma=\sqrt{\operatorname{Var}(X)}>0$
+    Let $\mu=E[X],\ \sigma=\sqrt{\operatorname{Var}(X)}>0$
 
-$E[Y]=E\!\left[\frac{X-\mu}{\sigma}\right]=\frac{1}{\sigma}\big(E[X]-\mu\big)=\frac{1}{\sigma}(\mu-\mu)=0$
+    $E[Y]=E\!\left[\frac{X-\mu}{\sigma}\right]=\frac{1}{\sigma}\big(E[X]-\mu\big)=\frac{1}{\sigma}(\mu-\mu)=0$
 
-$Var(Y)=Var(\frac{1}{\sigma}X-\frac{\mu}{\sigma})=\left(\frac{1}{\sigma}\right)^2Var(X-\mu)=\frac{1}{\sigma^2}Var(X)=\frac{1}{\sigma^2}\sigma^2=1$
+    $Var(Y)=Var(\frac{1}{\sigma}X-\frac{\mu}{\sigma})=\left(\frac{1}{\sigma}\right)^2Var(X-\mu)=\frac{1}{\sigma^2}Var(X)=\frac{1}{\sigma^2}\sigma^2=1$
 
 
-\item If $X\sim \mathrm{Exp}(\lambda)$  derive the CDF and verify the memoryless property.
+    \item If $X\sim \mathrm{Exp}(\lambda)$  derive the CDF and verify the memoryless property.
 
-Sol.
+    Sol.
 
-CDF:
-$F_X(x)=P(X\le x)=\int_{0}^{x}\lambda e^{-\lambda t}\,dt =\left[-e^{-\lambda t}\right]_{0}^{x}=1-e^{-\lambda x}$
+    CDF:
+    $F_X(x)=P(X\le x)=\int_{0}^{x}\lambda e^{-\lambda t}\,dt =\left[-e^{-\lambda t}\right]_{0}^{x}=1-e^{-\lambda x}$
 
-Thus
-$$
-F_X(x)=
-\begin{cases}
-    0, & x<0 \\
-    1-e^{-\lambda x}, & x\ge 0
-\end{cases}
-$$
+    Thus
+    $$
+    F_X(x)=
+    \begin{cases}
+        0, & x<0 \\
+        1-e^{-\lambda x}, & x\ge 0
+    \end{cases}
+    $$
+    Let $s,t\ge 0$. Then
 
-Let $s,t\ge 0$. Then
+    $$P(X>s+t\mid X>s)=\frac{P(X>s+t)}{P(X>s)}=\frac{e^{-\lambda(s+t)}}{e^{-\lambda s}}=e^{-\lambda t}=P(X>t)$$
 
-$$P(X>s+t\mid X>s)=\frac{P(X>s+t)}{P(X>s)}=\frac{e^{-\lambda(s+t)}}{e^{-\lambda s}}=e^{-\lambda t}=P(X>t)$$
+    Hence the exponential distribution is memoryless.
 
-Hence the exponential distribution is memoryless.
-
-\end{enumerate}
+    \end{enumerate}
 
 \section*{Problem 2: Normal Sampling Theory}
+Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
+    \begin{enumerate}
+        \item Derive the distribution of $\bar{X}$.
+        
+        Sol.
 
+        $\bar{X}=\frac{\sum_{i=1}^n X_i}{n}=\frac{X_1+X_2+\dots +X_n}{n}$, then 
+        
+        $E[\bar{X}]=\frac{E[X_1+X_2+\dots +X_n]}{n}=\frac{n\mu}{n}=\mu$
+        
+        $Var(\bar{X})=\frac{Var[X_1+X_2+\dots +X_n]}{n^2}=\frac{n\sigma^2}{n^2}=\frac{\sigma^2}{n}$
+
+        Hence $\bar{X}\sim N\left(\mu,\frac{\sigma^2}{n}\right).$
+
+        \item Show $\dfrac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}$.
+        
+        Sol.
+        
+        Let $S^2=\frac{\sum_{i=1}^n(X_i-\bar X)^2}{n-1}$, and we already know the following:
+
+        (1) $\bar X$ and $S^2$ are independent by Basu's theorem.
+
+        (2) If $Z=\frac{X-\mu}{\sigma}\sim N(0,1)$, then $Z^2\sim \chi^2_1$.
+        
+        (3) If $Y_i\stackrel{iid}{\sim}\chi^2_1$, then $\sum_{i=1}^n Y_i\sim \chi^2_n$,　$i=1,\dots,n$.
+        
+        (4) If $Q\sim \chi^2_k$, then $M_Q(t)=(1-2t)^{-k/2}$ for $t<\frac{1}{2}$.
+        
+        Compute
+        \begin{align*}
+        \sum_{i=1}^n (X_i-\mu)^2
+        &=\sum_{i=1}^n((X_i-\bar X)+(\bar X-\mu))^2 \\
+        &=\sum_{i=1}^n (X_i-\bar X)^2 + n(\bar X-\mu)^2.
+        \end{align*}
+
+        Then divide by $\sigma^2$:
+        $$\sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2=\sum_{i=1}^n\left(\frac{X_i-\bar X}{\sigma}\right)^2+\left(\frac{\bar X-\mu}{\sigma/\sqrt n}\right)^2.$$
+        Let
+        $$U=\sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2,　V=\sum_{i=1}^n\left(\frac{X_i-\bar X}{\sigma}\right)^2,　W=\left(\frac{\bar X-\mu}{\sigma/\sqrt n}\right)^2.$$
+        Then $U=V+W$, and we can know
+        $$U=\sum_{i=1}^n Z_i^2 \sim \chi^2_n,　V=\frac{1}{\sigma^2}\sum_{i=1}^n (X_i-\bar X)^2=\frac{(n-1)S^2}{\sigma^2},$$
+        also $\bar X\sim N(\mu,\sigma^2/n)$, hence $$\frac{\bar X-\mu}{\sigma/\sqrt n}\sim N(0,1)\Rightarrow W\sim\chi^2_1.$$
+        By (1) and $W$ is a function of $\bar X$ while
+        $V=\frac{(n-1)S^2}{\sigma^2}$ is a function of $S^2$, we have $$V\perp \!\!\! \perp W.$$
+        From $U=V+W$ and independence, we have $$M_U(t)=M_V(t)\,M_W(t).$$
+        By (4), we have $$(1-2t)^{-n/2}=M_U(t)=M_V(t)\,(1-2t)^{-1/2}\Rightarrow M_V(t)=(1-2t)^{-(n-1)/2}$$
+        Since $M_V(t)$ is the mgf of $\chi^2_{n-1}$.
+
+        Finally, $V=\frac{(n-1)S^2}{\sigma^2}\sim \chi^2_{n-1}.$
+
+        \item Deduce $T=\frac{\bar{X}-\mu}{S/\sqrt{n}} \sim t_{n-1}$.
+        
+        Sol.
+        
+        Let $Z=\frac{\bar X-\mu}{\sigma/\sqrt n}\sim N(0,1)$. From Q2, we know and let $U=\frac{(n-1)S^2}{\sigma^2}\sim \chi^2_{n-1}.$
+
+        Because         Therefore $$T=\frac{\bar X-\mu}{S/\sqrt n}=\frac{\bar X-\mu}{\sigma/\sqrt n}\cdot \frac{\sigma}{S}= Z\cdot \frac{\sigma}{S}$$
+
+        \[
+        \frac{\sigma}{S}
+        =\left(\frac{S^2}{\sigma^2}\right)^{-1/2}
+        =\left(\frac{U}{n-1}\right)^{-1/2}
+        =\sqrt{\frac{n-1}{U}}.
+        \]
+        所以
+        \[
+        T = \frac{Z}{\sqrt{U/(n-1)}}.
+        \]
+        依 $t$ 分佈定義：若 $Z\sim N(0,1)$、$U\sim\chi^2_\nu$ 且獨立，則
+        \[
+        \frac{Z}{\sqrt{U/\nu}}\sim t_\nu.
+        \]
+        取 $\nu=n-1$，得
+
+    \end{enumerate}
 
 \section*{Problem 3: Discrete Structure and Limits}
+    \begin{enumerate}
+        \item Derive $E[X]$, $\operatorname{Var}(X)$ for $X \sim \mathrm{Bin}(n,p)$.
+        \item Prove the Poisson limit of Binomial.
+        \item Give an SPC context favoring Poisson modeling.
+    \end{enumerate}
 
 
 \section*{Problem 4: Mixtures and Overdispersion}
+    \begin{enumerate}
+        \item Show Poisson--Gamma $\Rightarrow$ Negative Binomial.
+        \item Show Beta--Binomial via marginalization.
+        \item Explain why mixtures increase variance.
+    \end{enumerate}
 
 
 \end{document}

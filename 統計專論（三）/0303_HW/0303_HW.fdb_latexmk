@@ -1,12 +1,12 @@
 # Fdb version 4
-["xdvipdfmx"] 1772555266.35175 "0303_HW.xdv" "0303_HW.pdf" "0303_HW" 1772555266.61265 0
-  "0303_HW.xdv" 1772555266 8684 f5b9c036129b8ce1bb16c1e09e5ba246 "xelatex"
+["xdvipdfmx"] 1772594851.31376 "0303_HW.xdv" "0303_HW.pdf" "0303_HW" 1772594851.5927 0
+  "0303_HW.xdv" 1772594851 23916 7c6f30011e6524f200f843d3b1cf1fdc "xelatex"
   (generated)
   "0303_HW.pdf"
   (rewritten before read)
-["xelatex"] 1772555265.63682 "c:/Users/USER/Documents/GitHub/psychic-spoon/統計專論（三）/0303_HW/0303_HW.tex" "0303_HW.xdv" "0303_HW" 1772555266.61139 0
-  "0303_HW.aux" 1772555266 32 044b7f8fc9779af7531264e0c5c84b6d "xelatex"
-  "0303_HW.tex" 1772555265 2046 bef4e9a932cb698eeeb69ec6533ff549 ""
+["xelatex"] 1772594850.57178 "c:/Users/USER/Documents/GitHub/psychic-spoon/統計專論（三）/0303_HW/0303_HW.tex" "0303_HW.xdv" "0303_HW" 1772594851.59152 0
+  "0303_HW.aux" 1772594851 32 c81c40425fbb5e93b90fba65da0b5e61 "xelatex"
+  "0303_HW.tex" 1772594849 5929 57d2988ad40f2786b98fe3c67d91102d ""
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -49,7 +49,7 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/psychic-spoon/統計專論（三）/0303_HW/0303_HW.tex" 1772555265 2046 bef4e9a932cb698eeeb69ec6533ff549 ""
+  "c:/Users/USER/Documents/GitHub/psychic-spoon/統計專論（三）/0303_HW/0303_HW.tex" 1772594849 5929 57d2988ad40f2786b98fe3c67d91102d ""
   (generated)
   "0303_HW.aux"
   "0303_HW.log"
