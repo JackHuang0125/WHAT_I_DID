@@ -12,20 +12,20 @@
 \contentsline {subsection}{\numberline {2.2.3}少數類別特徵}{6}{subsection.2.2.3}%
 \contentsline {subsection}{\numberline {2.2.4}補值}{7}{subsection.2.2.4}%
 \contentsline {subsection}{\numberline {2.2.5}極端值處理}{8}{subsection.2.2.5}%
-\contentsline {subsection}{\numberline {2.2.6}前處理後最終資料集摘要}{9}{subsection.2.2.6}%
-\contentsline {chapter}{\numberline {3}研究方法與流程}{10}{chapter.3}%
-\contentsline {section}{\numberline {3.1}流程大綱}{10}{section.3.1}%
-\contentsline {section}{\numberline {3.2}流程細部}{10}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}資料降維與分群}{11}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}黑箱模型訓練}{12}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}中心點選取與局部生成格子點擬合模型}{13}{subsection.3.2.3}%
-\contentsline {chapter}{\numberline {4}研究結果}{15}{chapter.4}%
-\contentsline {section}{\numberline {4.1}分群建立黑箱}{15}{section.4.1}%
-\contentsline {section}{\numberline {4.2}分群黑箱的預測}{16}{section.4.2}%
-\contentsline {section}{\numberline {4.3}關鍵案例分析}{18}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}群 0（cluster\_0）}{18}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}群 1（cluster\_1）}{19}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}討論與限制}{20}{section.4.4}%
-\contentsline {chapter}{\numberline {5}結論}{21}{chapter.5}%
-\contentsline {section}{\numberline {5.1}總結}{21}{section.5.1}%
-\contentsline {section}{\numberline {5.2}未來工作}{21}{section.5.2}%
+\contentsline {subsection}{\numberline {2.2.6}前處理後最終資料集摘要}{10}{subsection.2.2.6}%
+\contentsline {chapter}{\numberline {3}研究方法與流程}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}流程大綱}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}流程細部}{11}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}資料降維與分群}{12}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}黑箱模型訓練}{15}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}中心點選取與局部生成格子點擬合模型}{16}{subsection.3.2.3}%
+\contentsline {chapter}{\numberline {4}研究結果}{18}{chapter.4}%
+\contentsline {section}{\numberline {4.1}分群建立黑箱}{18}{section.4.1}%
+\contentsline {section}{\numberline {4.2}分群黑箱的預測}{19}{section.4.2}%
+\contentsline {section}{\numberline {4.3}關鍵案例分析}{20}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}群 0（cluster\_0）}{21}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}群 1（cluster\_1）}{22}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}討論與限制}{23}{section.4.4}%
+\contentsline {chapter}{\numberline {5}結論}{24}{chapter.5}%
+\contentsline {section}{\numberline {5.1}總結}{24}{section.5.1}%
+\contentsline {section}{\numberline {5.2}未來工作}{24}{section.5.2}%

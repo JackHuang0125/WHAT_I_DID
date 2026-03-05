@@ -217,7 +217,7 @@
 		
 	% 	\begin{figure}[H]
 	% 		\centering
-	% 		\includegraphics[width=0.5\linewidth]{img/confusion_matrix.png}
+	% 		\includegraphics[width=1\linewidth]{img/confusion_matrix.png}
 	% 		\caption{範例圖片}
 	% 		\label{fig:confusion_matrix}
 	% 	\end{figure}
@@ -274,14 +274,14 @@
 	形成所謂的黑箱問題。
 	此外，
 	半導體製程資料內容大都具有高缺失率、大量變數、類別高度不平衡等狀況，
-	使得預測結果可能受到訓練模型方法的順序或參數設定影響，
+	使得分類結果可能受到訓練模型方法的順序或參數設定影響，
 	進而降低在工程上的可用性。
 
 	基於上述原因，
 	本研究建立一套可在黑箱模型中，
 	提供局部且可解釋性的分析方法，
-	使品質預測不僅只看分類結果的好壞，
-	亦能轉為對製程判斷與改善上具有參考價值的資訊。
+	使黑箱模型不只是看分類結果的好壞，
+	亦能轉為在製程改善上具有參考價值的資訊。
 
 	\section{文獻回顧與研究問題}
 	本研究以 \cite{UCISECOM2008}
@@ -526,8 +526,8 @@
 	以確保後續分群與交叉驗證索引一致。
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.5\linewidth]{img/未移除outlier做pca.png}
-			\caption{未移除 PCA 極端值的原始資料之 PCA 投影結果}
+			\includegraphics[width=1\linewidth]{img/未移除outlier做pca.png}
+			\caption{未移除 PCA 極端值的原始資料之 PCA 投影}
 			\label{fig:未移除outlier做pca}
 		\end{figure}
 	如圖 \ref{fig:未移除outlier做pca} 所示，
@@ -546,8 +546,8 @@
 	移除疑似的極端值後之二維主成分平面如圖 \ref{fig:移除outlier做pca} 所示。
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca.png}
-			\caption{移除 PCA 極端值後的原始資料之 PCA 投影結果}
+			\includegraphics[width=1\linewidth]{img/移除outlier做pca.png}
+			\caption{移除 PCA 極端值後的原始資料之 PCA 投影}
 			\label{fig:移除outlier做pca}
 		\end{figure}
 	其分佈較均勻，
@@ -638,16 +638,16 @@
 	本研究在使用 SMOTE 將少數類別資料增至與多數類別資料相近比例後，
 	接著再使用 PCA 做降維，
 	以降低降維結果被多數類別的訊息主導的情況；
-	其降維視覺化結果如圖 \ref{fig:移除outlier做pca的SMOTEdata}。
+	其降維視覺化如圖 \ref{fig:移除outlier做pca的SMOTEdata}。
 
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca的SMOTEdata.png}
-			\caption{移除 PCA 極端值後的 SMOTE 資料之 PCA 投影結果}
+			\includegraphics[width=1\linewidth]{img/移除outlier做pca的SMOTEdata.png}
+			\caption{移除 PCA 極端值後的合成資料之 PCA 投影}
 			\label{fig:移除outlier做pca的SMOTEdata}
 		\end{figure}
 	
-	\item \textbf{分群建構與合成樣本移除（僅保留真實資料供後續建模）}：
+	\item \textbf{合成樣本移除（僅保留真實資料供後續建模）與分群建構}：
 	
 	本研究採用k-平均演算法(k-means)做分群以處理資料異質性，
 	在 PCA 空間中依照樣本結構將資料切分為數個子群，
@@ -667,14 +667,14 @@
 	$$
 	其中 \(S_i\) 為第 \(i\) 群，
 	\(\boldsymbol{\mu}_i\) 為該群中心，
-	目標為最小化 WCSS。
-	最後選取下降幅度開始趨緩時的轉折點作為分為 $k$ 群的依據。
-	本研究最終採用 $k=2$ 進行分群。
-	分群結果如圖 \ref{fig:移除outlier做pca+kmeans的SMOTEdata}。
+	WCSS 隨著 k 增加必然下降，
+	因此選擇 k 值在 WCSS 降幅最大時作為分成 $k$ 群的依據。
+	本研究最終採用 $k=2$ 進行分群，
+	如圖 \ref{fig:移除outlier做pca+kmeans的SMOTEdata} 所示。
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
-			\caption{移除 PCA 極端值後的 SMOTE 資料在 PCA 空間之分群結果}
+			\includegraphics[width=1\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
+			\caption{移除 PCA 極端值後的合成資料在 PCA 空間之分群}
 			\label{fig:移除outlier做pca+kmeans的SMOTEdata}
 		\end{figure}
 	另外，
@@ -683,8 +683,19 @@
 	以改善少數類別在降維空間的資訊；
 	完成分群後，
 	會將合成樣本移除，
-	並保留真實資料集及其原始類別標記，
-	供後續各群內黑箱模型之訓練與評估使用。
+	只保留真實資料集。
+	在 \ref{fig:移除outlier做pca+kmeans的SMOTEdata} 上移除合成樣本後，
+	如圖 \ref{fig:移除outlier做pca+kmeans的移除合成data含y} 所示（以顏色標示少數類別），
+	可見各群中仍包含少數類別樣本，
+	故後續得以在各群內分別進行黑箱模型之訓練與效能評估。
+
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{img/移除outlier做pca+kmeans的移除合成data含y.png}
+			\caption{移除 PCA 極端值與合成樣本後的原始資料在 PCA 空間之分群}
+			\label{fig:移除outlier做pca+kmeans的移除合成data含y}
+		\end{figure}
+		
 	\end{enumerate}
 
 	\subsection{黑箱模型訓練}
@@ -800,24 +811,13 @@
 
 
 	\chapter{研究結果}
+	本章節依序介紹分群的黑箱分類結果與評估、刻劃黑箱模型的結果。
 	\section{分群建立黑箱}
-
-	我們對資料實施SMOTE，
-	是為了在降維與分群階段時，
-	以降低少數類別在 PCA 空間中被多數類別的結構主導，
-	導致難以形成可辨識的群集之風險。
-	依 \ref{sec:資料降維與分群} 的步驟2，
-	本研究在完成分群後，
-	隨即移除 SMOTE 所合成的樣本，
-	後續的建模僅用真實資料集，
-	而不包含經由 SMOTE 合成的樣本集。
-	其移除後在 PCA 空間分群後的視覺化結果如圖 \ref{fig:移除outlier做pca+kmeans的移除合成data} 。
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.5\linewidth]{img/移除outlier做pca+kmeans的移除合成data.png}
-			\caption{移除 PCA 極端值與合成樣本後的原始資料在 PCA 空間之分群結果}
-			\label{fig:移除outlier做pca+kmeans的移除合成data}
-		\end{figure}
+	在研究方法與流程的介紹中，
+	有提及圖 \ref{} 為移除合成樣本後分群，
+	同樣也標示真實類別樣本的顏色，
+	其數量如表 \ref{tab:分群}，
+	我們將在各群建立黑箱模型的評估。 
 	如表 \ref{tab:五折交叉驗證黑箱} 可知，
 	尚未分群的時，
 	單一模型於整體資料（ALL, $n=1525$）的平均評估為
@@ -837,19 +837,17 @@
 	若僅以未分群的單一平均指標呈現，
 	將掩蓋高誤報率群體（$cluster_0$）的存在。
 
-
-	
 		\begin{table}[H]
 			\centering
-			\caption{分群後的各群之真實目標類別數目}
-			\label{tab:分群黑箱}
+			\caption{各群之真實目標類別數目}
+			\label{tab:分群}
 			\begin{tabular}{|c|c|c|}
 			\hline
 			\textbf{群} & \textbf{0} & \textbf{1} \\
 			\hline
-			$Pass$ & 619 & 811 \\
+			$\text{Pass}$ & 619 & 811 \\
 			\hline
-			$Fail$ & 57  & 38 \\
+			$\text{Fail}$ & 57  & 38 \\
 			\hline
 			\end{tabular}
 		\end{table}

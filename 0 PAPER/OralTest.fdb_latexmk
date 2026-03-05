@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1772681289.47271 "OralTest.xdv" "OralTest.pdf" "OralTest" 1772681289.77795 0
-  "OralTest.xdv" 1772681288 71472 400c20b3a6c3146b182131ca4783a38b "xelatex"
+["xdvipdfmx"] 1772693894.53283 "OralTest.xdv" "OralTest.pdf" "OralTest" 1772693894.80025 0
+  "OralTest.xdv" 1772693894 71520 2fb1a3c0ab814b530988450e4ff6b652 "xelatex"
   (generated)
   "OralTest.pdf"
   (rewritten before read)
-["xelatex"] 1772681287.08918 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/OralTest.tex" "OralTest.xdv" "OralTest" 1772681289.74186 0
+["xelatex"] 1772693892.7242 "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/OralTest.tex" "OralTest.xdv" "OralTest" 1772693894.79469 0
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmr10.tfm" 1136765053 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
@@ -189,12 +189,12 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "OralTest.aux" 1772681288 3350 74e13b794670ab1ec95c273bd9cc8ff9 "xelatex"
-  "OralTest.nav" 1772681288 1859 efe0564e85360f82b11a539fa9b1278d "xelatex"
-  "OralTest.out" 1772681288 450 328542c9ae2afb932251973a7e7f5817 "xelatex"
-  "OralTest.tex" 1772681284 2911 53975863ea38b375072671382f9a0356 ""
-  "OralTest.toc" 1772681288 288 ccfe99797e4cf2c903d4a3d476c59119 "xelatex"
-  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/OralTest.tex" 1772681284 2911 53975863ea38b375072671382f9a0356 ""
+  "OralTest.aux" 1772693894 3350 74e13b794670ab1ec95c273bd9cc8ff9 "xelatex"
+  "OralTest.nav" 1772693894 1859 efe0564e85360f82b11a539fa9b1278d "xelatex"
+  "OralTest.out" 1772693894 450 328542c9ae2afb932251973a7e7f5817 "xelatex"
+  "OralTest.tex" 1772693892 2917 76eeb7f8cf1e629d3ba5f6ace26400cd ""
+  "OralTest.toc" 1772693894 288 ccfe99797e4cf2c903d4a3d476c59119 "xelatex"
+  "c:/Users/USER/Documents/GitHub/psychic-spoon/0 PAPER/OralTest.tex" 1772693892 2917 76eeb7f8cf1e629d3ba5f6ace26400cd ""
   (generated)
   "OralTest.aux"
   "OralTest.log"
