@@ -1,41 +1,43 @@
-\begin{thebibliography}{xx}
+\begin{thebibliography}{}
 
-\harvarditem{Chen \harvardand\ Guestrin}{2016}{ChenGuestrin2016}
-Chen, T. \harvardand\ Guestrin, C.  \harvardyearleft 2016\harvardyearright ,
-  Xgboost: A scalable tree boosting system, {\em in} `Proceedings of the 22nd
-  ACM SIGKDD International Conference on Knowledge Discovery and Data Mining',
-  pp.~785--794.
+\bibitem[Chen and Guestrin, 2016]{ChenGuestrin2016}
+Chen, T. and Guestrin, C. (2016).
+\newblock {XGBoost: A Scalable Tree Boosting System}.
+\newblock {\em Proceedings of the 22nd ACM SIGKDD International Conference on
+  Knowledge Discovery and Data Mining},  785--794.
 \newblock https://doi.org/10.1145/2939672.2939785.
 
-\harvarditem{Lundberg \harvardand\ Lee}{2017}{LundbergLee2017}
-Lundberg, S. \harvardand\ Lee, S.  \harvardyearleft 2017\harvardyearright , `A
-  unified approach to interpreting model predictions', arXiv:1705.07874.
+\bibitem[Lundberg and Lee, 2017]{LundbergLee2017}
+Lundberg, S. and Lee, S. (2017).
+\newblock {A Unified Approach to Interpreting Model Predictions}.
+\newblock (arXiv:1705.07874).
 \newblock arXiv. https://doi.org/10.48550/arXiv.1705.07874.
 
-\harvarditem[Park et~al.]{Park, Koo, Yang, Han \harvardand\
-  Nam}{2024}{Park2024}
-Park, H., Koo, Y., Yang, H., Han, Y. \harvardand\ Nam, C.  \harvardyearleft
-  2024\harvardyearright , `Study on data preprocessing for machine learning
-  based on semiconductor manufacturing processes', {\em Sensors} {\bf
-  24}(17),~5461.
+\bibitem[McCann and Johnston, 2008]{UCISECOM2008}
+McCann, M. and Johnston, A. (2008).
+\newblock Secom.
+\newblock UCI Machine Learning Repository, https://doi.org/10.24432/C54305.
+
+\bibitem[Park et~al., 2024]{Park2024}
+Park, H., Koo, Y., Yang, H., Han, Y., and Nam, C. (2024).
+\newblock {Study on Data Preprocessing for Machine Learning Based on
+  Semiconductor Manufacturing Processes}.
+\newblock {\em Sensors}, 24(17), 5461.
 \newblock https://doi.org/10.3390/s24175461.
 
-\harvarditem[Ribeiro et~al.]{Ribeiro, Singh \harvardand\
-  Guestrin}{2016}{Ribeiro2016}
-Ribeiro, M.~T., Singh, S. \harvardand\ Guestrin, C.  \harvardyearleft
-  2016\harvardyearright , ``why should i trust you?'': Explaining the
-  predictions of any classifier, {\em in} `Proceedings of the 22nd ACM SIGKDD
-  International Conference on Knowledge Discovery and Data Mining (KDD)',
-  pp.~1135--1144.
+\bibitem[Ribeiro et~al., 2016]{Ribeiro2016}
+Ribeiro, M.~T., Singh, S., and Guestrin, C. (2016).
+\newblock {「Why Should I Trust You?」: Explaining the Predictions of Any
+  Classifier}.
+\newblock {\em Proceedings of the 22nd ACM SIGKDD International Conference on
+  Knowledge Discovery and Data Mining},  1135--1144.
+\newblock https://doi.org/10.1145/2939672.2939778.
 
-\harvarditem{{UCI Machine Learning Repository}}{2008}{UCISECOM2008}
-{UCI Machine Learning Repository}  \harvardyearleft 2008\harvardyearright ,
-  `Secom', \url{https://archive.ics.uci.edu/ml/datasets/SECOM}.
-\newblock Accessed: 2026-02-21.
-
-\harvarditem{賴立夫}{2022}{Lai2022}
-賴立夫  \harvardyearleft 2022\harvardyearright , 使用 knn
-  和決策樹方法對填補缺失值的製造數據進行失效預測和原因追蹤分析,
-  碩士論文, 國立中興大學應用數學系.
+\bibitem[賴立夫, 2022]{Lai2022}
+賴立夫 (2022).
+\newblock 使用 knn
+  和決策樹方法對填補缺失值的製造數據進行失效預測和原因追蹤分析.
+\newblock Master's thesis.
+\newblock https://hdl.handle.net/11296/ub6st3.
 
 \end{thebibliography}
