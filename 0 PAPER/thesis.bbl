@@ -35,9 +35,8 @@ Ribeiro, M.~T., Singh, S., and Guestrin, C. (2016).
 
 \bibitem[賴立夫, 2022]{Lai2022}
 賴立夫 (2022).
-\newblock 使用 knn
+\newblock 使用 {KNN}
   和決策樹方法對填補缺失值的製造數據進行失效預測和原因追蹤分析.
-\newblock Master's thesis.
 \newblock https://hdl.handle.net/11296/ub6st3.
 
 \end{thebibliography}

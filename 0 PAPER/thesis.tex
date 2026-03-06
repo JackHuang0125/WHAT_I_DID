@@ -593,14 +593,14 @@
 
 
 	\chapter{研究方法與流程}
-	本研究以高維製程量測特徵與二元品質標記為基礎，
+	本研究以高維製程量測特徵與二元品質類別為基礎，
 	目標為黑箱在局部的可解釋性分析。
 	本章節將說明本研究用到的方法，降維、分群、黑箱分類模型、局部資料生成、局部代理模型建構，同時提供實驗環境與評估指標
 	以確保結果具可重現性與可比較性。
 
 	\section{流程大綱}
 	\begin{enumerate}
-	\item 資料前處理後取得特徵矩陣 $X$ 與標記 $y$。
+	\item 資料前處理後取得特徵矩陣 $X$ 與類別 $y$。
 	\item 以 SMOTE 後執行 PCA 的特徵進行分群，後續建模移除合成樣本。
 	\item 於各群內訓練黑箱分類模型 $f_c(\cdot)$，輸出機率 $\hat{p}_c(x)$。
 	\item 於各群內挑選決策邊界附近的代表點集合，取該集合的平均並定義為中心點 $x_0$。
@@ -715,8 +715,20 @@
 	可用於解決迴歸與分類問題，
 	亦是目前最常被使用在 Kaggle 資料分析競賽當中的機器學習模型。
 
-	本研究以（TN, FP, FN, TP）彙整分類結果，
-	並以此計算分類效能指標，包含 Accuracy(ACC)、誤報率（False Alarm Rate, FAR）。
+	模型訓練與效能評估皆採用五折交叉驗證（ $k$-fold Cross Validation, $k=5$）。
+	將資料切分成 $80\%$ 作為訓練集資料，
+	$20\%$ 作為測試集資料，
+	共依序訓練五次（五折）以降低單次切分造成的評估偏差，
+	由於資料具有類別不平衡，
+	僅對訓練集執行 SMOTE 以提升少數類別可分性，
+	測試集則維持不變。
+
+	每一折完成測試後，
+	可由預測類別與真實類別彙整得到混淆矩陣，
+	其說明如表 \ref{tab:confusion_matrix} 所示，
+	真陰性（TN）、假陽性（FP）、假陰性（FN）、真陽性（TP）分別對應「Pass判為Pass」、「Pass判為Fail」、「Fail判為Pass」、「Fail判為Fail」。
+	並計算以下指標：
+	Accuracy(ACC)、誤報率（False Alarm Rate, FAR）與 ROC-AUC。
 	其定義如下：
 	$$
 	\mathrm{Acc}=\frac{TP+TN}{TP+TN+FP+FN},
@@ -725,26 +737,32 @@
 	$$
 	ROC-AUC 則以模型輸出機率於不同門檻下所形成之 ROC 曲線面積表示。
 	
-	此外，
-	對各群內採用五折交叉驗證（ $k$-fold Cross Validation, $k=5$）。
-
-	設定五折的交叉驗證，
-	其目的在於模型不會僅依據單次切分造成的結果偏差，
-	而是將資料切分成 $80\%$ 作為訓練集資料，
-	$20\%$ 作為測試集資料，
-	共依序訓練五次（五折）。
-	其中每一折，
-	僅對訓練集進行 SMOTE 以提升少數類別可分性，
-	測試集則不進行 SMOTE。
-
-	本研究同時呈現整體與各群模型的混淆矩陣，以比較整體模型與分群後模型表現之差異。
+	\begin{table}[ht]
+		\centering
+		\caption{二元分類之混淆矩陣}
+		\label{tab:confusion_matrix}
+		\begin{tabular}{c|cc}
+		\hline
+		& 預測為Pass & 預測為Fail \\
+		\hline
+		真實為Pass & TN & FP \\
+		真實為Fail & FN & TP \\
+		\hline
+		\end{tabular}
+	\end{table}
 
 	\item \textbf{依各群內交叉驗證之測試集機率挑選樣本}：
 
-	接著在每一折中，
-	使用該折訓練之模型對測試集資料輸出預測為Pass或Fail的預測機率值（介於0, 1之間）。
-	彙整五折測試集輸出得到每筆真實樣本的交叉驗證機率值，
-	用於後續挑選欲分析的樣本。
+	在每一折交叉驗證中，
+	使用該折的訓練集所訓練的模型，
+	對該折的測試集預測為 Fail 的預測機率為 $\hat{p}\in[0,1$]。
+	本研究採用固定分類門檻 $0.5$，
+	我們將機率轉為預測類別：
+	當 $\hat{p}\ge 0.5$ 時，模型判定 $\hat{y}=1$（Fail）；
+	當 $\hat{p}<0.5$ 時，模型判定 $\hat{y}=0$（Pass）。
+	五折交叉驗證後，
+	即可得到每折測試集中的真實樣本之預測機率，
+	作為後續挑選局部分析樣本之依據。
 
 	\end{enumerate}
 
@@ -755,7 +773,7 @@
 
 	如同前一步驟所述，
 	取得預測機率後，
-	於該群內挑選預測機率最接近決策邊界（例如 $0.5$）的前幾筆樣本，
+	於該群內挑選預測機率最接近決策邊界（$0.5$）的前幾筆樣本，
 	並將其標準化後的特徵向量取平均，
 	作為該群的局部刻劃中心點。
 
@@ -811,35 +829,22 @@
 
 
 	\chapter{研究結果}
-	本章節依序介紹分群的黑箱分類結果與評估、刻劃黑箱模型的結果。
+	本章節先呈現分群後之黑箱分類評估，
+	比較「未分群單一模型」與「分群後各群模型」之差異；
+	接著再說明局部刻劃黑箱模型之結果。
 	\section{分群建立黑箱}
-	在研究方法與流程的介紹中，
-	有提及圖 \ref{} 為移除合成樣本後分群，
-	同樣也標示真實類別樣本的顏色，
-	其數量如表 \ref{tab:分群}，
-	我們將在各群建立黑箱模型的評估。 
-	如表 \ref{tab:五折交叉驗證黑箱} 可知，
-	尚未分群的時，
-	單一模型於整體資料（ALL, $n=1525$）的平均評估為
-	$ACC=0.9272$、$FAR=0.0189$、$ROC\text{-}AUC=0.6636$ ，
-	進一步將樣本分為兩群後，
-	各群模型的平均表現如下：
+	依研究方法與流程內容，
+	本研究於移除合成樣本後進行分群，
+	並統計各群內真實類別的分布，
+	如表 \ref{tab:分群} 所示，
+	可見兩群皆包含 Pass 與 Fail 的樣本，
+	因此可分別於各群建立黑箱模型並進行評估。
+	我們彙整各群黑箱模型在五折交叉驗證後的平均結果，
+	如表 \ref{tab:五折交叉驗證黑箱} 所示。
 	
-	$cluster\_0$（$n=676$）之 $ROC\text{-}AUC=0.6974$（相對整體提升 $0.0338$），
-	$FAR=0.0468$（相對整體增加 $0.0279$）、$ACC=0.8847$；相對地
-	
-	$cluster\_1$（$n=849$）之 $ROC\text{-}AUC=0.6266$（相對整體降低 $0.0370$），
-	$FAR=0.0099$（相對整體降低 $0.0090$）、$ACC=0.9482$。
-	
-	此結果顯示整體資料中存在呈現明顯異質性，
-	尤其是兩群之 $FAR$ 相差約 $0.0468/0.0099\approx 4.73$ 倍，
-	顯示不同群之錯誤回報程度與可分類程度（以 AUC 衡量）並不一致；
-	若僅以未分群的單一平均指標呈現，
-	將掩蓋高誤報率群體（$cluster_0$）的存在。
-
 		\begin{table}[H]
 			\centering
-			\caption{各群之真實目標類別數目}
+			\caption{各群之真實目標類別分布}
 			\label{tab:分群}
 			\begin{tabular}{|c|c|c|}
 			\hline
@@ -866,53 +871,39 @@
 			\hline
 			\end{tabular}
 		\end{table}
+	另外，我們還對全體與各群進行重抽計算ACC、FAR、ROC\-AUC的點估計與信賴區間，
+	
+	\ref{Ioannis Tsamardinos et.al(2018)} 提出重抽的評估方式...
 
-		% \begin{table}[H]
-		% 	\centering
-		% 	\caption{Confusion matrix (ALL), mean over 5 folds.}
-		% 	\label{tab:cm_all}
-		% 	\begin{tabular}{lrr}
-		% 	\hline
-		% 	& pred 0 & pred 1 \\
-		% 	\hline
-		% 	true 0 & 280.6 & 5.4 \\
-		% 	true 1 & 16.8  & 2.2 \\
-		% 	\hline
-		% 	\end{tabular}
-		% \end{table}
+	\begin{table}[H]
+		\centering	
+		\caption{各群在95\%信賴區間下的評估指標}
+		\label{tab:五折交叉驗證重抽黑箱評估}
+		\begin{tabular}{lrrrr}
+		\hline
+		group & $n$ & ACC & FAR & ROC-AUC \\
+		\hline
+		全體  & 1525 & 0.9272 [0.9141, 0.9403] & 0.0189 [0.0124, 0.0261] & 0.6623 [0.6057, 0.7170] \\
+		群 0  &  676 & 0.8846 [0.8595, 0.9083] & 0.0468 [0.0307, 0.0646] & 0.6983 [0.6309, 0.7624] \\
+		群 1  &  849 & 0.9482 [0.9329, 0.9623] & 0.0099 [0.0037, 0.0173] & 0.6224 [0.5235, 0.7160] \\
+		\hline
+		\end{tabular}
+	\end{table}
 
-		% \begin{table}[H]
-		% 	\centering
-		% 	\caption{Confusion matrix (cluster\_0), mean over 5 folds.}
-		% 	\label{tab:cm_c0}
-		% 	\begin{tabular}{lrr}
-		% 	\hline
-		% 	& pred 0 & pred 1 \\
-		% 	\hline
-		% 	true 0 & 118.0 & 5.8 \\
-		% 	true 1 & 9.8   & 1.6 \\
-		% 	\hline
-		% 	\end{tabular}
-		% \end{table}
+	其結果如表如表 \ref{tab:五折交叉驗證重抽黑箱評估} 所示，
+	近乎與表 \ref{tab:五折交叉驗證黑箱} 一致，
+	從兩表中可知，
+	整體資料中存在呈現明顯異質性，
+	尤其是兩群之 $FAR$ 相差約 $0.0468/0.0099\approx 4.73$ 倍，
+	顯示不同群之錯誤回報程度與可分類程度（以 AUC 衡量）並不一致；
+	若僅以未分群的單一平均指標呈現，
+	將掩蓋高誤報率群體（$cluster_0$）的存在。
 
-		% \begin{table}[H]
-		% 	\centering
-		% 	\caption{Confusion matrix (cluster\_1), mean over 5 folds.}
-		% 	\label{tab:cm_c1}
-		% 	\begin{tabular}{lrr}
-		% 	\hline
-		% 	& pred 0 & pred 1 \\
-		% 	\hline
-		% 	true 0 & 160.6 & 1.6 \\
-		% 	true 1 & 7.2   & 0.4 \\
-		% 	\hline
-		% 	\end{tabular}
-		% \end{table}
+
 
 	\section{分群黑箱的預測}
 
-	本研究以分群為單位訓練黑箱模型，
-	並在各群內採用 5-fold 交叉驗證取得 out-of-fold（OOF）之測試集預測機率 $p_{\text{test}}$。
+	 $p_{\text{test}}$。
 	針對 cluster=0，
 	我們以 $\lvert p_{\text{test}}-0.5\rvert$ 由小到大排序，
 	選取最接近 $0.5$ 的前 5 個樣本點（global\_idx：82、225、44、144、345），其部分特徵、真實標籤 $y_{\text{true}}$ 與黑箱輸出 $p_{\text{test}}$ 如表~\ref{tab:cluster0_near05}。
