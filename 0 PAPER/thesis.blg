@@ -6,45 +6,45 @@ The style file: apalike_custom.bst
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: references.bib
 Warning--empty journal in Lai2022
-You've used 6 entries,
+You've used 7 entries,
             1935 wiz_defined-function locations,
-            513 strings with 4894 characters,
-and the built_in function-call counts, 2402 in all, are:
-= -- 248
-> -- 92
-< -- 6
-+ -- 30
-- -- 30
-* -- 179
-:= -- 416
-add.period$ -- 22
-call.type$ -- 6
-change.case$ -- 45
-chr.to.int$ -- 6
-cite$ -- 7
-duplicate$ -- 95
-empty$ -- 151
-format.name$ -- 42
-if$ -- 479
+            523 strings with 5119 characters,
+and the built_in function-call counts, 2833 in all, are:
+= -- 294
+> -- 105
+< -- 7
++ -- 34
+- -- 34
+* -- 218
+:= -- 488
+add.period$ -- 26
+call.type$ -- 7
+change.case$ -- 52
+chr.to.int$ -- 7
+cite$ -- 8
+duplicate$ -- 109
+empty$ -- 183
+format.name$ -- 49
+if$ -- 564
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 4
-newline$ -- 37
-num.names$ -- 18
-pop$ -- 32
+missing$ -- 5
+newline$ -- 43
+num.names$ -- 21
+pop$ -- 35
 preamble$ -- 1
-purify$ -- 45
+purify$ -- 52
 quote$ -- 0
-skip$ -- 88
+skip$ -- 99
 stack$ -- 0
-substring$ -- 156
-swap$ -- 23
+substring$ -- 199
+swap$ -- 24
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 36
+type$ -- 42
 warning$ -- 1
-while$ -- 19
+while$ -- 23
 width$ -- 0
-write$ -- 85
+write$ -- 100
 (There was 1 warning)
