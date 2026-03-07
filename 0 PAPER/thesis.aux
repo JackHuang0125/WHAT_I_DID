@@ -19,6 +19,9 @@
 \pgfsyspdfmark {pgfid13}{4736286}{50644704}
 \pgfsyspdfmark {pgfid14}{4736286}{50644704}
 \pgfsyspdfmark {pgfid15}{4736286}{50644704}
+\citation{Liu2022}
+\citation{Park2024}
+\citation{Park2024}
 \citation{UCISECOM2008}
 \citation{Park2024}
 \HyPL@Entry{15<</S/D>>}
@@ -95,53 +98,61 @@
 \newlabel{tab:confusion_matrix}{{3.1}{16}{二元分類之混淆矩陣}{table.3.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}中心點選取與局部生成格子點擬合模型}{16}{subsection.3.2.3}\protected@file@percent }
 \newlabel{sec:中心點選取與局部生成格子點擬合模型}{{3.2.3}{16}{中心點選取與局部生成格子點擬合模型}{subsection.3.2.3}{}}
-\pgfsyspdfmark {pgfid32}{4736286}{50644704}
-\citation{Bengio}
 \pgfsyspdfmark {pgfid33}{4736286}{50644704}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}研究結果}{18}{chapter.4}\protected@file@percent }
+\pgfsyspdfmark {pgfid34}{4736286}{50644704}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces 以二維例子說明中心點附近的局部格子點生成方式。圖中橫軸與縱軸分別表示特徵維度 $x_1$ 與 $x_2$，各格子點座標由中心點 $(1.2,-0.5)$ 沿兩維依固定步長 $\delta =0.1$ 進行位移後形成；其中藍點為位移向量 $\mathbf  {m}=(-1,2)$ 所對應之格子點 $(1.1,-0.3)$。}}{18}{figure.3.4}\protected@file@percent }
+\newlabel{fig:格點範例}{{3.4}{18}{以二維例子說明中心點附近的局部格子點生成方式。圖中橫軸與縱軸分別表示特徵維度 $x_1$ 與 $x_2$，各格子點座標由中心點 $(1.2,-0.5)$ 沿兩維依固定步長 $\delta =0.1$ 進行位移後形成；其中藍點為位移向量 $\mathbf {m}=(-1,2)$ 所對應之格子點 $(1.1,-0.3)$。}{figure.3.4}{}}
+\pgfsyspdfmark {pgfid35}{4736286}{50644704}
+\pgfsyspdfmark {pgfid36}{4736286}{50644704}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}研究結果}{20}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}分群建立黑箱}{18}{section.4.1}\protected@file@percent }
-\pgfsyspdfmark {pgfid34}{4736286}{50644704}
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces 各群之真實目標類別分布}}{19}{table.4.1}\protected@file@percent }
-\newlabel{tab:分群}{{4.1}{19}{各群之真實目標類別分布}{table.4.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces 黑箱模型分類之表現：全體與分群比較}}{19}{table.4.2}\protected@file@percent }
-\newlabel{tab:五折交叉驗證黑箱}{{4.2}{19}{黑箱模型分類之表現：全體與分群比較}{table.4.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces 各群在95\%信賴區間下的評估指標}}{19}{table.4.3}\protected@file@percent }
-\newlabel{tab:五折交叉驗證重抽黑箱評估}{{4.3}{19}{各群在95\%信賴區間下的評估指標}{table.4.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}分群黑箱的預測}{19}{section.4.2}\protected@file@percent }
-\pgfsyspdfmark {pgfid35}{4736286}{50644704}
-\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces 群 0 的黑箱輸出最接近 0.5 的前五個樣本摘要}}{20}{table.4.4}\protected@file@percent }
-\newlabel{tab:cluster0_near05}{{4.4}{20}{群 0 的黑箱輸出最接近 0.5 的前五個樣本摘要}{table.4.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces 群 1 的黑箱輸出最接近 0.5 的前五個樣本點摘要}}{20}{table.4.5}\protected@file@percent }
-\newlabel{tab:cluster1_near05}{{4.5}{20}{群 1 的黑箱輸出最接近 0.5 的前五個樣本點摘要}{table.4.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Cluster 0：以 $x_{\text  {center}}$ 生成之格子點（示例特徵）與黑箱輸出}}{20}{table.4.6}\protected@file@percent }
-\newlabel{tab:cluster0_gridpoints_yblackbox}{{4.6}{20}{Cluster 0：以 $x_{\text {center}}$ 生成之格子點（示例特徵）與黑箱輸出}{table.4.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}關鍵案例分析}{20}{section.4.3}\protected@file@percent }
-\pgfsyspdfmark {pgfid36}{4736286}{50644704}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}群 0（cluster\_0）}{21}{subsection.4.3.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces Cluster 0 重要特徵（p值小到大前30個）}}{21}{table.4.7}\protected@file@percent }
-\newlabel{tab:feat_c0_all}{{4.7}{21}{Cluster 0 重要特徵（p值小到大前30個）}{table.4.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}各群黑箱模型之評估與決策邊界樣本分析}{20}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}各群之類別分布與黑箱模型設定}{20}{subsection.4.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces 各群之真實目標類別分布}}{20}{table.4.1}\protected@file@percent }
+\newlabel{tab:分群}{{4.1}{20}{各群之真實目標類別分布}{table.4.1}{}}
+\citation{Bengio}
 \pgfsyspdfmark {pgfid37}{4736286}{50644704}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}群 1（cluster\_1）}{22}{subsection.4.3.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces Cluster 1 重要特徵（p值小到大前30個）}}{22}{table.4.8}\protected@file@percent }
-\newlabel{tab:feat_c1}{{4.8}{22}{Cluster 1 重要特徵（p值小到大前30個）}{table.4.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces 黑箱模型之環境與主要參數設定}}{21}{table.4.2}\protected@file@percent }
+\newlabel{tab:xgb_env_param}{{4.2}{21}{黑箱模型之環境與主要參數設定}{table.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}各群黑箱模型之評估結果比較}{21}{subsection.4.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces 黑箱模型分類之表現：全體與分群比較}}{21}{table.4.3}\protected@file@percent }
+\newlabel{tab:五折交叉驗證黑箱}{{4.3}{21}{黑箱模型分類之表現：全體與分群比較}{table.4.3}{}}
 \pgfsyspdfmark {pgfid38}{4736286}{50644704}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}討論與限制}{23}{section.4.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces 各群在95\%信賴區間下的評估指標}}{22}{table.4.4}\protected@file@percent }
+\newlabel{tab:五折交叉驗證重抽黑箱評估}{{4.4}{22}{各群在95\%信賴區間下的評估指標}{table.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}各群中接近決策邊界之候選樣本}{22}{subsection.4.1.3}\protected@file@percent }
+\pgfsyspdfmark {pgfid39}{4736286}{50644704}
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces 群 0 的黑箱輸出機率最接近 0.5 的前 30 個樣本摘要（由近到遠）}}{23}{table.4.5}\protected@file@percent }
+\newlabel{tab:群0接近0.5}{{4.5}{23}{群 0 的黑箱輸出機率最接近 0.5 的前 30 個樣本摘要（由近到遠）}{table.4.5}{}}
+\pgfsyspdfmark {pgfid40}{4736286}{50644704}
+\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces 群 1 的黑箱輸出機率最接近 0.5 的前 30 個樣本點摘要（由近到遠）}}{24}{table.4.6}\protected@file@percent }
+\newlabel{tab:群1接近0.5}{{4.6}{24}{群 1 的黑箱輸出機率最接近 0.5 的前 30 個樣本點摘要（由近到遠）}{table.4.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}各群局部刻劃模型之建立與結果分析}{24}{section.4.2}\protected@file@percent }
+\pgfsyspdfmark {pgfid41}{4736286}{50644704}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}群 0 之局部刻劃模型結果}{25}{subsection.4.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces 群 0 之局部刻劃模型係數摘要（依係數絕對值由大到小）}}{25}{table.4.7}\protected@file@percent }
+\newlabel{tab:群0係數}{{4.7}{25}{群 0 之局部刻劃模型係數摘要（依係數絕對值由大到小）}{table.4.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}群 1 之局部刻劃模型結果}{25}{subsection.4.2.2}\protected@file@percent }
+\pgfsyspdfmark {pgfid42}{4736286}{50644704}
+\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces 群 1 之局部刻劃模型係數摘要（依係數絕對值由大到小）}}{26}{table.4.8}\protected@file@percent }
+\newlabel{tab:群1係數}{{4.8}{26}{群 1 之局部刻劃模型係數摘要（依係數絕對值由大到小）}{table.4.8}{}}
 \bibstyle{apalike_custom}
 \bibdata{references}
-\pgfsyspdfmark {pgfid39}{4736286}{50644704}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}結論}{24}{chapter.5}\protected@file@percent }
+\pgfsyspdfmark {pgfid43}{4736286}{50644704}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}結論}{27}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}總結}{24}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}未來工作}{24}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}總結}{27}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}未來工作}{27}{section.5.2}\protected@file@percent }
 \bibcite{Bengio}{{1}{2004}{{Bengio and Grandvalet}}{{}}}
 \bibcite{ChenGuestrin2016}{{2}{2016}{{Chen and Guestrin}}{{}}}
-\bibcite{LundbergLee2017}{{3}{2017}{{Lundberg and Lee}}{{}}}
-\bibcite{UCISECOM2008}{{4}{2008}{{McCann and Johnston}}{{}}}
-\bibcite{Park2024}{{5}{2024}{{Park et~al.}}{{}}}
-\bibcite{Ribeiro2016}{{6}{2016}{{Ribeiro et~al.}}{{}}}
-\bibcite{Lai2022}{{7}{2022}{{賴立夫}}{{}}}
-\pgfsyspdfmark {pgfid40}{4736286}{50644704}
-\gdef \@abspage@last{40}
+\bibcite{Liu2022}{{3}{2022}{{Liu et~al.}}{{}}}
+\bibcite{LundbergLee2017}{{4}{2017}{{Lundberg and Lee}}{{}}}
+\bibcite{UCISECOM2008}{{5}{2008}{{McCann and Johnston}}{{}}}
+\bibcite{Park2024}{{6}{2024}{{Park et~al.}}{{}}}
+\bibcite{Ribeiro2016}{{7}{2016}{{Ribeiro et~al.}}{{}}}
+\bibcite{Lai2022}{{8}{2022}{{賴立夫}}{{}}}
+\pgfsyspdfmark {pgfid44}{4736286}{50644704}
+\pgfsyspdfmark {pgfid45}{4736286}{50644704}
+\gdef \@abspage@last{44}

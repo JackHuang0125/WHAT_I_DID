@@ -13,6 +13,13 @@ Chen, T. and Guestrin, C. (2016).
   Knowledge Discovery and Data Mining},  785--794.
 \newblock https://doi.org/10.1145/2939672.2939785.
 
+\bibitem[Liu et~al., 2022]{Liu2022}
+Liu, D.-Y., Xu, L.-M., Lin, X.-M., Wei, X., Yu, W.-J., Wang, Y., and Wei, Z.-M.
+  (2022).
+\newblock {Machine Learning for Semiconductors}.
+\newblock {\em Chip}, 1, 100033.
+\newblock https://doi.org/10.1016/j.chip.2022.100033.
+
 \bibitem[Lundberg and Lee, 2017]{LundbergLee2017}
 Lundberg, S. and Lee, S. (2017).
 \newblock {A Unified Approach to Interpreting Model Predictions}.
