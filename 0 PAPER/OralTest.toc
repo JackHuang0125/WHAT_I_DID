@@ -1,6 +1,7 @@
-\beamer@sectionintoc {1}{研究背景}{3}{0}{1}
-\beamer@sectionintoc {2}{研究問題}{4}{0}{2}
-\beamer@sectionintoc {3}{研究目的}{5}{0}{3}
-\beamer@sectionintoc {4}{研究資料}{6}{0}{4}
-\beamer@sectionintoc {5}{研究方法}{7}{0}{5}
-\beamer@sectionintoc {6}{研究結果}{8}{0}{6}
+\beamer@sectionintoc {1}{研究背景與動機}{3}{0}{1}
+\beamer@sectionintoc {2}{研究問題與目的}{5}{0}{2}
+\beamer@sectionintoc {3}{研究資料與前處理}{7}{0}{3}
+\beamer@sectionintoc {4}{研究方法}{9}{0}{4}
+\beamer@sectionintoc {5}{實驗設計與評估方式}{13}{0}{5}
+\beamer@sectionintoc {6}{研究結果}{14}{0}{6}
+\beamer@sectionintoc {7}{結論與未來工作}{19}{0}{7}

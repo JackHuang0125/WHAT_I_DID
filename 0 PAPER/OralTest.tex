@@ -5,17 +5,17 @@
 
 % 導入圖形與表格的封包
 \usepackage{graphicx}
-\graphicspath{{./20260114_Meeting}}
+\graphicspath{{./20260114_Meeting/}}
 
 \usepackage{booktabs}
 
 % 排列多個子圖形的封包
-\usepackage{subfigure} 
+\usepackage{subfigure}
 
- % 提供進階數學環境與公式排版
+% 提供進階數學環境與公式排版
 \usepackage{mathtools, amsmath, amsfonts, amsthm, latexsym}
 
-%% 設定中文字體
+% 設定中文字體
 \usepackage{xeCJK}
 \setCJKmainfont[AutoFakeBold=3.5 , AutoFakeSlant=0.2]{標楷體}
 \setmainfont{Times New Roman}
@@ -23,37 +23,37 @@
 \XeTeXlinebreakskip = 0pt plus 1pt
 
 % 自訂字體顏色的封包
-\usepackage{color} 
+\usepackage{color}
 
 % 圖表自動編號的封包
 \usepackage{caption}
 % \usepackage{siunitx}
 
 % 允許表格的一格能多列呈現的封包
-\usepackage{multirow} 
+\usepackage{multirow}
 
 % 可指定表格排版的封包
 \usepackage{array}
 
 % 翻轉表格的封包
-\usepackage{lscape} 
+\usepackage{lscape}
 
 % 序列標號
-\usepackage{enumerate} 
+\usepackage{enumerate}
 
-%% 設定自動編號
+% 設定自動編號
 \setbeamertemplate{caption}[numbered]
 
-%% 自訂顏色
+% 自訂顏色
 \definecolor{Myblue}{RGB}{57,108,144}
 \definecolor{Default_Blue}{RGB}{52,51,171}
 
 % (動畫)字會若隱若現的顯示
-\beamersetuncovermixins{\opaqueness<1->{45}}{\opaqueness<1->{95}} 
+\beamersetuncovermixins{\opaqueness<1->{45}}{\opaqueness<1->{95}}
 
 % 設定中文的標籤
-\renewcommand{\figurename}{圖} 
-\renewcommand{\tablename}{表} 
+\renewcommand{\figurename}{圖}
+\renewcommand{\tablename}{表}
 
 % 排版形式 
 \mode<presentation>{
@@ -78,10 +78,12 @@
 \providecommand{\tabularnewline}{\\}
 }
 
-\title{碩士論文口試}
+% 正式口試時請改成論文正式題目
+% 高維半導體製程資料之分群式黑箱局部刻劃方法
+\title{碩士論文口試\\[0.3em]\large }
 \author{黃丞暘}
-\institute{國立東華大學應數統計所}
-\date{April XX, 2026}
+\institute{國立東華大學應用數學系統計碩士班}
+\date{2026 年 4 月 XX 日}
 
 \begin{document}
 
@@ -95,48 +97,274 @@
   \tableofcontents
 \end{frame}
 
-% 研究背景 
-\section{研究背景}
+%---------------------------------
+\section{研究背景與動機}
 
-\begin{frame}{\textbf{研究背景}}
-
+\begin{frame}{\textbf{研究背景與動機}}
+\begin{itemize}
+  \item 半導體製程已累積大量量測資料，品質預測可作為良率改善與製程監控的基礎。
+  \item 製程資料常同時具有高維度、高缺失率與類別不平衡，建模與解釋皆具難度。
+  \item 黑箱模型雖常有較佳分類能力，但僅有預測結果仍不足以支援工程決策。
+  \item 本研究關注的不只是\textbf{能否分類}，而是\textbf{模型在局部區域如何做出判斷}。
+\end{itemize}
 \end{frame}
 
-% 研究問題
-\section{研究問題}
+\begin{frame}{\textbf{文獻缺口}}
+\begin{itemize}
+  \item XGBoost 等黑箱模型可作為高維資料的強基準，但解釋性不足。
+  \item SHAP 可量化特徵貢獻；LIME 可做局部解釋，但在高維異質資料下可能不穩定。
+  \item 若整體資料存在多個子群，單一模型的局部解釋可能混合不同規則。
+  \item 若以隨機擾動生成鄰近點，可能偏離真實資料分布，產生外插風險。
+\end{itemize}
+\end{frame}
+
+%---------------------------------
+\section{研究問題與目的}
 
 \begin{frame}{\textbf{研究問題}}
-
+\begin{block}{本研究聚焦兩個核心問題}
+\begin{enumerate}[(1)]
+  \item 面對製程資料的異質性，如何先切分資料結構，再於群內建立黑箱分類模型，使決策規則與後續解釋在群內具可比性。
+  \item 在不產生明顯外插風險下，如何建立可檢視的局部刻劃模型，描述黑箱模型在決策邊界附近的局部行為。
+\end{enumerate}
+\end{block}
 \end{frame}
 
-
-% 研究目的
-\section{研究目的}
-
-\begin{frame}{\textbf{研究目的}}
-
+\begin{frame}{\textbf{研究目的與貢獻}}
+\begin{itemize}
+  \item 建立「\textbf{分群 -- 群內黑箱 -- 群內局部刻劃}」的分析流程。
+  \item 以決策邊界附近的樣本形成群內代表中心點，而非直接對單一樣本做隨機擾動。
+  \item 在中心點附近建立結構化格子點，以控制局部範圍並降低外插風險。
+  \item 以局部線性模型近似黑箱輸出，將黑箱決策轉為可檢視的局部特徵影響。
+\end{itemize}
 \end{frame}
 
-
-% 研究資料
-\section{研究資料}
+%---------------------------------
+\section{研究資料與前處理}
 
 \begin{frame}{\textbf{研究資料}}
-
+\begin{itemize}
+  \item 資料來源：SECOM 半導體製程資料集。
+  \item 原始資料共 1567 筆樣本、590 個量測變數與 1 個二元品質標籤。
+  \item 類別分布：Pass 1463 筆（93.36\%），Fail 104 筆（6.64\%）。
+  \item 整體缺失率為 4.54\%，但缺失分布不均；單一特徵最高缺失達 1429 筆。
+\end{itemize}
+\vspace{0.4em}
+\begin{block}{資料挑戰}
+高缺失、高維度、類別不平衡，且可能存在異質子群結構。
+\end{block}
 \end{frame}
 
-% 研究方法
+\begin{frame}{\textbf{資料前處理}}
+\begin{enumerate}[(1)]
+  \item 目標變數重新編碼：Pass $\to 0$，Fail $\to 1$；移除時間欄位。
+  \item 移除缺失筆數超過 1000 的特徵。
+  \item 移除相異值種類過少的特徵。
+  \item 採用 KNN imputer 進行補值，設定 $k=10$。
+  \item 以 PCA 二維投影輔助辨識極端值，依規則 $PC1\le 10$ 且 $PC2\le 10$ 移除異常點。
+  \item 對最終分析資料進行標準化。
+\end{enumerate}
+\vspace{0.2em}
+\begin{block}{前處理後資料}
+最終分析資料為 1525 筆樣本、459 個特徵。
+\end{block}
+\end{frame}
+
+%---------------------------------
 \section{研究方法}
 
-\begin{frame}{\textbf{研究方法}}
-
+\begin{frame}{\textbf{整體研究流程}}
+\begin{enumerate}[(1)]
+  \item 完成資料前處理，取得特徵矩陣 $X$ 與標籤 $y$。
+  \item 以 SMOTE 後的資料執行 PCA，並在 PCA 空間做分群。
+  \item 移除合成樣本後，於各群內訓練 XGBoost 黑箱分類模型。
+  \item 挑選接近決策邊界的樣本，形成各群中心點。
+  \item 在中心點附近生成局部格子點，並以黑箱輸出機率作為應變數。
+  \item 建立群內局部線性模型，刻劃黑箱在局部區域的反應。
+\end{enumerate}
+% 建議此頁置入論文中的流程圖或自行重畫簡化流程圖
 \end{frame}
 
-% 研究結果
+\begin{frame}{\textbf{分群與黑箱模型}}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{分群設計}
+\begin{itemize}
+  \item 先以 SMOTE 補強少數類別於降維空間中的資訊。
+  \item 於 PCA 空間以 k-means 進行分群。
+  \item 以 elbow method 選定群數 $k=2$。
+  \item 完成分群後移除合成樣本，只保留真實資料供後續建模。
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{黑箱模型}
+\begin{itemize}
+  \item 模型：XGBClassifier。
+  \item 評估方式：五折交叉驗證。
+  \item 僅在訓練集執行 SMOTE，測試集維持原分布。
+  \item 評估指標：ACC、FAR、ROC-AUC。
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{\textbf{局部刻劃方法}}
+\begin{enumerate}[(1)]
+  \item 在各群內以 $|\hat p_{test}-0.5|$ 挑選接近決策邊界的樣本。
+  \item 將候選樣本的標準化特徵向量取平均，形成群內中心點 $x_0$。
+  \item 在 $x_0$ 附近依固定步長 $\delta$ 建立結構化格子點，而非隨機擾動樣本。
+  \item 以黑箱模型對格子點輸出的預測機率作為應變數，建立 OLS 局部線性模型。
+  \item 重複 50 次局部抽樣與篩選，統計穩定保留特徵；最後再以 200 萬筆格子點重新擬合局部模型。
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{\textbf{局部格子點設計概念}}
+\begin{block}{核心想法}
+不直接在原樣本附近做隨機擾動，而是以群內代表中心點為核心，建立可控制、可檢視的局部鄰域。
+\end{block}
+
+\begin{itemize}
+  \item 每一維設定固定步長 $\delta$，位移倍數為 $m_j\in\{-k,-k+1,\dots,0,\dots,k\}$。
+  \item 格子點表示為
+  \[
+    x^{(m)} = x_0 + \delta m.
+  \]
+  \item 本研究設定 $p=459$、$k=2$，理論格子點數為 $(2k+1)^p = 5^{459}$，無法完整列舉。
+  \item 因此實作上改採隨機抽樣格子點建立局部模型。
+\end{itemize}
+% 建議此頁可放論文圖 3.4
+\end{frame}
+
+%---------------------------------
+\section{實驗設計與評估方式}
+
+\begin{frame}{\textbf{實驗設計與評估}}
+\begin{itemize}
+  \item 黑箱模型參數：\texttt{n\_estimators=300}、\texttt{max\_depth=3}、\texttt{learning\_rate=0.1}。
+  \item 交叉驗證完成後，對每筆測試樣本保留黑箱輸出機率。
+  \item 為補強五折平均值的穩定性說明，另以 bootstrap 方式建立 ACC、FAR、ROC-AUC 的 95\% 信賴區間。
+  \item 局部刻劃模型以 $R^2$ 作為局部線性近似黑箱輸出的擬合度指標。
+\end{itemize}
+\end{frame}
+
+%---------------------------------
 \section{研究結果}
 
-\begin{frame}{\textbf{研究結果}}
+\begin{frame}{\textbf{分群後資料概況}}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+類別 & 群 0 & 群 1 \\
+\midrule
+Pass & 619 & 811 \\
+Fail & 57 & 38 \\
+總數 & 676 & 849 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.4em}
+\begin{itemize}
+  \item 兩群皆同時包含 Pass 與 Fail 樣本，可分別建立群內二元分類模型。
+  \item 分群後並未使少數類別完全消失，後續局部刻劃仍可在各群內進行。
+\end{itemize}
+% 建議此頁可搭配論文圖 3.3
+\end{frame}
 
+\begin{frame}{\textbf{黑箱模型分類結果}}
+\begin{center}
+\small
+\begin{tabular}{lccc}
+\toprule
+群別 & ACC & FAR & ROC-AUC \\
+\midrule
+全體 & 0.9272 & 0.0189 & 0.6636 \\
+群 0 & 0.8847 & 0.0468 & 0.6974 \\
+群 1 & 0.9482 & 0.0099 & 0.6266 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+\begin{itemize}
+  \item 群 0 與群 1 在分類表現上具有差異，尤其 FAR 差異明顯。
+  \item 兩群 FAR 約相差 $0.0468/0.0099\approx 4.73$ 倍，顯示資料存在異質性。
+  \item 若只建立整體單一模型，可能稀釋群 0 較高錯誤回報率的現象。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{決策邊界樣本與中心點建立}}
+\begin{itemize}
+  \item 本研究以分類門檻 0.5 作為決策邊界基準。
+  \item 選取條件為
+  \[
+    |\hat p_{test}-0.5|\le 0.05.
+  \]
+  \item 篩選結果：群 0 共 12 個候選樣本；群 1 共 7 個候選樣本。
+  \item 將各群候選樣本取平均後形成中心點，再以中心點建立局部格子點鄰域。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{局部刻劃模型結果}}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{群 0}
+\begin{itemize}
+  \item 50 次重複篩選後，穩定保留 96 個特徵。
+  \item 以 200 萬筆局部格子點重新擬合。
+  \item 局部線性模型 $R^2 = 0.58$。
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{群 1}
+\begin{itemize}
+  \item 50 次重複篩選後，穩定保留 56 個特徵。
+  \item 同樣以 200 萬筆局部格子點重新擬合。
+  \item 論文結果顯示群 1 的局部刻劃能力略優於群 0。
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{0.4em}
+\begin{block}{解讀}
+兩群的重要特徵組成與係數方向並不一致，代表不同子群的黑箱局部決策結構不同。
+\end{block}
+\end{frame}
+
+\begin{frame}{\textbf{結果總結}}
+\begin{itemize}
+  \item 分群後，各群黑箱模型呈現不同的錯誤型態與可分類程度。
+  \item 以決策邊界附近樣本建立中心點，可聚焦於模型判斷最不明確的局部區域。
+  \item 結構化格子點可在可控制的鄰域內近似黑箱輸出，避免隨機擾動造成的外插偏誤。
+  \item 群內局部刻劃模型可將黑箱決策轉為具體的局部重要特徵與方向性資訊。
+\end{itemize}
+\end{frame}
+
+%---------------------------------
+\section{結論與未來工作}
+
+\begin{frame}{\textbf{結論}}
+\begin{itemize}
+  \item 本研究提出一套適用於高維、缺失嚴重且類別不平衡製程資料的分析流程。
+  \item 透過先分群再於群內建模，可降低異質性對黑箱學習與局部解釋的干擾。
+  \item 透過中心點與格子點設計，可在較低外插風險下建立局部線性刻劃模型。
+  \item 研究結果顯示，不同子群對應不同的黑箱局部決策結構，分群式局部刻劃具分析價值。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{未來工作}}
+\begin{itemize}
+  \item 比較不同分群方法與群數選擇對局部刻劃結果的影響。
+  \item 進一步分析步長 $\delta$、候選樣本門檻與抽樣策略對局部模型穩定性的敏感度。
+  \item 與 LIME、SHAP 等事後解釋方法進行系統性比較。
+  \item 若可取得具實際製程意義的變數名稱，可提升結果在工程端的可解讀性與應用價值。
+\end{itemize}
+\end{frame}
+
+%---------------------------------
+\section*{附錄}
+
+\begin{frame}{\textbf{謝謝聆聽}}
+\begin{center}
+\Large 問題
+\end{center}
 \end{frame}
 
 \end{document}
