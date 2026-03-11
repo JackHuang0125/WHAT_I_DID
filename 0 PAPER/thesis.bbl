@@ -6,12 +6,30 @@ Bengio, Y. and Grandvalet, Y. (2004).
 \newblock {\em Journal of Machine Learning Research}, 5(Sep), 1089--1105.
 \newblock https://www.jmlr.org/papers/v5/grandvalet04a.html?92f58540.
 
+\bibitem[Breiman, 2001]{Breiman2001}
+Breiman, L. (2001).
+\newblock {Random Forests}.
+\newblock {\em Machine Learning}, 45(1), 5--32.
+\newblock https://doi.org/10.1023/A:1010933404324.
+
 \bibitem[Chen and Guestrin, 2016]{ChenGuestrin2016}
 Chen, T. and Guestrin, C. (2016).
 \newblock {XGBoost: A Scalable Tree Boosting System}.
 \newblock {\em Proceedings of the 22nd ACM SIGKDD International Conference on
   Knowledge Discovery and Data Mining},  785--794.
 \newblock https://doi.org/10.1145/2939672.2939785.
+
+\bibitem[Friedman, 2001]{Friedman2001}
+Friedman, J.~H. (2001).
+\newblock {Greedy Function Approximation: A Gradient Boosting Machine}.
+\newblock {\em The Annals of Statistics}, 29(5), 1189--1232.
+\newblock https://doi.org/10.1214/aos/1013203451.
+
+\bibitem[Hubert et~al., 2005]{Hubert2005}
+Hubert, M., Rousseeuw, P.~J., and Vanden~Branden, K. (2005).
+\newblock {ROBPCA: A New Approach to Robust Principal Component Analysis}.
+\newblock {\em Technometrics}, 47(1), 64--79.
+\newblock https://doi.org/10.1198/004017004000000563.
 
 \bibitem[Liu et~al., 2022]{Liu2022}
 Liu, D.-Y., Xu, L.-M., Lin, X.-M., Wei, X., Yu, W.-J., Wang, Y., and Wei, Z.-M.
@@ -45,6 +63,13 @@ Ribeiro, M.~T., Singh, S., and Guestrin, C. (2016).
 \newblock {\em Proceedings of the 22nd ACM SIGKDD International Conference on
   Knowledge Discovery and Data Mining},  1135--1144.
 \newblock https://doi.org/10.1145/2939672.2939778.
+
+\bibitem[Troyanskaya et~al., 2001]{Troyanskaya}
+Troyanskaya, O., Cantor, M., Sherlock, G., Brown, P., Hastie, T., Tibshirani,
+  R., Botstein, D., and Altman, R.~B. (2001).
+\newblock {Missing value estimation methods for DNA microarrays}.
+\newblock {\em Bioinformatics}, 17(6), 520--525.
+\newblock https://api.semanticscholar.org/CorpusID:1105917.
 
 \bibitem[賴立夫, 2022]{Lai2022}
 賴立夫 (2022).

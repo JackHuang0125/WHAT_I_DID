@@ -1,0 +1,30 @@
+\begin{thebibliography}{1}
+
+\bibitem{Hubert2005}
+Mia Hubert, Peter~J. Rousseeuw, and Karlien Vanden~Branden.
+\newblock {ROBPCA: A New Approach to Robust Principal Component Analysis}.
+\newblock {\em Technometrics}, 47(1):64--79, 2005.
+\newblock https://doi.org/10.1198/004017004000000563.
+
+\bibitem{LundbergLee2017}
+Scott Lundberg and Su{-}In Lee.
+\newblock {A Unified Approach to Interpreting Model Predictions}.
+\newblock (arXiv:1705.07874), 2017.
+\newblock arXiv. https://doi.org/10.48550/arXiv.1705.07874.
+
+\bibitem{Ribeiro2016}
+Marco~Tulio Ribeiro, Sameer Singh, and Carlos Guestrin.
+\newblock {「Why Should I Trust You?」: Explaining the Predictions of Any
+  Classifier}.
+\newblock {\em Proceedings of the 22nd ACM SIGKDD International Conference on
+  Knowledge Discovery and Data Mining}, pages 1135--1144, 2016.
+\newblock https://doi.org/10.1145/2939672.2939778.
+
+\bibitem{Troyanskaya}
+Olga Troyanskaya, Michael Cantor, Gavin Sherlock, Pat Brown, Trevor Hastie,
+  Robert Tibshirani, David Botstein, and Russ~B. Altman.
+\newblock {Missing value estimation methods for DNA microarrays}.
+\newblock {\em Bioinformatics}, 17(6):520--525, 2001.
+\newblock https://api.semanticscholar.org/CorpusID:1105917.
+
+\end{thebibliography}
