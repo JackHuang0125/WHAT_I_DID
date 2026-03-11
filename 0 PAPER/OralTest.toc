@@ -1,5 +1,5 @@
 \beamer@sectionintoc {1}{背景與動機}{3}{0}{1}
 \beamer@sectionintoc {2}{問題與目的}{6}{0}{2}
 \beamer@sectionintoc {3}{資料與前處理}{7}{0}{3}
-\beamer@sectionintoc {4}{方法與流程}{15}{0}{4}
-\beamer@sectionintoc {5}{結果與討論}{22}{0}{5}
+\beamer@sectionintoc {4}{方法與流程}{16}{0}{4}
+\beamer@sectionintoc {5}{結果與討論}{24}{0}{5}

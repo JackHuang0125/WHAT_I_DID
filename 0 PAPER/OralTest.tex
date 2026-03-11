@@ -147,7 +147,7 @@
 
 \begin{frame}{\textbf{研究資料}}
   \begin{itemize}
-    \item SECOM 半導體製程資料集（\href{https://archive.ics.uci.edu/dataset/179/secom}{UCI:SECOM}）
+    \item 半導體製程資料 SEmi COnductor Manufacturing 
   \end{itemize}
   \vspace{-0.6cm}
   \begin{table}[H]
@@ -171,6 +171,9 @@
     \item 590 個量測變數
     \item 1 個二元品質類別，其中Pass($-$1) 有1463 筆（93.36\%），Fail(1) 有104 筆（6.64\%）
   \end{itemize}
+  
+  \vfill
+  \hspace*{0pt}\small{\textit{資料來源：}\href{https://archive.ics.uci.edu/dataset/179/secom}{UCI SECOM Dataset}}
 \end{frame}
 
 \begin{frame}{\textbf{資料 EDA}}
@@ -223,11 +226,11 @@
   \end{figure}
   \begin{itemize}
     \item 少數離群樣本可能對PCA主成分方向與投影結果造成明顯影響\cite{Hubert2005}
-    \item 動作：依門檻 $PC1\le 10$ 及 $PC2\le 10$ 移除極端值
+    \item 動作：依門檻 $PC1\le 10$ 及 $PC2\le 10$ 移除極端點
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{資料 EDA - PCA 降維視覺化}}
+\begin{frame}{\textbf{資料 EDA - 移除極端值後 PCA 降維視覺化}}
   \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{img/移除outlier做pca.png}
@@ -235,61 +238,87 @@
 \end{frame}
 
 \begin{frame}{\textbf{資料前處理}}
-\begin{enumerate}[(1)]
-  \item 目標變數重新編碼：Pass $\to 0$，Fail $\to 1$；移除時間欄位
-  \item 移除缺失筆數超過 1000 的特徵
-  \item 移除相異值種類過少的特徵
-  \item 採用 KNN imputer 進行補值，設定 $k=10$。
-  \item 以 PCA 二維投影輔助辨識極端值，依規則 $PC1\le 10$ 且 $PC2\le 10$ 移除異常點。
-  \item 對最終分析資料進行標準化。
-\end{enumerate}
-\vspace{0.2em}
-\begin{block}{前處理後資料}
-最終分析資料為 1525 筆樣本、459 個特徵。
-\end{block}
+  \begin{enumerate}[(1)]
+    \item 目標變數重新編碼：Pass $\to 0$，Fail $\to 1$；移除時間欄位
+    \item 移除缺失筆數超過 1000 的特徵
+    \item 移除相異值種類過少的特徵
+    \item 採用 KNN imputer 進行補值，設定 $k=10$。
+    \item 以 PCA 二維投影輔助辨識極端點，依規則 $PC1\le 10$ 且 $PC2\le 10$ 移除異常點。
+    \item 對最終分析資料進行標準化。
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{\textbf{最終分析資料}}
+最終分析資料為 1525 筆樣本、459 個特徵
+  \begin{table}[H]
+    \centering
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{r r r r c r r r r}
+    \toprule
+    idx & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
+    \midrule
+    1 & 0.216411 & 0.856549 & -0.434551 & \dots & -0.140893 & -0.050083 & 0.201450 & 0\\
+    2 & 1.094037 & -0.374751 & 1.020782 & \dots & 0.421933  & 0.258167  & 1.167895 & 0\\
+    3 & -1.114171 & 0.805982 & -0.479627 & \dots & 3.631596  & 3.316370  & -0.171694 & 1\\
+    4 & -0.354825 & -0.190915 & -0.049316 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
+    5 & 0.234139 & 0.095176 & 1.121165 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
+    \bottomrule
+    \end{tabular}%
+    }
+  \end{table}
 \end{frame}
 
 %---------------------------------
 \section{方法與流程}
 
 \begin{frame}{\textbf{流程大綱}}
-\begin{enumerate}[(1)]
-  \item 完成資料前處理，取得特徵矩陣 $X$ 與標籤 $y$。
-  \item 以 SMOTE 後的資料執行 PCA，並在 PCA 空間做分群。
-  \item 移除合成樣本後，於各群內訓練 XGBoost 黑箱分類模型。
-  \item 挑選接近決策邊界的樣本，形成各群中心點。
-  \item 在中心點附近生成局部格子點，並以黑箱輸出機率作為應變數。
-  \item 建立群內局部線性模型，刻劃黑箱在局部區域的反應。
-\end{enumerate}
-% 建議此頁置入論文中的流程圖或自行重畫簡化流程圖
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/process.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\textbf{分群設計}}
+  \begin{itemize}
+    \item 以 SMOTE 補強少數類別於降維空間中的資訊。
+    \item 於 PCA 空間以 k-means 進行分群。
+    \item 以 elbow method 選定群數 $k=2$。
+    \item 完成分群後移除合成樣本，只保留真實資料供後續建模。
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{分群}}
-\textbf{分群設計}
-\begin{itemize}
-  \item 以 SMOTE 補強少數類別於降維空間中的資訊。
-  \item 於 PCA 空間以 k-means 進行分群。
-  \item 以 elbow method 選定群數 $k=2$。
-  \item 完成分群後移除合成樣本，只保留真實資料供後續建模。
-\end{itemize}
+  \begin{columns}[c]
+    \column{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{img/移除outlier做pca.png}
+
+    \column{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{img/移除outlier做pca的SMOTEdata.png}
+  \end{columns}
+
+  \vspace{0.5em}
+  \begin{center}
+    \textbf{分群前後}
+  \end{center}
 \end{frame}
 
 \begin{frame}{\textbf{黑箱模型}}
-\textbf{黑箱模型}
-\begin{itemize}
-  \item 模型：XGBClassifier。
-  \item 評估方式：五折交叉驗證。
-  \item 僅在訓練集執行 SMOTE，測試集維持原分布。
-  \item 評估指標：ACC、FAR、ROC-AUC。
-\end{itemize}
+  \begin{itemize}
+    \item Skicit-learn: XGBClassifier
+    \item 評估方式：五折交叉驗證
+    \item 僅在訓練集執行 SMOTE，每一折當測試集輸出機率值
+    \item 用 Accuracy(ACC)、False Alarm Rate(FAR)、ROC-AUC 評估群間是否有差異
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{局部刻劃方法}}
 \begin{enumerate}[(1)]
-  \item 在各群內以 $|\hat p_{test}-0.5|\le 0.05$ 挑選樣本點。
-  \item 將候選樣本的標準化特徵向量取平均，形成群內中心點 $x_0$。
-  \item 在 $x_0$ 附近依固定步長 $\delta$ 建立結構化格子點，而非隨機擾動樣本。
-  \item 以黑箱模型對格子點輸出的預測機率作為應變數，建立 OLS 局部線性模型。
+  \item 在各群內以 $|\hat{p}-0.5|\le 0.05$ 挑選樣本點
+  \item 將樣本的標準化特徵向量取平均，形成群內中心點 $x_{\mathbf{center}}$
+  \item 在 $x_{\mathbf{center}}$ 附近依固定步長 $\delta$ 建立離散的格子點
+  \item 以黑箱模型對格子點輸出的預測機率作為應變數，以最小平方法建立局部模型
   \item 重複 50 次局部抽樣與篩選，統計穩定保留特徵；最後再以 200 萬筆格子點重新擬合局部模型。
 \end{enumerate}
 \end{frame}

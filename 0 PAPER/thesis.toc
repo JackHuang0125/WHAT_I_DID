@@ -10,11 +10,11 @@
 \contentsline {subsection}{\numberline {2.2.2}缺失值}{5}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.2.3}少數類別特徵}{5}{subsection.2.2.3}%
 \contentsline {subsection}{\numberline {2.2.4}補值}{6}{subsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.2.5}極端值處理}{7}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.5}極端點處理}{7}{subsection.2.2.5}%
 \contentsline {subsection}{\numberline {2.2.6}前處理後最終資料集摘要}{9}{subsection.2.2.6}%
 \contentsline {chapter}{\numberline {3}研究方法與流程}{11}{chapter.3}%
 \contentsline {section}{\numberline {3.1}流程大綱}{11}{section.3.1}%
-\contentsline {section}{\numberline {3.2}流程細部}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.2}流程細部}{12}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}資料降維與分群}{12}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}黑箱模型訓練}{15}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}中心點選取與局部生成格子點擬合模型}{16}{subsection.3.2.3}%
