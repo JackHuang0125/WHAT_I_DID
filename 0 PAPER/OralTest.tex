@@ -66,6 +66,9 @@
 \usefonttheme{professionalfonts}
 % enumerate 及 item 的形狀
 \setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[square]
+
 % 調整外框形式的字體大小
 \setbeamerfont{headline}{size=\scriptsize}
 \setbeamerfont{footline}{size=\scriptsize}
@@ -101,6 +104,11 @@
 %---------------------------------
 \section{背景與動機}
 
+\begin{frame}
+  \centering
+  \huge{背景與動機}
+\end{frame}
+
 \begin{frame}{\textbf{研究背景}}
   \begin{figure}[H]
 			\centering
@@ -134,6 +142,11 @@
 %---------------------------------
 \section{問題與目的}
 
+\begin{frame}
+  \centering
+  \huge{問題與目的}
+\end{frame}
+
 \begin{frame}{\textbf{研究目的}}
   \begin{itemize}
     \item 若整體資料存在多個子群，單一模型的局部解釋可能混合不同規則。
@@ -146,6 +159,11 @@
 
 %---------------------------------
 \section{資料與前處理}
+
+\begin{frame}
+  \centering
+  \huge{資料與前處理}
+\end{frame}
 
 \begin{frame}{\textbf{研究資料}}
   \begin{itemize}
@@ -274,6 +292,11 @@
 %---------------------------------
 \section{方法與流程}
 
+\begin{frame}
+  \centering
+  \huge{方法與流程}
+\end{frame}
+
 \begin{frame}{\textbf{流程大綱}}
   \begin{figure}
     \centering
@@ -319,16 +342,21 @@
 \end{frame}
 
 \begin{frame}{\textbf{局部刻劃方法}}
-  \begin{block}{核心想法}
-  不直接在原樣本附近做隨機擾動，而是以群內代表中心點為核心，建立可控制、可檢視的局部鄰域。
-  \end{block}
+    \vspace{0.5cm}
+  % 不直接在原樣本附近做隨機擾動，而是以
+    \begin{itemize}
+    \item 在群 c 內，取滿足 $|\hat{p}-0.5|\le 0.05$ 的樣本集合，記為 $S^c_n$
+    \item 對 $S^c_n$ 內的樣本特徵向量取平均，定義群內中心點為 $$x^c_\mathbf{center}=\frac{1}{|S^c_n|}\sum_{i\in S^c_n}\mathbf{x}_i=(x^{(c)}_1,\dots,x^{(c)}_p)$$ 
+    \item 以中心點為基準生成格子點： $$x^{(m)}=x^c_\mathbf{center}+\delta \mathbf{m}$$ 其中 
+      \begin{itemize}
+        \item $\delta$ 為各維度相同的位移步長
+        \item $\mathbf{m}=(m_1,\dots,m_p)$ 為位移向量，且$m_j\in\{-k,-k+1,\dots,0,\dots,k-1,k\}$
+      \end{itemize}
+    \item 共有 $(2k+1)^p$ 個格子點
+    \end{itemize}
+\end{frame}
 
-  \begin{itemize}
-    \item 在各群內以 $|\hat{p}-0.5|\le 0.05$ 挑選樣本點
-    % \item 將樣本的標準化特徵向量取平均，形成群內中心點 $x_{\mathbf{center}}$
-    % \item 在 $x_{\mathbf{center}}$ 附近依固定步長 $\delta$ 建立離散的格子點
-  \end{itemize}
-
+\begin{frame}{\textbf{局部格子點舉例}}
   \centering
 		\begin{tikzpicture}[scale=8]
 			% vertical dashed lines
@@ -359,26 +387,18 @@
 			\draw[<->] (1.2,-0.73) -- (1.3,-0.73);
 			\node[below] at (1.25,-0.73) {$\delta$};
 		\end{tikzpicture}
-
-\end{frame}
-
-\begin{frame}{\textbf{局部格子點設計概念}}
   \begin{itemize}
-    \item 每一維設定固定步長 $\delta$，位移倍數為 $m_j\in\{-k,-k+1,\dots,0,\dots,k\}$。
-    \item 格子點表示為
-    \[
-      x^{(m)} = x_0 + \delta m.
-    \]
-    \item 本研究設定 $p=459$、$k=2$，理論格子點數為 $(2k+1)^p = 5^{459}$
     \item 以黑箱模型對格子點輸出的預測機率作為應變數
-  \end{itemize}  
+    \item 本研究：$p=459$、$k=2$
+  \end{itemize} 
 \end{frame}
 
 \begin{frame}{\textbf{建立局部刻劃模型}}
+  \vspace{0.3cm}
   \centering
-  \resizebox{0.3\textwidth}{!}{
+  \resizebox{0.55\textwidth}{!}{
   \begin{tikzpicture}[
-      node distance=8mm and 8mm,
+      node distance=4mm and 4mm,
       >=Latex,
       every node/.style={font=\scriptsize},
       box/.style={
@@ -519,6 +539,11 @@
 %---------------------------------
 \section{結果與討論}
 
+\begin{frame}
+  \centering
+  \huge{結果與討論}
+\end{frame}
+
 \begin{frame}{\textbf{分群黑箱模型}}
   \begin{center}
     \small
@@ -533,49 +558,32 @@
     \end{tabular}
   \end{center}
 \vspace{0.4em}
-  \begin{itemize}
-    \item 兩群皆同時包含 Pass 與 Fail 樣本，可分別建立群內二元分類模型。
-    \item 群 0 與群 1 在分類表現上具有差異，尤其 FAR 差異明顯。
-    \item 兩群 FAR 約相差 $0.0468/0.0099\approx 4.73$ 倍，顯示資料存在異質性。
-    \item 若只建立整體單一模型，可能稀釋群 0 較高錯誤回報率的現象。
-  \end{itemize}
+  % \begin{itemize}
+    % \item 群 0 與群 1 在分類表現上具有差異，尤其 FAR 差異明顯。
+    % \item 兩群 FAR 約相差 $0.0468/0.0099\approx 4.73$ 倍，顯示資料存在異質性。
+    % \item 若只建立整體單一模型，可能稀釋群 0 較高錯誤回報率的現象。
+  % \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{決策邊界樣本與中心點建立}}
 \begin{itemize}
-  \item 本研究以分類門檻 0.5 作為決策邊界基準。
-  \item 選取條件為
-  \[
-    |\hat p_{test}-0.5|\le 0.05.
-  \]
-  \item 篩選結果：群 0 共 12 個候選樣本；群 1 共 7 個候選樣本。
-  \item 將各群候選樣本取平均後形成中心點，再以中心點建立局部格子點鄰域。
+  \item 篩選結果：群 0 共 12 個樣本；群 1 共 7 個樣本。
 \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{局部刻劃模型結果}}
-\begin{columns}[T]
-\begin{column}{0.48\textwidth}
+\begin{frame}{\textbf{群 0 的局部刻劃模型結果}}
 \textbf{群 0}
 \begin{itemize}
   \item 50 次重複篩選後，穩定保留 96 個特徵。
-  \item 以 200 萬筆局部格子點重新擬合。
   \item 局部線性模型 $R^2 = 0.58$。
 \end{itemize}
-\end{column}
-\begin{column}{0.48\textwidth}
-\textbf{群 1}
+\end{frame}
+
+\begin{frame}{\textbf{群 1 的局部刻劃模型結果}}
 \begin{itemize}
   \item 50 次重複篩選後，穩定保留 56 個特徵。
-  \item 同樣以 200 萬筆局部格子點重新擬合。
-  \item 論文結果顯示群 1 的局部刻劃能力略優於群 0。
+  \item 局部線性模型 $R^2 = 0.61$。
 \end{itemize}
-\end{column}
-\end{columns}
-\vspace{0.4em}
-\begin{block}{解讀}
-兩群的重要特徵組成與係數方向並不一致，代表不同子群的黑箱局部決策結構不同。
-\end{block}
 \end{frame}
 
 \begin{frame}{\textbf{結果總結}}
@@ -607,6 +615,11 @@
 
 %---------------------------------
 \section*{附錄}
+
+\begin{frame}
+  \centering
+  \huge{附錄}
+\end{frame}
 
 \begin{frame}[allowframebreaks]{References}
   \bibliographystyle{plain}
