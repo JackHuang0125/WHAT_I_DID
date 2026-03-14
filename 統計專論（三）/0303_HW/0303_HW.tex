@@ -65,6 +65,14 @@ Let $X$ be a continuous random variable.
 
     \textbf{SPC Link}: Why is standardization fundamental in control limits?
 
+    Sol.
+
+    在 SPC 中，標準化重要的原因是：
+    控制界線是建立在機率的基礎上，
+    透過 $\frac{X-\mu}{\sigma}$ 的轉換，我們可以把統計量的中心移至 0 ，並以標準差為距離作為統一的單位，
+    使不同製程資料都能在相同的標準下判斷是否異常，
+    這也是為甚麼常見的 3-$\sigma$ 控制界線具有意義。
+
 \section*{Problem 2: Normal Sampling Theory}
 Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
     \begin{enumerate}
@@ -130,6 +138,11 @@ Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
     \end{enumerate}
 
     \textbf{SPC Link}: Known vs unknown σ changes limits.
+
+    Sol.
+
+    在 SPC 中，若製程資料的標準差 $\sigma$ 已知，則 $\bar{X}$ 的控制界線會服從常態分配 $Z$ ；若 $\sigma$ 未知，則會以樣本標準差 $S$ 取代 $\sigma$ 來估計，因此統計量會服從 $t$ 分配，
+    因此控制界線需要調整。
 
 \section*{Problem 3: Discrete Structure and Limits}
     \begin{enumerate}
@@ -225,8 +238,8 @@ Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
 
         混合分配會使變異數增加，乃至於 Law of total variance ：
         $$Var(X)=E\left[Var(X\mid \theta)\right]+Var\left(E[X\mid \theta]\right).$$
-        其中第一項是「抽樣變異」（Sampling variation），描述在參數 $\theta$ 固定時的隨機波動；
-        第二項是「異質性變異」（Heterogeneity effect），描述在參數 $\theta$ 隨機時而引入的額外波動。
+        其中第一項是「抽樣變異」（Sampling variation），描述在參數 $\theta$ 固定時的隨機變動；
+        第二項是「異質性變異」（Heterogeneity effect），描述在參數 $\theta$ 隨機時而引入的額外變動。
 
         若不混合，此時 $\theta$ 為常數，則 $E[X\mid \theta]$ 為常數，
         因此
@@ -254,4 +267,8 @@ Let $X_1,\dots,X_n \stackrel{iid}{\sim} N(\mu,\sigma^2)$
 
     \textbf{SPC Link}: Overdispersion violates p-chart assumptions.
 
+    Sol.
+
+    在SPC中，c-chart假設每個檢驗單位的缺陷數服從 Poisson 分配，其平均數與變異數皆為 $\lambda$ ，若缺陷發生率在不同時間或批次之間產生變動，則會形成 Poisson-Gamma 的混和分配，
+    使得分配變為 Negative-Bionimal ，且變異數會大於平均數，即 Overdispersion ，因此違反 c-chart 的 Poisson 假設，使得控制界線仍在使用相對較小的變異數，導致控制界線過窄。
 \end{document}
