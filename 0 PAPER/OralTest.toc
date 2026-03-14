@@ -2,4 +2,4 @@
 \beamer@sectionintoc {2}{問題與目的}{7}{0}{2}
 \beamer@sectionintoc {3}{資料與前處理}{9}{0}{3}
 \beamer@sectionintoc {4}{方法與流程}{18}{0}{4}
-\beamer@sectionintoc {5}{結果與討論}{26}{0}{5}
+\beamer@sectionintoc {5}{結果與討論}{25}{0}{5}

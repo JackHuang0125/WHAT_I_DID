@@ -110,7 +110,7 @@
 \end{frame}
 
 \begin{frame}{\textbf{研究背景}}
-  \begin{figure}[H]
+  \begin{figure}
 			\centering
 			\includegraphics[width=0.8\linewidth]{img/wafer.png}
   \end{figure}
@@ -121,13 +121,13 @@
 
 \begin{frame}{\textbf{研究動機}}
   \vspace{-0.5cm}
-  \begin{figure}[H]
+  \begin{figure}
 			\centering
 			\includegraphics[width=0.8\linewidth]{img/blackbox.png}
   \end{figure}
   \vspace{-1cm}
   \begin{itemize}
-    \item 黑箱模型：箱子內計算的是什麼？如何預測是好還是壞？依據是？
+    \item 黑箱模型：箱子內的計算是什麼？如何預測是好還是壞？依據是？
   \end{itemize}
 \end{frame}
 
@@ -170,7 +170,7 @@
     \item 半導體製程資料 SEmi COnductor Manufacturing 
   \end{itemize}
   \vspace{-0.6cm}
-  \begin{table}[H]
+  \begin{table}
 		\centering
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r l r r r c r r r r}
@@ -196,52 +196,47 @@
   \hspace*{0pt}\small{\textit{資料來源：}\href{https://archive.ics.uci.edu/dataset/179/secom}{UCI SECOM Dataset}}
 \end{frame}
 
-\begin{frame}{\textbf{資料 EDA}}
-  \begin{itemize}
-    \item 目標變數
-  \end{itemize}
-  \begin{figure}[H]
+\begin{frame}{\textbf{資料 EDA - 目標變數}}
+  \begin{figure}
     \centering
-    \includegraphics[width=0.6\linewidth]{img/y.png}
+    \includegraphics[width=0.8\linewidth]{img/y.png}
   \end{figure}
-  動作：目標變數重新編碼：Pass $\to 0$，Fail $\to 1$；移除時間欄位
 \end{frame}
 
-\begin{frame}{\textbf{資料 EDA}}
-  \begin{itemize}
-    \item 缺失值
-  \end{itemize}
-  \begin{figure}[H]
+\begin{frame}{\textbf{資料 EDA - 單一特徵的缺失值}}
+  \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{img/missingvalue.png}
   \end{figure}
-  動作：移除缺失筆數超過 1000 的特徵
-  \end{frame}
+  \begin{itemize}
+    \item 動作：移除缺失值數量超過 1000 筆的單一特徵
+  \end{itemize}
+\end{frame}
 
-\begin{frame}{\textbf{資料 EDA - 相異值}}
-  \begin{figure}[H]
+\begin{frame}{\textbf{資料 EDA - 單一特徵的相異值}}
+  \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{img/uniquevalue.png}
   \end{figure}
   \begin{itemize}
-    \item 動作：移除相異值種類過少的特徵
+    \item 動作：移除相異值種類低於 10 種的單一特徵
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{資料 EDA - 缺失值}}
-  \begin{figure}[H]
+\begin{frame}{\textbf{資料 EDA - 補齊缺失值}}
+  \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{img/simpleNA.png}
   \end{figure}
   \begin{itemize}
-    \item KNN 型式的補值方法在缺失值估計上具有良好的穩健性\cite{Troyanskaya}
-    \item  動作：採用 KNN imputer 進行補值，設定 $k=10$
+    \item KNN 補值法在缺失值估計上具有良好的穩健性\cite{Troyanskaya}
+    \item 動作：採用 KNN imputer 進行補值，設定 $k=10$
   \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{資料 EDA - 極端點}}
   \begin{itemize}
-    \item 少數離群樣本可能對PCA主成分方向與投影結果造成明顯影響\cite{Hubert2005}
+    \item 離群樣本對PCA主成分方向與投影結果造成影響\cite{Hubert2005}
     \item 動作：依門檻 $PC1\le 10$ 及 $PC2\le 10$ 移除極端點
   \end{itemize}
   \vspace{0.3cm}
@@ -260,18 +255,19 @@
 
 \begin{frame}{\textbf{資料前處理}}
   \begin{enumerate}[(1)]
-    \item 目標變數重新編碼：Pass $\to 0$，Fail $\to 1$；移除時間欄位
-    \item 移除缺失筆數超過 1000 的特徵
-    \item 移除相異值種類過少的特徵
-    \item 採用 KNN imputer 進行補值，設定 $k=10$。
-    \item 以 PCA 二維投影輔助辨識極端點，依規則 $PC1\le 10$ 且 $PC2\le 10$ 移除異常點。
-    \item 對最終分析資料進行標準化。
+    \item 目標變數重新編碼：Pass（$-$1 $\to$ 0），移除時間欄位
+    \item 移除缺失值數量超過 1000 筆的單一特徵
+    \item 移除相異值種類低於 10 種的單一特徵
+    \item 採用 KNN imputer 進行補值，設定 $k=10$
+    \item 依門檻 $PC1\le 10$ 及 $PC2\le 10$ 移除極端點
   \end{enumerate}
 \end{frame}
 
 \begin{frame}{\textbf{最終分析資料}}
-最終分析資料為 1525 筆樣本、459 個特徵
-  \begin{table}[H]
+  \begin{itemize}
+    \item 最終分析資料為 1525 筆樣本、459 個特徵
+  \end{itemize}
+  \begin{table}
     \centering
     \resizebox{\linewidth}{!}{%
     \begin{tabular}{r r r r c r r r r}
@@ -304,32 +300,25 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textbf{分群設計}}
+\begin{frame}{\textbf{分群設計：SMOTE $\rightarrow$ PCA $\rightarrow$ KMeans}}
   \begin{itemize}
     \item 以 SMOTE 補強少數類別於降維空間中的資訊。
     \item 於 PCA 空間以 k-means 進行分群。
     \item 以 elbow method 選定群數 $k=2$。
-    \item 完成分群後移除合成樣本，只保留真實資料供後續建模。
   \end{itemize}
-\end{frame}
-
-\begin{frame}{\textbf{SMOTE -> PCA -> KMeans}}
   \begin{columns}[c]
-    \column{0.48\textwidth}
+    \column{0.45\textwidth}
     \centering
     前\\
     \includegraphics[width=\linewidth]{img/移除outlier做pca+kmeans的原始data.png}
-
-    \column{0.48\textwidth}
+    \column{0.45\textwidth}
     \centering
     後\\
     \includegraphics[width=\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
   \end{columns}
-
-  \vspace{0.5em}
-  \begin{center}
-    \textbf{分群前後}
-  \end{center}
+  \begin{itemize}
+    \item 完成分群後移除合成樣本，只保留真實資料供後續建模
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{黑箱模型}}
@@ -545,18 +534,29 @@
 \end{frame}
 
 \begin{frame}{\textbf{分群黑箱模型}}
-  \begin{center}
-    \small
-    \begin{tabular}{lccccc}
-    \toprule
-    群別 & 總數 & Pass / Fail & ACC & FAR & ROC-AUC \\
-    \midrule
-    全體 & 1525 & 1430 / 95 & 0.9272 & 0.0189 & 0.6636 \\
-    群 0 & 676  & 619 / 57  & 0.8847 & 0.0468 & 0.6974 \\
-    群 1 & 849  & 811 / 38  & 0.9482 & 0.0099 & 0.6266 \\
-    \bottomrule
-    \end{tabular}
-  \end{center}
+  \centering
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    group & $n$ & Pass / Fail & ACC & FAR & ROC-AUC \\
+    \hline
+    全體 & 1525 & 1430 / 95  & 
+    \begin{tabular}[c]{@{}c@{}}0.9272\\ {}[0.9141, 0.9397]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.0189\\ {}[0.0120, 0.0264]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.6623\\ {}[0.6054, 0.7178]\end{tabular} \\
+    \hline
+    群 0 & 676  & 619 / 57   & 
+    \begin{tabular}[c]{@{}c@{}}0.8846\\ {}[0.8595, 0.9083]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.0468\\ {}[0.0308, 0.0639]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.6983\\ {}[0.6308, 0.7631]\end{tabular} \\
+    \hline
+    群 1 & 849  & 811 / 38   & 
+    \begin{tabular}[c]{@{}c@{}}0.9482\\ {}[0.9329, 0.9623]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.0099\\ {}[0.0037, 0.0172]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.6224\\ {}[0.5228, 0.7171]\end{tabular} \\
+    \hline
+  \end{tabular}
+  }
 \vspace{0.4em}
   % \begin{itemize}
     % \item 群 0 與群 1 在分類表現上具有差異，尤其 FAR 差異明顯。
@@ -566,26 +566,78 @@
 \end{frame}
 
 \begin{frame}{\textbf{決策邊界樣本與中心點建立}}
-\begin{itemize}
-  \item 篩選結果：群 0 共 12 個樣本；群 1 共 7 個樣本。
-  \item 示意圖
-\end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/02.png}
+  \end{figure}
+  \begin{itemize}
+    \item 篩選結果：群 0 取 12 個、群 1 取 7 個。
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{群 0 的局部刻劃模型結果}}
-\begin{itemize}
-  \item 50 次重複篩選後，穩定保留 96 個特徵。
-  \item 局部線性模型 $R^2 = 0.58$。
-  \item 迴歸係數
-\end{itemize}
+\begin{frame}{\textbf{局部刻劃模型結果}}
+  \begin{table}
+  \centering
+    \begin{tabular}{c c c c}
+      \toprule
+      Cluster & 使用特徵數 & 點估計 & $95\%$ 信賴區間 \\
+      \midrule
+      0 & 96 & 0.584160 & [0.583563, 0.584737] \\
+      \hline
+      1 & 56 & 0.592644 & [0.590905, 0.594560] \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
 \end{frame}
 
-\begin{frame}{\textbf{群 1 的局部刻劃模型結果}}
-\begin{itemize}
-  \item 50 次重複篩選後，穩定保留 56 個特徵。
-  \item 局部線性模型 $R^2 = 0.61$。
-  \item 迴歸係數
-\end{itemize}
+\begin{frame}{\textbf{群 0 ：特徵係數}}
+	\begin{table}
+  \centering
+  \setlength{\tabcolsep}{5pt}
+		\begin{tabular}{lc|lc|lc}
+			\hline
+			\textbf{特徵} & \textbf{係數} & \textbf{特徵} & \textbf{係數} & \textbf{特徵} & \textbf{係數} \\
+			\hline
+			intercept   & 1.005144  & x153 & 0.013929  & x554 & 0.008468  \\
+			x291        & 0.034033  & x426 & 0.013283  & x324 & -0.008034 \\
+			x7          & -0.029912 & x588 & 0.011796  & x361 & 0.007764  \\
+			x141        & -0.028171 & x585 & 0.010932  & x247 & -0.007745 \\
+			x87         & 0.022993  & x253 & 0.009463  & x274 & -0.007529 \\
+			x217        & 0.022274  & x144 & -0.009319 & x282 & -0.007520 \\
+			x461        & 0.019723  & x470 & 0.009020  & x525 & 0.007486  \\
+			x20         & 0.017796  & x103 & -0.008795 & x578 & -0.006877 \\
+			x58         & -0.015820 & x518 & -0.008775 & x240 & 0.006598  \\
+			x1          & -0.014731 & x358 & 0.008565  & x164 & 0.006592  \\
+			x378        & 0.014099  &      &           &      &           \\
+			\hline
+		\end{tabular}
+	\end{table}
+
+\end{frame}
+
+\begin{frame}{\textbf{群 1 ：特徵係數}}
+  \begin{table}
+		\centering
+		\setlength{\tabcolsep}{5pt}
+		\begin{tabular}{lc|lc|lc}
+			\hline
+			\textbf{特徵} & \textbf{係數} & \textbf{特徵} & \textbf{係數} & \textbf{特徵} & \textbf{係數} \\
+			\hline
+			(intercept) & 0.996643  &  x8  & 0.004151 & x196 & 0.002293 \\
+			x386        & 0.016675  & x92  & 0.003006 & x337 & 0.002250 \\
+			x117        & -0.012556 & x112 &-0.002733 &  x81 & 0.002090 \\
+			x420        & -0.011799 & x288 & 0.002681 & x276 & 0.001966 \\
+			x456        & 0.010252  & x252 & 0.00264  & x51  & 0.001769 \\
+			x28         & -0.009172 & x17  & 0.002646 & x355 &-0.001724 \\
+			x36         & -0.008981 & x347 & 0.002574 & x145 &-0.001689 \\
+			x287        & -0.007539 & x82  & 0.002374 & x431 & 0.001613 \\
+			x103        & -0.006848 & x551 &-0.002365 & x571 &-0.001550 \\
+			x583        & 0.005797  & x497 & 0.002339 & x247 & 0.001472 \\
+			x184        & 0.005055  &      &          &      &          \\
+			\hline
+		\end{tabular}
+	\end{table}
+
 \end{frame}
 
 \begin{frame}{\textbf{結果總結}}
