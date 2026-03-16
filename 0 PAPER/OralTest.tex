@@ -87,7 +87,7 @@
 \title{碩士論文口試\\[0.3em]\large }
 \author{學生　黃丞暘 \\　\\ 指導教授　曹振海}
 \institute{國立東華大學應用數學系統計碩士班}
-\date{2026 年 4 月 XX 日}
+\date{2026 年 X 月 XX 日}
 
 \begin{document}
 
@@ -127,7 +127,7 @@
   \end{figure}
   \vspace{-1cm}
   \begin{itemize}
-    \item 黑箱模型：箱子內的計算是什麼？如何預測是好還是壞？依據是？
+    \item 黑箱模型如何決定某一點是屬於 Pass 還是 Fail？依據是？
   \end{itemize}
 \end{frame}
 
@@ -150,10 +150,16 @@
 \begin{frame}{\textbf{研究目的}}
   \begin{itemize}
     \item 若整體資料存在多個子群，單一模型的局部解釋可能混合不同規則。
-      \item 分群後建立黑箱模型，以降低資料異質性對模型學習的干擾。
+    \begin{itemize}  
+      \item 先分群，再建立黑箱模型
+    \end{itemize}
+    \vspace{0.3cm}
     \item 若以隨機擾動生成鄰近點，可能偏離真實資料分布，產生外插風險。
-      \item 設計格子點生成方法，以控制局部擾動範圍，提升局部擬合的穩定性，並降低外插可能造成的偏誤
-      \item 建立可檢視的局部刻劃模型，以作為黑箱模型在分類行為上的可解釋依據。
+    \begin{itemize}
+      \item 設計局部格子點的生成方法
+    \end{itemize}
+    \vspace{0.3cm}
+    \item 建立可檢視的局部刻劃模型，以作為黑箱模型在分類行為上的可解釋依據。
   \end{itemize}
 \end{frame}
 
@@ -335,8 +341,8 @@
   % 不直接在原樣本附近做隨機擾動，而是以
     \begin{itemize}
     \item 在群 c 內，取滿足 $|\hat{p}-0.5|\le 0.05$ 的樣本集合，記為 $S^c_n$
-    \item 對 $S^c_n$ 內的樣本特徵向量取平均，定義群內中心點為 $$x^c_\mathbf{center}=\frac{1}{|S^c_n|}\sum_{i\in S^c_n}\mathbf{x}_i=(x^{(c)}_1,\dots,x^{(c)}_p)$$ 
-    \item 以中心點為基準生成格子點： $$x^{(m)}=x^c_\mathbf{center}+\delta \mathbf{m}$$ 其中 
+    \item 對 $S^c_n$ 內的樣本特徵向量取平均，定義群內中心點為 $$\mathbf{x}^c_\mathbf{center}=\frac{1}{|S^c_n|}\sum_{i\in S^c_n}\mathbf{x}_i=(x^c_1,\dots,x^c_p)$$ 
+    \item 以中心點為基準生成格子點： $$\mathbf{x}^c_{\mathbf{m}}=\mathbf{x}^c_\mathbf{center}+\delta \mathbf{m}$$ 其中 
       \begin{itemize}
         \item $\delta$ 為各維度相同的位移步長
         \item $\mathbf{m}=(m_1,\dots,m_p)$ 為位移向量，且$m_j\in\{-k,-k+1,\dots,0,\dots,k-1,k\}$
@@ -368,16 +374,16 @@
 			\draw[->] (1.2,-0.75) -- (1.2,-0.25) node[above] {$x_2$};
 			% center point
 			\fill[red] (1.2,-0.5) circle (0.7pt);
-			\node[above right] at (1.2,-0.5) {中心點 $\mathbf{x}^{(c)}_{\mathrm{center}}=(1.2,-0.5)$};
+			\node[above right] at (1.2,-0.5) {中心點 $\mathbf{x}^c_{\mathrm{center}}=(1.2,-0.5)$};
 			% example point
 			\fill[blue] (1.1,-0.3) circle (0.7pt);
-			\node[above left] at (1.1,-0.3) {$\mathbf{x}^{(\mathbf{m})}=(1.1,-0.3)$};
+			\node[above left] at (1.1,-0.3) {$\mathbf{x}^c_{\mathbf{m}}=(1.1,-0.3)$};
 			% delta annotation x-direction
 			\draw[<->] (1.2,-0.73) -- (1.3,-0.73);
 			\node[below] at (1.25,-0.73) {$\delta$};
 		\end{tikzpicture}
   \begin{itemize}
-    \item 以黑箱模型對格子點輸出的預測機率作為應變數
+    \item 以黑箱模型對格子點的輸出機率作為應變數
     \item 本研究：$p=459$、$k=2$
   \end{itemize} 
 \end{frame}
@@ -402,7 +408,7 @@
       arrow/.style={->, thick}
   ]
 
-  \node[box] (input) {抽樣局部資料\\$(X, y)$};
+  \node[box] (input) {抽樣局部資$(X, y)$\\擬合線性迴歸模型};
   \node[box, below=of input] (single) {單次流程：5 輪 pvalue 特徵選擇\\$0.05 \rightarrow 0.01 \rightarrow 0.005 \rightarrow 0.001 \rightarrow 0.0005$};
   \node[box, below=of single] (repeat) {重複 50 次};
   \node[box, below=of repeat] (summary) {統計各特徵\\最後一輪保留次數};
@@ -571,73 +577,87 @@
     \includegraphics[width=0.8\linewidth]{img/02.png}
   \end{figure}
   \begin{itemize}
-    \item 篩選結果：群 0 取 12 個、群 1 取 7 個。
+    \item 形成中心點的樣本：群 0 取 12 個、群 1 取 7 個。
   \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{局部刻劃模型結果}}
   \begin{table}
   \centering
-    \begin{tabular}{c c c c}
+  \scalebox{0.65}{
+    \begin{tabular}{cc|c}
       \toprule
-      群別 & 最終使用特徵數 & 點估計 & $95\%$ 信賴區間 \\
+           & 最終使用特徵數 & 特徵 \\
       \midrule
-      群 0 & 96 & 0.584160 & [0.583563, 0.584737] \\
+      群 0 & 96 & x291, x87, x217, x461, x20, $\dots$\\
       \hline
-      群 1 & 56 & 0.592644 & [0.590905, 0.594560] \\
+      群 1 & 56 & x386, x456, x583, x184, x8, $\dots$\\
       \bottomrule
     \end{tabular}
+  }
   \end{table}
-\end{frame}
 
-\begin{frame}{\textbf{群 0 ：特徵係數}}
-	\begin{table}
-  \centering
-  \setlength{\tabcolsep}{5pt}
-		\begin{tabular}{lc|lc|lc}
-			\hline
-			\textbf{特徵} & \textbf{係數} & \textbf{特徵} & \textbf{係數} & \textbf{特徵} & \textbf{係數} \\
-			\hline
-			intercept   & 1.005144  & x153 & 0.013929  & x554 & 0.008468  \\
-			x291        & 0.034033  & x426 & 0.013283  & x324 & -0.008034 \\
-			x7          & -0.029912 & x588 & 0.011796  & x361 & 0.007764  \\
-			x141        & -0.028171 & x585 & 0.010932  & x247 & -0.007745 \\
-			x87         & 0.022993  & x253 & 0.009463  & x274 & -0.007529 \\
-			x217        & 0.022274  & x144 & -0.009319 & x282 & -0.007520 \\
-			x461        & 0.019723  & x470 & 0.009020  & x525 & 0.007486  \\
-			x20         & 0.017796  & x103 & -0.008795 & x578 & -0.006877 \\
-			x58         & -0.015820 & x518 & -0.008775 & x240 & 0.006598  \\
-			x1          & -0.014731 & x358 & 0.008565  & x164 & 0.006592  \\
-			x378        & 0.014099  &      &           &      &           \\
-			\hline
-		\end{tabular}
-	\end{table}
-
-\end{frame}
-
-\begin{frame}{\textbf{群 1 ：特徵係數}}
   \begin{table}
+  \centering
+  \scalebox{0.7}{
+		\begin{tabular}{cr|cr}
+			\toprule
+			\multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
+      \midrule
+      \multicolumn{2}{c|}{$R^2=0.5842$} & \multicolumn{2}{c}{$R^2=0.5926$} \\
+      \multicolumn{2}{c|}{$95\%C.I.\in[0.583563, 0.584737]$} & \multicolumn{2}{c}{$95\%C.I.\in[0.590905, 0.594560]$} \\
+			\midrule
+			特徵 & 估計係數 &
+			特徵 & 估計係數 \\
+			\midrule
+			intercept   & 1.005144  & intercept & 0.996643  \\
+			x291        & 0.034033  & x386      & 0.016675  \\
+			x7          & -0.029912 & x117      & -0.012556 \\
+			x141        & -0.028171 &	x420      & -0.011799 \\
+			x87         & 0.022993  &	x456      & 0.010252  \\
+			x217        & 0.022274  &	x28       & -0.009172 \\
+			x461        & 0.019723  &	x36       & -0.008981 \\
+			x20         & 0.017796  &	x287      & -0.007539 \\
+			x58         & -0.015820 &	x103      & -0.006848 \\
+			x1          & -0.014731 &	x583      & 0.005797  \\
+			x378        & 0.014099  &	x184      & 0.005055  \\
+			\bottomrule
+		\end{tabular}
+  }
+	\end{table}
+\end{frame}
+
+\begin{frame}{\textbf{局部線性模型跨群比較}}
+	\begin{table}
 		\centering
-		\setlength{\tabcolsep}{5pt}
-		\begin{tabular}{lc|lc|lc}
+		\begin{tabular}{c|ccc}
 			\hline
-			\textbf{特徵} & \textbf{係數} & \textbf{特徵} & \textbf{係數} & \textbf{特徵} & \textbf{係數} \\
+			比較設定 & \textbf{$R^2$} & \textbf{$\rho$} \\
 			\hline
-			intercept   & 0.996643  &  x8  & 0.004151 & x196 & 0.002293 \\
-			x386        & 0.016675  & x92  & 0.003006 & x337 & 0.002250 \\
-			x117        & -0.012556 & x112 &-0.002733 &  x81 & 0.002090 \\
-			x420        & -0.011799 & x288 & 0.002681 & x276 & 0.001966 \\
-			x456        & 0.010252  & x252 & 0.00264  & x51  & 0.001769 \\
-			x28         & -0.009172 & x17  & 0.002646 & x355 &-0.001724 \\
-			x36         & -0.008981 & x347 & 0.002574 & x145 &-0.001689 \\
-			x287        & -0.007539 & x82  & 0.002374 & x431 & 0.001613 \\
-			x103        & -0.006848 & x551 &-0.002365 & x571 &-0.001550 \\
-			x583        & 0.005797  & x497 & 0.002339 & x247 & 0.001472 \\
-			x184        & 0.005055  &      &          &      &          \\
+      $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^0_\mathbf{m})$ & 0.584211 & 0.764337 \\
+      $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^1_\mathbf{m})$ & 0.642828 & 0.801765 \\
+      $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^1_\mathbf{m})$ & -4.153173 & 0.217520 \\
+      $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^0_\mathbf{m})$ & -2.024091 & 0.051963 \\
 			\hline
 		\end{tabular}
 	\end{table}
+\end{frame}
 
+\begin{frame}{\textbf{局部線性模型跨群比較}}
+  \begin{figure}
+  \centering
+
+  \includegraphics[width=0.3\linewidth]{img/g0onG0vsf0(G0).png}
+  \hfill
+  \includegraphics[width=0.3\linewidth]{img/g1onG1vsf1(G1).png}
+
+  \vspace{0.5em}
+
+  \includegraphics[width=0.3\linewidth]{img/g0onG1vsf1(G1).png}
+  \hfill
+  \includegraphics[width=0.3\linewidth]{img/g1onG0vsf0(G0).png}
+
+  \end{figure}
 \end{frame}
 
 \begin{frame}{\textbf{結果總結}}
