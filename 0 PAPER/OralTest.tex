@@ -102,52 +102,51 @@
 \end{frame}
 
 %---------------------------------
-\section{背景與動機}
+\section{緒論}
 
 \begin{frame}
   \centering
   \huge{背景與動機}
 \end{frame}
 
-\begin{frame}{\textbf{研究背景}}
+\begin{frame}{\textbf{背景與動機}}
+  \vspace{-0.15cm}
   \begin{figure}
 			\centering
-			\includegraphics[width=0.8\linewidth]{img/wafer.png}
+			\includegraphics[width=0.65\linewidth]{img/semiconductorlogo.jpg}
   \end{figure}
-  半導體製程：累積大量資料，同時具有高維度、高缺失率與類別不平衡，建模與解釋皆具難度
-  
-  模型預測：黑箱模型有很好的預測／分類能力，且在品質預測可作為良率改善與製程監控的基礎
+  \vfill
+  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://www.retech.com.tw/key-projects/detail/167}{鋒霈環境科技股份有限公司}}
 \end{frame}
 
-\begin{frame}{\textbf{研究動機}}
-  \vspace{-0.5cm}
-  \begin{figure}
+\begin{frame}{\textbf{背景與動機}}
+    \begin{figure}
 			\centering
-			\includegraphics[width=0.8\linewidth]{img/blackbox.png}
+			\includegraphics[width=1\linewidth]{img/semiconductorprocess.png}
   \end{figure}
-  \vspace{-1cm}
-  \begin{itemize}
-    \item 黑箱模型如何決定某一點是屬於 Pass 還是 Fail？依據是？
-  \end{itemize}
+  \vfill
+  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://www.semi.org/zh/technology-trends/what-is-a-semiconductor}{SEMI 國際半導體產業協會}}
+\end{frame}
+
+\begin{frame}
+  \centering
+  \huge{文獻回顧}
 \end{frame}
 
 \begin{frame}{\textbf{文獻回顧}}
 \begin{itemize}
-  \item 黑箱模型可作為高維資料的強基準，但解釋性不足。
-  \item SHAP 可量化特徵貢獻 \cite{LundbergLee2017}
-  \item LIME 可做局部解釋，但在高維異質資料下可能不穩定。 \cite{Ribeiro2016}
+  \item 賴立夫(2022) 提出決策樹。\cite{Lai2022}
+  \item Lundberg \& Lee(2017)提出 SHAP 。\cite{LundbergLee2017}
+  \item Ribeiro et.al(2016) 提出 LIME 。\cite{Ribeiro2016}
 \end{itemize}
 \end{frame}
-
-%---------------------------------
-\section{問題與目的}
 
 \begin{frame}
   \centering
   \huge{問題與目的}
 \end{frame}
 
-\begin{frame}{\textbf{研究目的}}
+\begin{frame}{\textbf{問題與目的}}
   \begin{itemize}
     \item 若整體資料存在多個子群，單一模型的局部解釋可能混合不同規則。
     \begin{itemize}  
@@ -164,14 +163,14 @@
 \end{frame}
 
 %---------------------------------
-\section{資料與前處理}
+\section{研究資料}
 
 \begin{frame}
   \centering
-  \huge{資料與前處理}
+  \huge{資料介紹}
 \end{frame}
 
-\begin{frame}{\textbf{研究資料}}
+\begin{frame}{\textbf{資料介紹}}
   \begin{itemize}
     \item 半導體製程資料 SEmi COnductor Manufacturing 
   \end{itemize}
@@ -214,9 +213,9 @@
     \centering
     \includegraphics[width=1\linewidth]{img/missingvalue.png}
   \end{figure}
-  \begin{itemize}
-    \item 動作：移除缺失值數量超過 1000 筆的單一特徵
-  \end{itemize}
+  % \begin{itemize}
+  %   \item 動作：移除缺失值數量超過 1000 筆的單一特徵
+  % \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{資料 EDA - 單一特徵的相異值}}
@@ -224,39 +223,42 @@
     \centering
     \includegraphics[width=1\linewidth]{img/uniquevalue.png}
   \end{figure}
-  \begin{itemize}
-    \item 動作：移除相異值種類低於 10 種的單一特徵
-  \end{itemize}
+  % \begin{itemize}
+  %   \item 動作：移除相異值種類低於 10 種的單一特徵
+  % \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{資料 EDA - 補齊剩餘缺失值}}
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.8\linewidth]{img/simpleNA.png}
-  \end{figure}
-  \begin{itemize}
-    \item KNN 補值法在缺失值估計上具有良好的穩健性\cite{Troyanskaya}
-    \item 動作：採用 KNN imputer 進行補值，設定 $k=10$
-  \end{itemize}
-\end{frame}
+% \begin{frame}{\textbf{資料 EDA - 補齊剩餘缺失值}}
+%   \begin{figure}
+%     \centering
+%     \includegraphics[width=0.8\linewidth]{img/simpleNA.png}
+%   \end{figure}
+%   \begin{itemize}
+%     \item KNN 補值法在缺失值估計上具有良好的穩健性\cite{Troyanskaya}
+%     \item 動作：採用 KNN imputer 進行補值，設定 $k=10$
+%   \end{itemize}
+% \end{frame}
 
 \begin{frame}{\textbf{資料 EDA - 極端點}}
   \begin{itemize}
     \item 離群樣本對PCA主成分方向與投影結果造成影響\cite{Hubert2005}
-    \item 動作：依門檻 $PC1\le 10$ 及 $PC2\le 10$ 移除極端點
   \end{itemize}
   \vspace{0.3cm}
-  \begin{columns}[c]
-    \column{0.48\textwidth}
+  \begin{figure}
     \centering
-    前\\
-    \includegraphics[width=\linewidth]{img/未移除outlier做pca.png}
+    \includegraphics[width=0.8\linewidth]{img/未移除outlier做pca.png}
+  \end{figure}
+  % \begin{columns}[c]
+  %   \column{0.48\textwidth}
+  %   \centering
+  %   前\\
+  %   \includegraphics[width=\linewidth]{img/未移除outlier做pca.png}
 
-    \column{0.48\textwidth}
-    \centering
-    後\\
-    \includegraphics[width=\linewidth]{img/移除outlier做pca.png}
-  \end{columns}
+  %   \column{0.48\textwidth}
+  %   \centering
+  %   後\\
+  %   \includegraphics[width=\linewidth]{img/移除outlier做pca.png}
+  % \end{columns}
 \end{frame}
 
 \begin{frame}{\textbf{資料前處理}}
@@ -265,8 +267,12 @@
     \item 移除缺失值數量超過 1000 筆的單一特徵
     \item 移除相異值種類低於 10 種的單一特徵
     \item 採用 KNN imputer 進行補值，設定 $k=10$
-    \item 依門檻 $PC1\le 10$ 及 $PC2\le 10$ 移除極端點
+    \item 移除極端點
   \end{enumerate}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/移除outlier做pca.png}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{\textbf{最終分析資料}}
