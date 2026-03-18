@@ -120,12 +120,21 @@
 \end{frame}
 
 \begin{frame}{\textbf{背景與動機}}
-    \begin{figure}
+  \begin{figure}
 			\centering
 			\includegraphics[width=1\linewidth]{img/semiconductorprocess.png}
   \end{figure}
   \vfill
   \hspace*{0pt}\small{\textit{圖片來源：}\href{https://www.semi.org/zh/technology-trends/what-is-a-semiconductor}{SEMI 國際半導體產業協會}}
+\end{frame}
+
+\begin{frame}{\textbf{背景與動機}}
+    \begin{figure}
+			\centering
+			\includegraphics[width=1\linewidth]{img/waferyield.png}
+  \end{figure}
+  \vfill
+  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://de.wikipedia.org/wiki/Ausbeute_(Halbleitertechnik)}{WIKIPIEDA}}
 \end{frame}
 
 \begin{frame}
@@ -201,32 +210,32 @@
   \hspace*{0pt}\small{\textit{資料來源：}\href{https://archive.ics.uci.edu/dataset/179/secom}{UCI SECOM Dataset}}
 \end{frame}
 
-\begin{frame}{\textbf{資料 EDA - 目標變數}}
+\begin{frame}{\textbf{資料介紹 - 目標變數}}
   \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{img/y.png}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textbf{資料 EDA - 單一特徵的缺失值}}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{img/missingvalue.png}
-  \end{figure}
-  % \begin{itemize}
-  %   \item 動作：移除缺失值數量超過 1000 筆的單一特徵
-  % \end{itemize}
-\end{frame}
+% \begin{frame}{\textbf{資料 EDA - 單一特徵的缺失值}}
+%   \begin{figure}
+%     \centering
+%     \includegraphics[width=1\linewidth]{img/missingvalue.png}
+%   \end{figure}
+%   \begin{itemize}
+%     \item 動作：移除缺失值數量超過 1000 筆的單一特徵
+%   \end{itemize}
+% \end{frame}
 
-\begin{frame}{\textbf{資料 EDA - 單一特徵的相異值}}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{img/uniquevalue.png}
-  \end{figure}
+% \begin{frame}{\textbf{資料 EDA - 單一特徵的相異值}}
+%   \begin{figure}
+%     \centering
+%     \includegraphics[width=1\linewidth]{img/uniquevalue.png}
+%   \end{figure}
   % \begin{itemize}
   %   \item 動作：移除相異值種類低於 10 種的單一特徵
   % \end{itemize}
-\end{frame}
+% \end{frame}
 
 % \begin{frame}{\textbf{資料 EDA - 補齊剩餘缺失值}}
 %   \begin{figure}
@@ -239,14 +248,14 @@
 %   \end{itemize}
 % \end{frame}
 
-\begin{frame}{\textbf{資料 EDA - 極端點}}
+\begin{frame}{\textbf{資料介紹 - 極端點}}
   \begin{itemize}
     \item 離群樣本對PCA主成分方向與投影結果造成影響\cite{Hubert2005}
   \end{itemize}
   \vspace{0.3cm}
   \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{img/未移除outlier做pca.png}
+    \includegraphics[width=0.75\linewidth]{img/未移除outlier做pca.png}
   \end{figure}
   % \begin{columns}[c]
   %   \column{0.48\textwidth}
@@ -261,7 +270,7 @@
   % \end{columns}
 \end{frame}
 
-\begin{frame}{\textbf{資料前處理}}
+\begin{frame}{\textbf{資料介紹}}
   \begin{enumerate}[(1)]
     \item 目標變數重新編碼：Pass（$-$1 $\to$ 0），移除時間欄位
     \item 移除缺失值數量超過 1000 筆的單一特徵
@@ -269,13 +278,10 @@
     \item 採用 KNN imputer 進行補值，設定 $k=10$
     \item 移除極端點
   \end{enumerate}
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/移除outlier做pca.png}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{\textbf{最終分析資料}}
+  % \begin{figure}
+  %   \centering
+  %   \includegraphics[width=0.5\linewidth]{img/移除outlier做pca.png}
+  % \end{figure}
   \begin{itemize}
     \item 最終分析資料為 1525 筆樣本、459 個特徵
   \end{itemize}
@@ -333,7 +339,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{黑箱模型}}
+\begin{frame}{\textbf{機器學習模型}}
   \begin{itemize}
     \item Skicit-learn: XGBClassifier
     \item 評估方式：五折交叉驗證

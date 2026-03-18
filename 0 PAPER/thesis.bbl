@@ -31,13 +31,6 @@ Hubert, M., Rousseeuw, P.~J., and Vanden~Branden, K. (2005).
 \newblock {\em Technometrics}, 47(1), 64--79.
 \newblock https://doi.org/10.1198/004017004000000563.
 
-\bibitem[Liu et~al., 2022]{Liu2022}
-Liu, D.-Y., Xu, L.-M., Lin, X.-M., Wei, X., Yu, W.-J., Wang, Y., and Wei, Z.-M.
-  (2022).
-\newblock {Machine Learning for Semiconductors}.
-\newblock {\em Chip}, 1, 100033.
-\newblock https://doi.org/10.1016/j.chip.2022.100033.
-
 \bibitem[Lundberg and Lee, 2017]{LundbergLee2017}
 Lundberg, S. and Lee, S. (2017).
 \newblock {A Unified Approach to Interpreting Model Predictions}.
