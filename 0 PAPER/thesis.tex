@@ -28,6 +28,8 @@
 
 % object position
 \usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 
 % graphic
 \usepackage{graphicx}
@@ -277,8 +279,8 @@
 		\label{fig:waferprocess}
   	\end{figure}
 
-	這些資料並非主要用來技術生產過程，
-	而是被用來監控製程狀態、辨識異常，
+	這些資料除了用來記錄生產過程，
+	也被用來監控製程狀態、辨識異常，
 	以降低不良品產出。
 	也因此，
 	為了良率的進步與品質的穩定需求，
@@ -287,17 +289,17 @@
 	常見的任務便是如何透過分析量測變數來判斷產品最終是屬於良品（Pass）還是不良品（Fail），
 
 	近年來，
-	多項研究使用機器學習方法進行品質的分類，
-	並以準確度等指標比較模型表現。
+	多項研究使用機器學習方法進行產品品質的預測，
+	並以準確度（Accuracy）等指標來比較模型表現。
 	然而在實務情境中，
 	僅有準確度往往不足以支援製程的決策。
 	工程部門更關心的是：
-	模型為何判斷結果為不良，
-	或者哪些製造過程及變數對分類具有影響性。
+	哪些製程變數是對產品品質最具重要性及影響性的。
 	換言之，
 	當產業開始利用機器學習方法分析製程資料時，
-	研究焦點便不再只停留於分類結果本身，
-	而是將問題轉向如何利用累積的大量製程資料，來支援品質的監控與說明分類判斷的依據。
+	研究焦點不只注重在分類結果的好壞，
+	而是將問題轉向如何利用製程資料，
+	來回答工程師哪些變數對產品品質的結果是具決定性的。
 	
 	\section{文獻回顧}
 	在既有的研究中，
@@ -362,42 +364,61 @@
 
 	\section{研究目的}
 	
-	基於上述，
-	本研究並不只是建立一套可進行品質分類的方法，
-	而是在複雜的半導體製程資料中，
-	進一步分析得到對實務較具有參考價值的判斷依據。
-
-	其原因在於，
-	現有的局部解釋方法仍可能不穩定，
-	主要來自兩個原因。
+	然而，
+	現有的解釋方法仍可能不穩定，
+	主要來自以下幾個原因。
 
 	第一，
+	面對高維度的製程資料，
+	其特性是量測變數數量龐大，
+	但是觀察樣本數不足以支撐對各變數的影響；
+	若採用結構較淺的模型（如決策樹）進行解釋，
+	其表現可能受限於模型本身的能力。
+
+	第二，
 	製程資料可能存在多種製程狀態，
-	亦即混合的子群結構。
+	亦即混合的結構。
 	若以單一分類基準描述全體樣本，
-	其決策邊界可能同時存在多種不同的規則，
+	其決策方面可能同時存在多種不同的規則，
 	則對單一樣本的局部解釋，
 	得到的可能是混合後的分類標準，
-	導致局部解釋在不同樣本間缺乏可比性。
-	
-	第二，
+	導致局部解釋缺乏穩定及信任。
+	舉個簡單的例子：
+	好比像是在一間咖啡廳，
+	我們想要知道這間咖啡廳的顧客在消費能力與咖啡價的關係，
+	可是咖啡廳的顧客千奇百種，
+	有老人、有年輕人、有工程師、有服務業各式各樣的人群，
+	若我們以整群下去做分析，
+	那可能得到的結果是混雜的。
+	可是如果我們能先把相似的族群放一群，
+	也就是資料中彼此相似的樣本，
+	可能是變數調查結果是一群學生、一群老年人或一群上班族，
+	那是不是對於整個分析的結果會更加分明？
+	所以這也是我們的假設，
+	在整筆資料中有彼此相似的個體，
+	個體內部所形成的群與群之間存在明顯差異，
+	因此，
+	透過分群或許能讓分析結果更具有信心與穩定。
+
+	第三，
 	在高維空間中，
 	以隨機擾動的方式生成鄰近樣本時，
 	樣本容易偏離真實資料分布，
 	使局部刻劃模型可能在外插的區域擬合，
-	導致解釋與實際資料機制不一致。
+	導致局部的解釋與實際資料機制不一致。
+	
 
-	因此
-	本研究在保留分類任務的前提下，
-	進一步建立一套能對複雜分類結果提供局部可解釋的分析方法。
-	包括：
-	先透過分群降低資料異質性對模型學習過程的干擾；
-	再藉由設計可控制的局部樣本生成方式，
-	以提升局部模型擬合的穩定性，
-	並降低外插可能造成的偏誤；
-	最後建立可檢視的局部刻劃模型，
-	使分類結果不只是看預測表現的比較，
-	還能轉為製程改善上較具有參考價值的資訊。
+	因此，
+	本研究進一步建立一套能對複雜分類結果提供局部可解釋的分析方法。
+	具體而言：
+	先透過分群降低資料異質性及其對訓練模型時的干擾；
+	再設計局部範圍中的樣本生成方式，
+	以便在局部模型擬合時，
+	可提升模型的穩定性，
+	同時降低樣本生成時偏離資料分布所造成的外插風險；
+	最後建立局部刻劃模型，
+	使分類結果不只是看預測表現，
+	還能轉為對製程改善具有參考價值的資訊。
 
 	\section{章節介紹}
 	第二章介紹研究資料；第三章說明研究方法與流程，包含分群、訓練分類模型、擬合局部刻劃模型；第四章呈現研究結果與分析；第五章總結研究結論與未來工作方向。
@@ -617,10 +638,73 @@
 	\section{流程大綱}
 
 		\begin{figure}[H]
-			\centering
-			\includegraphics[width=1\linewidth]{img/process.png}
-			\caption{流程大綱}
-			\label{fig:流程}
+		\centering
+		\resizebox{\textwidth}{!}{%
+		\begin{tikzpicture}[
+			>=Latex,
+			node distance=1.2cm and 0.8cm,
+			every node/.style={font=\large},
+			line/.style={draw=black!60, very thick, -Latex},
+			box/.style={
+				draw=black!60,
+				very thick,
+				fill=white!15,
+				minimum width=3.2cm,
+				minimum height=1.6cm,
+				align=center
+			},
+			roundbox/.style={
+				box,
+				rounded corners=12pt
+			},
+			io/.style={
+				draw=black!60,
+				very thick,
+				fill=white!15,
+				trapezium,
+				trapezium left angle=70,
+				trapezium right angle=110,
+				minimum width=2.8cm,
+				minimum height=1.6cm,
+				align=center
+			}
+			]
+
+			% 上排
+			\node[io] (read) {資料\\讀取};
+			\node[box, right=of read] (prep) {資料前處理};
+			\node[box, right=of prep] (cluster) {分群};
+			\node[box, right=of cluster, minimum width=3.6cm] (keep) {保留原始資料};
+
+			% 下排
+			\node[box, below=3.2cm of read, xshift=0.2cm] (blackbox) {訓練分類模型};
+			\node[box, right=1.8cm of blackbox, yshift=1.2cm] (compare) {比較群間差異};
+			\node[box, right=1.8cm of blackbox, yshift=-1.2cm] (local) {建立\\局部刻劃模型};
+			\node[box, right=1.8cm of compare, yshift=-1.2cm] (result) {結果與討論};
+			\node[roundbox, right=of result, minimum width=2.6cm] (conclusion) {結論};
+
+			% 上排箭頭
+			\draw[line] (read) -- (prep);
+			\draw[line] (prep) -- (cluster);
+			\draw[line] (cluster) -- (keep);
+
+			% 從 keep 繞到 blackbox
+			\draw[line] (keep.south) |- ([yshift=2.2cm]blackbox.north) -| (blackbox.north);
+
+			% blackbox 分叉
+			\draw[line] (blackbox.east) -- ++(0.8,0) |- (compare.west);
+			\draw[line] (blackbox.east) -- ++(0.8,0) |- (local.west);
+
+			% compare / local 匯入 result
+			\draw[line] (compare.east) -- ++(0.8,0) |- (result.west);
+			\draw[line] (local.east) -- ++(0.8,0) |- (result.west);
+
+			% result -> conclusion
+			\draw[line] (result) -- (conclusion);
+		\end{tikzpicture}
+		}
+		\caption{流程大綱}
+		\label{fig:流程}
 		\end{figure}
 
 	如圖 \ref{fig:流程} 為整個研究流程大綱，細部說明如 \ref{sec:資料降維與分群}。
@@ -653,17 +737,17 @@
 	\mathbf{x}_{\text{new}}=\mathbf{x}_i+\lambda\left(\mathbf{x}_{neighbor}-\mathbf{x}_i\right),\quad \lambda\sim\mathrm{Uniform}(0,1)
 	$$
 	將少數類別資料增至與多數類別資料相近比例後，
-	接著再使用 PCA 做降維，
-	其降維後的 PCA 空間的二維主成分如圖 \ref{fig:移除outlier做pca的SMOTEdata}。
+	接著再使用 PCA 做降維。
+	% 其降維後的 PCA 空間的二維主成分如圖 \ref{fig:移除outlier做pca的SMOTEdata}。
 
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=1\linewidth]{img/移除outlier做pca的SMOTEdata.png}
-			\caption{SMOTE 後的合成資料之 PCA 投影}
-			\label{fig:移除outlier做pca的SMOTEdata}
-		\end{figure}
+		% \begin{figure}[H]
+		% 	\centering
+		% 	\includegraphics[width=1\linewidth]{img/移除outlier做pca的SMOTEdata.png}
+		% 	\caption{SMOTE 後的合成資料之 PCA 投影}
+		% 	\label{fig:移除outlier做pca的SMOTEdata}
+		% \end{figure}
 	
-	\item \textbf{分群建構與合成資料移除（僅保留真實資料供後續建模）}：
+	\item \textbf{分群與合成資料移除（僅保留真實資料供後續建模）}：
 	
 	本研究採用k-平均演算法(k-means)做分群以處理資料異質性，
 	在 PCA 空間中依照樣本結構將資料切分為數個子群，
@@ -685,54 +769,54 @@
 	\(\boldsymbol{\mu}_i\) 為該群中心，
 	WCSS 隨著 k 增加必然下降，
 	因此選擇 k 值在 WCSS 降幅最大時作為分成 $k$ 群的依據。
-	本研究最終採用 $k=2$ 進行分群，
-	如圖 \ref{fig:移除outlier做pca+kmeans的SMOTEdata} 所示。
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=1\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
-			\caption{SMOTE 後的合成資料在 PCA 空間之分群}
-			\label{fig:移除outlier做pca+kmeans的SMOTEdata}
-		\end{figure}
+	本研究最終採用 $k=2$ 進行分群。
+	% 如圖 \ref{fig:移除outlier做pca+kmeans的SMOTEdata} 所示。
+	% 	\begin{figure}[H]
+	% 		\centering
+	% 		\includegraphics[width=1\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
+	% 		\caption{SMOTE 後的合成資料在 PCA 空間之分群}
+	% 		\label{fig:移除outlier做pca+kmeans的SMOTEdata}
+	% 	\end{figure}
+
 	另外，
 	需強調的是：
 	SMOTE 僅用於降維與分群的階段，
 	以改善少數類別在降維空間的資訊；
 	完成分群後，
 	會將合成資料移除，
-	只保留真實資料集。
-	在圖 \ref{fig:移除outlier做pca+kmeans的SMOTEdata} 上移除合成資料後，
-	如圖 \ref{fig:移除outlier做pca+kmeans的移除合成data含y} 所示（以顏色標示少數類別），
-	可見各群中仍包含少數類別樣本，
-	故後續得以在各群內分別進行分類模型的訓練與評估。
-
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=1\linewidth]{img/移除outlier做pca+kmeans的移除合成data含y.png}
-			\caption{移除極端點與合成樣本後的原始資料在 PCA 空間之分群}
-			\label{fig:移除outlier做pca+kmeans的移除合成data含y}
-		\end{figure}
+	只保留真實資料集以便後續在各群內分別進行分類模型的訓練與評估。
+	% 在圖 \ref{fig:移除outlier做pca+kmeans的SMOTEdata} 上移除合成資料後，
+	% 如圖 \ref{fig:移除outlier做pca+kmeans的移除合成data含y} 所示（以顏色標示少數類別），
+	% 可見各群中仍包含少數類別樣本，
+	% 故後續得以在各群內分別進行分類模型的訓練與評估。
+		% \begin{figure}[H]
+		% 	\centering
+		% 	\includegraphics[width=1\linewidth]{img/移除outlier做pca+kmeans的移除合成data含y.png}
+		% 	\caption{移除極端點與合成樣本後的原始資料在 PCA 空間之分群}
+		% 	\label{fig:移除outlier做pca+kmeans的移除合成data含y}
+		% \end{figure}
 		
 	\end{enumerate}
 
-	\subsection{分類模型訓練與評估}
+	\subsection{訓練分類模型}
 
-	\begin{enumerate}
-	\item \textbf{訓練全體與各群內之分類模型}：
-
-	於移除合成資料後，
-	在全體與各群內各自訓練一個分類模型，
-	以作為後續局部格子點的機率輸出函數。
-	本研究中採用樹模型中的極限梯度提升（Extreme Gradient Boosting, XGBoost）作為分類模型的訓練，
+	本研究在建立模型方面採用樹模型中的極限梯度提升（Extreme Gradient Boosting, XGBoost）。
 
 	XGBoost 為監督式學習方法，
 	基於梯度提升決策樹（Gradient Boosting Decision Tree），
 	以加法模型逐步疊加弱學習器（決策樹），
 	並透過損失函數的梯度資訊進行更新，
 	同時引入多種優化以提升效能與模型泛化能力，
-	可用於解決迴歸與分類問題，
+	可用於解決預測與分類問題，
 	亦是目前最常被使用在 Kaggle 資料分析競賽當中的機器學習模型。
+	
+	\subsection{中心點選取與局部生成格子點擬合模型}
+	\label{sec:中心點選取與局部生成格子點擬合模型}
+	\begin{enumerate}
+		
+	\item \textbf{群內樣本挑選與中心點建立}：
 
-	模型訓練與效能評估皆採用五折交叉驗證（ $k$-fold Cross Validation, $k=5$）。
+	本研究在建立模型階段有採用五折交叉驗證（ $k$-fold Cross Validation, $k=5$）。
 	將資料切分成 $80\%$ 作為訓練集資料，
 	$20\%$ 作為測試集資料，
 	共依序訓練五次（五折）以降低單次切分造成的評估偏差，
@@ -740,70 +824,21 @@
 	僅對訓練集執行 SMOTE 以提升少數類別可分性，
 	測試集則維持不變。
 
-	\item \textbf{各群內分類模型之效能評估}：
-
-	當每一折完成測試後，	
-	每筆樣本皆會被當作測試集而得到模型輸出的機率。
-	此外，
-	\cite{Bengio} 表示 $k$-折交叉驗證在不同折之間會使用相同的資料作為訓練集，
-	使各折的評估結果具有相關性，
-	倘若直接以各折的分數去建立信賴區間，
-	在統計上並不直觀且可能產生偏差。
-
-	因此，
-	本研究採用有放回的方式反覆抽取相同樣本數，
-	每次重抽會計算評估指標 Accuracy(ACC)、誤報率（False Alarm Rate, FAR）與 ROC-AUC ，
-	來建構其 95\% 信賴區間。
-	評估指標定義如下：
-	$$
-	\mathrm{Acc}=\frac{TP+TN}{TP+TN+FP+FN},
-	\qquad
-	\mathrm{FAR}=\frac{FP}{FP+TN}
-	$$
-	ROC-AUC 則以模型輸出機率於不同門檻下所形成的 ROC 曲線面積表示。
-	其中真陰性（TN）、假陽性（FP）、假陰性（FN）、真陽性（TP）分別對應「Pass判為Pass」、「Pass判為Fail」、「Fail判為Pass」、「Fail判為Fail」。
-	其說明如表 \ref{tab:confusion_matrix} 所示。
-
-	\begin{table}[H]
-		\centering
-		\caption{二元分類之混淆矩陣}
-		\label{tab:confusion_matrix}
-		\begin{tabular}{|c|c|c|}
-		\hline
-		& 預測為Pass & 預測為Fail \\
-		\hline
-		真實為Pass & TN & FP \\
-		\hline
-		真實為Fail & FN & TP \\
-		\hline
-		\end{tabular}
-	\end{table}
-	
-	\item \textbf{依各群內交叉驗證之測試集機率挑選樣本}：
-
 	在每一折交叉驗證中，
 	使用該折的訓練集所訓練的模型，
-	對該折的測試集預測為 Fail 的預測機率為 $\hat{p}\in[0,1$]。
-	本研究採用固定分類閾值為 $0.5$，
-	我們將機率轉為類別：
-	當 $\hat{p}\ge 0.5$ 時，模型判斷 $\hat{y}=1$（Fail）；
-	當 $\hat{p}<0.5$ 時，模型判斷 $\hat{y}=0$（Pass）。
-	五折交叉驗證後，
-	可得到每折測試集中的真實樣本之預測機率，
-	亦作為後續挑選局部分析樣本的依據。
+	輸出該折的測試集之機率為 $\hat{p}$（$\hat{p}\in [0,1$]），
+	並轉為類別 Pass 或 Fail。
+	本研究採用分類閾值為 $0.5$，
+	亦即，
+	當 $\hat{p}\ge 0.5$ 時，模型預測為 $\hat{y}=1$（Fail）；
+	當 $\hat{p}<0.5$ 時，模型預測為 $\hat{y}=0$（Pass）。
+	在五折交叉驗證後，
+	可得到所有樣本在模型輸出後的機率，
 
-	\end{enumerate}
-
-	\subsection{中心點選取與局部生成格子點擬合模型}
-	\label{sec:中心點選取與局部生成格子點擬合模型}
-	\begin{enumerate}
-	\item \textbf{群內樣本挑選與中心點建立}：
-
-	由前一小節所述，
-	設定的分類閾值為 $0.5$ ，
-	故樣本的分類模型輸出之預測機率愈接近 $0.5$ 時，
-	表示該樣本愈接近模型的決策邊界，
-	模型對該樣本的分類判斷亦較不明確。
+	而當該機率愈接近 $0.5$ 時，
+	表示該樣本愈接近模型的決策邊界。
+	換句話說，
+	就是模型預測該樣本為哪一類很不明確。
 	因此本研究設定篩選的門檻為： $$\lvert \hat{p}-0.5\rvert \le 0.05$$ 
 	並令其為群 $c$ 下的樣本集合 $S^c_n$。
 	此處的 0.05 並非理論上唯一的門檻，
@@ -811,8 +846,8 @@
 	一方面可保留足夠接近決策邊界的樣本，
 	另一方面亦可避免門檻過於嚴格而使樣本數太少，
 	不利後續分析與比較。
-	接著將其標準化後的特徵向量取平均，
-	定義為群 $c$ 的局部刻劃中心點： $$\mathbf{x}^c_{\mathrm{center}}=\frac{1}{|S^c_n|}\sum_{i\in S^c_n}\mathbf{x}_i=(x^c_1,\dots,x^c_p).$$
+	接著定義群 $c$ 的局部刻劃中心點： $$\mathbf{x}^c_{\mathrm{center}}=\frac{1}{|S^c_n|}\sum_{i\in S^c_n}\mathbf{x}_i=(x^c_1,\dots,x^c_p)$$
+	其中 $\mathbf{x}_i$ 為接近決策邊界的樣本點之特徵向量。
 
 	\item \textbf{局部格子點生成}：
 
@@ -841,7 +876,7 @@
 	此例表示該格子點由中心點在 $x_1$ 方向減少 $0.1$ 、在 $x_2$ 方向增加 $0.2$ 所形成。
 	若在二維情況下取所有組合，
 	則總共可形成 $5^2=25$ 個格子點，
-	構成一個以中心點為核心的鄰域。
+	構成局部範圍。
 
 	\begin{figure}[H]
 	\hspace{1.5cm}
@@ -879,56 +914,94 @@
 	\label{fig:格點範例}
 	\end{figure}
 
-	\item \textbf{抽樣做局部線性刻劃}：
+	\item \textbf{特徵選擇與建立局部刻劃模型}：
 	
 	然而，
 	本研究 $p=459$ 且令 $k=2$ ，
-	若對所有 $p$ 個維度取所有組合，
+	若對整個 $p$ 維度取所有組合，
 	則理論上的格子點總數為 $$(2k+1)^p = 5^{459}$$
 	其數量極為龐大，
 	無法完整列舉。
 	因此，
-	本研究將此完整格子點集合視為理論上的局部鄰域定義，
+	本研究將所有格子點視為理論上某個局部的範圍，
 	實作上並非窮舉全部組合，
-	而是從該集合中隨機抽樣格子點建立局部刻劃模型，
-	其過程如下：
+	而是透過隨機抽樣的方式建立該局部空間，
+	以進行後續分析。
 
-	抽樣 100 萬筆的格子點後，
-	以該格子點的特徵向量作為自變數，
-	以分類模型對該格子點所輸出的預測機率作為應變數，
-	採用多元線性迴歸模型建立局部線性刻劃模型，
+	首先，
+	自所有格子點鐘隨機抽樣 100 萬筆，
+	以其特徵向量作為自變數，
+	以分類模型對該其所輸出的預測機率作為應變數，
+	建立多元迴歸線性模型，
 	並以普通最小平方法（Ordinary least squares, OLS）估計其迴歸係數。
-	其目的在於以線性模型刻劃分類模型於中心點附近的局部變動關係。
-
-	具體而言，
-	OLS 是透過最小化殘差平方和（Residual Sum of Squares）來估計迴歸係數；
+	OLS 是透過最小化殘差平方和（Residual Sum of Squares）進行評估，
 	當 $X$ 滿秩使 $X^\top X$ 可逆時，
 	其估計式為 $$\hat{\beta}=(X^\top X)^{-1}X^\top y$$
-	最後根據 p-value 門檻保留通過的特徵。
-	
-	\item \textbf{多輪特徵選擇與局部刻劃評估}：
 
-	本研究重複上述局部擬合的流程作為特徵選擇的機制，
-	於每次執行中依序進行 5 輪的特徵選擇，
-	各論所採用的 p-value 門檻依序為 $0.05, 0.01, 0.005, 0.001, 0.0005$ ，
-	該程序預計達到預設的輪數或保留特徵的集合不再變動為止。
-
-	為避免只做一次的多輪特徵選擇造成的偶然性，
-	本研究將上述 5 輪流程重複進行 50 次，
-	每次皆重新進行局部格子點抽樣與特徵選擇，
-	統計各特徵在最後一輪被保留的次數。
-	最後，
-	將 50 次重複於最後一輪皆被保留的特徵視為該群的局部刻劃模型所選定的特徵。
+	在此基礎上，
+	為篩選在局部範圍中具有穩定影響的特徵，
+	本研究進行重複抽樣與特徵選擇的流程：
+	於每次抽樣與模型擬合中，
+	依序以顯著水準 $\text{p-value} = \{ 0.05, 0.01, 0.005, 0.001, 0.0005\}$ 逐步選擇特徵，
+	並重複執行 50 次，
+	統計各特徵在最後一輪被保留的次數；
+	將 50 次重複中皆在最後一輪被保留的特徵視為該群的局部範圍中最具穩定的特徵。
 
 	在決定最終的特徵後，
-	再從相同的格子點生成集合中重新抽取 200 萬筆格子點，
+	再從相同的格子點生成方法中重新抽取 200 萬筆格子點，
 	以最終的特徵作為自變數，
 	並以其分類模型輸出的預測機率作為應變數，
-	重新以 OLS 擬合局部線性模型，
-	估計各特徵的係數來觀察分類模型在中心點附近的行為。
-	並以 $R^2$ 作為該局部線性模型對機率輸出的擬合度指標，
+	重新以 OLS 擬合最終的局部線性模型。
 	
 	\end{enumerate}
+
+	\section{評估方法}	
+	
+	\cite{Bengio} 表示 $k$-折交叉驗證在不同折之間會使用相同的資料作為訓練集，
+	使各折的評估結果具有相關性，
+	倘若直接以各折的分數去建立信賴區間，
+	在統計上並不直觀且可能產生偏差。
+
+	因此，
+	本研究改採重抽樣（Bootstrap）方法，
+	以有放回的方式反覆抽取相同的格子點生成方法中 200 萬筆格子點，	
+	並於每次重抽當中計算評估指標，
+	以其抽樣分布估計其點估計與其 95\% 信賴區間來判斷群間是否有差異。
+
+	評估指標包含準確率（Accuracy, ACC）、誤報率（False Alarm Rate, FAR）與 ROC-AUC ，
+	其定義如下：
+	$$
+	\mathrm{ACC}=\frac{TP+TN}{TP+TN+FP+FN},
+	\qquad
+	\mathrm{FAR}=\frac{FP}{FP+TN}
+	$$
+	ROC-AUC 則以模型輸出機率於不同門檻下所形成的 ROC 曲線面積表示。
+	其中真陰性（TN）、假陽性（FP）、假陰性（FN）、真陽性（TP）分別對應「Pass判為Pass」、「Pass判為Fail」、「Fail判為Pass」、「Fail判為Fail」。
+	其說明如表 \ref{tab:confusion_matrix} 所示。
+
+	\begin{table}[H]
+		\centering
+		\caption{二元分類之混淆矩陣}
+		\label{tab:confusion_matrix}
+		\begin{tabular}{|c|c|c|}
+		\hline
+		& 預測為Pass & 預測為Fail \\
+		\hline
+		真實為Pass & TN & FP \\
+		\hline
+		真實為Fail & FN & TP \\
+		\hline
+		\end{tabular}
+	\end{table}
+	
+	針對局部刻劃模型，
+	同樣採用重抽樣方法，
+	以估計決定係數 $R^2$ 之點估計與其 95\% 信賴區間，
+	以評估局部模型對分類模型在該範圍的擬合程度。
+	此外，
+	亦透過各特徵之迴歸係數，
+	觀察分類模型在中心點附近的局部行為，
+	以分析不同特徵對預測結果的影響方向與重要性。
 
 	\chapter{研究結果}
 	本章節先呈現分群後的分類模型評估，

@@ -83,7 +83,7 @@
 }
 
 % 正式口試時請改成論文正式題目
-% 高維半導體製程資料之分群式黑箱局部刻劃方法
+% 高維半導體製程資料之分群式分類模型局部刻劃方法
 \title{碩士論文口試\\[0.3em]\large }
 \author{學生　黃丞暘 \\　\\ 指導教授　曹振海}
 \institute{國立東華大學應用數學系統計碩士班}
@@ -157,17 +157,11 @@
 
 \begin{frame}{\textbf{問題與目的}}
   \begin{itemize}
-    \item 若整體資料存在多個子群，單一模型的局部解釋可能混合不同規則。
-    \begin{itemize}  
-      \item 先分群，再建立黑箱模型
-    \end{itemize}
+    \item 量測變數龐大，樣本數不足
     \vspace{0.3cm}
-    \item 若以隨機擾動生成鄰近點，可能偏離真實資料分布，產生外插風險。
-    \begin{itemize}
-      \item 設計局部格子點的生成方法
-    \end{itemize}
+    \item 多個子群結構　【舉例】咖啡廳
     \vspace{0.3cm}
-    \item 建立可檢視的局部刻劃模型，以作為黑箱模型在分類行為上的可解釋依據。
+    \item 隨機擾動生成
   \end{itemize}
 \end{frame}
 
@@ -312,39 +306,93 @@
 \end{frame}
 
 \begin{frame}{\textbf{流程大綱}}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{img/process.png}
-  \end{figure}
+\centering
+\resizebox{1\textwidth}{!}{
+  \begin{tikzpicture}[
+      >=Latex,
+      node distance=1.2cm and 0.8cm,
+      every node/.style={font=\large},
+      line/.style={draw=black!60, very thick, -Latex},
+      box/.style={
+          draw=black!60,
+          very thick,
+          fill=white!15,
+          minimum width=3.2cm,
+          minimum height=1.6cm,
+          align=center
+      },
+      roundbox/.style={
+          box,
+          rounded corners=12pt
+      },
+      io/.style={
+          draw=black!60,
+          very thick,
+          fill=white!15,
+          trapezium,
+          trapezium left angle=70,
+          trapezium right angle=110,
+          minimum width=2.8cm,
+          minimum height=1.6cm,
+          align=center
+      }
+    ]
+
+    % 上排
+    \node[io] (read) {資料\\讀取};
+    \node[box, right=of read] (prep) {資料前處理};
+    \node[box, right=of prep] (cluster) {分群};
+    \node[box, right=of cluster, minimum width=3.6cm] (keep) {保留原始資料};
+
+    % 下排
+    \node[box, below=3.2cm of read, xshift=0.2cm] (blackbox) {訓練分類模型};
+    \node[box, right=1.8cm of blackbox, yshift=1.2cm] (compare) {比較群間差異};
+    \node[box, right=1.8cm of blackbox, yshift=-1.2cm] (local) {建立\\局部刻劃模型};
+    \node[box, right=1.8cm of compare, yshift=-1.2cm] (result) {結果與討論};
+    \node[roundbox, right=of result, minimum width=2.6cm] (conclusion) {結論};
+
+    % 上排箭頭
+    \draw[line] (read) -- (prep);
+    \draw[line] (prep) -- (cluster);
+    \draw[line] (cluster) -- (keep);
+
+    % 從 keep 繞到 blackbox
+    \draw[line] (keep.south) |- ([yshift=2.2cm]blackbox.north) -| (blackbox.north);
+
+    % blackbox 分叉
+    \draw[line] (blackbox.east) -- ++(0.8,0) |- (compare.west);
+    \draw[line] (blackbox.east) -- ++(0.8,0) |- (local.west);
+
+    % compare / local 匯入 result
+    \draw[line] (compare.east) -- ++(0.8,0) |- (result.west);
+    \draw[line] (local.east) -- ++(0.8,0) |- (result.west);
+
+    % result -> conclusion
+    \draw[line] (result) -- (conclusion);
+  \end{tikzpicture}
+  }
 \end{frame}
 
 \begin{frame}{\textbf{分群設計：SMOTE $\rightarrow$ PCA $\rightarrow$ KMeans}}
   \begin{itemize}
-    \item 以 SMOTE 補強少數類別於降維空間中的資訊。
-    \item 於 PCA 空間以 k-means 進行分群。
-    \item 以 elbow method 選定群數 $k=2$。
+    \item \textbf{存在類別不平衡？}
+    
+    \vspace{0.3cm}
+    以 SMOTE 補強少數類別於降維空間中的資訊
+    \vspace{0.5cm}
   \end{itemize}
-  \begin{columns}[c]
-    \column{0.45\textwidth}
-    \centering
-    前\\
-    \includegraphics[width=\linewidth]{img/移除outlier做pca+kmeans的原始data.png}
-    \column{0.45\textwidth}
-    \centering
-    後\\
-    \includegraphics[width=\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
-  \end{columns}
+  % \begin{columns}[c]
+  %   \column{0.45\textwidth}
+  %   \centering
+  %   前\\
+  %   \includegraphics[width=\linewidth]{img/移除outlier做pca+kmeans的原始data.png}
+  %   \column{0.45\textwidth}
+  %   \centering
+  %   後\\
+  %   \includegraphics[width=\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
+  % \end{columns}
   \begin{itemize}
     \item 完成分群後移除合成樣本，只保留真實資料供後續建模
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{\textbf{機器學習模型}}
-  \begin{itemize}
-    \item Skicit-learn: XGBClassifier
-    \item 評估方式：五折交叉驗證
-    \item 僅在訓練集執行 SMOTE，每一折當測試集輸出機率值
-    \item 用 Accuracy($ACC$)、False Alarm Rate($FAR$)、$ROC-AUC$ 評估群間是否有差異
   \end{itemize}
 \end{frame}
 
@@ -395,7 +443,7 @@
 			\node[below] at (1.25,-0.73) {$\delta$};
 		\end{tikzpicture}
   \begin{itemize}
-    \item 以黑箱模型對格子點的輸出機率作為應變數
+    \item 以分類模型對格子點的輸出機率作為應變數
     \item 本研究：$p=459$、$k=2$
   \end{itemize} 
 \end{frame}
@@ -551,7 +599,12 @@
   \huge{結果與討論}
 \end{frame}
 
-\begin{frame}{\textbf{分群黑箱模型}}
+\begin{frame}{\textbf{比較分群後的分類模型}}
+  \begin{itemize}
+    \item 分類模型：XGBoost Classifier
+    \item 評估方式：重抽，計算點估計、建立 95\% 信賴區間
+  \end{itemize}
+  \vspace{0.5cm}
   \centering
   \resizebox{\textwidth}{!}{
   \begin{tabular}{|l|c|c|c|c|c|}
@@ -674,19 +727,19 @@
 
 \begin{frame}{\textbf{結果總結}}
 \begin{itemize}
-  \item 分群後，各群黑箱模型呈現不同的錯誤型態與可分類程度。
+  \item 分群後，各群分類模型呈現不同的錯誤型態與可分類程度。
   \item 以決策邊界附近樣本建立中心點，可聚焦於模型判斷最不明確的局部區域。
-  \item 結構化格子點可在可控制的鄰域內近似黑箱輸出，避免隨機擾動造成的外插偏誤。
-  \item 群內局部刻劃模型可將黑箱決策轉為具體的局部重要特徵與方向性資訊。
+  \item 結構化格子點可在可控制的鄰域內近似模型輸出，避免隨機擾動造成的外插偏誤。
+  \item 群內局部刻劃模型可將模型的決策轉為具體的局部重要特徵與方向性資訊。
 \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{結論}}
 \begin{itemize}
   \item 本研究提出一套適用於高維、缺失嚴重且類別不平衡製程資料的分析流程。
-  \item 透過先分群再於群內建模，可降低異質性對黑箱學習與局部解釋的干擾。
+  \item 透過先分群再於群內建模，可降低異質性對模型學習與局部解釋的干擾。
   \item 透過中心點與格子點設計，可在較低外插風險下建立局部線性刻劃模型。
-  \item 研究結果顯示，不同子群對應不同的黑箱局部決策結構，分群式局部刻劃具分析價值。
+  \item 研究結果顯示，不同子群對應不同的分類模型之局部決策結構，分群式局部刻劃具分析價值。
 \end{itemize}
 \end{frame}
 

@@ -1,4 +1,4 @@
 \beamer@sectionintoc {1}{緒論}{3}{0}{1}
 \beamer@sectionintoc {2}{研究資料}{11}{0}{2}
 \beamer@sectionintoc {3}{方法與流程}{16}{0}{3}
-\beamer@sectionintoc {4}{結果與討論}{23}{0}{4}
+\beamer@sectionintoc {4}{結果與討論}{22}{0}{4}

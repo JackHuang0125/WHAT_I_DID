@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex thesis"] 1773823338.74708 "thesis.aux" "thesis.bbl" "thesis" 1773823589.69989 0
+["bibtex thesis"] 1773986639.99684 "thesis.aux" "thesis.bbl" "thesis" 1773994171.70783 0
   "./apalike_custom.bst" 1772687957 25736 40ef02e6d93688cb0c64eb44a079fe4f ""
   "./references.bib" 1773212595 4081 aee6cdc986770c1c6ba770af2c038e5b ""
-  "thesis.aux" 1773823587 13812 816d822fe5a405c0c00a42837c58f135 "xelatex"
+  "thesis.aux" 1773994170 12878 e2675c878e06e36028077e8a70ca6810 "xelatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["xdvipdfmx"] 1773823588.56873 "thesis.xdv" "thesis.pdf" "thesis" 1773823589.70455 0
-  "thesis.xdv" 1773823587 374752 abc8bbc5ff1e48a2abe7c97a3f7a588a "xelatex"
+["xdvipdfmx"] 1773994170.78493 "thesis.xdv" "thesis.pdf" "thesis" 1773994171.71257 0
+  "thesis.xdv" 1773994170 379836 191d5bcb2f9c0ca944dca76a0c83b362 "xelatex"
   (generated)
   "thesis.pdf"
   (rewritten before read)
-["xelatex"] 1773823585.70756 "c:/Users/No/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" "thesis.xdv" "thesis" 1773823589.70011 0
+["xelatex"] 1773994168.51955 "c:/Users/No/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" "thesis.xdv" "thesis" 1773994171.70804 0
   "C:/Users/No/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758243793 27011562 5a194f1f729f3c84b35029ea57eb0ca7 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1233951848 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -69,9 +69,13 @@
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex" 1756451143 35251 5ff5b5b310c5ac882610e0ccc99095e7 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex" 1756451143 22012 81b34a0aa8fa1a6158cc6220b00e4f10 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex" 1756451144 8893 e851de2175338fdf7c17f3e091d94618 ""
+  "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex" 1756451144 3937 3f208572dd82c71103831da976d74f1a ""
+  "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex" 1756451144 339 be0fe46d92a80e3385dd6a83511a46f2 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex" 1756451144 11518 738408f795261b70ce8dd47459171309 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex" 1756451144 186859 0445d9a41a87648b4723e04765409541 ""
+  "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex" 1756451144 58801 1e750fb0692eb99aaac45698bbec96b1 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex" 1756451144 32995 ac577023e12c0e4bd8aa420b2e852d1a ""
+  "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex" 1756451144 161011 ba5eb2ff24ee291c22417ed4ca9ed62f ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/math/pgfint.code.tex" 1756451144 3063 8c415c68a0f3394e45cfeca0b65f6ee6 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/math/pgfmath.code.tex" 1756451144 949 cea70942e7b7eddabfb3186befada2e6 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/generic/pgf/math/pgfmathcalc.code.tex" 1756451144 13272 7777a64fbd07131a37d276b131c17ee2 ""
@@ -189,22 +193,18 @@
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/No/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" 1773823585 51154 be3f693687dcdd64ca90ae1080401fc7 ""
+  "c:/Users/No/Documents/GitHub/psychic-spoon/0 PAPER/thesis.tex" 1773994168 53469 5b0beab10bb059dc1a14ef7b9df300ee ""
   "img/NDHU_logo.png" 1767580746 188926 57d150a335f603bec77dda0e8786a7bd ""
   "img/missingvalue.png" 1773401035 31387 d8c005ae5724cbc6431934bc4d3cf69f ""
-  "img/process.png" 1773214948 73358 c98ca3b765a0ec88a85655eb5af4330c ""
   "img/semiconductorprocess.png" 1773730029 238291 85071090992ec420bba9083864024dab ""
   "img/uniquevalue.png" 1773401057 16712 072793166ae7263b3d233540bc94677e ""
   "img/未移除outlier做pca.png" 1773401082 30436 2a473adac6f3bba2e74f7a2e0f411751 ""
-  "img/移除outlier做pca+kmeans的SMOTEdata.png" 1772698703 135987 cd2c45324458820756fb906d9274efe8 ""
-  "img/移除outlier做pca+kmeans的移除合成data含y.png" 1772697618 110425 954e4fa2a4ffe233426c89e404401e0c ""
   "img/移除outlier做pca.png" 1773401102 63291 50b3869410236d21f7c0d0e249564aab ""
-  "img/移除outlier做pca的SMOTEdata.png" 1773401148 89548 bc3ea300b10b1c3233b108fb4800f1fe ""
-  "thesis.aux" 1773823587 13812 816d822fe5a405c0c00a42837c58f135 "xelatex"
-  "thesis.bbl" 1773823338 3109 15224ba1e491fbff3194a9a5aefe6829 "bibtex thesis"
-  "thesis.out" 1773823587 3223 a4e8506a3e7c49d81cf655b5f87afb60 "xelatex"
-  "thesis.tex" 1773823585 51154 be3f693687dcdd64ca90ae1080401fc7 ""
-  "thesis.toc" 1773823587 2459 158ba0a783114f37c47d130cb17c57ca "xelatex"
+  "thesis.aux" 1773994170 12878 e2675c878e06e36028077e8a70ca6810 "xelatex"
+  "thesis.bbl" 1773986640 3109 15224ba1e491fbff3194a9a5aefe6829 "bibtex thesis"
+  "thesis.out" 1773994170 3286 f62dc8af07d398a043d988b9015b40e2 "xelatex"
+  "thesis.tex" 1773994168 53469 5b0beab10bb059dc1a14ef7b9df300ee ""
+  "thesis.toc" 1773994170 2523 49d6cabc3d08d80f15727df9b19531a1 "xelatex"
   (generated)
   "thesis.aux"
   "thesis.log"
