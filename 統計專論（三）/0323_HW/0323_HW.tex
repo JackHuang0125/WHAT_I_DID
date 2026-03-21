@@ -1,5 +1,6 @@
 \documentclass[a4paper, 12pt]{article}  %set doc type and font size
 \usepackage{fontspec}
+\usepackage[left=2cm,right=2cm,top=2.2cm,bottom=2.2cm]{geometry}
 
 % math tools
 \usepackage{amsmath}
@@ -135,23 +136,30 @@
 
 \section*{2.9}
 \textbf{Sol.}
-
-D, D, R, O, R, R, R, D, R, D, D, R, D, D, R, R, R, O, D, D
+\begin{center}
+    D, D, R, O, R, R, R, D, R, D, D, R, D, D, R, R, R, O, D, D
+\end{center}
 \begin{enumerate}[i.]
-    \item \mbox{}\\
-    \begin{tabular}{c|c|c}
-        \hline
-        Political Status & Frequency & Relative Frequency \\
-        \hline
-    $D\ (\text{Democrats}) $ & 9 & 0.45 \\
-    $R\ (\text{Republicans})$ & 9 & 0.45 \\
-    $O\ (\text{Others})$ & 2 & 0.10 \\
-        \hline
-    \end{tabular}
-    \item \mbox{}\\
-    \includegraphics[width=0.8\linewidth]{2.9pie.png}
-    \item \mbox{}\\
-    \includegraphics[width=0.8\linewidth]{2.9bar.png}
+    \item \mbox{}
+    \begin{center}
+        \begin{tabular}{c|c|c}
+            \hline
+            Political Status & Frequency & Relative Frequency \\
+            \hline
+        $D\ (\text{Democrats}) $ & 9 & 0.45 \\
+        $R\ (\text{Republicans})$ & 9 & 0.45 \\
+        $O\ (\text{Others})$ & 2 & 0.10 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \item \mbox{}
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{2.9pie.png}
+    \end{center}
+    \item \mbox{}
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{2.9bar.png}
+    \end{center}
 \end{enumerate}
 
 
@@ -159,38 +167,157 @@ D, D, R, O, R, R, R, D, R, D, D, R, D, D, R, R, R, O, D, D
 \section*{2.11}
 \textbf{Sol.}
 \begin{enumerate}[i.]
-    \item \mbox{}\\
-    \begin{tabular}{c|c|c|c}
-        \hline
-        Class Interval & Frequency & Relative Frequency & Density\\
-        \hline
-    $[5,10)$  & 20 & 0.0615 & 0.0123\\
-    $[10,15)$ & 45 & 0.1385 & 0.0277\\
-    $[15,20)$ & 75 & 0.2308 & 0.0462\\
-    $[20,25)$ & 90 & 0.2769 & 0.0554\\
-    $[25,30)$ & 60 & 0.1846 & 0.0369\\ 
-    $[30,35)$ & 35 & 0.1077 & 0.0215\\
-        \hline
-    \end{tabular}
-    \item \mbox{}\\
-    \includegraphics[width=1\linewidth]{2.11Hist.png}
+    \item \mbox{}
+    \begin{center}
+        \begin{tabular}{c|c|c|c}
+            \hline
+            Class Interval & Frequency & Relative Frequency & Density\\
+            \hline
+        $[5,10)$  & 20 & 0.0615 & 0.0123\\
+        $[10,15)$ & 45 & 0.1385 & 0.0277\\
+        $[15,20)$ & 75 & 0.2308 & 0.0462\\
+        $[20,25)$ & 90 & 0.2769 & 0.0554\\
+        $[25,30)$ & 60 & 0.1846 & 0.0369\\ 
+        $[30,35)$ & 35 & 0.1077 & 0.0215\\
+            \hline
+        \end{tabular}
+    \end{center}
+    \item \mbox{}
+    \begin{center}
+        \includegraphics[width=0.65\linewidth]{2.11Hist.png}
+    \end{center}
     \item $$P(5\le X<20)=\frac{20+45+75}{325}\approx 0.4308$$
-    
-
 \end{enumerate}
 
 
 \section*{2.14}
 \textbf{Sol.}
 
+\begin{enumerate}[i.]
+    \item $$\hat{\pi}=\frac{x}{n}=\frac{272}{400}=0.68$$
+    \item 95\% CI for $\pi$ is $$hat{\pi}\pm Z_{0.025}\sqrt{\frac{\hat{\pi}(1-\hat{\pi})}{n}}=
+    0.68\pm 1.96\sqrt{\frac{0.68\cdot 0.32}{400}}=0.68\pm0.0457$$
+    So the 95\% CI is $$\left(0.6343, 0.7257\right)$$
+\end{enumerate}
+
 \section*{2.19}
-\textbf{Sol.}
+\textbf{Sol.} \mbox{}
+\begin{center}
+    \begin{tabular}{c|ccccccccc}
+        \hline
+        Year & 1942 & 1948 & 1954 & 1959 & 1967 & 1970 & 1975 & 1981 & 1983\\
+        \hline
+        City A & 45 & 0 & 4 & 21 & 9 & 1 & 30 & 17 & 53\\
+        City B & 40 & 10 & 2 & 20 & 7 & 9 & 33 & 17 & 50\\
+        $d_i=A_i-B_i$ & 5 & -10 & 2 & 1 & 2 & -8 & -3 & 0 & 3\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{enumerate}[i.]
+    \item We test $$H_0\text{：}\mu_d=0 \text{ vs } H_1\text{：}\mu_d\ne 0$$
+    The sample mean of the differences is
+    $$\bar{d}=\frac{5-10+2+1+2-8-3+0+3}{9}=-\frac{8}{9}\approx-0.8889$$
+    and the sample standard deviation is
+    $$s_d=\sqrt{\frac{\sum (d_i^{\,2})-(\sum d_i)^2/n}{n-1}}=\sqrt{\frac{(5^2+\dots+3^2)-[(-8)^2/9]}{8}}\approx 5.1099$$
+    Thus, the test statistic is
+    $$t=\frac{\bar{d}-\mu_d}{s_d/\sqrt{n}}=\frac{-0.8889}{5.1099/\sqrt{9}}\approx-0.5219$$
+    The degree of freedom are $9-1=8$
+    For a two-sided test with $\alpha=0.05$, the critival value $t_{0.025,\,8}=2.306$
+    Since $$-0.5219<2.306$$
+    So we fail to reject $H_0$.
+    
+    Therefore, at the 0.05 significance level, there is no significance differences between the average snowfalls of the two cities.
+\end{enumerate}
+
 
 \section*{2.21}
 \textbf{Sol.}
 
+5.6, 2.5, 3.7, 7.9, 11.3, 6.4, 3.2, 2.7, 0.5, 5.7, 3.2, 2.4, 7.6, 3.8, 5.7, 5.8, 3.4,
+5.1, 2.2, 4.0, 4.2, 4.2, 5.5, 1.5, 1.6, 6.3, 4.3, 5.0, 8.6, 6.3, 4.3, 6.4, 4.6, 2.0, 4.4
+\begin{enumerate}[i.]
+    \item Let $$g(\mu)=\mu(\mu+1)=\theta$$
+    $$n=35,\,\bar{X}=\frac{5.6+\dots4.4}{35}\approx 4.6257,\,s^2=\frac{(5.6^2+\dots+4.4^2)-[4.6257^2/35]}{35-1}\approx2.2203$$
+    The point estimate of $\theta$ is $$\hat{\theta}=g(\bar{X})=\bar{X}(\bar{X}+1)=4.6257(4.6257+1)\approx 26.0229$$
+    Since $$g'(\mu)=2\mu+1$$
+    By delta method, we have $$\sqrt{n}\left(g(\bar{X})-g(\mu)\right)\rightarrow N(0, [g'(\mu)]^2\sigma^2)$$
+    So the approximate standard error is
+    $$\widehat{SE}\left(g(\bar{X})\right)
+    =\sqrt{\frac{\left(2\bar{X}+1\right)^2s^2}{n}}
+    =\sqrt{\frac{\left(2\cdot 4.6257+1\right)^22.2203^2}{35}}\approx 3.8473$$
+    95\% CI for $\theta$ is $$\hat{\theta}\pm 1.96\,\widehat{SE}=26.0229\pm 1.96\cdot 3.8473=26.0229\pm 7.5407$$
+    So the 95\% CI is $$(18.4822,\,33.5637)$$
+    \item 
+    \begin{center}
+        \begin{verbatim}
+        x = np.array([
+        5.6, 2.5, 3.7, 7.9, 11.3, 6.4, 3.2, 2.7, 0.5, 5.7,
+        3.2, 2.4, 7.6, 3.8, 5.7, 5.8, 3.4, 5.1, 2.2, 4.0,
+        4.2, 4.2, 5.5, 1.5, 1.6, 6.3, 4.3, 5.0, 8.6, 6.3,
+        4.3, 6.4, 4.6, 2.0, 4.4])
+
+        B = 1000
+        n = len(x)
+        np.random.seed(611211106)
+
+        def theta_from_mean(m):
+            return m * (m + 1)
+
+        theta = np.empty(B)
+
+        for b in range(B):
+            sample = np.random.choice(x, size=n, replace=True)
+            mean = np.mean(sample)
+            theta[b] = theta_from_mean(mean)
+
+        lower = np.percentile(theta, 2.5)
+        upper = np.percentile(theta, 97.5)
+
+        print(f"95% bootstrap CI for theta = ({lower:.4f}, {upper:.4f})")
+        ---
+        95% bootstrap CI for theta = (19.5137, 34.2572)
+        \end{verbatim}
+    \end{center}
+    Using the bootstrap method, the 95\% bootstrap CI is $$(19.5137,\, 34.2572)$$
+    The delta-method interval is close to the boostrap interval, and it is slightly shifted to the right.
+\end{enumerate}
+
 \section*{2.25}
 \textbf{Sol.}
+
+The kernel density estimator of f (x) is defined by $$\hat{f}(x)=\frac{1}nh_n{\sum_{i=1}^nK\left(\frac{x-X_i}{h_n}\right)}$$
+where $h_n>0$ is a bandwidth and $K$ is a kernel function.
+Therefore
+\begin{center}
+    \begin{verbatim}
+        data = np.array([
+        5.6, 2.5, 3.7, 7.9, 11.3, 6.4, 3.2, 2.7, 0.5, 5.7,
+        3.2, 2.4, 7.6, 3.8, 5.7, 5.8, 3.4, 5.1, 2.2, 4.0,
+        4.2, 4.2, 5.5, 1.5, 1.6, 6.3, 4.3, 5.0, 8.6, 6.3,
+        4.3, 6.4, 4.6, 2.0, 4.4])
+    n = len(data)
+    h = 1.0
+    # Epanechnikov kernel
+    def epanechnikov(u):
+        return np.where(np.abs(u)<=0.5, 12/11*(1-u**2), 0.0)
+
+    def kde_epanechnikov(x, data, h):
+        u = (x[:, None]-data[None, :])/h
+        return np.sum(epanechnikov(u), axis=1)/(len(data)*h)
+
+    x_grid = np.linspace(min(data)-1, max(data)+1, 500)
+    y_kde = kde_epanechnikov(x_grid, data, h)
+
+    plt.figure(figsize=(8, 5))
+    plt.plot(x_grid, y_kde, linewidth=2)
+    plt.xlabel('x', fontsize=12)
+    plt.ylabel('Density', fontsize=12)
+    plt.title('Kernel Density Estimator', fontsize=14)
+    plt.show()
+    \end{verbatim}
+    \includegraphics[width=0.65\linewidth]{2.25kernel.png}
+\end{center}
 
 \section*{2.26}
 \textbf{Sol.}
