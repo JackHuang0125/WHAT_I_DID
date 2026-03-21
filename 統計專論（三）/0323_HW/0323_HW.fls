@@ -219,4 +219,13 @@ INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
 OUTPUT 0323_HW.xdv
+INPUT .\2.9pie.png
+INPUT .\2.9pie.png
+INPUT .\2.9pie.png
+INPUT .\2.9bar.png
+INPUT .\2.9bar.png
+INPUT .\2.9bar.png
+INPUT .\2.11Hist.png
+INPUT .\2.11Hist.png
+INPUT .\2.11Hist.png
 INPUT 0323_HW.aux
