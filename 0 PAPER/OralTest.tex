@@ -83,7 +83,7 @@
 }
 
 % 正式口試時請改成論文正式題目
-% 高維半導體製程資料之分群式分類模型局部刻劃方法
+% 高維半導體製程資料之分群式預測模型局部刻劃方法
 \title{碩士論文口試\\[0.3em]\large }
 \author{學生　黃丞暘 \\　\\ 指導教授　曹振海}
 \institute{國立東華大學應用數學系統計碩士班}
@@ -129,9 +129,9 @@
 \end{frame}
 
 \begin{frame}{\textbf{背景與動機}}
-    \begin{figure}
+  \begin{figure}
 			\centering
-			\includegraphics[width=1\linewidth]{img/waferyield.png}
+			\includegraphics[width=0.85\linewidth]{img/waferyield.png}
   \end{figure}
   \vfill
   \hspace*{0pt}\small{\textit{圖片來源：}\href{https://de.wikipedia.org/wiki/Ausbeute_(Halbleitertechnik)}{WIKIPIEDA}}
@@ -156,10 +156,11 @@
 \end{frame}
 
 \begin{frame}{\textbf{問題與目的}}
+【舉例】咖啡廳
   \begin{itemize}
     \item 量測變數龐大，樣本數不足
     \vspace{0.3cm}
-    \item 多個子群結構　【舉例】咖啡廳
+    \item 多個子群結構
     \vspace{0.3cm}
     \item 隨機擾動生成
   \end{itemize}
@@ -242,11 +243,12 @@
 %   \end{itemize}
 % \end{frame}
 
-\begin{frame}{\textbf{資料介紹 - 極端點}}
+\begin{frame}{\textbf{資料介紹 - 離群樣本}}
+  \vspace{0.3cm}
   \begin{itemize}
     \item 離群樣本對PCA主成分方向與投影結果造成影響\cite{Hubert2005}
   \end{itemize}
-  \vspace{0.3cm}
+
   \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{img/未移除outlier做pca.png}
@@ -270,7 +272,7 @@
     \item 移除缺失值數量超過 1000 筆的單一特徵
     \item 移除相異值種類低於 10 種的單一特徵
     \item 採用 KNN imputer 進行補值，設定 $k=10$
-    \item 移除極端點
+    \item 移除離群樣本
   \end{enumerate}
   % \begin{figure}
   %   \centering
@@ -345,7 +347,7 @@
     \node[box, right=of cluster, minimum width=3.6cm] (keep) {保留原始資料};
 
     % 下排
-    \node[box, below=3.2cm of read, xshift=0.2cm] (blackbox) {訓練分類模型};
+    \node[box, below=3.2cm of read, xshift=0.2cm] (blackbox) {訓練預測模型};
     \node[box, right=1.8cm of blackbox, yshift=1.2cm] (compare) {比較群間差異};
     \node[box, right=1.8cm of blackbox, yshift=-1.2cm] (local) {建立\\局部刻劃模型};
     \node[box, right=1.8cm of compare, yshift=-1.2cm] (result) {結果與討論};
@@ -373,13 +375,15 @@
   }
 \end{frame}
 
-\begin{frame}{\textbf{分群設計：SMOTE $\rightarrow$ PCA $\rightarrow$ KMeans}}
+\begin{frame}{\textbf{分群}}
   \begin{itemize}
     \item \textbf{存在類別不平衡？}
     
     \vspace{0.3cm}
     以 SMOTE 補強少數類別於降維空間中的資訊
     \vspace{0.5cm}
+    \item SMOTE $\rightarrow$ PCA $\rightarrow$ KMeans
+    \vspace{1cm}
   \end{itemize}
   % \begin{columns}[c]
   %   \column{0.45\textwidth}
@@ -392,7 +396,7 @@
   %   \includegraphics[width=\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
   % \end{columns}
   \begin{itemize}
-    \item 完成分群後移除合成樣本，只保留真實資料供後續建模
+    \item 完成分群後移除合成資料，只保留真實資料供後續建模
   \end{itemize}
 \end{frame}
 
@@ -443,7 +447,7 @@
 			\node[below] at (1.25,-0.73) {$\delta$};
 		\end{tikzpicture}
   \begin{itemize}
-    \item 以分類模型對格子點的輸出機率作為應變數
+    \item 以預測模型對格子點輸出的機率作為應變數
     \item 本研究：$p=459$、$k=2$
   \end{itemize} 
 \end{frame}
@@ -599,17 +603,16 @@
   \huge{結果與討論}
 \end{frame}
 
-\begin{frame}{\textbf{比較分群後的分類模型}}
+\begin{frame}{\textbf{比較分群後的預測模型}}
   \begin{itemize}
-    \item 分類模型：XGBoost Classifier
-    \item 評估方式：重抽，計算點估計、建立 95\% 信賴區間
+    \item 預測模型：XGBoost Classifier
+    % \item 評估方式：重抽，計算點估計、建立 95\% 信賴區間
   \end{itemize}
-  \vspace{0.5cm}
   \centering
   \resizebox{\textwidth}{!}{
   \begin{tabular}{|l|c|c|c|c|c|}
     \hline
-    群名 & 樣本數 & Pass / Fail & $ACC$ & $FAR$ & $ROC-AUC$ \\
+    群名 & 樣本數 & Pass / Fail & ACC & FAR & ROC-AUC \\
     \hline
     全體 & 1525 & 1430 / 95  & 
     \begin{tabular}[c]{@{}c@{}}0.9272\\ {}[0.9141, 0.9397]\end{tabular} &
@@ -626,6 +629,23 @@
     \begin{tabular}[c]{@{}c@{}}0.0099\\ {}[0.0037, 0.0172]\end{tabular} &
     \begin{tabular}[c]{@{}c@{}}0.6224\\ {}[0.5228, 0.7171]\end{tabular} \\
     \hline
+  \end{tabular}
+  }
+  \vspace{0.5cm}
+  \begin{itemize}
+    \item 比較：全體資料之預測結果
+  \end{itemize}
+  \resizebox{0.95\textwidth}{!}{
+  \begin{tabular}{|l|l|l|c|c|}
+  \hline
+  研究 & 前處理方法 & 預測模型 & ACC & FAR \\
+  \hline
+  賴利夫（2022） & KNN、SMOTE & 決策樹（ID3） & 85.99\% & 11.26\% \\
+  \hline
+  賴利夫（2022） & KNN、SMOTE & 決策樹（CART） & 86.94\% & 9.22\% \\
+  \hline
+  本研究 & 資料前處理 & XGBoost Classifier & 92.72\% & 1.89\% \\
+  \hline
   \end{tabular}
   }
 \vspace{0.4em}
@@ -692,7 +712,7 @@
 	\end{table}
 \end{frame}
 
-\begin{frame}{\textbf{局部線性模型跨群比較}}
+\begin{frame}{\textbf{局部刻劃模型跨群比較}}
 	\begin{table}
 		\centering
 		\begin{tabular}{c|ccc}
@@ -708,7 +728,7 @@
 	\end{table}
 \end{frame}
 
-\begin{frame}{\textbf{局部線性模型跨群比較}}
+\begin{frame}{\textbf{局部刻劃模型跨群比較}}
   \begin{figure}
   \centering
 
@@ -727,19 +747,33 @@
 
 \begin{frame}{\textbf{結果總結}}
 \begin{itemize}
-  \item 分群後，各群分類模型呈現不同的錯誤型態與可分類程度。
-  \item 以決策邊界附近樣本建立中心點，可聚焦於模型判斷最不明確的局部區域。
-  \item 結構化格子點可在可控制的鄰域內近似模型輸出，避免隨機擾動造成的外插偏誤。
-  \item 群內局部刻劃模型可將模型的決策轉為具體的局部重要特徵與方向性資訊。
+  \item 各群預測模型
+  \vspace{1cm}
+  \item 決策邊界為中心點
+  \vspace{1cm}
+  \item 建立可控制的局部範圍
+  \vspace{1cm}
+  \item 局部刻劃模型
+  % \item 分群後，各群預測模型呈現與整體預測模型不同的誤報率與可預測程度
+  % \item 以決策邊界附近樣本建立中心點，可聚焦於模型預測最不明確的局部範圍
+  % \item 在可控制的局部範圍內擬合模型，避免隨機擾動造成的外插風險
+  % \item 局部刻劃模型可將預測行為轉為重要特徵的影響性與方向性
 \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{結論}}
 \begin{itemize}
-  \item 本研究提出一套適用於高維、缺失嚴重且類別不平衡製程資料的分析流程。
-  \item 透過先分群再於群內建模，可降低異質性對模型學習與局部解釋的干擾。
-  \item 透過中心點與格子點設計，可在較低外插風險下建立局部線性刻劃模型。
-  \item 研究結果顯示，不同子群對應不同的分類模型之局部決策結構，分群式局部刻劃具分析價值。
+  \item 分析流程
+  \vspace{1cm}
+  \item 先分群再建模
+  \vspace{1cm}
+  \item 設計局部格子點擬合模型
+  \vspace{1cm}
+  \item 各群的決策行為
+  % \item 本研究提出一套適用於高維、缺失嚴重且類別不平衡製程資料的分析流程
+  % \item 透過先分群再於群內建模，可降低異質性對模型學習與局部解釋的干擾
+  % \item 透過中心點與格子點設計，可在較低外插風險下建立局部線性刻劃模型
+  % \item 研究結果顯示，不同子群對應不同的預測模型之局部決策結構，分群的局部刻劃模型具分析價值
 \end{itemize}
 \end{frame}
 
