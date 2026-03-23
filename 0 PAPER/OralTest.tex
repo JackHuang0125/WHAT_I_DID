@@ -144,9 +144,11 @@
 
 \begin{frame}{\textbf{文獻回顧}}
 \begin{itemize}
-  \item 賴立夫(2022) 提出決策樹。\cite{Lai2022}
-  \item Lundberg \& Lee(2017)提出 SHAP 。\cite{LundbergLee2017}
-  \item Ribeiro et.al(2016) 提出 LIME 。\cite{Ribeiro2016}
+  \item 賴立夫(2022) 提出決策樹 \cite{Lai2022}
+  \vspace{0.3cm}
+  \item Lundberg \& Lee(2017)提出 SHAP \cite{LundbergLee2017}
+  \vspace{0.3cm}
+  \item Ribeiro et.al(2016) 提出 LIME \cite{Ribeiro2016}
 \end{itemize}
 \end{frame}
 
@@ -156,14 +158,15 @@
 \end{frame}
 
 \begin{frame}{\textbf{問題與目的}}
-【舉例】咖啡廳
   \begin{itemize}
-    \item 量測變數龐大，樣本數不足
+    \item 量測變數龐大，能蒐集到的樣本數不足
     \vspace{0.3cm}
     \item 多個子群結構
     \vspace{0.3cm}
     \item 隨機擾動生成
   \end{itemize}
+  \vspace{0.3cm}
+  【舉例】咖啡廳
 \end{frame}
 
 %---------------------------------
@@ -198,9 +201,8 @@
   \begin{itemize}
     \item 共 1567 筆樣本
     \item 590 個量測變數
-    \item 1 個二元品質類別，其中Pass($-$1) 有1463 筆（93.36\%），Fail(1) 有104 筆（6.64\%）
-  \end{itemize}
-  
+    \item $-1$代表Pass，1代表Fail
+  \end{itemize}  
   \vfill
   \hspace*{0pt}\small{\textit{資料來源：}\href{https://archive.ics.uci.edu/dataset/179/secom}{UCI SECOM Dataset}}
 \end{frame}
@@ -210,6 +212,10 @@
     \centering
     \includegraphics[width=0.8\linewidth]{img/y.png}
   \end{figure}
+  \vspace{-0.3cm}
+  \begin{itemize}
+    \item Pass($-$1) 有1463 筆（93.36\%），Fail(1) 有104 筆（6.64\%）
+  \end{itemize}
 \end{frame}
 
 % \begin{frame}{\textbf{資料 EDA - 單一特徵的缺失值}}
@@ -244,15 +250,13 @@
 % \end{frame}
 
 \begin{frame}{\textbf{資料介紹 - 離群樣本}}
-  \vspace{0.3cm}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/未移除outlier做pca無門檻.png}
+  \end{figure}
   \begin{itemize}
     \item 離群樣本對PCA主成分方向與投影結果造成影響\cite{Hubert2005}
   \end{itemize}
-
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/未移除outlier做pca.png}
-  \end{figure}
   % \begin{columns}[c]
   %   \column{0.48\textwidth}
   %   \centering
@@ -266,7 +270,7 @@
   % \end{columns}
 \end{frame}
 
-\begin{frame}{\textbf{資料介紹}}
+\begin{frame}{\textbf{資料前處理}}
   \begin{enumerate}[(1)]
     \item 目標變數重新編碼：Pass（$-$1 $\to$ 0），移除時間欄位
     \item 移除缺失值數量超過 1000 筆的單一特徵
@@ -278,9 +282,9 @@
   %   \centering
   %   \includegraphics[width=0.5\linewidth]{img/移除outlier做pca.png}
   % \end{figure}
-  \begin{itemize}
-    \item 最終分析資料為 1525 筆樣本、459 個特徵
-  \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{最終資料}}
   \begin{table}
     \centering
     \resizebox{\linewidth}{!}{%
@@ -297,6 +301,10 @@
     \end{tabular}%
     }
   \end{table}
+
+  \begin{itemize}
+    \item 最終分析資料為 1525 筆樣本、459 個特徵
+  \end{itemize}
 \end{frame}
 
 %---------------------------------
@@ -342,9 +350,9 @@
 
     % 上排
     \node[io] (read) {資料\\讀取};
-    \node[box, right=of read] (prep) {資料前處理};
-    \node[box, right=of prep] (cluster) {分群};
-    \node[box, right=of cluster, minimum width=3.6cm] (keep) {保留原始資料};
+    \node[box, right=2.5cm of read] (prep) {資料前處理};
+    \node[box, right=2.5cm of prep] (cluster) {分群};
+    % \node[box, right=of cluster, minimum width=3.6cm] (keep) {保留原始資料};
 
     % 下排
     \node[box, below=3.2cm of read, xshift=0.2cm] (blackbox) {訓練預測模型};
@@ -356,10 +364,10 @@
     % 上排箭頭
     \draw[line] (read) -- (prep);
     \draw[line] (prep) -- (cluster);
-    \draw[line] (cluster) -- (keep);
+    % \draw[line] (cluster) -- (keep);
 
     % 從 keep 繞到 blackbox
-    \draw[line] (keep.south) |- ([yshift=2.2cm]blackbox.north) -| (blackbox.north);
+    \draw[line] (cluster.south) |- ([yshift=2.2cm]blackbox.north) -| (blackbox.north);
 
     % blackbox 分叉
     \draw[line] (blackbox.east) -- ++(0.8,0) |- (compare.west);
@@ -382,7 +390,7 @@
     \vspace{0.3cm}
     以 SMOTE 補強少數類別於降維空間中的資訊
     \vspace{0.5cm}
-    \item SMOTE $\rightarrow$ PCA $\rightarrow$ KMeans
+    \item SMOTE $\rightarrow$ PCA $\rightarrow$ KMeans 分成兩群
     \vspace{1cm}
   \end{itemize}
   % \begin{columns}[c]
@@ -398,6 +406,33 @@
   \begin{itemize}
     \item 完成分群後移除合成資料，只保留真實資料供後續建模
   \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{預測模型}}
+  \begin{itemize}
+    \item XGBoost Classifier    
+    \vspace{0.3cm}
+    \item 採用五折交叉驗證，得到每筆樣本輸出機率 $\hat{p}$
+  \end{itemize}
+  \begin{table}
+		\centering
+      \scalebox{0.8}{
+			\begin{tabular}{crr|crr}
+				\toprule
+				\multicolumn{3}{c|}{群 0} & \multicolumn{3}{c}{群 1} \\
+				\midrule
+				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ &
+				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ \\
+				\midrule
+				82  & 0.498364 & 0.001636 & 1158 & 0.493004 & 0.006996 \\
+				225 & 0.516134 & 0.016134 & 990  & 0.513882 & 0.013882 \\
+				44  & 0.481022 & 0.018978 & 1361 & 0.521811 & 0.021811 \\
+				144 & 0.527558 & 0.027558 & 1189 & 0.473835 & 0.026165 \\
+				345 & 0.470658 & 0.029342 & 1187 & 0.528723 & 0.028723 \\
+				\bottomrule
+			\end{tabular}
+      }
+	\end{table}
 \end{frame}
 
 \begin{frame}{\textbf{局部刻劃方法}}
@@ -472,7 +507,7 @@
       arrow/.style={->, thick}
   ]
 
-  \node[box] (input) {抽樣局部資$(X, y)$\\擬合線性迴歸模型};
+  \node[box] (input) {抽樣局部資料$(X, y)$\\擬合線性迴歸模型};
   \node[box, below=of input] (single) {單次流程：5 輪 pvalue 特徵選擇\\$0.05 \rightarrow 0.01 \rightarrow 0.005 \rightarrow 0.001 \rightarrow 0.0005$};
   \node[box, below=of single] (repeat) {重複 50 次};
   \node[box, below=of repeat] (summary) {統計各特徵\\最後一輪保留次數};
@@ -656,14 +691,33 @@
   % \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{決策邊界樣本與中心點建立}}
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.8\linewidth]{img/02.png}
-  \end{figure}
-  \begin{itemize}
-    \item 形成中心點的樣本：群 0 取 12 個、群 1 取 7 個。
-  \end{itemize}
+\begin{frame}{\textbf{決策邊界樣本}}
+	\begin{table}
+		\centering
+      \scalebox{0.8}{
+			\begin{tabular}{crr|crr}
+				\toprule
+				\multicolumn{3}{c|}{群 0} & \multicolumn{3}{c}{群 1} \\
+				\midrule
+				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ &
+				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ \\
+				\midrule
+				82  & 0.498364 & 0.001636 & 1158 & 0.493004 & 0.006996 \\
+				225 & 0.516134 & 0.016134 & 990  & 0.513882 & 0.013882 \\
+				44  & 0.481022 & 0.018978 & 1361 & 0.521811 & 0.021811 \\
+				144 & 0.527558 & 0.027558 & 1189 & 0.473835 & 0.026165 \\
+				345 & 0.470658 & 0.029342 & 1187 & 0.528723 & 0.028723 \\
+				298 & 0.468458 & 0.031542 & 458  & 0.464450 & 0.035550 \\
+				484 & 0.533517 & 0.033517 & 1054 & 0.540420 & 0.040420 \\
+				105 & 0.458454 & 0.041546 &  &  &  \\
+				111 & 0.457258 & 0.042742 &  &  &  \\
+				247 & 0.544061 & 0.044061 &  &  &  \\
+				653 & 0.548375 & 0.048375 &  &  &  \\
+				109 & 0.548989 & 0.048989 &  &  &  \\
+				\bottomrule
+			\end{tabular}
+      }
+	\end{table}
 \end{frame}
 
 \begin{frame}{\textbf{局部刻劃模型結果}}
@@ -749,8 +803,6 @@
 \begin{itemize}
   \item 各群預測模型
   \vspace{1cm}
-  \item 決策邊界為中心點
-  \vspace{1cm}
   \item 建立可控制的局部範圍
   \vspace{1cm}
   \item 局部刻劃模型
@@ -805,5 +857,11 @@
 \end{center}
 \end{frame}
 
+\begin{frame}{\textbf{資料介紹 - 離群樣本處理完}}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/移除outlier做pca.png}
+  \end{figure}
+\end{frame}
 
 \end{document}

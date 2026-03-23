@@ -443,9 +443,9 @@ INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
 INPUT .\img\y.png
 INPUT .\img\y.png
 INPUT .\img\y.png
-INPUT .\img\未移除outlier做pca.png
-INPUT .\img\未移除outlier做pca.png
-INPUT .\img\未移除outlier做pca.png
+INPUT .\img\未移除outlier做pca無門檻.png
+INPUT .\img\未移除outlier做pca無門檻.png
+INPUT .\img\未移除outlier做pca無門檻.png
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmex10.tfm
@@ -457,9 +457,6 @@ INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextr
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam5.tfm
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\latex-fonts\lasy5.tfm
-INPUT .\img\02.png
-INPUT .\img\02.png
-INPUT .\img\02.png
 INPUT .\img\g0onG0vsf0(G0).png
 INPUT .\img\g0onG0vsf0(G0).png
 INPUT .\img\g0onG0vsf0(G0).png
@@ -490,6 +487,9 @@ INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\tex\latex\beamer\beamericonartic
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\tex\latex\beamer\beamericonarticle.pdf
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\tex\latex\beamer\beamericonarticle.pdf
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\tex\latex\beamer\beamericonarticle.pdf
+INPUT .\img\移除outlier做pca.png
+INPUT .\img\移除outlier做pca.png
+INPUT .\img\移除outlier做pca.png
 OUTPUT OralTest.nav
 OUTPUT OralTest.toc
 OUTPUT OralTest.snm
