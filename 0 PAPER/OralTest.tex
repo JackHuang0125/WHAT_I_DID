@@ -102,82 +102,90 @@
 \end{frame}
 
 %---------------------------------
-\section{緒論}
+\section{介紹}
 
 \begin{frame}
   \centering
-  \huge{背景與動機}
+  \huge{介紹}
 \end{frame}
 
-\begin{frame}{\textbf{背景與動機}}
-  \vspace{-0.15cm}
+\begin{frame}
+  \vspace{0.3cm}
   \begin{figure}
 			\centering
 			\includegraphics[width=0.65\linewidth]{img/semiconductorlogo.jpg}
   \end{figure}
   \vfill
-  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://www.retech.com.tw/key-projects/detail/167}{鋒霈環境科技股份有限公司}}
+  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://www.retech.com.tw/key-projects/detail/167}{\textit{鋒霈環境科技股份有限公司}}}
 \end{frame}
 
-\begin{frame}{\textbf{背景與動機}}
+\begin{frame}{\textbf{半導體}}
+  \centering
+\resizebox{1\textwidth}{!}{
+  \begin{tikzpicture}[
+      >=Latex,
+      node distance=1.2cm and 0.8cm,
+      every node/.style={font=\huge},
+      line/.style={draw=black!60, very thick, -Latex},
+      box/.style={
+          draw=black!60,
+          very thick,
+          fill=white,
+          minimum width=3.2cm,
+          minimum height=1.4cm,
+          align=center
+      }
+    ]
+
+    % 上排
+    \node[box] (semi) {半導體};
+
+    % 中排
+    \node[box, below=2.5cm of semi, xshift=-5.4cm] (IC) {積體電路（IC）};
+    \node[box, right=1.2cm of IC] (DC) {離散元件};
+    \node[box, right=1.2cm of DC] (OD) {光電元件};
+    \node[box, right=1.2cm of OD] (SD) {感測元件};
+
+    % 下排
+    \node[box, below=2.5cm of IC, xshift=-5.4cm] (RAM) {記憶體};
+    \node[box, right=1.2cm of RAM] (MD) {微元件};
+    \node[box, right=1.2cm of MD] (Logic) {邏輯IC};
+    \node[box, right=1.2cm of Logic] (Analog) {類比IC};
+
+    % 從 semi 繞到 四大
+    \draw[line] (semi.south) -- ++(0,-0.8) -| (IC.north);
+    \draw[line] (semi.south) -- ++(0,-0.8) -| (DC.north);
+    \draw[line] (semi.south) -- ++(0,-0.8) -| (OD.north);
+    \draw[line] (semi.south) -- ++(0,-0.8) -| (SD.north);
+
+    % 從 IC 繞到 四小
+    \draw[line] (IC.south) -- ++(0,-0.8) -| (RAM.north);
+    \draw[line] (IC.south) -- ++(0,-0.8) -| (MD.north);
+    \draw[line] (IC.south) -- ++(0,-0.8) -| (Logic.north);
+    \draw[line] (IC.south) -- ++(0,-0.8) -| (Analog.north);
+  \end{tikzpicture}
+  }
+\end{frame}
+
+\begin{frame}{\textbf{六大製程}}
   \begin{figure}
 			\centering
 			\includegraphics[width=1\linewidth]{img/semiconductorprocess.png}
   \end{figure}
   \vfill
-  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://www.semi.org/zh/technology-trends/what-is-a-semiconductor}{SEMI 國際半導體產業協會}}
+  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://www.semi.org/zh/technology-trends/what-is-a-semiconductor}{\textit{SEMI 國際半導體產業協會}}}
 \end{frame}
 
-\begin{frame}{\textbf{背景與動機}}
+\begin{frame}{\textbf{晶片良率}}
   \begin{figure}
 			\centering
 			\includegraphics[width=0.85\linewidth]{img/waferyield2.png}
   \end{figure}
   \vfill
-  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://de.wikipedia.org/wiki/Ausbeute_(Halbleitertechnik)}{WIKIPIEDA}}
+  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://de.wikipedia.org/wiki/Ausbeute_(Halbleitertechnik)}{\textit{WIKIPIEDA}}}
 \end{frame}
 
-\begin{frame}
-  \centering
-  \huge{文獻回顧}
-\end{frame}
-
-\begin{frame}{\textbf{文獻回顧}}
-\begin{itemize}
-  \item 賴立夫(2022) 提出決策樹 \cite{Lai2022}
-  \vspace{0.3cm}
-  \item Lundberg \& Lee(2017)提出 SHAP \cite{LundbergLee2017}
-  \vspace{0.3cm}
-  \item Ribeiro et.al(2016) 提出 LIME \cite{Ribeiro2016}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-  \centering
-  \huge{問題與目的}
-\end{frame}
-
-\begin{frame}{\textbf{問題與目的}}
-  \begin{itemize}
-    \item 量測變數龐大，能蒐集到的樣本數不足
-    \vspace{0.3cm}
-    \item 多個子群結構
-    \vspace{0.3cm}
-    \item 隨機擾動生成
-  \end{itemize}
-  \vspace{0.3cm}
-  【舉例】咖啡廳
-\end{frame}
-
-%---------------------------------
-\section{研究資料}
-
-\begin{frame}
-  \centering
-  \huge{資料介紹}
-\end{frame}
-
-\begin{frame}{\textbf{資料介紹}}
+\begin{frame}{\textbf{資料}}
   \begin{itemize}
     \item 半導體製程資料 SEmi COnductor Manufacturing 
   \end{itemize}
@@ -207,115 +215,83 @@
   \hspace*{0pt}\small{\textit{資料來源：}\href{https://archive.ics.uci.edu/dataset/179/secom}{UCI SECOM Dataset}}
 \end{frame}
 
-\begin{frame}{\textbf{資料介紹 - 目標變數}}
+\begin{frame}{\textbf{資料 - 類別不平衡}}
   \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{img/y.png}
+    \includegraphics[width=0.7\linewidth]{img/y.png}
   \end{figure}
-  \vspace{-0.3cm}
-  \begin{itemize}
-    \item Pass($-$1) 有1463 筆（93.36\%），Fail(1) 有104 筆（6.64\%）
-  \end{itemize}
 \end{frame}
 
-% \begin{frame}{\textbf{資料 EDA - 單一特徵的缺失值}}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=1\linewidth]{img/missingvalue.png}
-%   \end{figure}
-%   \begin{itemize}
-%     \item 動作：移除缺失值數量超過 1000 筆的單一特徵
-%   \end{itemize}
-% \end{frame}
-
-% \begin{frame}{\textbf{資料 EDA - 單一特徵的相異值}}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=1\linewidth]{img/uniquevalue.png}
-%   \end{figure}
-  % \begin{itemize}
-  %   \item 動作：移除相異值種類低於 10 種的單一特徵
-  % \end{itemize}
-% \end{frame}
-
-% \begin{frame}{\textbf{資料 EDA - 補齊剩餘缺失值}}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=0.8\linewidth]{img/simpleNA.png}
-%   \end{figure}
-%   \begin{itemize}
-%     \item KNN 補值法在缺失值估計上具有良好的穩健性\cite{Troyanskaya}
-%     \item 動作：採用 KNN imputer 進行補值，設定 $k=10$
-%   \end{itemize}
-% \end{frame}
-
-\begin{frame}{\textbf{資料介紹 - 離群樣本}}
+\begin{frame}{\textbf{資料 - 高缺失率}}
+  \vspace{0.3cm}
   \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{img/未移除outlier做pca無門檻.png}
+    \includegraphics[width=0.85\linewidth]{img/xNA.png}
+    \includegraphics[width=0.85\linewidth]{img/nNA.png}
   \end{figure}
-  \begin{itemize}
-    \item 離群樣本對PCA主成分方向與投影結果造成影響\cite{Hubert2005}
-  \end{itemize}
-  % \begin{columns}[c]
-  %   \column{0.48\textwidth}
-  %   \centering
-  %   前\\
-  %   \includegraphics[width=\linewidth]{img/未移除outlier做pca.png}
-
-  %   \column{0.48\textwidth}
-  %   \centering
-  %   後\\
-  %   \includegraphics[width=\linewidth]{img/移除outlier做pca.png}
-  % \end{columns}
 \end{frame}
 
-\begin{frame}{\textbf{資料前處理}}
-  \begin{enumerate}[(1)]
-    \item 目標變數重新編碼：Pass（$-$1 $\to$ 0），移除時間欄位
-    \item 移除缺失值數量超過 1000 筆的單一特徵
-    \item 移除相異值種類低於 10 種的單一特徵
-    \item 採用 KNN imputer 進行補值，設定 $k=10$
-    \item 移除離群樣本
-  \end{enumerate}
-  % \begin{figure}
-  %   \centering
-  %   \includegraphics[width=0.5\linewidth]{img/移除outlier做pca.png}
-  % \end{figure}
+\begin{frame}{\textbf{文獻回顧}}
+\begin{itemize}
+  \item 賴立夫(2022) \cite{Lai2022}
+  \vspace{0.3cm}
+  \item 
+  \vspace{0.3cm}
+\end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{最終資料}}
-  \begin{table}
-    \centering
-    \resizebox{\linewidth}{!}{%
-    \begin{tabular}{r r r r c r r r r}
-    \toprule
-    idx & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
-    \midrule
-    1 & 0.216411 & 0.856549 & -0.434551 & \dots & -0.140893 & -0.050083 & 0.201450 & 0\\
-    2 & 1.094037 & -0.374751 & 1.020782 & \dots & 0.421933  & 0.258167  & 1.167895 & 0\\
-    3 & -1.114171 & 0.805982 & -0.479627 & \dots & 3.631596  & 3.316370  & -0.171694 & 1\\
-    4 & -0.354825 & -0.190915 & -0.049316 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
-    5 & 0.234139 & 0.095176 & 1.121165 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
-    \bottomrule
-    \end{tabular}%
-    }
-  \end{table}
-
+\begin{frame}{\textbf{目的}}
   \begin{itemize}
-    \item 最終分析資料為 1525 筆樣本、459 個特徵
+    \item 建立較佳的預測模型
+    \vspace{0.3cm}
+    \item 在該模型上提供對單一預測結果具參考價值的解釋
   \end{itemize}
+  \vspace{0.3cm}
+  \begin{itemize}
+    \item 比較：全體資料之預測結果
+  \end{itemize}
+  \resizebox{0.95\textwidth}{!}{
+  \begin{tabular}{|l|l|l|c|c|}
+    \hline
+    研究 & 前處理方法 & 預測模型 & ACC & FAR \\
+    \hline
+    賴利夫（2022） & KNN、SMOTE & 決策樹（ID3） & 85.99\% & 11.26\% \\
+    \hline
+    賴利夫（2022） & KNN、SMOTE & 決策樹（CART） & 86.94\% & 9.22\% \\
+    \hline
+    本研究 & 資料前處理 & XGBoost Classifier & 92.72\% & 1.89\% \\
+    \hline
+  \end{tabular}
+  }
 \end{frame}
 
 %---------------------------------
-\section{方法與流程}
+\section{問題與方法}
 
 \begin{frame}
   \centering
-  \huge{方法與流程}
+  \huge{問題與方法}
 \end{frame}
 
-\begin{frame}{\textbf{流程大綱}}
+\begin{frame}{\textbf{問題}}
+  \begin{itemize}
+    \item 如何建立好的預測模型
+    \begin{itemize}
+      \item 量測變數龐大，能蒐集到的樣本數不足
+      \item 多個子群結構
+    \end{itemize}
+    \vspace{0.3cm}
+    \item 如何讓局部刻劃更可靠
+    \begin{itemize}
+      \item 隨機擾動生成
+    \end{itemize}
+    
+  \end{itemize}
+  \vspace{0.3cm}
+  【舉例】咖啡廳
+\end{frame}
+
+\begin{frame}{\textbf{流程}}
 \centering
 \resizebox{1\textwidth}{!}{
   \begin{tikzpicture}[
@@ -381,6 +357,49 @@
     \draw[line] (result) -- (conclusion);
   \end{tikzpicture}
   }
+\end{frame}
+
+\begin{frame}{\textbf{資料前處理}}
+  \begin{enumerate}[(1)]
+    \item 目標變數重新編碼：Pass（$-$1 $\to$ 0），移除時間欄位
+    \item 移除缺失值數量超過 1000 筆的單一特徵
+    \item 移除相異值種類低於 10 種的單一特徵
+    \item 採用 KNN imputer 進行補值，設定 $k=10$
+    \item 移除離群樣本
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{\textbf{資料 - 離群樣本}}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/未移除outlier做pca無門檻.png}
+  \end{figure}
+  \begin{itemize}
+    \item 離群樣本對PCA主成分方向與投影結果造成影響\cite{Hubert2005}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{最終資料}}
+  \begin{table}
+    \centering
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{r r r r c r r r r}
+    \toprule
+    idx & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
+    \midrule
+    1 & 0.216411 & 0.856549 & -0.434551 & \dots & -0.140893 & -0.050083 & 0.201450 & 0\\
+    2 & 1.094037 & -0.374751 & 1.020782 & \dots & 0.421933  & 0.258167  & 1.167895 & 0\\
+    3 & -1.114171 & 0.805982 & -0.479627 & \dots & 3.631596  & 3.316370  & -0.171694 & 1\\
+    4 & -0.354825 & -0.190915 & -0.049316 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
+    5 & 0.234139 & 0.095176 & 1.121165 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
+    \bottomrule
+    \end{tabular}%
+    }
+  \end{table}
+
+  \begin{itemize}
+    \item 最終分析資料為 1525 筆樣本、459 個特徵
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{分群}}
@@ -667,23 +686,6 @@
   \end{tabular}
   }
   \vspace{0.5cm}
-  \begin{itemize}
-    \item 比較：全體資料之預測結果
-  \end{itemize}
-  \resizebox{0.95\textwidth}{!}{
-  \begin{tabular}{|l|l|l|c|c|}
-  \hline
-  研究 & 前處理方法 & 預測模型 & ACC & FAR \\
-  \hline
-  賴利夫（2022） & KNN、SMOTE & 決策樹（ID3） & 85.99\% & 11.26\% \\
-  \hline
-  賴利夫（2022） & KNN、SMOTE & 決策樹（CART） & 86.94\% & 9.22\% \\
-  \hline
-  本研究 & 資料前處理 & XGBoost Classifier & 92.72\% & 1.89\% \\
-  \hline
-  \end{tabular}
-  }
-\vspace{0.4em}
   % \begin{itemize}
     % \item 群 0 與群 1 在分類表現上具有差異，尤其 FAR 差異明顯。
     % \item 兩群 FAR 約相差 $0.0468/0.0099\approx 4.73$ 倍，顯示資料存在異質性。
