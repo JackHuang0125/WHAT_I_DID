@@ -113,10 +113,10 @@
   \vspace{0.3cm}
   \begin{figure}
 			\centering
-			\includegraphics[width=0.65\linewidth]{img/semiconductorlogo.jpg}
+			\includegraphics[width=0.9\linewidth]{img/產業.png}
   \end{figure}
   \vfill
-  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://www.retech.com.tw/key-projects/detail/167}{\textit{鋒霈環境科技股份有限公司}}}
+  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://naipnews.naipo.com/17315/}{\textit{李淑蓮\,北美智權報}}}
 \end{frame}
 
 \begin{frame}{\textbf{半導體}}
@@ -187,7 +187,7 @@
 
 \begin{frame}{\textbf{資料}}
   \begin{itemize}
-    \item 半導體製程資料 SEmi COnductor Manufacturing 
+    \item 半導體製程資料（SEmi COnductor Manufacturing, SECOM）
   \end{itemize}
   \vspace{-0.6cm}
   \begin{table}
@@ -212,13 +212,13 @@
     \item $-1$代表Pass，1代表Fail
   \end{itemize}  
   \vfill
-  \hspace*{0pt}\small{\textit{資料來源：}\href{https://archive.ics.uci.edu/dataset/179/secom}{UCI SECOM Dataset}}
+  \hspace*{0pt}\small{\textit{資料來源：}\href{https://archive.ics.uci.edu/dataset/179/secom}{\textit{UCI}}}
 \end{frame}
 
 \begin{frame}{\textbf{資料 - 類別不平衡}}
   \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{img/y.png}
+    \includegraphics[width=0.65\linewidth]{img/y.png}
   \end{figure}
 \end{frame}
 
@@ -232,12 +232,15 @@
 \end{frame}
 
 \begin{frame}{\textbf{文獻回顧}}
-\begin{itemize}
-  \item 賴立夫(2022) \cite{Lai2022}
-  \vspace{0.3cm}
-  \item 
-  \vspace{0.3cm}
-\end{itemize}
+  \begin{itemize}
+    \item Salem et al.（2018）－前處理+預測模型、ANOVA
+    \vspace{0.25cm}
+    \item 賴立夫（2022）－KNN補值、SMOTE、決策樹
+    \vspace{0.25cm}
+    \item Park et al.（2024）－前處理流程
+    \vspace{0.25cm}
+    \item Presciuttini et al.（2024）－LIME、可解釋預測模型
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{目的}}
@@ -246,31 +249,111 @@
     \vspace{0.3cm}
     \item 在該模型上提供對單一預測結果具參考價值的解釋
   \end{itemize}
-  \vspace{0.3cm}
+\end{frame}
+
+\begin{frame}{\textbf{預測模型結果}}
   \begin{itemize}
     \item 比較：全體資料之預測結果
   \end{itemize}
-  \resizebox{0.95\textwidth}{!}{
-  \begin{tabular}{|l|l|l|c|c|}
+  \centering
+  \scalebox{0.9}{
+  \begin{tabular}{|l|c|c|c|}
     \hline
-    研究 & 前處理方法 & 預測模型 & ACC & FAR \\
+    研究 & ACC & FAR & ROC-AUC \\
     \hline
-    賴利夫（2022） & KNN、SMOTE & 決策樹（ID3） & 85.99\% & 11.26\% \\
+    賴立夫（2022）& 85.99\% & 11.26\% &  \\
     \hline
-    賴利夫（2022） & KNN、SMOTE & 決策樹（CART） & 86.94\% & 9.22\% \\
+    賴立夫（2022）& 86.94\% & 9.22\% &  \\
     \hline
-    本研究 & 資料前處理 & XGBoost Classifier & 92.72\% & 1.89\% \\
+    Salem et al.（2018）&  & 24.95\% & 70.22\% \\
+    \hline
+    Park et al.（2024）& 85.14\% &  &  \\
+    \hline
+    Presciuttini et al.（2024）&  &  &  \\
+    \hline
+    本研究（分群前）& 92.72\% & 1.89\% & 66.23\% \\
     \hline
   \end{tabular}
   }
 \end{frame}
 
+\begin{frame}{\textbf{比較分群後的預測模型}}
+  \centering
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    群名 & 樣本數 & Pass / Fail & ACC & FAR & ROC-AUC \\
+    \hline
+    全體（分群前） & 1525 & 1430 / 95  & 
+    \begin{tabular}[c]{@{}c@{}}0.9272\\ {}[0.9141, 0.9397]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.0189\\ {}[0.0120, 0.0264]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.6623\\ {}[0.6054, 0.7178]\end{tabular} \\
+    \hline
+    群 0 & 676  & 619 / 57   & 
+    \begin{tabular}[c]{@{}c@{}}0.8846\\ {}[0.8595, 0.9083]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.0468\\ {}[0.0308, 0.0639]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.6983\\ {}[0.6308, 0.7631]\end{tabular} \\
+    \hline
+    群 1 & 849  & 811 / 38   & 
+    \begin{tabular}[c]{@{}c@{}}0.9482\\ {}[0.9329, 0.9623]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.0099\\ {}[0.0037, 0.0172]\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}0.6224\\ {}[0.5228, 0.7171]\end{tabular} \\
+    \hline
+  \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}{\textbf{局部刻劃模型結果}}
+  \begin{table}
+  \centering
+  \scalebox{0.65}{
+    \begin{tabular}{cc|c}
+      \toprule
+           & 最終使用特徵數 & 特徵 \\
+      \midrule
+      群 0 & 96 & x291, x87, x217, x461, x20, $\dots$\\
+      \hline
+      群 1 & 56 & x386, x456, x583, x184, x8, $\dots$\\
+      \bottomrule
+    \end{tabular}
+  }
+  \end{table}
+
+  \begin{table}
+  \centering
+  \scalebox{0.7}{
+  \begin{tabular}{cr|cr}
+    \toprule
+    \multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
+    \midrule
+    \multicolumn{2}{c|}{$R^2=0.5842$} & \multicolumn{2}{c}{$R^2=0.5926$} \\
+    \multicolumn{2}{c|}{$95\%C.I.\in[0.583563, 0.584737]$} & \multicolumn{2}{c}{$95\%C.I.\in[0.590905, 0.594560]$} \\
+    \midrule
+    特徵 & 估計係數 &
+    特徵 & 估計係數 \\
+    \midrule
+    intercept   & 1.005144  & intercept & 0.996643  \\
+    x291        & 0.034033  & x386      & 0.016675  \\
+    x7          & -0.029912 & x117      & -0.012556 \\
+    x141        & -0.028171 &	x420      & -0.011799 \\
+    x87         & 0.022993  &	x456      & 0.010252  \\
+    x217        & 0.022274  &	x28       & -0.009172 \\
+    x461        & 0.019723  &	x36       & -0.008981 \\
+    x20         & 0.017796  &	x287      & -0.007539 \\
+    x58         & -0.015820 &	x103      & -0.006848 \\
+    x1          & -0.014731 &	x583      & 0.005797  \\
+    x378        & 0.014099  &	x184      & 0.005055  \\
+    \bottomrule
+  \end{tabular}
+  }
+	\end{table}
+\end{frame}
 %---------------------------------
-\section{問題與方法}
+\section{問題}
 
 \begin{frame}
   \centering
-  \huge{問題與方法}
+  \huge{問題}
 \end{frame}
 
 \begin{frame}{\textbf{問題}}
@@ -291,7 +374,9 @@
   【舉例】咖啡廳
 \end{frame}
 
-\begin{frame}{\textbf{流程}}
+%---------------------------------
+\section{方法與流程}
+\begin{frame}{\textbf{方法與流程}}
 \centering
 \resizebox{1\textwidth}{!}{
   \begin{tikzpicture}[
@@ -435,22 +520,22 @@
   \end{itemize}
   \begin{table}
 		\centering
-      \scalebox{0.8}{
-			\begin{tabular}{crr|crr}
-				\toprule
-				\multicolumn{3}{c|}{群 0} & \multicolumn{3}{c}{群 1} \\
-				\midrule
-				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ &
-				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ \\
-				\midrule
-				82  & 0.498364 & 0.001636 & 1158 & 0.493004 & 0.006996 \\
-				225 & 0.516134 & 0.016134 & 990  & 0.513882 & 0.013882 \\
-				44  & 0.481022 & 0.018978 & 1361 & 0.521811 & 0.021811 \\
-				144 & 0.527558 & 0.027558 & 1189 & 0.473835 & 0.026165 \\
-				345 & 0.470658 & 0.029342 & 1187 & 0.528723 & 0.028723 \\
-				\bottomrule
-			\end{tabular}
-      }
+    \scalebox{0.7}{
+    \begin{tabular}{crrr|crrr}
+      \toprule
+      \multicolumn{4}{c|}{群 0} & \multicolumn{4}{c}{群 1} \\
+      \midrule
+      樣本編號 & $\hat{p}$ & 真實類別 & 預測類別 &
+      樣本編號 & $\hat{p}$ & 真實類別 & 預測類別\\
+      \midrule
+      82  & 0.498364 & Pass & Pass & 1158 & 0.493004 & Pass & Pass\\
+      225 & 0.516134 & Pass & Fail & 990  & 0.513882 & Pass & Fail\\
+      44  & 0.481022 & Pass & Pass & 1361 & 0.521811 & Fail & Fail\\
+      144 & 0.527558 & Pass & Fail & 1189 & 0.473835 & Fail & Pass\\
+      345 & 0.470658 & Pass & Pass & 1187 & 0.528723 & Pass & Fail\\
+      \bottomrule
+    \end{tabular}
+    }
 	\end{table}
 \end{frame}
 
@@ -650,47 +735,11 @@
 % \end{frame}
 
 %---------------------------------
-\section{結果與討論}
+\section{討論}
 
 \begin{frame}
   \centering
-  \huge{結果與討論}
-\end{frame}
-
-\begin{frame}{\textbf{比較分群後的預測模型}}
-  \begin{itemize}
-    \item 預測模型：XGBoost Classifier
-    % \item 評估方式：重抽，計算點估計、建立 95\% 信賴區間
-  \end{itemize}
-  \centering
-  \resizebox{\textwidth}{!}{
-  \begin{tabular}{|l|c|c|c|c|c|}
-    \hline
-    群名 & 樣本數 & Pass / Fail & ACC & FAR & ROC-AUC \\
-    \hline
-    全體 & 1525 & 1430 / 95  & 
-    \begin{tabular}[c]{@{}c@{}}0.9272\\ {}[0.9141, 0.9397]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.0189\\ {}[0.0120, 0.0264]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.6623\\ {}[0.6054, 0.7178]\end{tabular} \\
-    \hline
-    群 0 & 676  & 619 / 57   & 
-    \begin{tabular}[c]{@{}c@{}}0.8846\\ {}[0.8595, 0.9083]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.0468\\ {}[0.0308, 0.0639]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.6983\\ {}[0.6308, 0.7631]\end{tabular} \\
-    \hline
-    群 1 & 849  & 811 / 38   & 
-    \begin{tabular}[c]{@{}c@{}}0.9482\\ {}[0.9329, 0.9623]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.0099\\ {}[0.0037, 0.0172]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.6224\\ {}[0.5228, 0.7171]\end{tabular} \\
-    \hline
-  \end{tabular}
-  }
-  \vspace{0.5cm}
-  % \begin{itemize}
-    % \item 群 0 與群 1 在分類表現上具有差異，尤其 FAR 差異明顯。
-    % \item 兩群 FAR 約相差 $0.0468/0.0099\approx 4.73$ 倍，顯示資料存在異質性。
-    % \item 若只建立整體單一模型，可能稀釋群 0 較高錯誤回報率的現象。
-  % \end{itemize}
+  \huge{討論}
 \end{frame}
 
 \begin{frame}{\textbf{決策邊界樣本}}
@@ -722,51 +771,7 @@
 	\end{table}
 \end{frame}
 
-\begin{frame}{\textbf{局部刻劃模型結果}}
-  \begin{table}
-  \centering
-  \scalebox{0.65}{
-    \begin{tabular}{cc|c}
-      \toprule
-           & 最終使用特徵數 & 特徵 \\
-      \midrule
-      群 0 & 96 & x291, x87, x217, x461, x20, $\dots$\\
-      \hline
-      群 1 & 56 & x386, x456, x583, x184, x8, $\dots$\\
-      \bottomrule
-    \end{tabular}
-  }
-  \end{table}
 
-  \begin{table}
-  \centering
-  \scalebox{0.7}{
-		\begin{tabular}{cr|cr}
-			\toprule
-			\multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
-      \midrule
-      \multicolumn{2}{c|}{$R^2=0.5842$} & \multicolumn{2}{c}{$R^2=0.5926$} \\
-      \multicolumn{2}{c|}{$95\%C.I.\in[0.583563, 0.584737]$} & \multicolumn{2}{c}{$95\%C.I.\in[0.590905, 0.594560]$} \\
-			\midrule
-			特徵 & 估計係數 &
-			特徵 & 估計係數 \\
-			\midrule
-			intercept   & 1.005144  & intercept & 0.996643  \\
-			x291        & 0.034033  & x386      & 0.016675  \\
-			x7          & -0.029912 & x117      & -0.012556 \\
-			x141        & -0.028171 &	x420      & -0.011799 \\
-			x87         & 0.022993  &	x456      & 0.010252  \\
-			x217        & 0.022274  &	x28       & -0.009172 \\
-			x461        & 0.019723  &	x36       & -0.008981 \\
-			x20         & 0.017796  &	x287      & -0.007539 \\
-			x58         & -0.015820 &	x103      & -0.006848 \\
-			x1          & -0.014731 &	x583      & 0.005797  \\
-			x378        & 0.014099  &	x184      & 0.005055  \\
-			\bottomrule
-		\end{tabular}
-  }
-	\end{table}
-\end{frame}
 
 \begin{frame}{\textbf{局部刻劃模型跨群比較}}
 	\begin{table}

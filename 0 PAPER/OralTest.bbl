@@ -6,11 +6,4 @@ Mia Hubert, Peter~J. Rousseeuw, and Karlien Vanden~Branden.
 \newblock {\em Technometrics}, 47(1):64--79, 2005.
 \newblock https://doi.org/10.1198/004017004000000563.
 
-\bibitem{Lai2022}
-賴立夫.
-\newblock 使用 {KNN}
-  和決策樹方法對填補缺失值的製造數據進行失效預測和原因追蹤分析.
-\newblock 2022.
-\newblock https://hdl.handle.net/11296/ub6st3.
-
 \end{thebibliography}

@@ -91,9 +91,9 @@
 			
 			\renewcommand{\baselinestretch}{1}
 			
-			{\LARGE \bfseries 中文論文標題 \\ }
+			{\LARGE \bfseries 預測模型局部決策因子之刻劃：以半導體製程資料為例 \\ }
 			
-			{\large \bfseries \itshape English Title \\ } 
+			{\large \bfseries \itshape Characterizing Local Decision Factors of Prediction Models: A Case Study of Semiconductor Manufacturing Data \\ } 
 			
 			\vspace{40pt}
 			
@@ -165,11 +165,41 @@
 		\section*{摘要}
 	\end{center}
 	
-	這頁寫中文摘要
-	
+	半導體產業蓬勃發展，
+	製程中所累積的資料逐漸受到重視。
+	然而，
+	半導體製程資料通常具有量測變數多、缺失比例高、類別分布不平衡，
+	以及樣本數取得不易等特性，
+	增加了預測與解釋的困難。
+	近年來，
+	相關研究多以決策樹、隨機森林、XGBoost等機器學習方法進行預測，
+	並以SHAP、LIME等方法輔助說明變數的重要性。
+	然而，
+	對於預測模型在特定樣本附近的局部決策依據，
+	仍有進一步分析與討論的空間。
+
+	本研究以 UCI SECOM 半導體製程資料為研究對象，
+	建立一套兼顧預測與局部解釋的分析流程。
+	首先進行資料前處理，
+	其次利用 KMeans 分群，
+	並於訓練資料中結合 SMOTE 與交叉驗證建立 XGBoost 預測模型；
+	最後於關注的局部範圍內，
+	透過資料生成方式建立局部刻劃模型，
+	用來描述預測模型在局部範圍內的決策行為，
+	並說明各變數影響之方向與相對大小。
+
+	研究結果顯示，
+	分群後建構的 XGBoost 預測模型，
+	其分類準確度分別為 88.46\% 及 94.82\% 。
+	此外，
+	局部刻劃模型之決定係數約為 0.6 ，
+	顯示其在局部範圍內可有效刻劃預測模型之決策行為，
+	亦能提供局部決策因子之具體資訊，
+	作為後續製程監控與改善之依據。
+
 	% put to bottom
 	\vfill
-	\textbf{關鍵字：} 關鍵字1、關鍵字2、關鍵字3
+	\textbf{關鍵字：} SECOM、半導體製程資料、分群、XGBoost、局部刻劃模型、可解釋人工智慧
 	\newpage 
 	
 	% no page number
@@ -184,11 +214,41 @@
 		\section*{Abstract}
 	\end{center}
 	
-	這頁寫英文摘要
+	Semiconductor manufacturing data have attracted increasing attention as the semiconductor industry continues to grow.
+	However,
+	such data usually exhibit characteristics such as a large number of measured variables, 
+	a high proportion of missing values, 
+	imbalanced class distribution, 
+	and limited sample availability, 
+	which increase the difficulty of prediction and interpretation. 
+	In recent years, 
+	related studies have commonly employed machine learning methods such as decision tree, 
+	random forests, 
+	and XGBoost for prediction, 
+	and have further used SHAP and LIME to explain feature importance.
+	Nevertheless,
+	there remains room for further analysis and discussion regarding the local decision basis of prediction models around specific samples.
+
+	This study uses the UCI SECOM semiconductor manufacturing dataset as the research object and establishes an analytical framework that takes both prediction and local explanation into account.
+	First,
+	data preprocessing is performed.
+	Next,
+	KMeans clustering is applied,
+	and an XGBoost prediction model is constructed by combining SMOTE and cross-validation on the training data.
+	Finally,
+	within a local region of interest, 
+	a local characterization model is established through a data generation approach to describe the decision behavior of the prediction model in the local region and to analyze the direction and relative magnitude of the effects of variables.
+
+	The results show that the XGBoost prediction models constructed after clustering achieve classification accuracies of 88.46\% and 94.82\% respectively. 
+	In addition, 
+	the coefficient of determination of the local characterization model is approximately 0.6, 
+	indicating that the model can effectively characterize the decision behavior of the prediction model within the local region. 
+	The proposed framework also provides specific information on local decision factors, 
+	which may serve as a basis for subsequent process monitoring and improvement.
 	
 	% put to bottom
 	\vfill
-	\textbf{Keywords:} keyword 1, keyword 2, keyword 3 
+	\textbf{Keywords:} SECOM, semiconductor manufacturing data, clustering, XGBoost, local characterization model, explainable artificial intelligence 
 	\newpage 
 	
 	% no page number
@@ -688,9 +748,9 @@
 
 			% 上排
 			\node[io] (read) {資料\\讀取};
-			\node[box, right=of read] (prep) {資料前處理};
-			\node[box, right=of prep] (cluster) {分群};
-			\node[box, right=of cluster, minimum width=3.6cm] (keep) {保留原始資料};
+			\node[box, right=2.5cm of read] (prep) {資料前處理};
+			\node[box, right=2.5cm of prep] (cluster) {分群};
+			% \node[box, right=of cluster, minimum width=3.6cm] (keep) {保留原始資料};
 
 			% 下排
 			\node[box, below=3.2cm of read, xshift=0.2cm] (blackbox) {訓練預測模型};
@@ -702,10 +762,10 @@
 			% 上排箭頭
 			\draw[line] (read) -- (prep);
 			\draw[line] (prep) -- (cluster);
-			\draw[line] (cluster) -- (keep);
+			% \draw[line] (cluster) -- (keep);
 
 			% 從 keep 繞到 blackbox
-			\draw[line] (keep.south) |- ([yshift=2.2cm]blackbox.north) -| (blackbox.north);
+			\draw[line] (cluster.south) |- ([yshift=2.2cm]blackbox.north) -| (blackbox.north);
 
 			% blackbox 分叉
 			\draw[line] (blackbox.east) -- ++(0.8,0) |- (compare.west);
