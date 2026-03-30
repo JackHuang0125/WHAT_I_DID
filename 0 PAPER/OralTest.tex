@@ -237,7 +237,7 @@
     \vspace{0.25cm}
     \item 賴立夫（2022）－KNN補值、SMOTE、決策樹
     \vspace{0.25cm}
-    \item Park et al.（2024）－前處理流程
+    \item Park et al.（2024）－交叉驗證、前處理
     \vspace{0.25cm}
     \item Presciuttini et al.（2024）－LIME、可解釋預測模型
   \end{itemize}
@@ -245,63 +245,64 @@
 
 \begin{frame}{\textbf{目的}}
   \begin{itemize}
-    \item 建立較佳的預測模型
+    \item 建立一套較完整的分析流程，以提升預測模型之表現
     \vspace{0.3cm}
-    \item 在該模型上提供對單一預測結果具參考價值的解釋
+    \item 建立一個對某樣本的預測結果能提供解釋的局部刻劃模型
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{預測模型結果}}
-  \begin{itemize}
-    \item 比較：全體資料之預測結果
-  \end{itemize}
+\begin{frame}{\textbf{比較全體資料的預測模型}}
   \centering
   \scalebox{0.9}{
   \begin{tabular}{|l|c|c|c|}
     \hline
     研究 & ACC & FAR & ROC-AUC \\
     \hline
-    賴立夫（2022）& 85.99\% & 11.26\% &  \\
+    賴立夫（2022）& 85.99\% & 11.26\% & － \\
     \hline
-    賴立夫（2022）& 86.94\% & 9.22\% &  \\
+    賴立夫（2022）& 86.94\% & 9.22\% & － \\
     \hline
-    Salem et al.（2018）&  & 24.95\% & 70.22\% \\
+    Salem et al.（2018）&  74.41\%  & 24.95\% & 70.22\% \\
     \hline
     Park et al.（2024）& 85.14\% &  &  \\
     \hline
-    Presciuttini et al.（2024）&  &  &  \\
+    Presciuttini et al.（2024）& 89.49\% & 4.14\% & 75\% \\
     \hline
     本研究（分群前）& 92.72\% & 1.89\% & 66.23\% \\
+    \hline
+    本研究（分群後）群0 & 88.46\% & 4.68\% & 69.83\% \\
+    \hline
+    本研究（分群後）群1 & 94.82\% & 0.99\% & 62.24\% \\
     \hline
   \end{tabular}
   }
 \end{frame}
 
-\begin{frame}{\textbf{比較分群後的預測模型}}
-  \centering
-  \resizebox{\textwidth}{!}{
-  \begin{tabular}{|l|c|c|c|c|c|}
-    \hline
-    群名 & 樣本數 & Pass / Fail & ACC & FAR & ROC-AUC \\
-    \hline
-    全體（分群前） & 1525 & 1430 / 95  & 
-    \begin{tabular}[c]{@{}c@{}}0.9272\\ {}[0.9141, 0.9397]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.0189\\ {}[0.0120, 0.0264]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.6623\\ {}[0.6054, 0.7178]\end{tabular} \\
-    \hline
-    群 0 & 676  & 619 / 57   & 
-    \begin{tabular}[c]{@{}c@{}}0.8846\\ {}[0.8595, 0.9083]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.0468\\ {}[0.0308, 0.0639]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.6983\\ {}[0.6308, 0.7631]\end{tabular} \\
-    \hline
-    群 1 & 849  & 811 / 38   & 
-    \begin{tabular}[c]{@{}c@{}}0.9482\\ {}[0.9329, 0.9623]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.0099\\ {}[0.0037, 0.0172]\end{tabular} &
-    \begin{tabular}[c]{@{}c@{}}0.6224\\ {}[0.5228, 0.7171]\end{tabular} \\
-    \hline
-  \end{tabular}
-  }
-\end{frame}
+% \begin{frame}{\textbf{比較分群後的預測模型}}
+%   \centering
+%   \scalebox{0.7}{
+%   \begin{tabular}{|l|c|c|c|c|c|}
+%     \hline
+%     群名 & 樣本數 & Pass / Fail & ACC & FAR & ROC-AUC \\
+%     \hline
+%     全體 & 1525 & 1430 / 95  & 
+%     \begin{tabular}[c]{@{}c@{}}92.72\%\\ {}[91.41\%, 93.97\%]\end{tabular} &
+%     \begin{tabular}[c]{@{}c@{}}1.89\%\\ {}[1.2\%, 2.64\%]\end{tabular} &
+%     \begin{tabular}[c]{@{}c@{}}66.23\%\\ {}[60.54\%, 71.78\%]\end{tabular} \\
+%     \hline
+%     群 0 & 676  & 619 / 57   & 
+%     \begin{tabular}[c]{@{}c@{}}88.46\%\\ {}[85.95\%, 90.83\%]\end{tabular} &
+%     \begin{tabular}[c]{@{}c@{}}4.68\%\\ {}[3.08\%, 6.39\%]\end{tabular} &
+%     \begin{tabular}[c]{@{}c@{}}69.83\%\\ {}[63.08\%, 76.31\%]\end{tabular} \\
+%     \hline
+%     群 1 & 849  & 811 / 38   & 
+%     \begin{tabular}[c]{@{}c@{}}94.82\%\\ {}[93.29\%, 96.23\%]\end{tabular} &
+%     \begin{tabular}[c]{@{}c@{}}0.99\%\\ {}[0.37\%, 1.72\%]\end{tabular} &
+%     \begin{tabular}[c]{@{}c@{}}62.24\%\\ {}[52.28\%, 71.71\%]\end{tabular} \\
+%     \hline
+%   \end{tabular}
+%   }
+% \end{frame}
 
 \begin{frame}{\textbf{局部刻劃模型結果}}
   \begin{table}
@@ -348,6 +349,20 @@
   }
 	\end{table}
 \end{frame}
+
+%---------------------------------
+\section{小結}
+
+\begin{frame}{\textbf{小結}}
+\begin{itemize}
+  \item 預測模型
+  \vspace{1cm}
+  \item 局部刻劃模型
+  % \item 分群後，各群預測模型呈現與整體預測模型不同的誤報率與可預測程度
+  % \item 局部刻劃模型可將預測行為轉為重要特徵的影響性與方向性
+\end{itemize}
+\end{frame}
+
 %---------------------------------
 \section{問題}
 
@@ -358,25 +373,23 @@
 
 \begin{frame}{\textbf{問題}}
   \begin{itemize}
-    \item 如何建立好的預測模型
-    \begin{itemize}
-      \item 量測變數龐大，能蒐集到的樣本數不足
-      \item 多個子群結構
-    \end{itemize}
+    \item 局部刻劃模型更具有可信度
     \vspace{0.3cm}
-    \item 如何讓局部刻劃更可靠
     \begin{itemize}
-      \item 隨機擾動生成
+      \item 量測變數多，樣本數少
+      \vspace{0.3cm}
+      \item 晶片製造過程繁雜
+      \vspace{0.3cm}
+      \item 具體的變數解釋，而非重要性
     \end{itemize}
-    
   \end{itemize}
   \vspace{0.3cm}
   【舉例】咖啡廳
 \end{frame}
 
 %---------------------------------
-\section{方法與流程}
-\begin{frame}{\textbf{方法與流程}}
+\section{方法流程與討論}
+\begin{frame}{\textbf{方法流程與討論}}
 \centering
 \resizebox{1\textwidth}{!}{
   \begin{tikzpicture}[
@@ -459,9 +472,6 @@
     \centering
     \includegraphics[width=0.75\linewidth]{img/未移除outlier做pca無門檻.png}
   \end{figure}
-  \begin{itemize}
-    \item 離群樣本對PCA主成分方向與投影結果造成影響\cite{Hubert2005}
-  \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{最終資料}}
@@ -512,7 +522,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{預測模型}}
+\begin{frame}{\textbf{訓練預測模型}}
   \begin{itemize}
     \item XGBoost Classifier    
     \vspace{0.3cm}
@@ -528,14 +538,43 @@
       樣本編號 & $\hat{p}$ & 真實類別 & 預測類別 &
       樣本編號 & $\hat{p}$ & 真實類別 & 預測類別\\
       \midrule
-      82  & 0.498364 & Pass & Pass & 1158 & 0.493004 & Pass & Pass\\
-      225 & 0.516134 & Pass & Fail & 990  & 0.513882 & Pass & Fail\\
-      44  & 0.481022 & Pass & Pass & 1361 & 0.521811 & Fail & Fail\\
-      144 & 0.527558 & Pass & Fail & 1189 & 0.473835 & Fail & Pass\\
-      345 & 0.470658 & Pass & Pass & 1187 & 0.528723 & Pass & Fail\\
+      82  & 0.4984 & Pass & Pass & 1158 & 0.4930 & Pass & Pass\\
+      225 & 0.5161 & Pass & Fail & 990  & 0.5139 & Pass & Fail\\
+      44  & 0.4810 & Pass & Pass & 1361 & 0.5218 & Fail & Fail\\
+      144 & 0.5276 & Pass & Fail & 1189 & 0.4738 & Fail & Pass\\
+      345 & 0.4707 & Pass & Pass & 1187 & 0.5287 & Pass & Fail\\
       \bottomrule
     \end{tabular}
     }
+	\end{table}
+\end{frame}
+
+\begin{frame}{\textbf{決策邊界樣本}}
+	\begin{table}
+		\centering
+      \scalebox{0.8}{
+			\begin{tabular}{crr|crr}
+				\toprule
+				\multicolumn{3}{c|}{群 0} & \multicolumn{3}{c}{群 1} \\
+				\midrule
+				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ &
+				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ \\
+				\midrule
+				82  & 0.4984 & 0.0016 & 1158 & 0.4930 & 0.0070 \\
+				225 & 0.5161 & 0.0161 & 990  & 0.5139 & 0.0139 \\
+				44  & 0.4810 & 0.0190 & 1361 & 0.5218 & 0.0218 \\
+				144 & 0.5276 & 0.0276 & 1189 & 0.4738 & 0.0262 \\
+				345 & 0.4707 & 0.0293 & 1187 & 0.5287 & 0.0287 \\
+				298 & 0.4685 & 0.0315 & 458  & 0.4645 & 0.0355 \\
+				484 & 0.5335 & 0.0335 & 1054 & 0.5404 & 0.0404 \\
+				105 & 0.4585 & 0.0415 &  &  &  \\
+				111 & 0.4573 & 0.0427 &  &  &  \\
+				247 & 0.5441 & 0.0441 &  &  &  \\
+				653 & 0.5484 & 0.0484 &  &  &  \\
+				109 & 0.5490 & 0.0490 &  &  &  \\
+				\bottomrule
+			\end{tabular}
+      }
 	\end{table}
 \end{frame}
 
@@ -626,153 +665,6 @@
   }
 \end{frame}
 
-% \begin{frame}
-% \centering
-% \resizebox{0.98\textwidth}{!}{
-% \begin{tikzpicture}[
-%     >=Latex,
-%     every node/.style={font=\scriptsize},
-%     startstop/.style={
-%         rectangle,
-%         rounded corners,
-%         draw=black,
-%         thick,
-%         align=center,
-%         minimum width=2.2cm,
-%         minimum height=0.8cm
-%     },
-%     process/.style={
-%         rectangle,
-%         draw=black,
-%         thick,
-%         align=center,
-%         minimum width=1.8cm,
-%         minimum height=0.8cm
-%     },
-%     output/.style={
-%         rectangle,
-%         rounded corners,
-%         draw=black,
-%         thick,
-%         align=center,
-%         minimum width=2.5cm,
-%         minimum height=0.8cm
-%     },
-%     arrow/.style={->, thick}
-% ]
-
-% % input
-% \node[startstop] (input) at (0,0) {局部資料\\$(X,y)$};
-
-% % row 1
-% \node[process] (t1) at (0,-1.8) {第1次\\特徵選擇};
-% \node[process] (p11) at (2.4,-1.8) {$p=0.05$};
-% \node[process] (p12) at (4.5,-1.8) {$p=0.01$};
-% \node[process] (p13) at (6.6,-1.8) {$p=0.005$};
-% \node[process] (p14) at (8.9,-1.8) {$p=0.001$};
-% \node[process] (p15) at (11.2,-1.8) {$p=0.0005$};
-% \node[output]  (f1)  at (14.0,-1.8) {輸出第1次\\保留特徵};
-
-% % row 2
-% \node[process] (t2) at (0,-3.6) {第2次\\特徵選擇};
-% \node[process] (p21) at (2.4,-3.6) {$p=0.05$};
-% \node[process] (p22) at (4.5,-3.6) {$p=0.01$};
-% \node[process] (p23) at (6.6,-3.6) {$p=0.005$};
-% \node[process] (p24) at (8.9,-3.6) {$p=0.001$};
-% \node[process] (p25) at (11.2,-3.6) {$p=0.0005$};
-% \node[output]  (f2)  at (14.0,-3.6) {輸出第2次\\保留特徵};
-
-% % dots
-% \node[process] (dots) at (0,-5.2) {$\vdots$};
-
-% % row 50
-% \node[process] (t50) at (0,-6.8) {第50次\\特徵選擇};
-% \node[process] (p501) at (2.4,-6.8) {$p=0.05$};
-% \node[process] (p502) at (4.5,-6.8) {$p=0.01$};
-% \node[process] (p503) at (6.6,-6.8) {$p=0.005$};
-% \node[process] (p504) at (8.9,-6.8) {$p=0.001$};
-% \node[process] (p505) at (11.2,-6.8) {$p=0.0005$};
-% \node[output]  (f50)  at (14.0,-6.8) {輸出第50次\\保留特徵};
-
-% % summary
-% \node[process] (summary) at (0,-8.7) {統計50次保留結果};
-% \node[startstop] (final) at (0,-10.4) {最終特徵集合\\（50次皆保留之特徵）};
-
-% % arrows vertical
-% \draw[arrow] (input) -- (t1);
-% \draw[arrow] (t1) -- (t2);
-% \draw[arrow] (t2) -- (dots);
-% \draw[arrow] (dots) -- (t50);
-% \draw[arrow] (t50) -- (summary);
-% \draw[arrow] (summary) -- (final);
-
-% % arrows horizontal row 1
-% \draw[arrow] (t1) -- (p11);
-% \draw[arrow] (p11) -- (p12);
-% \draw[arrow] (p12) -- (p13);
-% \draw[arrow] (p13) -- (p14);
-% \draw[arrow] (p14) -- (p15);
-% \draw[arrow] (p15) -- (f1);
-
-% % arrows horizontal row 2
-% \draw[arrow] (t2) -- (p21);
-% \draw[arrow] (p21) -- (p22);
-% \draw[arrow] (p22) -- (p23);
-% \draw[arrow] (p23) -- (p24);
-% \draw[arrow] (p24) -- (p25);
-% \draw[arrow] (p25) -- (f2);
-
-% % arrows horizontal row 50
-% \draw[arrow] (t50) -- (p501);
-% \draw[arrow] (p501) -- (p502);
-% \draw[arrow] (p502) -- (p503);
-% \draw[arrow] (p503) -- (p504);
-% \draw[arrow] (p504) -- (p505);
-% \draw[arrow] (p505) -- (f50);
-
-% \end{tikzpicture}
-% }
-% \end{frame}
-
-%---------------------------------
-\section{討論}
-
-\begin{frame}
-  \centering
-  \huge{討論}
-\end{frame}
-
-\begin{frame}{\textbf{決策邊界樣本}}
-	\begin{table}
-		\centering
-      \scalebox{0.8}{
-			\begin{tabular}{crr|crr}
-				\toprule
-				\multicolumn{3}{c|}{群 0} & \multicolumn{3}{c}{群 1} \\
-				\midrule
-				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ &
-				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ \\
-				\midrule
-				82  & 0.498364 & 0.001636 & 1158 & 0.493004 & 0.006996 \\
-				225 & 0.516134 & 0.016134 & 990  & 0.513882 & 0.013882 \\
-				44  & 0.481022 & 0.018978 & 1361 & 0.521811 & 0.021811 \\
-				144 & 0.527558 & 0.027558 & 1189 & 0.473835 & 0.026165 \\
-				345 & 0.470658 & 0.029342 & 1187 & 0.528723 & 0.028723 \\
-				298 & 0.468458 & 0.031542 & 458  & 0.464450 & 0.035550 \\
-				484 & 0.533517 & 0.033517 & 1054 & 0.540420 & 0.040420 \\
-				105 & 0.458454 & 0.041546 &  &  &  \\
-				111 & 0.457258 & 0.042742 &  &  &  \\
-				247 & 0.544061 & 0.044061 &  &  &  \\
-				653 & 0.548375 & 0.048375 &  &  &  \\
-				109 & 0.548989 & 0.048989 &  &  &  \\
-				\bottomrule
-			\end{tabular}
-      }
-	\end{table}
-\end{frame}
-
-
-
 \begin{frame}{\textbf{局部刻劃模型跨群比較}}
 	\begin{table}
 		\centering
@@ -806,34 +698,29 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textbf{結果總結}}
-\begin{itemize}
-  \item 各群預測模型
-  \vspace{1cm}
-  \item 建立可控制的局部範圍
-  \vspace{1cm}
-  \item 局部刻劃模型
-  % \item 分群後，各群預測模型呈現與整體預測模型不同的誤報率與可預測程度
-  % \item 以決策邊界附近樣本建立中心點，可聚焦於模型預測最不明確的局部範圍
-  % \item 在可控制的局部範圍內擬合模型，避免隨機擾動造成的外插風險
-  % \item 局部刻劃模型可將預測行為轉為重要特徵的影響性與方向性
-\end{itemize}
+%---------------------------------
+\section{結論}
+
+\begin{frame}
+  \centering
+  \huge{結論}
 \end{frame}
 
 \begin{frame}{\textbf{結論}}
-\begin{itemize}
-  \item 分析流程
-  \vspace{1cm}
-  \item 先分群再建模
-  \vspace{1cm}
-  \item 設計局部格子點擬合模型
-  \vspace{1cm}
-  \item 各群的決策行為
-  % \item 本研究提出一套適用於高維、缺失嚴重且類別不平衡製程資料的分析流程
-  % \item 透過先分群再於群內建模，可降低異質性對模型學習與局部解釋的干擾
-  % \item 透過中心點與格子點設計，可在較低外插風險下建立局部線性刻劃模型
-  % \item 研究結果顯示，不同子群對應不同的預測模型之局部決策結構，分群的局部刻劃模型具分析價值
-\end{itemize}
+  \begin{itemize}
+    \item 分析流程
+    \vspace{1cm}
+    \item 先分群再建模
+    \vspace{1cm}
+    \item 設計局部格子點擬合模型
+    \vspace{1cm}
+    \item 各群的決策行為
+    % \item 本研究提出一套適用於高維、缺失嚴重且類別不平衡製程資料的分析流程
+    % \item 透過先分群再於群內建模，可降低異質性對模型學習與局部解釋的干擾
+    % \item 以決策邊界附近樣本建立中心點，可聚焦於模型預測最不明確的局部範圍
+    % \item 透過中心點與格子點設計，在可控制的局部範圍內擬合模型，可在較低外插風險下建立局部線性刻劃模型
+    % \item 不同子群對應不同的預測模型之局部決策結構，分群的局部刻劃模型具分析價值
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{未來工作}}
@@ -843,6 +730,12 @@
   % \item 與 LIME、SHAP 等事後解釋方法進行系統性比較。
   % \item 若可取得具實際製程意義的變數名稱，可提升結果在工程端的可解讀性與應用價值。
 % \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{謝謝聆聽}}
+  \begin{center}
+  \Huge 問題
+  \end{center}
 \end{frame}
 
 %---------------------------------
@@ -856,12 +749,6 @@
 \begin{frame}[allowframebreaks]{References}
   \bibliographystyle{plain}
   \bibliography{references}
-\end{frame}
-
-\begin{frame}{\textbf{謝謝聆聽}}
-\begin{center}
-\Large 問題
-\end{center}
 \end{frame}
 
 \begin{frame}{\textbf{資料介紹 - 離群樣本處理完}}
