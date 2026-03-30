@@ -113,10 +113,8 @@
   \vspace{0.3cm}
   \begin{figure}
 			\centering
-			\includegraphics[width=0.9\linewidth]{img/產業.png}
+			\includegraphics[width=1.0\linewidth]{img/logo.png}
   \end{figure}
-  \vfill
-  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://naipnews.naipo.com/17315/}{\textit{李淑蓮\,北美智權報}}}
 \end{frame}
 
 \begin{frame}{\textbf{半導體}}
@@ -251,7 +249,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{比較全體資料的預測模型}}
+\begin{frame}{\textbf{結果I－預測模型}}
   \centering
   \scalebox{0.9}{
   \begin{tabular}{|l|c|c|c|}
@@ -304,7 +302,7 @@
 %   }
 % \end{frame}
 
-\begin{frame}{\textbf{局部刻劃模型結果}}
+\begin{frame}{\textbf{結果II－局部刻劃模型}}
   \begin{table}
   \centering
   \scalebox{0.65}{
@@ -327,23 +325,23 @@
     \toprule
     \multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
     \midrule
-    \multicolumn{2}{c|}{$R^2=0.5842$} & \multicolumn{2}{c}{$R^2=0.5926$} \\
-    \multicolumn{2}{c|}{$95\%C.I.\in[0.583563, 0.584737]$} & \multicolumn{2}{c}{$95\%C.I.\in[0.590905, 0.594560]$} \\
+    \multicolumn{2}{c|}{$R^2=0.58$} & \multicolumn{2}{c}{$R^2=0.59$} \\
+    \multicolumn{2}{c|}{$95\%C.I.\in[58.36\%, 58.47\%]$} & \multicolumn{2}{c}{$95\%C.I.\in[59.09\%, 59.45\%]$} \\
     \midrule
     特徵 & 估計係數 &
     特徵 & 估計係數 \\
     \midrule
-    intercept   & 1.005144  & intercept & 0.996643  \\
-    x291        & 0.034033  & x386      & 0.016675  \\
-    x7          & -0.029912 & x117      & -0.012556 \\
-    x141        & -0.028171 &	x420      & -0.011799 \\
-    x87         & 0.022993  &	x456      & 0.010252  \\
-    x217        & 0.022274  &	x28       & -0.009172 \\
-    x461        & 0.019723  &	x36       & -0.008981 \\
-    x20         & 0.017796  &	x287      & -0.007539 \\
-    x58         & -0.015820 &	x103      & -0.006848 \\
-    x1          & -0.014731 &	x583      & 0.005797  \\
-    x378        & 0.014099  &	x184      & 0.005055  \\
+    intercept   & 1.0051  & intercept & 0.9966  \\
+    x291        & 0.0340  & x386      & 0.01668  \\
+    x7          & -0.0299 & x117      & -0.0126 \\
+    x141        & -0.0282 &	x420      & -0.0118 \\
+    x87         & 0.0230  &	x456      & 0.0106  \\
+    x217        & 0.0223  &	x28       & -0.0092 \\
+    x461        & 0.0197  &	x36       & -0.0090 \\
+    x20         & 0.0178  &	x287      & -0.0075 \\
+    x58         & -0.0158 &	x103      & -0.0068 \\
+    x1          & -0.0147 &	x583      & 0.0058  \\
+    x378        & 0.0141  &	x184      & 0.0051  \\
     \bottomrule
   \end{tabular}
   }
@@ -714,7 +712,7 @@
     \vspace{1cm}
     \item 設計局部格子點擬合模型
     \vspace{1cm}
-    \item 各群的決策行為
+    \item 局部的決策行為
     % \item 本研究提出一套適用於高維、缺失嚴重且類別不平衡製程資料的分析流程
     % \item 透過先分群再於群內建模，可降低異質性對模型學習與局部解釋的干擾
     % \item 以決策邊界附近樣本建立中心點，可聚焦於模型預測最不明確的局部範圍
