@@ -180,7 +180,7 @@
 			\includegraphics[width=0.85\linewidth]{img/waferyield2.png}
   \end{figure}
   \vfill
-  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://de.wikipedia.org/wiki/Ausbeute_(Halbleitertechnik)}{\textit{WIKIPIEDA}}}
+  \hspace*{0pt}\small{\textit{圖片來源：}\href{https://de.wikipedia.org/wiki/Ausbeute_(Halbleitertechnik)}{\textit{Wikipedia}}}
 \end{frame}
 
 \begin{frame}{\textbf{資料}}
@@ -207,17 +207,10 @@
   \begin{itemize}
     \item 共 1567 筆樣本
     \item 590 個量測變數
-    \item $-1$代表Pass，1代表Fail
+    \item $-1$代表Pass有1463筆(93.36\%)，1代表Fail有104筆(6.64\%)
   \end{itemize}  
   \vfill
   \hspace*{0pt}\small{\textit{資料來源：}\href{https://archive.ics.uci.edu/dataset/179/secom}{\textit{UCI}}}
-\end{frame}
-
-\begin{frame}{\textbf{資料 - 類別不平衡}}
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.65\linewidth]{img/y.png}
-  \end{figure}
 \end{frame}
 
 \begin{frame}{\textbf{資料 - 高缺失率}}
@@ -243,9 +236,9 @@
 
 \begin{frame}{\textbf{目的}}
   \begin{itemize}
-    \item 建立一套較完整的分析流程，以提升預測模型之表現
+    \item 提升預測模型的表現
     \vspace{0.3cm}
-    \item 建立一個對某樣本的預測結果能提供解釋的局部刻劃模型
+    \item 提供具解釋性的局部刻劃模型
   \end{itemize}
 \end{frame}
 
@@ -276,32 +269,6 @@
   }
 \end{frame}
 
-% \begin{frame}{\textbf{比較分群後的預測模型}}
-%   \centering
-%   \scalebox{0.7}{
-%   \begin{tabular}{|l|c|c|c|c|c|}
-%     \hline
-%     群名 & 樣本數 & Pass / Fail & ACC & FAR & ROC-AUC \\
-%     \hline
-%     全體 & 1525 & 1430 / 95  & 
-%     \begin{tabular}[c]{@{}c@{}}92.72\%\\ {}[91.41\%, 93.97\%]\end{tabular} &
-%     \begin{tabular}[c]{@{}c@{}}1.89\%\\ {}[1.2\%, 2.64\%]\end{tabular} &
-%     \begin{tabular}[c]{@{}c@{}}66.23\%\\ {}[60.54\%, 71.78\%]\end{tabular} \\
-%     \hline
-%     群 0 & 676  & 619 / 57   & 
-%     \begin{tabular}[c]{@{}c@{}}88.46\%\\ {}[85.95\%, 90.83\%]\end{tabular} &
-%     \begin{tabular}[c]{@{}c@{}}4.68\%\\ {}[3.08\%, 6.39\%]\end{tabular} &
-%     \begin{tabular}[c]{@{}c@{}}69.83\%\\ {}[63.08\%, 76.31\%]\end{tabular} \\
-%     \hline
-%     群 1 & 849  & 811 / 38   & 
-%     \begin{tabular}[c]{@{}c@{}}94.82\%\\ {}[93.29\%, 96.23\%]\end{tabular} &
-%     \begin{tabular}[c]{@{}c@{}}0.99\%\\ {}[0.37\%, 1.72\%]\end{tabular} &
-%     \begin{tabular}[c]{@{}c@{}}62.24\%\\ {}[52.28\%, 71.71\%]\end{tabular} \\
-%     \hline
-%   \end{tabular}
-%   }
-% \end{frame}
-
 \begin{frame}{\textbf{結果II－局部刻劃模型}}
   \begin{table}
   \centering
@@ -326,7 +293,6 @@
     \multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
     \midrule
     \multicolumn{2}{c|}{$R^2=0.58$} & \multicolumn{2}{c}{$R^2=0.59$} \\
-    \multicolumn{2}{c|}{$95\%C.I.\in[58.36\%, 58.47\%]$} & \multicolumn{2}{c}{$95\%C.I.\in[59.09\%, 59.45\%]$} \\
     \midrule
     特徵 & 估計係數 &
     特徵 & 估計係數 \\
@@ -526,6 +492,9 @@
     \vspace{0.3cm}
     \item 採用五折交叉驗證，得到每筆樣本輸出機率 $\hat{p}$
   \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{訓練預測模型}}
   \begin{table}
 		\centering
     \scalebox{0.7}{

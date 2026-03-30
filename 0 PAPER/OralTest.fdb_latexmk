@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex OralTest"] 1774850536.02783 "OralTest.aux" "OralTest.bbl" "OralTest" 1774850693.55374 0
+["bibtex OralTest"] 1774858579.33162 "OralTest.aux" "OralTest.bbl" "OralTest" 1774858594.01105 0
   "./references.bib" 1774243520 4081 42d37a7488a31d734b4d098a0cf633a5 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "OralTest.aux" 1774850692 8055 f4209ad09d9351f71a4aab72128e1bad "xelatex"
+  "OralTest.aux" 1774858592 8055 68f84426ff5c3a896945a0b903c36a4a "xelatex"
   (generated)
   "OralTest.bbl"
   "OralTest.blg"
   (rewritten before read)
-["xdvipdfmx"] 1774850692.5538 "OralTest.xdv" "OralTest.pdf" "OralTest" 1774850693.55973 0
-  "OralTest.xdv" 1774850692 1091576 1dfea11628d58966e5aaba21c7010c80 "xelatex"
+["xdvipdfmx"] 1774858593.02717 "OralTest.xdv" "OralTest.pdf" "OralTest" 1774858594.0171 0
+  "OralTest.xdv" 1774858592 1091000 b98c3ad19094b6b9e4e977980cc5aa23 "xelatex"
   (generated)
   "OralTest.pdf"
   (rewritten before read)
-["xelatex"] 1774850685.78364 "c:/Users/No/Documents/GitHub/psychic-spoon/0 PAPER/OralTest.tex" "OralTest.xdv" "OralTest" 1774850693.55395 0
+["xelatex"] 1774858586.33922 "c:/Users/No/Documents/GitHub/psychic-spoon/0 PAPER/OralTest.tex" "OralTest.xdv" "OralTest" 1774858594.01126 0
   "C:/Users/No/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758243793 27011562 5a194f1f729f3c84b35029ea57eb0ca7 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -240,13 +240,13 @@
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "OralTest.aux" 1774850692 8055 f4209ad09d9351f71a4aab72128e1bad "xelatex"
-  "OralTest.bbl" 1774850536 52 0eba253fc001332e731e8aba3f23127b "bibtex OralTest"
-  "OralTest.nav" 1774850692 4425 6e7b7d8768c35a4aeb402b277fea73e6 "xelatex"
-  "OralTest.out" 1774850692 394 6dc1241164707a487ca4efc58ab34a55 "xelatex"
-  "OralTest.tex" 1774850685 24747 2d252e75c0e6f20177b66d6491c2a339 ""
-  "OralTest.toc" 1774850692 229 cde66868ebf892dad199e944c88be138 "xelatex"
-  "c:/Users/No/Documents/GitHub/psychic-spoon/0 PAPER/OralTest.tex" 1774850685 24747 2d252e75c0e6f20177b66d6491c2a339 ""
+  "OralTest.aux" 1774858592 8055 68f84426ff5c3a896945a0b903c36a4a "xelatex"
+  "OralTest.bbl" 1774858579 52 0eba253fc001332e731e8aba3f23127b "bibtex OralTest"
+  "OralTest.nav" 1774858592 4425 da3125420a4f78eb3e1029be4c8d2281 "xelatex"
+  "OralTest.out" 1774858592 394 6dc1241164707a487ca4efc58ab34a55 "xelatex"
+  "OralTest.tex" 1774858585 23348 be5b7fe93e5d9a2cd5c6a0a4ccd98292 ""
+  "OralTest.toc" 1774858592 229 b65d815ff48356efedd7251e2710cc30 "xelatex"
+  "c:/Users/No/Documents/GitHub/psychic-spoon/0 PAPER/OralTest.tex" 1774858585 23348 be5b7fe93e5d9a2cd5c6a0a4ccd98292 ""
   "img/g0onG0vsf0(G0).png" 1773640643 46365 eb680f25a02617e14ae62f8c8be4c0b8 ""
   "img/g0onG1vsf1(G1).png" 1773640680 64571 a354da8bab4afb6d2b0e36ca36390159 ""
   "img/g1onG0vsf0(G0).png" 1773640695 29421 01f45c0d99a66542aa5cb39f55766a84 ""
@@ -256,7 +256,6 @@
   "img/semiconductorprocess.png" 1773730029 238291 85071090992ec420bba9083864024dab ""
   "img/waferyield2.png" 1774254770 127559 f64c724a6b5bc0c6ffe058fcc5fc0f88 ""
   "img/xNA.png" 1774503828 16993 8f9a4f88ec730b84b6cfa747d10c595e ""
-  "img/y.png" 1774504199 16589 d44a42c3204ed25ef340e1251daca8a4 ""
   "img/未移除outlier做pca無門檻.png" 1774244243 29333 e005542b671925f85c1b231ddb56faf3 ""
   "img/移除outlier做pca.png" 1773401102 63291 50b3869410236d21f7c0d0e249564aab ""
   (generated)
