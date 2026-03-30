@@ -6,25 +6,6 @@ Bengio, Y. and Grandvalet, Y. (2004).
 \newblock {\em Journal of Machine Learning Research}, 5(Sep), 1089--1105.
 \newblock https://www.jmlr.org/papers/v5/grandvalet04a.html?92f58540.
 
-\bibitem[Breiman, 2001]{Breiman2001}
-Breiman, L. (2001).
-\newblock {Random Forests}.
-\newblock {\em Machine Learning}, 45(1), 5--32.
-\newblock https://doi.org/10.1023/A:1010933404324.
-
-\bibitem[Chen and Guestrin, 2016]{ChenGuestrin2016}
-Chen, T. and Guestrin, C. (2016).
-\newblock {XGBoost: A Scalable Tree Boosting System}.
-\newblock {\em Proceedings of the 22nd ACM SIGKDD International Conference on
-  Knowledge Discovery and Data Mining},  785--794.
-\newblock https://doi.org/10.1145/2939672.2939785.
-
-\bibitem[Friedman, 2001]{Friedman2001}
-Friedman, J.~H. (2001).
-\newblock {Greedy Function Approximation: A Gradient Boosting Machine}.
-\newblock {\em The Annals of Statistics}, 29(5), 1189--1232.
-\newblock https://doi.org/10.1214/aos/1013203451.
-
 \bibitem[Hubert et~al., 2005]{Hubert2005}
 Hubert, M., Rousseeuw, P.~J., and Vanden~Branden, K. (2005).
 \newblock {ROBPCA: A New Approach to Robust Principal Component Analysis}.
@@ -56,6 +37,13 @@ Ribeiro, M.~T., Singh, S., and Guestrin, C. (2016).
 \newblock {\em Proceedings of the 22nd ACM SIGKDD International Conference on
   Knowledge Discovery and Data Mining},  1135--1144.
 \newblock https://doi.org/10.1145/2939672.2939778.
+
+\bibitem[Salem et~al., 2018]{Salem2018}
+Salem, M., Taheri, S., and Yuan, J.-S. (2018).
+\newblock {An Experimental Evaluation of Fault Diagnosis from Imbalanced and
+  Incomplete Data for Smart Semiconductor Manufacturing}.
+\newblock {\em Big Data and Cognitive Computing}, 2(4), 30.
+\newblock https://doi.org/10.3390/bdcc2040030.
 
 \bibitem[Troyanskaya et~al., 2001]{Troyanskaya}
 Troyanskaya, O., Cantor, M., Sherlock, G., Brown, P., Hastie, T., Tibshirani,
