@@ -1,17 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[Bengio and Grandvalet, 2004]{Bengio}
-Bengio, Y. and Grandvalet, Y. (2004).
-\newblock {No Unbiased Estimator of the Variance of K-Fold Cross-Validation}.
-\newblock {\em Journal of Machine Learning Research}, 5(Sep), 1089--1105.
-\newblock https://www.jmlr.org/papers/v5/grandvalet04a.html?92f58540.
-
-\bibitem[Hubert et~al., 2005]{Hubert2005}
-Hubert, M., Rousseeuw, P.~J., and Vanden~Branden, K. (2005).
-\newblock {ROBPCA: A New Approach to Robust Principal Component Analysis}.
-\newblock {\em Technometrics}, 47(1), 64--79.
-\newblock https://doi.org/10.1198/004017004000000563.
-
 \bibitem[Lundberg and Lee, 2017]{LundbergLee2017}
 Lundberg, S. and Lee, S. (2017).
 \newblock {A Unified Approach to Interpreting Model Predictions}.
@@ -29,6 +17,15 @@ Park, H., Koo, Y., Yang, H., Han, Y., and Nam, C. (2024).
   Semiconductor Manufacturing Processes}.
 \newblock {\em Sensors}, 24(17), 5461.
 \newblock https://doi.org/10.3390/s24175461.
+
+\bibitem[Presciuttini et~al., 2024]{Presciuttini2024}
+Presciuttini, A., Cantini, A., and Portioli-Staudacher, A. (2024).
+\newblock {Advancing manufacturing with interpretable machine learning:
+  LIME-driven insights from the SECOM dataset}.
+\newblock {\em Advances in Production Management Systems. Production Management
+  Systems for Volatile, Uncertain, Complex, and Ambiguous Environments},
+  286--300.
+\newblock https://doi.org/10.1007/978-3-031-71629-4.
 
 \bibitem[Ribeiro et~al., 2016]{Ribeiro2016}
 Ribeiro, M.~T., Singh, S., and Guestrin, C. (2016).
