@@ -486,7 +486,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{訓練預測模型}}
+\begin{frame}{\textbf{訓練預測模型結果}}
   \begin{itemize}
     \item XGBoost Classifier 搭配五折交叉驗證
   \end{itemize}
@@ -612,7 +612,7 @@
   \end{itemize} 
 \end{frame}
 
-\begin{frame}{\textbf{建立局部刻劃模型}}
+\begin{frame}{\textbf{擬和局部刻劃模型流程}}
   \vspace{0.3cm}
   \centering
   \resizebox{0.55\textwidth}{!}{
@@ -647,7 +647,7 @@
   }
 \end{frame}
 
-\begin{frame}{\textbf{局部刻劃模型}}
+\begin{frame}{\textbf{最終篩選特徵}}
   \begin{table}
   \centering
   \scalebox{0.65}{
@@ -662,7 +662,9 @@
     \end{tabular}
   }
   \end{table}
+\end{frame}
 
+\begin{frame}{\textbf{局部刻劃模型}}
   \begin{table}
   \centering
   \scalebox{0.7}{
@@ -699,10 +701,10 @@
 			\hline
 			比較設定 & \textbf{$R^2$} & \textbf{$\rho$} \\
 			\hline
-      $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^0_\mathbf{m})$ & 0.584211 & 0.764337 \\
-      $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^1_\mathbf{m})$ & 0.642828 & 0.801765 \\
-      $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^1_\mathbf{m})$ & -4.153173 & 0.217520 \\
-      $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^0_\mathbf{m})$ & -2.024091 & 0.051963 \\
+      $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^0_\mathbf{m})$ & 0.58 & 0.76 \\
+      $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^1_\mathbf{m})$ & 0.64 & 0.80 \\
+      $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^1_\mathbf{m})$ & -4.15 & 0.22 \\
+      $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^0_\mathbf{m})$ & -2.02 & 0.05 \\
 			\hline
 		\end{tabular}
 	\end{table}

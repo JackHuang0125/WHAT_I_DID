@@ -2,4 +2,4 @@
 \beamer@sectionintoc {2}{小結}{14}{0}{2}
 \beamer@sectionintoc {3}{問題}{15}{0}{3}
 \beamer@sectionintoc {4}{方法流程與結果討論}{17}{0}{4}
-\beamer@sectionintoc {5}{結論}{31}{0}{5}
+\beamer@sectionintoc {5}{結論}{32}{0}{5}

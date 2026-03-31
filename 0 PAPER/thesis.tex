@@ -308,7 +308,7 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\linewidth]{img/semiconductorprocess.png}
-		\caption{晶圓程序}
+		\caption{晶片六大核心製程}
 		\label{fig:waferprocess}
   	\end{figure}
 
@@ -525,17 +525,18 @@
 	\begin{table}[H]
 		\centering
 		\caption{SECOM 原始資料集摘要}
+		\vspace{0.15cm}
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r l r r r c r r r r}
-			\toprule
-			idx & Time & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
-			\midrule
+			\hline
+			索引 & Time & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
+			\hline
 			1 & 2008-07-19 11:55:00 & 3030.9300 & 2564.0000 & 2187.7333 & \dots & NaN    & NaN    & NaN     & -1 \\
 			2 & 2008-07-19 12:32:00 & 3095.7800 & 2465.1400 & 2230.4222 & \dots & 0.0201 & 0.0060 & 208.2045 & -1 \\
 			3 & 2008-07-19 13:17:00 & 2932.6100 & 2559.9400 & 2186.4111 & \dots & 0.0484 & 0.0148 & 82.8602  &  1 \\
 			4 & 2008-07-19 14:43:00 & 2988.7200 & 2479.9000 & 2199.0333 & \dots & 0.0149 & 0.0044 & 73.8432  & -1 \\
 			5 & 2008-07-19 15:22:00 & 3032.2400 & 2502.8700 & 2233.3667 & \dots & 0.0149 & 0.0044 & 73.8432  & -1 \\
-			\bottomrule
+			\hline
 		\end{tabular}%
 		}
 		\label{tab:資料集}
@@ -692,17 +693,18 @@
 	\begin{table}[H]
 		\centering
 		\caption{資料前處理後之最終資料集}
+		\vspace{0.15cm}
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r r r r c r r r r}
-			\toprule
-			idx & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
-			\midrule
+			\hline
+			索引 & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
+			\hline
 			1 & 0.216411 & 0.856549 & -0.434551 & \dots & -0.140893 & -0.050083 & 0.201450 & 0\\
 			2 & 1.094037 & -0.374751 & 1.020782 & \dots & 0.421933  & 0.258167  & 1.167895 & 0\\
 			3 & -1.114171 & 0.805982 & -0.479627 & \dots & 3.631596  & 3.316370  & -0.171694 & 1\\
 			4 & -0.354825 & -0.190915 & -0.049316 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
 			5 & 0.234139 & 0.095176 & 1.121165 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
-			\bottomrule
+			\hline
 		\end{tabular}%
 		}
 		\label{tab:資料前處理完}
@@ -1045,17 +1047,18 @@
 	評估指標包含準確度（Accuracy, ACC）、誤報率（False Alarm Rate, FAR）與 ROC-AUC ，
 	其定義如下：
 	$$
-	\mathrm{ACC}=\frac{TP+TN}{TP+TN+FP+FN},
+	\mathrm{ACC}=\frac{\text{TP}+\text{TN}}{\text{TP}+\text{TN}+\text{FP}+\text{FN}},
 	\qquad
-	\mathrm{FAR}=\frac{FP}{FP+TN}
+	\mathrm{FAR}=\frac{\text{FP}}{\text{FP}+\text{TN}}
 	$$
-	ROC-AUC 則以預測模型輸出機率於不同門檻下所形成的 ROC 曲線面積表示。
-	其中真陰性（TN）、假陽性（FP）、假陰性（FN）、真陽性（TP）分別對應「Pass判為Pass」、「Pass判為Fail」、「Fail判為Pass」、「Fail判為Fail」。
+	其中，TN（True False, 真陰性）、FP（False Positive, 假陽性）、FN（False Negative, 假陰性）、TP（True Positive, 真陽性）分別對應「Pass判為Pass」、「Pass判為Fail」、「Fail判為Pass」、「Fail判為Fail」。
 	其說明如表 \ref{tab:confusion_matrix} 所示。
+	ROC-AUC 則以預測模型輸出機率於不同門檻下所形成的 ROC 曲線面積表示。
 
 	\begin{table}[H]
 		\centering
 		\caption{混淆矩陣}
+		\vspace{0.15cm}
 		\label{tab:confusion_matrix}
 		\begin{tabular}{|c|c|c|}
 		\hline
@@ -1092,14 +1095,15 @@
 	\begin{table}[H]
 		\centering
 		\caption{各群之真實目標類別分布}
+		\vspace{0.15cm}
 		\label{tab:分群}
 		\begin{tabular}{|c|c|c|}
 		\hline
-		& \text{群0} & \text{群1} \\
+		& Pass & Fail \\
 		\hline
-		$\text{Pass}$ & 619 & 811 \\
+		群 0 & 619 & 57 \\
 		\hline
-		$\text{Fail}$ & 57  & 38 \\
+		群 1 & 811 & 38 \\
 		\hline
 		\end{tabular}
 	\end{table}
@@ -1115,6 +1119,7 @@
 	\begin{table}[H]
 		\centering
 		\caption{預測模型之環境與主要參數設定}
+		\vspace{0.15cm}
 		\label{tab:xgb_env_param}
 		\begin{tabular}{|l|l|}
 		\hline
@@ -1248,9 +1253,9 @@
 		\caption{局部刻劃模型決定係數 $R^2$ }
 		\vspace{0.15cm}
 		\label{tab:決定係數估計}
-			\begin{tabular}{c c}
+			\begin{tabular}{|c|c|}
 				\hline
-				群  & $R^2$ \\
+				 & $R^2$ \\
 				\hline
 				群 0 & 0.58 \\
 				\hline
