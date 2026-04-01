@@ -192,15 +192,15 @@
 		\centering
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r l r r r c r r r r}
-      \toprule
+      \hline
       idx & Time & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
-      \midrule
+      \hline
       1 & 2008-07-19 11:55:00 & 3030.9300 & 2564.0000 & 2187.7333 & \dots & NaN    & NaN    & NaN     & -1 \\
       2 & 2008-07-19 12:32:00 & 3095.7800 & 2465.1400 & 2230.4222 & \dots & 0.0201 & 0.0060 & 208.2045 & -1 \\
       3 & 2008-07-19 13:17:00 & 2932.6100 & 2559.9400 & 2186.4111 & \dots & 0.0484 & 0.0148 & 82.8602  &  1 \\
       4 & 2008-07-19 14:43:00 & 2988.7200 & 2479.9000 & 2199.0333 & \dots & 0.0149 & 0.0044 & 73.8432  & -1 \\
       5 & 2008-07-19 15:22:00 & 3032.2400 & 2502.8700 & 2233.3667 & \dots & 0.0149 & 0.0044 & 73.8432  & -1 \\
-      \bottomrule
+      \hline
 		\end{tabular}%
 		}
 	\end{table}
@@ -229,48 +229,65 @@
 \end{frame}
 
 \begin{frame}{\textbf{文獻回顧}}
-  \begin{itemize}
-    \item Salem et al.（2018）－前處理+預測模型、ANOVA
-    \vspace{0.4cm}
-    \item 賴立夫（2022）－KNN補值、SMOTE、決策樹
-    \vspace{0.4cm}
-    \item Park et al.（2024）－交叉驗證、前處理
-    \vspace{0.4cm}
-    \item Presciuttini et al.（2024）－LIME、可解釋預測模型
-  \end{itemize}
+  \centering
+  \scalebox{0.8}{
+  \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    研究                                    & 補值                           & 特徵篩選    & 預測模型 & 解釋方法 \\
+    \hline
+    \makecell{Salem et al.\\(2018)}         & \makecell{In-Painting \\ KNN} & Univariate & LR       & ANOVA   \\
+    \hline
+    \makecell{賴立夫\\（2022）}              & KNN                           & RF         & CART     & 決策樹   \\
+    \hline
+    \makecell{Park et al.\\（2024）}         & Mean                          & PCA        & SVM     & －       \\
+    \hline
+    \makecell{Presciuttini et al.\\（2024）} & Median                        & Boruta     & XGBoost & LIME     \\
+    \hline
+    \makecell{Naudé et al.\\(2024)}          & KNN                           & ANOVA      & SVM     & SHAP     \\
+    \hline
+  \end{tabular}
+  }
+\end{frame}
+
+%---------------------------------
+\section{目的與結果}
+
+\begin{frame}
+  \centering
+  \huge{目的與結果}
 \end{frame}
 
 \begin{frame}{\textbf{目的}}
-  \begin{itemize}
+  \begin{enumerate}[1.]
     \item 提升預測模型的表現
     \vspace{1cm}
     \item 提供具解釋性的局部刻劃模型
-  \end{itemize}
+  \end{enumerate}
 \end{frame}
 
-\begin{frame}{\textbf{結果I－預測模型}}
+\begin{frame}{\textbf{文獻預測模型結果比較}}
   \vspace{0.5cm}
   \centering
-  \scalebox{1}{
+  \scalebox{0.85}{
   \begin{tabular}{|l|c|c|c|}
     \hline
-    研究 & ACC & FAR & ROC-AUC \\
+    研究／預測模型              & ACC     & FAR     & AUC     \\
     \hline
-    賴立夫（2022）& 85.99\% & 11.26\% & － \\
+    Salem et al.（2018）       & 74.41\% & 24.95\% & 70.22\% \\
     \hline
-    賴立夫（2022）& 86.94\% & 9.22\% & － \\
+    賴立夫（2022）              & 86.94\% & 9.22\%  & －      \\
     \hline
-    Salem et al.（2018）&  74.41\%  & 24.95\% & 70.22\% \\
+    Park et al.（2024）        & 85.14\% & 6.59\%  & －      \\
     \hline
-    Park et al.（2024）& 85.14\% &  &  \\
+    Presciuttini et al.（2024）& 89.49\% & 4.14\%  & 75\%    \\
     \hline
-    Presciuttini et al.（2024）& 89.49\% & 4.14\% & 75\% \\
+    Naudé et al.（2024）       & －      & －      & 62.33\% \\     
     \hline
-    本研究（分群前）& 92.72\% & 1.89\% & 66.36\% \\
+    本研究（分群前）            & 92.72\% & 1.89\%  & 66.36\% \\
     \hline
-    本研究（分群後）群0 & 88.47\% & 4.68\% & 69.74\% \\
+    本研究（分群後）群0         & 88.47\% & 4.68\%  & 69.74\% \\
     \hline
-    本研究（分群後）群1 & 94.82\% & 0.99\% & 62.66\% \\
+    本研究（分群後）群1         & 94.82\% & 0.99\%  & 62.66\% \\
     \hline
   \end{tabular}
   }
@@ -279,24 +296,22 @@
     \begin{itemize}
       \item ACC: Accuracy(準確度)
       \item FAR: False Alarm rate(誤報率)
-      \item ROC-AUC(鑑別度)
+      \item AUC: Area under ROC curve(鑑別度)
     \end{itemize}
   }
 \end{frame}
 
-\begin{frame}{\textbf{結果II－局部刻劃模型}}
+\begin{frame}{\textbf{局部刻劃模型結果}}
   \begin{table}
   \centering
   \scalebox{0.85}{
   \begin{tabular}{cr|cr}
-    \toprule
+    \hline
     \multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
-    \midrule
-    \multicolumn{2}{c|}{$R^2=0.58$} & \multicolumn{2}{c}{$R^2=0.59$} \\
-    \midrule
+    \hline
     特徵 & 估計係數 &
     特徵 & 估計係數 \\
-    \midrule
+    \hline
     intercept   & 1.0051  & intercept & 0.9966  \\
     x291        & 0.0340  & x386      & 0.01668  \\
     x7          & -0.0299 & x117      & -0.0126 \\
@@ -308,14 +323,11 @@
     x58         & -0.0158 &	x103      & -0.0068 \\
     x1          & -0.0147 &	x583      & 0.0058  \\
     x378        & 0.0141  &	x184      & 0.0051  \\
-    \bottomrule
+    \hline
   \end{tabular}
   }
 	\end{table}
 \end{frame}
-
-%---------------------------------
-\section{小結}
 
 \begin{frame}{\textbf{小結}}
 \begin{itemize}
@@ -443,15 +455,15 @@
     \centering
     \resizebox{\linewidth}{!}{%
     \begin{tabular}{r r r r c r r r r}
-    \toprule
+    \hline
     idx & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
-    \midrule
+    \hline
     1 & 0.216411 & 0.856549 & -0.434551 & \dots & -0.140893 & -0.050083 & 0.201450 & 0\\
     2 & 1.094037 & -0.374751 & 1.020782 & \dots & 0.421933  & 0.258167  & 1.167895 & 0\\
     3 & -1.114171 & 0.805982 & -0.479627 & \dots & 3.631596  & 3.316370  & -0.171694 & 1\\
     4 & -0.354825 & -0.190915 & -0.049316 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
     5 & 0.234139 & 0.095176 & 1.121165 & \dots & -0.167828 & -0.297870 & -0.268061 & 0\\
-    \bottomrule
+    \hline
     \end{tabular}%
     }
   \end{table}
@@ -463,45 +475,40 @@
 
 \begin{frame}{\textbf{分群}}
   \begin{itemize}
-    \item \textbf{存在類別不平衡？}
-    
+    \item SECOM 資料具有類別不平衡與高維度特性
     \vspace{0.3cm}
-    以 SMOTE 補強少數類別於降維空間中的資訊
-    \vspace{0.5cm}
-    \item SMOTE $\rightarrow$ PCA $\rightarrow$ KMeans 分成兩群
-    \vspace{1cm}
+    \begin{enumerate}[1.]
+      \item SMOTE 補強少數類別資訊
+      \vspace{0.3cm}
+      \item PCA 將五百多個變數濃縮為主成分，
+      \vspace{0.3cm}
+      \item KMeans 分成兩群
+    \end{enumerate}
   \end{itemize}
-  % \begin{columns}[c]
-  %   \column{0.45\textwidth}
-  %   \centering
-  %   前\\
-  %   \includegraphics[width=\linewidth]{img/移除outlier做pca+kmeans的原始data.png}
-  %   \column{0.45\textwidth}
-  %   \centering
-  %   後\\
-  %   \includegraphics[width=\linewidth]{img/移除outlier做pca+kmeans的SMOTEdata.png}
-  % \end{columns}
+  \vspace{0.5cm}
   \begin{itemize}
-    \item 完成分群後移除合成資料，只保留真實資料供後續建模
+    \item 分群完成後移除合成資料，只保留真實資料供後續建模
   \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{訓練預測模型結果}}
   \begin{itemize}
-    \item XGBoost Classifier 搭配五折交叉驗證
+    \item XGBoost Classifier
+    \vspace{0.3cm}
+    \item 五折交叉驗證：80\% 訓練、20\% 測試
   \end{itemize}
   \begin{table}
     \centering
     \scalebox{0.9}{
-    \begin{tabular}{|l|c|c|c|}
+    \begin{tabular}{|l|c|c|c|c|c|}
       \hline
-      & ACC & FAR & ROC-AUC \\
+           & Pass & Fail & ACC     & FAR    & ROC-AUC \\
       \hline
-      全體& 92.72\% & 1.89\% & 66.36\% \\
+      全體 & 1463 & 104  & 92.72\% & 1.89\% & 66.36\% \\
       \hline
-      群0 & 88.47\% & 4.68\% & 69.74\% \\
+      群0  & 619  & 57   & 88.47\% & 4.68\% & 69.74\% \\
       \hline
-      群1 & 94.82\% & 0.99\% & 62.66\% \\
+      群1  & 811  & 38   & 94.82\% & 0.99\% & 62.66\% \\
       \hline
     \end{tabular}
     }
@@ -515,17 +522,18 @@
   \begin{table}
 		\centering
     \caption{以群 0 為例}
+    \vspace{-0.5cm}
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r r r r r r r}
-		\toprule
+		\hline
 		idx & x1 & \dots & x590 & 真實類別 & $\hat{p}$ & 真實類別 \\
-		\midrule
+		\hline
 		1 & 0.216411  & \dots & 0.201450  & Pass & 0.005049	& Pass \\
 		2 & 1.094037  & \dots & 1.167895  & Pass & 0.080591 & Pass \\
 		3 & -1.114171 & \dots & -0.171694 & Fail & 0.765585	& Fail \\
 		4 & -0.354825 & \dots & -0.268061 & Pass & 0.193338	& Pass \\
 		5 & 0.234139  & \dots & -0.268061 & Pass & 0.011200 & Pass \\
-		\bottomrule
+		\hline
 		\end{tabular}%
     }
 	\end{table}
@@ -536,12 +544,12 @@
 		\centering
       \scalebox{0.8}{
 			\begin{tabular}{crr|crr}
-				\toprule
+				\hline
 				\multicolumn{3}{c|}{群 0} & \multicolumn{3}{c}{群 1} \\
-				\midrule
+				\hline
 				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ &
 				樣本編號 & $\hat{p}$ & $\lvert \hat{p}-0.5\rvert$ \\
-				\midrule
+				\hline
 				82  & 0.4984 & 0.0016 & 1158 & 0.4930 & 0.0070 \\
 				225 & 0.5161 & 0.0161 & 990  & 0.5139 & 0.0139 \\
 				44  & 0.4810 & 0.0190 & 1361 & 0.5218 & 0.0218 \\
@@ -554,7 +562,7 @@
 				247 & 0.5441 & 0.0441 &  &  &  \\
 				653 & 0.5484 & 0.0484 &  &  &  \\
 				109 & 0.5490 & 0.0490 &  &  &  \\
-				\bottomrule
+				\hline
 			\end{tabular}
       }
 	\end{table}
@@ -652,13 +660,13 @@
   \centering
   \scalebox{0.65}{
     \begin{tabular}{cc|c}
-      \toprule
+      \hline
            & 最終使用特徵數 & 特徵 \\
-      \midrule
+      \hline
       群 0 & 97 & x291, x87, x217, x461, x20, $\dots$\\
       \hline
       群 1 & 56 & x386, x456, x583, x184, x8, $\dots$\\
-      \bottomrule
+      \hline
     \end{tabular}
   }
   \end{table}
@@ -669,14 +677,14 @@
   \centering
   \scalebox{0.7}{
   \begin{tabular}{cr|cr}
-    \toprule
+    \hline
     \multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
-    \midrule
+    \hline
     \multicolumn{2}{c|}{$R^2=0.58$} & \multicolumn{2}{c}{$R^2=0.59$} \\
-    \midrule
+    \hline
     特徵 & 估計係數 &
     特徵 & 估計係數 \\
-    \midrule
+    \hline
     intercept   & 1.0051  & intercept & 0.9966  \\
     x291        & 0.0340  & x386      & 0.01668  \\
     x7          & -0.0299 & x117      & -0.0126 \\
@@ -688,7 +696,7 @@
     x58         & -0.0158 &	x103      & -0.0068 \\
     x1          & -0.0147 &	x583      & 0.0058  \\
     x378        & 0.0141  &	x184      & 0.0051  \\
-    \bottomrule
+    \hline
   \end{tabular}
   }
 	\end{table}
