@@ -250,11 +250,11 @@
 \end{frame}
 
 %---------------------------------
-\section{目的與結果}
+\section{目的}
 
 \begin{frame}
   \centering
-  \huge{目的與結果}
+  \huge{目的}
 \end{frame}
 
 \begin{frame}{\textbf{目的}}
@@ -265,7 +265,7 @@
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{\textbf{文獻預測模型結果比較}}
+\begin{frame}{\textbf{結果I - 比較文獻預測模型}}
   \vspace{0.5cm}
   \centering
   \scalebox{0.85}{
@@ -295,25 +295,26 @@
   \small{
     \begin{itemize}
       \item ACC: Accuracy(準確度)
-      \item FAR: False Alarm rate(誤報率)
+      \item FAR: False Alarm Rate(誤報率)
       \item AUC: Area under ROC curve(鑑別度)
     \end{itemize}
   }
 \end{frame}
 
-\begin{frame}{\textbf{局部刻劃模型結果}}
+\begin{frame}{\textbf{結果II - 局部刻劃模型}}
   \begin{table}
   \centering
   \scalebox{0.85}{
   \begin{tabular}{cr|cr}
     \hline
-    \multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
+    \multicolumn{2}{c|}{群 0}       & \multicolumn{2}{c}{群 1}       \\
     \hline
-    特徵 & 估計係數 &
-    特徵 & 估計係數 \\
+    \multicolumn{2}{c|}{$R^2=0.58$} & \multicolumn{2}{c}{$R^2=0.59$} \\
+    \hline
+    特徵        & 估計係數 & 特徵      & 估計係數 \\
     \hline
     intercept   & 1.0051  & intercept & 0.9966  \\
-    x291        & 0.0340  & x386      & 0.01668  \\
+    x291        & 0.0340  & x386      & 0.0167  \\
     x7          & -0.0299 & x117      & -0.0126 \\
     x141        & -0.0282 &	x420      & -0.0118 \\
     x87         & 0.0230  &	x456      & 0.0106  \\
@@ -329,42 +330,48 @@
 	\end{table}
 \end{frame}
 
-\begin{frame}{\textbf{小結}}
-\begin{itemize}
-  \item 預測模型
-  \vspace{1cm}
-  \item 局部刻劃模型
-  % \item 分群後，各群預測模型呈現與整體預測模型不同的誤報率與可預測程度
-  % \item 局部刻劃模型可將預測行為轉為重要特徵的影響性與方向性
-\end{itemize}
-\end{frame}
+% \begin{frame}{\textbf{小結}}
+% \begin{itemize}
+%   \item 預測模型
+%   \vspace{1cm}
+%   \item 局部刻劃模型
+%   % \item 分群後，各群預測模型呈現與整體預測模型不同的誤報率與可預測程度
+%   % \item 局部刻劃模型可將預測行為轉為重要特徵的影響性與方向性
+% \end{itemize}
+% \end{frame}
 
 %---------------------------------
-\section{問題}
+% \section{問題}
 
-\begin{frame}
-  \centering
-  \huge{問題}
-\end{frame}
+% \begin{frame}
+%   \centering
+%   \huge{問題}
+% \end{frame}
 
-\begin{frame}{\textbf{問題}}
-  \begin{itemize}
-    \item 局部刻劃模型更具有可信度
-    \vspace{0.3cm}
-    \begin{itemize}
-      \item 量測變數多，樣本數少
-      \vspace{0.3cm}
-      \item 晶片製造過程繁雜
-      \vspace{0.3cm}
-      \item 具體的變數解釋，而非重要性
-    \end{itemize}
-  \end{itemize}
-  \vspace{0.3cm}
-  【舉例】咖啡廳
-\end{frame}
+% \begin{frame}{\textbf{問題}}
+%   \begin{itemize}
+%     \item 局部刻劃模型更具有可信度
+%     \vspace{0.3cm}
+%     \begin{itemize}
+%       \item 量測變數多，樣本數少
+%       \vspace{0.3cm}
+%       \item 晶片製造過程繁雜
+%       \vspace{0.3cm}
+%       \item 具體的變數解釋，而非重要性
+%     \end{itemize}
+%   \end{itemize}
+%   \vspace{0.3cm}
+%   【舉例】咖啡廳
+% \end{frame}
 
 %---------------------------------
 \section{方法流程與結果討論}
+
+\begin{frame}
+  \centering
+  \huge{方法流程與結果討論}
+\end{frame}
+
 \begin{frame}{\textbf{方法流程與結果討論}}
 \centering
 \resizebox{1\textwidth}{!}{
@@ -438,8 +445,8 @@
     \item 目標變數重新編碼：Pass（$-$1 $\to$ 0），移除時間欄位
     \item 移除缺失值數量超過 1000 筆的單一特徵
     \item 移除相異值種類低於 10 種的單一特徵
-    \item 採用 KNN imputer 進行補值，設定 $k=10$
-    \item 移除離群樣本
+    \item 採用 KNN 補缺失值
+    \item 採用 PCA 移除離群樣本
   \end{enumerate}
 \end{frame}
 
@@ -491,11 +498,12 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{訓練預測模型結果}}
+\begin{frame}{\textbf{訓練預測模型}}
   \begin{itemize}
     \item XGBoost Classifier
     \vspace{0.3cm}
-    \item 五折交叉驗證：80\% 訓練、20\% 測試
+    \item 五折交叉驗證：80\% 訓練集、20\% 測試集
+    \\（每次訓練集會用 SMOTE）
   \end{itemize}
   \begin{table}
     \centering
@@ -526,7 +534,7 @@
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r r r r r r r}
 		\hline
-		idx & x1 & \dots & x590 & 真實類別 & $\hat{p}$ & 真實類別 \\
+		idx & x1 & \dots & x590 & 真實類別 & $\hat{p}$ & 預測類別 \\
 		\hline
 		1 & 0.216411  & \dots & 0.201450  & Pass & 0.005049	& Pass \\
 		2 & 1.094037  & \dots & 1.167895  & Pass & 0.080591 & Pass \\
@@ -655,23 +663,6 @@
   }
 \end{frame}
 
-\begin{frame}{\textbf{最終篩選特徵}}
-  \begin{table}
-  \centering
-  \scalebox{0.65}{
-    \begin{tabular}{cc|c}
-      \hline
-           & 最終使用特徵數 & 特徵 \\
-      \hline
-      群 0 & 97 & x291, x87, x217, x461, x20, $\dots$\\
-      \hline
-      群 1 & 56 & x386, x456, x583, x184, x8, $\dots$\\
-      \hline
-    \end{tabular}
-  }
-  \end{table}
-\end{frame}
-
 \begin{frame}{\textbf{局部刻劃模型}}
   \begin{table}
   \centering
@@ -682,8 +673,8 @@
     \hline
     \multicolumn{2}{c|}{$R^2=0.58$} & \multicolumn{2}{c}{$R^2=0.59$} \\
     \hline
-    特徵 & 估計係數 &
-    特徵 & 估計係數 \\
+    特徵(97個) & 估計係數 &
+    特徵(56個) & 估計係數 \\
     \hline
     intercept   & 1.0051  & intercept & 0.9966  \\
     x291        & 0.0340  & x386      & 0.01668  \\
