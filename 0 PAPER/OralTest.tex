@@ -193,7 +193,7 @@
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r l r r r c r r r r}
       \hline
-      idx & Time & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
+      樣本編號 & Time & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
       \hline
       1 & 2008-07-19 11:55:00 & 3030.9300 & 2564.0000 & 2187.7333 & \dots & NaN    & NaN    & NaN     & -1 \\
       2 & 2008-07-19 12:32:00 & 3095.7800 & 2465.1400 & 2230.4222 & \dots & 0.0201 & 0.0060 & 208.2045 & -1 \\
@@ -235,7 +235,7 @@
     \hline
     研究                                    & 補值                           & 特徵篩選    & 預測模型 & 解釋方法 \\
     \hline
-    \makecell{Salem et al.\\(2018)}         & \makecell{In-Painting \\ KNN} & Univariate & LR       & ANOVA   \\
+    \makecell{Salem et al.\\(2018)}         & \makecell{In-painting \\ KNN} & Univariate & LR       & ANOVA   \\
     \hline
     \makecell{賴立夫\\（2022）}              & KNN                           & RF         & CART     & 決策樹   \\
     \hline
@@ -265,10 +265,10 @@
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{\textbf{結果I - 比較文獻預測模型}}
+\begin{frame}{\textbf{比較文獻預測模型}}
   \vspace{0.5cm}
   \centering
-  \scalebox{0.85}{
+  \scalebox{0.9}{
   \begin{tabular}{|l|c|c|c|}
     \hline
     研究／預測模型              & ACC     & FAR     & AUC     \\
@@ -292,7 +292,7 @@
   \end{tabular}
   }
   \vspace{0.3cm}
-  \small{
+  \scriptsize{
     \begin{itemize}
       \item ACC: Accuracy(準確度)
       \item FAR: False Alarm Rate(誤報率)
@@ -301,46 +301,14 @@
   }
 \end{frame}
 
-\begin{frame}{\textbf{結果II - 局部刻劃模型}}
-  \begin{table}
-  \centering
-  \scalebox{0.85}{
-  \begin{tabular}{cr|cr}
-    \hline
-    \multicolumn{2}{c|}{群 0}       & \multicolumn{2}{c}{群 1}       \\
-    \hline
-    \multicolumn{2}{c|}{$R^2=0.58$} & \multicolumn{2}{c}{$R^2=0.59$} \\
-    \hline
-    特徵        & 估計係數 & 特徵      & 估計係數 \\
-    \hline
-    intercept   & 1.0051  & intercept & 0.9966  \\
-    x291        & 0.0340  & x386      & 0.0167  \\
-    x7          & -0.0299 & x117      & -0.0126 \\
-    x141        & -0.0282 &	x420      & -0.0118 \\
-    x87         & 0.0230  &	x456      & 0.0106  \\
-    x217        & 0.0223  &	x28       & -0.0092 \\
-    x461        & 0.0197  &	x36       & -0.0090 \\
-    x20         & 0.0178  &	x287      & -0.0075 \\
-    x58         & -0.0158 &	x103      & -0.0068 \\
-    x1          & -0.0147 &	x583      & 0.0058  \\
-    x378        & 0.0141  &	x184      & 0.0051  \\
-    \hline
-  \end{tabular}
-  }
-	\end{table}
+\begin{frame}{\textbf{各群預測模型可於局部範圍由線性模型刻劃}}
+  \begin{itemize}
+    \item 群 0：$R^2=0.58$
+    \vspace{1.5cm}
+    \item 群 1：$R^2=0.59$
+  \end{itemize}
 \end{frame}
 
-% \begin{frame}{\textbf{小結}}
-% \begin{itemize}
-%   \item 預測模型
-%   \vspace{1cm}
-%   \item 局部刻劃模型
-%   % \item 分群後，各群預測模型呈現與整體預測模型不同的誤報率與可預測程度
-%   % \item 局部刻劃模型可將預測行為轉為重要特徵的影響性與方向性
-% \end{itemize}
-% \end{frame}
-
-%---------------------------------
 % \section{問題}
 
 % \begin{frame}
@@ -463,7 +431,7 @@
     \resizebox{\linewidth}{!}{%
     \begin{tabular}{r r r r c r r r r}
     \hline
-    idx & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
+    樣本編號 & x1 & x2 & x3 & \dots & x588 & x589 & x590 & Pass/Fail \\
     \hline
     1 & 0.216411 & 0.856549 & -0.434551 & \dots & -0.140893 & -0.050083 & 0.201450 & 0\\
     2 & 1.094037 & -0.374751 & 1.020782 & \dots & 0.421933  & 0.258167  & 1.167895 & 0\\
@@ -487,7 +455,7 @@
     \begin{enumerate}[1.]
       \item SMOTE 補強少數類別資訊
       \vspace{0.3cm}
-      \item PCA 將五百多個變數濃縮為主成分，
+      \item PCA 將五百多個變數濃縮為主成分
       \vspace{0.3cm}
       \item KMeans 分成兩群
     \end{enumerate}
@@ -498,7 +466,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textbf{訓練預測模型}}
+\begin{frame}{\textbf{全體與分群後預測模型之結果}}
   \begin{itemize}
     \item XGBoost Classifier
     \vspace{0.3cm}
@@ -530,11 +498,10 @@
   \begin{table}
 		\centering
     \caption{以群 0 為例}
-    \vspace{-0.5cm}
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r r r r r r r}
 		\hline
-		idx & x1 & \dots & x590 & 真實類別 & $\hat{p}$ & 預測類別 \\
+		樣本編號 & x1 & \dots & x590 & 真實類別 & $\hat{p}$ & 預測類別 \\
 		\hline
 		1 & 0.216411  & \dots & 0.201450  & Pass & 0.005049	& Pass \\
 		2 & 1.094037  & \dots & 1.167895  & Pass & 0.080591 & Pass \\
@@ -663,68 +630,80 @@
   }
 \end{frame}
 
-\begin{frame}{\textbf{局部刻劃模型}}
-  \begin{table}
-  \centering
-  \scalebox{0.7}{
-  \begin{tabular}{cr|cr}
-    \hline
-    \multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
-    \hline
-    \multicolumn{2}{c|}{$R^2=0.58$} & \multicolumn{2}{c}{$R^2=0.59$} \\
-    \hline
-    特徵(97個) & 估計係數 &
-    特徵(56個) & 估計係數 \\
-    \hline
-    intercept   & 1.0051  & intercept & 0.9966  \\
-    x291        & 0.0340  & x386      & 0.01668  \\
-    x7          & -0.0299 & x117      & -0.0126 \\
-    x141        & -0.0282 &	x420      & -0.0118 \\
-    x87         & 0.0230  &	x456      & 0.0106  \\
-    x217        & 0.0223  &	x28       & -0.0092 \\
-    x461        & 0.0197  &	x36       & -0.0090 \\
-    x20         & 0.0178  &	x287      & -0.0075 \\
-    x58         & -0.0158 &	x103      & -0.0068 \\
-    x1          & -0.0147 &	x583      & 0.0058  \\
-    x378        & 0.0141  &	x184      & 0.0051  \\
-    \hline
-  \end{tabular}
-  }
-	\end{table}
+\begin{frame}{\textbf{群 0 的局部刻劃模型與擬合結果}}
+  \small{
+  $$\hat{y}_{\text{local}}^{(0)}(x)=
+  1.0051
+  +0.0340x_{291}
+  -0.0299x_{7}
+  -0.0282x_{141}
+  +0.0230x_{87}
+  +\cdots$$}
+  \begin{columns}[T]
+    \begin{column}{0.4\textwidth}
+      \vspace{0.2cm}
+      $$R^2 = 0.58$$
+    \end{column}
+    \begin{column}{0.6\textwidth}
+      \centering
+      \includegraphics[width=0.8\linewidth]{img/g0onG0vsf0(G0).png}
+    \end{column}
+  \end{columns}
 \end{frame}
 
-\begin{frame}{\textbf{局部刻劃模型跨群比較}}
-	\begin{table}
-		\centering
-		\begin{tabular}{c|ccc}
-			\hline
-			比較設定 & \textbf{$R^2$} & \textbf{$\rho$} \\
-			\hline
-      $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^0_\mathbf{m})$ & 0.58 & 0.76 \\
-      $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^1_\mathbf{m})$ & 0.64 & 0.80 \\
-      $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^1_\mathbf{m})$ & -4.15 & 0.22 \\
-      $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^0_\mathbf{m})$ & -2.02 & 0.05 \\
-			\hline
-		\end{tabular}
-	\end{table}
+\begin{frame}{\textbf{群 1 的局部刻劃模型與擬合結果}}
+  \small{
+  $$
+  \hat{y}_{\text{local}}^{(1)}(x)=
+  0.9966
+  +0.0167x_{386}
+  -0.0126x_{117}
+  -0.0118x_{420}
+  +0.0106x_{456}
+  +\cdots
+  $$}
+  \begin{columns}[T]
+    \begin{column}{0.4\textwidth}
+      \vspace{0.2cm}
+      $$R^2 = 0.59$$
+    \end{column}
+    \begin{column}{0.6\textwidth}
+      \centering
+      \includegraphics[width=0.8\linewidth]{img/g1onG1vsf1(G1).png}
+    \end{column}
+  \end{columns}
 \end{frame}
 
-\begin{frame}{\textbf{局部刻劃模型跨群比較}}
-  \begin{figure}
-  \centering
+% \begin{frame}{\textbf{局部刻劃模型跨群比較}}
+% 	\begin{table}
+% 		\centering
+% 		\begin{tabular}{c|ccc}
+% 			\hline
+% 			比較設定 & \textbf{$R^2$} & \textbf{$\rho$} \\
+% 			\hline
+%       $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^0_\mathbf{m})$ & 0.58 & 0.76 \\
+%       $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^1_\mathbf{m})$ & 0.64 & 0.80 \\
+%       $f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^1_\mathbf{m})$ & -4.15 & 0.22 \\
+%       $f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^0_\mathbf{m})$ & -2.02 & 0.05 \\
+% 			\hline
+% 		\end{tabular}
+% 	\end{table}
+% \end{frame}
 
-  \includegraphics[width=0.3\linewidth]{img/g0onG0vsf0(G0).png}
-  \hfill
-  \includegraphics[width=0.3\linewidth]{img/g1onG1vsf1(G1).png}
+% \begin{frame}{\textbf{局部刻劃模型跨群比較}}
+%   \begin{figure}
+%   \centering
 
-  \vspace{0.5em}
+%   \hfill
 
-  \includegraphics[width=0.3\linewidth]{img/g0onG1vsf1(G1).png}
-  \hfill
-  \includegraphics[width=0.3\linewidth]{img/g1onG0vsf0(G0).png}
+%   \vspace{0.5em}
 
-  \end{figure}
-\end{frame}
+%   \includegraphics[width=0.3\linewidth]{img/g0onG1vsf1(G1).png}
+%   \hfill
+%   \includegraphics[width=0.3\linewidth]{img/g1onG0vsf0(G0).png}
+
+%   \end{figure}
+% \end{frame}
 
 %---------------------------------
 \section{結論}
@@ -736,13 +715,11 @@
 
 \begin{frame}{\textbf{結論}}
   \begin{itemize}
-    \item 分析流程
+    \item 建立一套從資料前處理、分群、建模到局部線性刻劃的分析流程
     \vspace{1cm}
-    \item 先分群再建模
+    \item 先分群再建模，可避免不同型態樣本的判斷規則混合，提升後續局部刻劃的清晰性
     \vspace{1cm}
-    \item 設計局部格子點擬合模型
-    \vspace{1cm}
-    \item 局部的決策行為
+    \item 在設定的局部範圍內，各群預測模型可藉由線性模型作一定程度的刻劃
     % \item 本研究提出一套適用於高維、缺失嚴重且類別不平衡製程資料的分析流程
     % \item 透過先分群再於群內建模，可降低異質性對模型學習與局部解釋的干擾
     % \item 以決策邊界附近樣本建立中心點，可聚焦於模型預測最不明確的局部範圍
@@ -774,57 +751,86 @@
   \huge{附錄}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{References}
-  \bibliographystyle{plain}
-  \bibliography{references}
-\end{frame}
+% \begin{frame}[allowframebreaks]{References}
+%   \bibliographystyle{plain}
+%   \bibliography{references}
+% \end{frame}
 
-\begin{frame}{\textbf{資料介紹 - 離群樣本處理完}}
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/移除outlier做pca.png}
-  \end{figure}
-\end{frame}
+% \begin{frame}{\textbf{資料介紹 - 離群樣本處理完}}
+%   \begin{figure}
+%     \centering
+%     \includegraphics[width=0.75\linewidth]{img/移除outlier做pca.png}
+%   \end{figure}
+% \end{frame}
 
-\begin{frame}{\textbf{XGBoost 參數設定}}
-	\begin{table}
-		\centering
-    \scalebox{0.75}{
-      \begin{tabular}{|l|l|}
-        \hline
-        項目 & 設定內容 \\
-        \hline
-        程式版本 & Python 3.12.7 \\
-        \hline
-        預測模型 & \texttt{XGBClassifier} \\
-        \hline
-        隨機種子 & 42 \\
-        \hline
-        n\_estimators & 300 \\
-        \hline
-        max\_depth & 3 \\
-        \hline
-        learning\_rate & 0.1 \\
-        \hline
-        subsample & 0.8 \\
-        \hline
-        colsample\_bytree & 0.8 \\
-        \hline
-        min\_child\_weight & 10 \\
-        \hline
-        gamma & 1.0 \\
-        \hline
-        reg\_lambda & 2.0 \\
-        \hline
-        reg\_alpha & 0.5 \\
-        \hline
-        objective & binary:logistic \\
-        \hline
-        eval\_metric & logloss \\
-        \hline
-        \end{tabular}
-      }
-	\end{table}
-\end{frame}
+% \begin{frame}{\textbf{XGBoost 參數設定}}
+% 	\begin{table}
+% 		\centering
+%     \scalebox{0.75}{
+%       \begin{tabular}{|l|l|}
+%         \hline
+%         項目 & 設定內容 \\
+%         \hline
+%         程式版本 & Python 3.12.7 \\
+%         \hline
+%         預測模型 & \texttt{XGBClassifier} \\
+%         \hline
+%         隨機種子 & 42 \\
+%         \hline
+%         n\_estimators & 300 \\
+%         \hline
+%         max\_depth & 3 \\
+%         \hline
+%         learning\_rate & 0.1 \\
+%         \hline
+%         subsample & 0.8 \\
+%         \hline
+%         colsample\_bytree & 0.8 \\
+%         \hline
+%         min\_child\_weight & 10 \\
+%         \hline
+%         gamma & 1.0 \\
+%         \hline
+%         reg\_lambda & 2.0 \\
+%         \hline
+%         reg\_alpha & 0.5 \\
+%         \hline
+%         objective & binary:logistic \\
+%         \hline
+%         eval\_metric & logloss \\
+%         \hline
+%         \end{tabular}
+%       }
+% 	\end{table}
+% \end{frame}
 
+% \begin{frame}
+%   \begin{table}
+%     \centering
+%     \scalebox{0.7}{
+%     \begin{tabular}{cr|cr}
+%       \hline
+%       \multicolumn{2}{c|}{群 0} & \multicolumn{2}{c}{群 1} \\
+%       \hline
+%       \multicolumn{2}{c|}{$R^2=0.58$} & \multicolumn{2}{c}{$R^2=0.59$} \\
+%       \hline
+%       特徵(97個) & 估計係數 &
+%       特徵(56個) & 估計係數 \\
+%       \hline
+%       intercept   & 1.0051  & intercept & 0.9966  \\
+%       x291        & 0.0340  & x386      & 0.0167  \\
+%       x7          & -0.0299 & x117      & -0.0126 \\
+%       x141        & -0.0282 &	x420      & -0.0118 \\
+%       x87         & 0.0230  &	x456      & 0.0106  \\
+%       x217        & 0.0223  &	x28       & -0.0092 \\
+%       x461        & 0.0197  &	x36       & -0.0090 \\
+%       x20         & 0.0178  &	x287      & -0.0075 \\
+%       x58         & -0.0158 &	x103      & -0.0068 \\
+%       x1          & -0.0147 &	x583      & 0.0058  \\
+%       x378        & 0.0141  &	x184      & 0.0051  \\
+%       \hline
+%     \end{tabular}
+%     }
+% 	\end{table}
+% \end{frame}
 \end{document}

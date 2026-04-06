@@ -11,6 +11,14 @@ McCann, M. and Johnston, A. (2008).
 \newblock Secom.
 \newblock UCI Machine Learning Repository, https://doi.org/10.24432/C54305.
 
+\bibitem[Naudé and van V.J.H., 2024]{Naudé2024}
+Naudé, A. and van V.J.H. (2024).
+\newblock {A Machine Learning Framework for Data-Driven Defect Detection in
+  Multistage Manufacturing Systems}.
+\newblock {\em South African Journal of Industrial Engineering}, 35(2),
+  151--170.
+\newblock https://doi.org/10.7166/35-2-3008.
+
 \bibitem[Park et~al., 2024]{Park2024}
 Park, H., Koo, Y., Yang, H., Han, Y., and Nam, C. (2024).
 \newblock {Study on Data Preprocessing for Machine Learning Based on

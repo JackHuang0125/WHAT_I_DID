@@ -64,6 +64,10 @@
 % put pdf page
 \usepackage{pdfpages}
 
+% 可指定表格排版的封包
+\usepackage{array}
+\usepackage{makecell}
+
 % 行距
 \usepackage{setspace}
 \onehalfspacing
@@ -166,36 +170,25 @@
 	\end{center}
 	
 	半導體產業蓬勃發展，
-	製程中所累積的資料逐漸受到重視。
-	然而，
-	半導體製程資料通常具有量測變數多、缺失比例高、類別分布不平衡，
-	以及樣本數取得不易等特性，
-	增加了預測與解釋的困難。
-	近年來，
-	相關研究多以決策樹、隨機森林、XGBoost等機器學習方法進行預測，
-	並以SHAP、LIME等方法輔助說明變數的重要性。
-	然而，
-	對於預測模型在特定樣本附近的局部決策依據，
-	仍有進一步分析與討論的空間。
-
-	本研究以 UCI SECOM 半導體製程資料為研究對象，
+	製程中累積的資料逐漸受到重視。
+	此類資料通常具有量測變數多、缺失比例高、類別分布不平衡，
+	以及樣本取得不易等特性，
+	增加預測與解釋的困難。
+	
+	本研究以 UCI 的半導體製程資料 SECOM 為研究對象，
 	建立一套兼顧預測與局部解釋的分析流程。
-	首先進行資料前處理，
-	其次利用 KMeans 分群，
-	並於訓練資料中結合 SMOTE 與交叉驗證建立 XGBoost 預測模型；
-	最後於關注的局部範圍內，
-	透過資料生成方式建立局部刻劃模型，
-	用來描述預測模型在局部範圍內的決策行為，
-	並說明各變數影響之方向與相對大小。
+	透過 KMeans 將資料分為兩群，
+	並於各群中結合 SMOTE 與交叉驗證建立 XGBoost 預測模型；
+	最後於關注的局部範圍內建立局部刻劃模型，
+	描述預測模型在局部範圍內的決策行為，
+	說明各變數影響之方向與相對大小。
 
 	研究結果顯示，
-	分群後建構的 XGBoost 預測模型，
-	其分類準確度分別為 88.46\% 及 94.82\% 。
-	此外，
+	各群預測模型的分類準確度分別為 88.46\% 及 94.82\%。
 	局部刻劃模型之決定係數約為 0.6 ，
 	顯示其在局部範圍內可有效刻劃預測模型之決策行為，
-	亦能提供局部決策因子之具體資訊，
-	作為後續製程監控與改善之依據。
+	能提供局部決策因子之具體資訊，
+	並作為後續製程監控與改善之依據。
 
 	% put to bottom
 	\vfill
@@ -214,38 +207,22 @@
 		\section*{Abstract}
 	\end{center}
 	
-	Semiconductor manufacturing data have attracted increasing attention as the semiconductor industry continues to grow.
-	However,
-	such data usually exhibit characteristics such as a large number of measured variables, 
+	Semiconductor manufacturing data have attracted increasing attention with the growth of the semiconductor industry.
+	These data often contain many measured variables, 
 	a high proportion of missing values, 
 	imbalanced class distribution, 
-	and limited sample availability, 
-	which increase the difficulty of prediction and interpretation. 
-	In recent years, 
-	related studies have commonly employed machine learning methods such as decision tree, 
-	random forests, 
-	and XGBoost for prediction, 
-	and have further used SHAP and LIME to explain feature importance.
-	Nevertheless,
-	there remains room for further analysis and discussion regarding the local decision basis of prediction models around specific samples.
+	and limited sample size.
+	These characteristics increase the difficulty of prediction and interpretation.
 
-	This study uses the UCI SECOM semiconductor manufacturing dataset as the research object and establishes an analytical framework that takes both prediction and local explanation into account.
-	First,
-	data preprocessing is performed.
-	Next,
-	KMeans clustering is applied,
-	and an XGBoost prediction model is constructed by combining SMOTE and cross-validation on the training data.
-	Finally,
-	within a local region of interest, 
-	a local characterization model is established through a data generation approach to describe the decision behavior of the prediction model in the local region and to analyze the direction and relative magnitude of the effects of variables.
+	This study uses the UCI SECOM dataset and develops an analytical framework for prediction and local explanation.
+	KMeans divides the data into two clusters.
+	XGBoost models are built with SMOTE and cross-validation on the training data.
+	A local characterization model is constructed through a data generation approach to describe the local decision behavior and to analyze the direction and relative magnitude of the variable effects.
 
-	The results show that the XGBoost prediction models constructed after clustering achieve classification accuracies of 88.46\% and 94.82\% respectively. 
-	In addition, 
-	the coefficient of determination of the local characterization model is approximately 0.6, 
-	indicating that the model can effectively characterize the decision behavior of the prediction model within the local region. 
-	The proposed framework also provides specific information on local decision factors, 
-	which may serve as a basis for subsequent process monitoring and improvement.
-	
+	The results show classification accuracies of 88.46\% and 94.82\% for the clustered XGBoost models. 
+	The local characterization model has an $R^2$ value of about 0.6.
+	The framework identifies local decision behavior and supports process monitoring and improvement.
+
 	% put to bottom
 	\vfill
 	\textbf{Keywords:} SECOM, semiconductor manufacturing data, clustering, XGBoost, local characterization model, explainable artificial intelligence 
@@ -349,13 +326,13 @@
 	例如，
 	\cite{Salem2018} 針對資料修剪、缺失值填補、特徵選擇與預測方法進行大量組合比較，
 	並提出 In-painting KNN-Imputation 來改善缺失值處理的效果；
-	\cite{Park2024} 則比較缺失值處理、降維、過採樣技術與資料縮放等方法，
+	\cite{Park2024} 則比較缺失值處理、降維、過採樣技術（Oversampling）與資料縮放（Scaling）等方法，
 	並強調應先切分成訓練集與測試集，
 	再進行前處理，
 	以避免資料洩漏對模型評估造成偏誤。
 
 	在預測模型方面，
-	\cite{Lai2022} 透過補值、特徵選擇與決策樹（Decision Tree）建立預測模型，
+	\cite{Lai2022} 透過 KNN 補值、隨機森林為特徵選擇方法與決策樹建立預測模型，
 	並利用決策樹的節點結構追溯影響模型預測的關鍵變數，
 	此類方法的優點是在於結果較容易說明；
 	但是當使用的資料量不大且形態呈現高維度特性時，
@@ -392,10 +369,33 @@
 	並以距離為權重給予相鄰的樣本較高權重，
 	再以簡單線性模型描述預測模型在局部範圍內的預測行為，
 	以提供單一樣本被預測至某一類的解釋依據。
-	\cite{Presciuttini2024} 則進一步將 LIME 應用在 SECOM，
+	\cite{Presciuttini2024} 及 \cite{Naudé2024} 分別進一步將 LIME 及 SHAP 應用在 SECOM，
 	嘗試提升預測模型的可解釋性，
 	並提供可用於品質控制與製程改善的解釋資訊。
 	
+	表 \ref{tab:文獻比較} 彙整過去文獻於 SECOM 資料分析中主要採用的補值方法、特徵篩選方式、分類模型及解釋方法。
+	\begin{table}[H]
+		\centering
+		\caption{SECOM 相關文獻方法整理摘要}
+		\vspace{0.15cm}
+		\label{tab:文獻比較}
+		\begin{tabular}{|l|c|c|c|c|}
+			\hline
+			研究                                    & 補值方法                       & 特徵篩選方法 & 預測模型 & 解釋方法 \\
+			\hline
+			\makecell{Salem et al.\\(2018)}         & \makecell{In-painting \\ KNN} & Univariate & LR       & ANOVA   \\
+			\hline
+			\makecell{賴立夫\\（2022）}              & KNN                           & RF         & CART     & 決策樹   \\
+			\hline
+			\makecell{Park et al.\\（2024）}         & Mean                          & PCA        & SVM     & －       \\
+			\hline
+			\makecell{Presciuttini et al.\\（2024）} & Median                        & Boruta     & XGBoost & LIME     \\
+			\hline
+			\makecell{Naudé et al.\\(2024)}          & KNN                           & ANOVA      & SVM     & SHAP     \\
+			\hline
+		\end{tabular}
+	\end{table}
+
 	整體而言，
 	既有以 SECOM 資料集為對象的研究，
 	大致可分為兩個方向：
@@ -509,19 +509,16 @@
 
 	\section{資料背景}
 	\label{sec:databackground}
-	本研究使用半導體製程量測資料－SECOM作為分析對象 \cite{UCISECOM2008} ，
-	共 1567 筆；
+	本研究使用 UCI 的半導體製程量測資料 SECOM 為分析對象，
+	源自 \cite{UCISECOM2008} 。
+	其資料摘要如表 \ref{tab:資料集} 所示，
+	樣本數共 1567 筆；
 	每筆樣本包含一個時間欄位（Time, 範圍自 2008-01-08 02:02:00 至 2008-12-10 18:47:00）、590 個已匿名化的量測變項（以 $x1$ 至 $x590$ 表示），
-	以及一個品質類別欄位（二元變數，Pass/Fail）作為目標變數，其中 Pass（$-$1）共1463 筆（93.36\%），
+	以及一個品質類別欄位（二元變數，Pass/Fail）作為目標變數，其中 Pass（-1）共 1463 筆（93.36\%），
 	Fail（1）共 104 筆（6.64\%），
-	存在明顯的類別不平衡，
-	同時存在缺失值問題，
-	整體缺失率為 4.54\%，
-	但缺失分布不均，
-	部分特徵缺失筆數極高，
-	單一特徵最高缺失達 1429 筆（91.19\%），
-	且有 20 個特徵之缺失筆數超過 1000 筆（占樣本數 63.82\% 以上）。
-	
+	如圖 \ref{fig:y} 所示，
+	存在明顯的類別不平衡。
+
 	\begin{table}[H]
 		\centering
 		\caption{SECOM 原始資料集摘要}
@@ -542,43 +539,67 @@
 		\label{tab:資料集}
 	\end{table}
 
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{img/y.png}
+		\caption{品質類別分布}
+		\label{fig:y}
+	\end{figure}
+
+	此外，
+	資料亦存在缺失值問題，
+	圖 \ref{fig:nNA} 及圖 \ref{fig:xNA} 分別呈現每個樣本的缺失值個數與每個特徵的缺失值個數。
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\linewidth]{img/nNA.png}
+		\caption{每個樣本的缺失值個數}
+		\label{fig:nNA}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\linewidth]{img/xNA.png}
+		\caption{每個特徵的缺失值個數}
+		\label{fig:xNA}
+	\end{figure}
+
+	整體缺失率為 4.54\%，
+	且部分特徵缺失筆數極高，
+	最高缺失達 1429 筆（91.19\%），
+	另有 20 個特徵之缺失筆數超過 1000 筆，
+	占樣本數 63.82\% 以上。
+
 	\section{資料前處理}
 	\label{sec:資料處理}
-	本節說明資料清理與特徵處理流程。
-
-	\subsection{目標變數與資料切分單位}
+	本節說明資料清理與特徵處理流程，
 	為方便後續建模與評估，
-	本研究將原始目標欄位Pass（$-$1）、Fail（1），重新編碼為Pass（0）、Fail（1）。
-	時間欄位 Time 不作為模型特徵，
-	於建模前移除。
+	本研究將原始目標欄位Pass（-1）、Fail（1），重新編碼為Pass（0）、Fail（1）。
+	移除時間欄位 Time 。
 
-	\subsection{缺失值}
+	% \subsection{缺失值}
+	% \subsection{少數類別特徵}
 	如同第 \ref{sec:databackground} 節所述，
 	資料有高度缺失的狀況。
 	為避免高度缺失的特徵在補值後造成誤差，
-	本研究以「單一特徵的缺失筆數」作為篩選指標，
-	先移除缺失筆數高於 1000 筆的特徵。
-
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=1\linewidth]{img/missingvalue.png}
-		\caption{SECOM 原始資料各變數缺失值筆數分布}
-		\label{fig:missingvalue}
-	\end{figure}
-
-	\subsection{少數類別特徵}
-	同時，
-	亦發現部分特徵的值為單一或僅數個常數的欄位，
+	先移除缺失筆數高於 1000 筆的特徵共20筆。
+	接著，
+	部分特徵的值為單一或僅數個常數的欄位，
 	我們認為這些特徵對預測模型的影響有限，
-	並以「特徵的不同數值」作為篩選指標，
-	移除特徵值種類低於門檻的特徵。
+	故移除特徵值種類低於 10 筆的特徵共 103 筆。
+	% \begin{figure}[H]
+	% 	\centering
+	% 	\includegraphics[width=1\linewidth]{img/missingvalue.png}
+	% 	\caption{SECOM 原始資料各變數缺失值筆數分布}
+	% 	\label{fig:missingvalue}
+	% \end{figure}
 
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=1\linewidth]{img/uniquevalue.png}
-		\caption{SECOM 原始資料各變數相異值數量分布}
-		\label{fig:uniquevalue}
-	\end{figure}
+
+
+	% \begin{figure}[H]
+	% 	\centering
+	% 	\includegraphics[width=1\linewidth]{img/uniquevalue.png}
+	% 	\caption{SECOM 原始資料各變數相異值數量分布}
+	% 	\label{fig:uniquevalue}
+	% \end{figure}
 
 	\subsection{補值}
 	保留上述處理在門檻內的特徵後，
@@ -621,12 +642,7 @@
 	$p$ 為特徵總數。
 
 	\subsection{離群樣本處理}
-	本研究資料屬於高維度的特徵空間，
-	若直接在原始高維空間進行計算，
-	則容易受到尺度差異、雜訊影響，
-	使得後續分群結果不穩定。
-	因此，
-	本研究先以主成分分析(Principal Component Analysis, PCA)將高維資料投影至可觀察的二維平面，
+	本研究以主成分分析(Principal Component Analysis, PCA)將高維資料投影至可觀察的二維平面，
 	作為離群樣本檢視與後續分群的輔助。
 
 	PCA 為線性降維方法，
@@ -640,7 +656,7 @@
 
 	(1)將高維資料投影至低維空間，進行視覺化檢視整體的分布，並移除明顯偏離分布的離群樣本；
 	
-	(2)作為後續分群的輔助，以降低高維空間的距離度量不穩定所造成的干擾。
+	(2)作為後續分群與建立局部刻劃模型的輔助，以降低高維空間的距離度量不穩定所造成的干擾。
 
 		\begin{figure}[H]
 			\centering
@@ -660,6 +676,8 @@
 	將明顯偏離真實資料分布的樣本視為離群樣本並移除，
 	再重複同樣的資料前處理與 PCA 步驟，
 	移除離群樣本後的二維主成分平面如圖 \ref{fig:移除outlier做pca} 所示。
+	其分布較均勻，
+	可顯示資料在投影與距離結構上受到離群樣本干擾的程度降低。
 
 	\begin{figure}[H]
 		\centering
@@ -668,31 +686,22 @@
 		\label{fig:移除outlier做pca}
 	\end{figure}
 
-	其分布較均勻，
-	可顯示資料在投影與距離結構上受到離群樣本干擾的程度降低。
-
 	\subsection{前處理後最終資料集摘要}
 	\label{sec:最終資料集}
 	
 	完成特徵清理、缺失處理與離群樣本移除後，
-	本研究得到最終分析資料 $(\mathbf{X},\mathbf{y})$，
-	其中 $\mathbf{X}\in\mathbb{R}^{n\times p}$ 為輸入變數，
-	$\mathbf{y}\in\{0,1\}^{n}$ 為對應標籤。
-	$n$ 為樣本數，
-	$p$ 為前處理後的特徵數。
+	最終分析資料如表 \ref{tab:資料前處理完} 所示，
+	共 1525 筆樣本及 459 個特徵。
 	為避免不同單位與尺度造成距離計算與模型訓練偏差，
-	$\mathbf{X}$ 已進一步進行標準化處理。
-
-	表 \ref{tab:資料前處理完} 為最終分析資料的預覽表。
-	其中 Pass/Fail 欄位即為標籤 $\mathbf{y}$。
+	已完成標準化處理。
 	此時資料已不含缺失值，
 	且於移除離群樣本後重新對樣本編號，
-	以確保後續分群、訓練預測模型與建立局部刻劃模型時的樣本編號一致。
-	並且皆以此資料集作為分析。
+	以確保後續分群、訓練預測模型與建立局部刻劃模型時的樣本編號一致，
+	後續分析皆以此資料集為基礎。
 
 	\begin{table}[H]
 		\centering
-		\caption{資料前處理後之最終資料集}
+		\caption{前處理與標準化後之最終資料集}
 		\vspace{0.15cm}
 		\resizebox{\linewidth}{!}{%
 		\begin{tabular}{r r r r c r r r r}
@@ -1044,7 +1053,7 @@
 	針對預測模型，
 	因有採用交叉驗證，
 	故採用的評估指標會取平均，
-	評估指標包含準確度（Accuracy, ACC）、誤報率（False Alarm Rate, FAR）與 ROC-AUC ，
+	評估指標包含準確度（Accuracy, ACC）、誤報率（False Alarm Rate, FAR）與 AUC ，
 	其定義如下：
 	$$
 	\mathrm{ACC}=\frac{\text{TP}+\text{TN}}{\text{TP}+\text{TN}+\text{FP}+\text{FN}},
@@ -1053,7 +1062,7 @@
 	$$
 	其中，TN（True False, 真陰性）、FP（False Positive, 假陽性）、FN（False Negative, 假陰性）、TP（True Positive, 真陽性）分別對應「Pass判為Pass」、「Pass判為Fail」、「Fail判為Pass」、「Fail判為Fail」。
 	其說明如表 \ref{tab:confusion_matrix} 所示。
-	ROC-AUC 則以預測模型輸出機率於不同門檻下所形成的 ROC 曲線面積表示。
+	AUC 則以預測模型輸出機率於不同門檻下所形成的 ROC 曲線面積表示。
 
 	\begin{table}[H]
 		\centering
@@ -1156,36 +1165,55 @@
 		\end{tabular}
 	\end{table}
 			
-	\subsection{各群預測模型之評估結果比較}
+	\subsection{各群預測模型之評估結果}
 
-	各群評估指標的平均整理如表 \ref{tab:五折交叉驗證重抽預測模型評估} 所示，
-	從中可知，
+	各群評估指標的平均與相關文獻結果整理如表 \ref{tab:五折交叉驗證重抽預測模型評估} 所示。
+	就本研究分群比來說，
 	群 0 的 ACC 較低、 FAR 較高，
 	其 FAR = 4.68\% 約為群 1 之 FAR = 0.99\% 的 4.73 倍，
 	而 ROC-AUC 則是群 0 較高。
 	顯示不同群的預測準確度、錯誤回報率及整體排序能力存在差異，
-	故整體資料存在異質性。
+	反映整體資料中可能存在性質相異的子群。
 
-	因此若未做分群而只使用整體資料，
-	可能會把不同群的模型在預測時所判斷的依據被稀釋掉，
-	使後續局部範圍內的模型預測更複雜，
-	進而影響局部刻劃的擬合效果與解釋一致性。
+	再與既有文獻比較，
+	本研究的預測結果大致與過去文獻所呈現的結果相近，
+	部分評估指標表現較佳，
+	部分則未必較優。
+	此結果表示，
+	本研究所建立的方法流程在 SECOM 資料上具有一定可行性，
+	其預測表現並未與既有研究呈現明顯差距。
+
+	綜合而言，
+	若未做分群而只使用整體資料建立預測模型，
+	可能會使不同群在預測時所依據的判別資訊被稀釋，
+	進而增加後續局部刻劃模型的複雜度，
+	並影響擬合效果與解釋一致性。
 
 	\begin{table}[H]
 		\centering
-		\caption{五折交叉驗證各群預測模型評估指標之平均}
+		\caption{本研究各群預測模型評估指標之平均與相關文獻結果整理}
 		\vspace{0.25cm}
 		\label{tab:五折交叉驗證重抽預測模型評估}
-		\begin{tabular}{|l|c|c|c|c|}
-		\hline
-		群名 & 樣本數 &  ACC  &  FAR  & ROC-AUC \\
-		\hline
-		全體 & 1525  & 92.72\% & 1.89\% & 66.36\%  \\
-		\hline
-		群 0 & 676   & 88.47\% & 4.68\% & 69.74\%  \\
-		\hline
-		群 1 & 849   & 94.82\% & 0.99\% & 62.66\%  \\
-		\hline
+		\begin{tabular}{|l|c|c|c|}
+			\hline
+			研究／預測模型              & ACC     & FAR     & AUC     \\
+			\hline
+			Salem et al.（2018）       & 74.41\% & 24.95\% & 70.22\% \\
+			\hline
+			賴立夫（2022）              & 86.94\% & 9.22\%  & －      \\
+			\hline
+			Park et al.（2024）        & 85.14\% & 6.59\%  & －      \\
+			\hline
+			Presciuttini et al.（2024）& 89.49\% & 4.14\%  & 75\%    \\
+			\hline
+			Naudé et al.（2024）       & －      & －      & 62.33\% \\     
+			\hline
+			本研究（分群前）            & 92.72\% & 1.89\%  & 66.36\% \\
+			\hline
+			本研究（分群後）群0         & 88.47\% & 4.68\%  & 69.74\% \\
+			\hline
+			本研究（分群後）群1         & 94.82\% & 0.99\%  & 62.66\% \\
+			\hline
 		\end{tabular}
 	\end{table}
 
@@ -1236,21 +1264,16 @@
 			\end{tabular}
 	\end{table}
 
-	\section{各群局部刻劃模型之建立與結果分析}
+	\section{各群局部刻劃模型之結果}
 
-	本節呈現各群局部刻劃模型之結果。
+	群 0 與群 1 分別有 97 個與 56 個特徵於 50 次實驗中於最終輪皆被保留。
 	依研究方法與流程之特徵選擇程序，
-	群 0 與群 1 分別有 97 個與 56 個特徵於 50 次實驗中於最終輪皆被保留，
-	故後續以這些特徵作為局部刻劃模型之擬合的自變數；
-	以重複抽區 200 萬個局部格子點及其對應之預測模型輸出機率作為應變數。
+	後續各群再以這些特徵作為自變數來擬合局部刻劃模型，
+	並計算其決定係數 $R^2$ 。
 
-	結果顯示如表 \ref{tab:決定係數估計} ，
-	群 0 與群 1 之 $R^2$ 點估計分別為 0.58 與 0.59，
-	表示局部刻劃模型對各群的預測模型輸出在局部範圍之變異皆可解釋約六成。
-			
 	\begin{table}[H]
 		\centering
-		\caption{局部刻劃模型決定係數 $R^2$ }
+		\caption{各群局部刻劃模型之決定係數 $R^2$ }
 		\vspace{0.15cm}
 		\label{tab:決定係數估計}
 			\begin{tabular}{|c|c|}
@@ -1264,9 +1287,32 @@
 			\end{tabular}
 	\end{table}
 
+	結果顯示如表 \ref{tab:決定係數估計} 所示，
+	群 0 與群 1 之局部刻劃模型 $R^2$ 分別為 0.58 與 0.59，
+	從模型刻劃的角度而言，
+	此結果表示在本研究所關注之局部範圍內，
+	線性模型已可掌握約六成的預測模型輸出變異，
+	顯示預測模型在局部範圍內並非完全不可描述，
+	仍有部分的決策規則可由較簡單的線性模型作局部刻劃。
+	就方法而言，
+	此結果支持本研究所提出之局部刻劃程序具有一定可行性，
+	並能提供預測模型局部行為之初步解釋。
+	
+	然而，
+	若由半導體製程實務應用的觀點來看，
+	特別是在實務上對良率與穩定交貨能力通常具有高度要求的情況下，
+	企業所重視的不僅是模型是否具有部分可解釋性，
+	更重視其是否足以作為高風險決策之可靠依據。
+	因此，
+	本研究認為，
+	局部刻劃模型的定位應為預測模型的輔助解釋工具，
+	其主要價值在於協助工程人員理解預測模型於特定局部範圍內可能依循之判斷方向，
+	並作為後續變數檢視、製程討論與異常追蹤之參考。
+
 	再者，
-	表 \ref{tab:群0係數} 與表 \ref{tab:群1係數} 分別列出群 0 與群 1 之單次擬合局部刻劃模型中，
-	依係數絕對值由大到小排序的前30個特徵及其係數。
+	為說明局部刻劃模型於單次擬合下主要影響特徵與相對影響程度，
+	表 \ref{tab:群0係數} 與表 \ref{tab:群1係數} 分別列出群 0 與群 1 之單次擬合結果中，
+	截距項以及依係數絕對值由大到小排序的前30個特徵及其係數。
 	由表可之，
 	兩群在局部範圍內具有不同的主要影響特徵，
 	其中，
@@ -1287,7 +1333,7 @@
 			\hline
 			特徵 & 係數 & 特徵 & 係數 & 特徵 & 係數 \\
 			\hline
-			(intercept) & 1.005144  & x153 & 0.013929  & x554 & 0.008468  \\
+			截距項       & 1.005144  & x153 & 0.013929  & x554 & 0.008468  \\
 			x291        & 0.034033  & x426 & 0.013283  & x324 & -0.008034 \\
 			x7          & -0.029912 & x588 & 0.011796  & x361 & 0.007764  \\
 			x141        & -0.028171 & x585 & 0.010932  & x247 & -0.007745 \\
@@ -1313,7 +1359,7 @@
 			\hline
 			特徵 & 係數 & 特徵 & 係數 & 特徵 & 係數 \\
 			\hline
-			(intercept) & 0.996643  &  x8  & 0.004151 & x196 & 0.002293 \\
+			截距項       & 0.996643  &  x8  & 0.004151 & x196 & 0.002293 \\
 			x386        & 0.016675  & x92  & 0.003006 & x337 & 0.002250 \\
 			x117        & -0.012556 & x112 &-0.002733 &  x81 & 0.002090 \\
 			x420        & -0.011799 & x288 & 0.002681 & x276 & 0.001966 \\
@@ -1329,55 +1375,79 @@
 	\end{table}
 
 	最後，
-	本研究進一步評估局部刻劃模型在跨群時的表現，
-	以觀察某群所建立的局部刻劃模型，
-	在另一群的局部範圍是否仍具有良好的擬合度。
-	重抽 1 萬點做評估後的結果如表 \ref{tab:跨群比較} 所示，
-	並以決定係數（$R^2$）及相關係數（$\rho$）作為評估指標。
-	其中，$f_c(\mathbf{x}^{d}_{\mathbf{m}})$ 表示第 $c$ 群預測模型對第 $d$ 群局部格子點 $\mathbf{x}^{d}_{\mathbf{m}}$ 所輸出的預測機率；
-	$g_c(\mathbf{x}^{d}_{m})$ 表示第 $c$ 群所建立之局部刻劃模型，對第 $d$ 群局部格子點 $\mathbf{x}^{d}_{\mathbf{m}}$ 所輸出的預測分數，
-	其中 $c,d\in\{0,1\}$，$\mathbf{m}$ 為局部格子點索引。
+	本研究以各群所建立的局部刻劃模型，
+	分別對其對應局部格子點上的預測模型輸出進行比較，
+	以觀察局部刻劃模型在各群局部範圍內對預測模型的擬合情形。
+	其中，
+	$f_c(\mathbf{x}^{c}_{\mathbf{m}})$ 表示第 $c$ 群預測模型對第 $c$ 群局部格子點 $\mathbf{x}^{c}_{\mathbf{m}}$ 所輸出的預測機率；
+	$g_c(\mathbf{x}^{c}_{\mathbf{m}})$ 表示第 $c$ 群所建立之局部刻劃模型，
+	對第 $c$ 群局部格子點 $\mathbf{x}^{c}_{\mathbf{m}}$ 所輸出的預測分數，
+	其中 $c\in\{0,1\}$，
+	$\mathbf{m}$ 為局部格子點索引。
 
-	\begin{table}[H]
+	\begin{figure}[H]
 		\centering
-		\caption{各群的局部刻劃模型於群內與跨群套用下之評估結果}
-		\vspace{0.15cm}
-		\label{tab:跨群比較}
-		\renewcommand{\arraystretch}{1}
-		\setlength{\tabcolsep}{8pt}
-		\begin{tabular}{c|ccc}
-			\hline
-			設置 & \textbf{$R^2$} & \textbf{$\rho$} \\
-			\hline
-			$f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^0_\mathbf{m})$ & 0.58  & 0.76 \\
-			$f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^1_\mathbf{m})$ & 0.64  & 0.80 \\
-			$f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^1_\mathbf{m})$ & -4.15 & 0.22 \\
-			$f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^0_\mathbf{m})$ & -2.02 & 0.05 \\
-			\hline
-		\end{tabular}
-	\end{table}
+		\includegraphics[width=0.5\linewidth]{img/g0onG0vsf0(G0).png}
+		\caption{群 0 局部刻劃模型與預測模型輸出之散佈圖}
+		\label{fig:群0輸出散步圖}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{img/g1onG1vsf1(G1).png}
+		\caption{群 1 局部刻劃模型與預測模型輸出之散佈圖}
+		\label{fig:群1輸出散步圖}
+	\end{figure}
 	
-	結果顯示，
-	當群 0 所建立的局部刻劃模型套用至群 1 的局部範圍時，
-	其 $R^2=-4.15$、$\rho=0.22$；
-	反之，
-	當群 1 所建立的局部刻劃模型亦套用至群 0 的局部範圍時；
-	其 $R^2=-2.02$、$\rho=0.05$。
-	相較於各群模型在原來的局部範圍內可取得約六成左右的 $R^2$ 與較高的相關係數，
-	跨群套用後的 $R^2$ 皆轉為負值，
-	且相關係數亦明顯下降至兩成或接近 0，
-	顯示模型跨群後，
-	已無法有效刻劃另一群預測模型輸出的關係。
+	由圖 \ref{fig:群0輸出散步圖} 與圖 \ref{fig:群1輸出散步圖} 可見，
+	各群局部刻劃模型的輸出與預測模型輸出之間仍呈現正向關係，
+	顯示局部刻劃模型在各自的局部範圍內，
+	仍可掌握預測模型輸出的主要變化趨勢。
+	然而，
+	散佈圖中的預測模型輸出並未集中於 0.5 附近，
+	而是偏向較高的分數。
+	此結果表示，
+	雖然本研究是由接近決策邊界的樣本為基礎建立局部中心點，
+	但在中心點附近生成的局部格子點，
+	其預測模型輸出不一定落在決策邊界附近。
+	
+	此現象反映預測模型本身具有非線性特性。
+	對於 XGBoost 而言，
+	即使某一中心點的預測機率接近 0.5，
+	其附近樣本在高維特徵空間中經過小幅度的位移後，
+	所對應之預測模型輸出仍可能主要落在決策邊界的某一側。
+	換言之，
+	本研究所控制的是特徵空間中的局部距離，
+	而非模型輸出空間中的距離，
+	因此接近某一樣本點，
+	並不代表其預測模型輸出必然接近該點的預測值。
 	
 	綜合而言，
-	兩群的局部模型在跨群後皆明顯失去解釋性，
-	顯示各群的預測模型在局部範圍內進行決策時所依賴的特徵結構並不一致，
-	其局部範圍的決策具有群間差異。
-	此結果說明局部刻劃模型具有明顯的區域性，
-	因此不宜將某一群所建立之局部解釋直接套用至另一群。
-	亦與前述分群的分析結果相互呼應，
-	表示資料中的異質性不僅反映於整體模型的預測表現，
-	亦反映於各群局部刻劃模型的重要特徵組成與影響方向。
+	本研究的局部刻劃模型並不保證該局部範圍的預測模型輸出分布皆於 0.5 附近。
+	亦即，
+	局部格子點代入預測模型後的輸出未必落在決策邊界附近，
+	但局部刻劃模型仍可在該局部範圍內，
+	對預測模型輸出的變化趨勢提供一定程度的刻劃，
+	進而作為理解其局部決策行為的依據。
+
+	% \begin{table}[H]
+	% 	\centering
+	% 	\caption{各群的局部刻劃模型於群內與跨群套用下之評估結果}
+	% 	\vspace{0.15cm}
+	% 	\label{tab:跨群比較}
+	% 	\renewcommand{\arraystretch}{1}
+	% 	\setlength{\tabcolsep}{8pt}
+	% 	\begin{tabular}{c|ccc}
+	% 		\hline
+	% 		設置 & \textbf{$R^2$} & \textbf{$\rho$} \\
+	% 		\hline
+	% 		$f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^0_\mathbf{m})$ & 0.58  & 0.76 \\
+	% 		$f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^1_\mathbf{m})$ & 0.64  & 0.80 \\
+	% 		$f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^1_\mathbf{m})$ & -4.15 & 0.22 \\
+	% 		$f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^0_\mathbf{m})$ & -2.02 & 0.05 \\
+	% 		\hline
+	% 	\end{tabular}
+	% \end{table}
 
 	\chapter{結論}
 	\section{總結}
@@ -1397,7 +1467,7 @@
 		\item 
 		整體資料中可能存在資料結構上具有差異的子群。
 		以具高維度、高缺失性且類別不平衡的半導體製程資料 SECOM 資料為例，
-		本研究比較整體建模與與分群後建模之結果，
+		本研究比較整體建模與分群後建模之結果，
 		發現資料在 PCA 降維投影空間中呈現群與群之間的差異，
 		且各群在預測表現指標上亦存在差異。
 		此結果顯示，
@@ -1408,22 +1478,28 @@
 		
 		\item 
 		在各群內分別建立預測模型及其對應的局部刻劃模型後，
-		可觀察到各群的重要特徵及其影響大小和方向並不相同，
+		可觀察到各群的重要特徵及其影響大小與方向並不相同，
 		顯示不同子群在局部的決策行為上存在明顯差異。
 		此結果說明，
 		若僅以整體模型進行解釋，
 		容易忽略群與群之間在決策行為上的差異，
-		因而降低模型在局部的決策行為之掌握程度，
+		因而降低對模型局部決策行為的掌握程度。
+		因此，
+		分群後再進行局部刻劃，
+		較有助於呈現不同子群在局部範圍內的判斷依據。
 
 		\item 
-		本研究所建立的局部線性刻劃模型，
-		可在預測模型之外提供局部範圍內較明確的特徵影響資訊，
-		使原本難以直接說明的預測結果，
-		可以轉化為由係數方向與大小所表示的決策描述。
 		相較於僅關注模型預測的準確度之分析方式，
-		本研究更進一步說明預測模型在特定局部範圍內是如何做出預測的判斷，
-		有助於提升模型在半導體製程資料分析中的可解釋性與提升其應用價值。
-	
+		本研究所建立的局部刻劃模型，
+		可提供局部範圍內較明確的特徵影響資訊，
+		使原本難以直接說明的預測結果，
+		轉化為由係數方向與大小所表示的決策描述，
+		有助於提升模型在半導體製程資料分析中的可解釋性與應用價值。
+		此外，
+		局部格子點代入預測模型後的輸出未必集中於決策邊界附近，
+		顯示預測模型在局部範圍內仍可能具有明顯的非線性特徵；
+		然而，
+		局部刻劃模型仍可對該局部範圍內的主要變化趨勢提供一定程度的刻畫。
 	\end{enumerate}
 
 	\section{未來工作}
