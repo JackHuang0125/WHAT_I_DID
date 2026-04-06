@@ -24,7 +24,7 @@
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
 
-\title{Chapter 2　Assignment \small{Due date: March 30, 2026 (Mon)}}
+\title{Chapter 2　Assignment \small{Due date: April 6, 2026 (Mon)}}
 \author{黃丞暘　611211106}
 \date{}
 
@@ -321,5 +321,83 @@ Therefore
 
 \section*{2.26}
 \textbf{Sol.}
+
+\begin{enumerate}[i.]
+    \item \textbf{bias}
+    
+    Nadaraya-Waston kernel estimator:
+    $$
+    \hat{f}_{NW}(x)=\frac{\sum_{i=1}^nY_iK(\frac{x_i-x}{h_n})}{\sum_{i=1}^nK(\frac{x_i-x}{h_n})}
+    $$
+    Assume that nonparametric regression model is
+    $$
+    Y_i=f(x_i)+\varepsilon_i,\,\, i=1,...,n
+    $$
+    Let
+    $$
+    w_i(x)=\frac{K(\frac{x_i-x}{h_n})}{\sum_{j=1}^nK(\frac{x_j-x}{h_n})}
+    $$
+    then
+    $$
+    \hat{f}_{NW}(x)=\sum_{i=1}^nw_i(x)Y_i=\sum_{i=1}^nw_i(x)f(x_i)+\sum_{i=1}^nw_i(x)\varepsilon_i
+    $$
+    Since $E(\varepsilon_i)=0$, so
+    $$
+    E[\hat{f}_{NW}(x)]=\sum_{i=1}^nw_i(x)f(x_i)
+    $$
+    Therefore,
+    $$
+    Bias(\hat{f}_{NW}(x))=E[\hat{f}_{NW}(x)]-f(x)=\sum_{i=1}^nw_i(x)f(x_i)-f(x)
+    $$
+    Use Taylor expansion, we have
+    \begin{align*}
+    E[\hat{f}_{NW}(x)]
+    &=\sum_{i=1}^nw_i(x)\left[f(x)+f'(x)(x_i-x)+\frac{1}{2}f''(x)(x_i-x)^2+r((x_i-x)^2)\right] \\
+    &=f(x)\sum_{i=1}^nw_i(x)+f'(x)\sum_{i=1}^nw_i(x)(x_i-x)+\frac{1}{2}f''(x)\sum_{i=1}^nw_i(x)(x_i-x)^2 \\
+    &　　　　+\sum_{i=1}^nw_i(x)r((x_i-x)^2) \\
+    &=f(x)+\frac{1}{2}f''(x)h^2_n\mu_2(K)+r(h_n^2)
+    \end{align*}
+    where
+    $$
+    \sum_{i=1}^nw_i=1,\,\sum_{i=1}^nw_i(x)(x_i-x)\approx h_n\int uK(u)du=0,\,\sum_{i=1}^nw_i(x)(x_i-x)^2\approx h_n^2\int u^2K(u)du=h_n^2\mu_2(K)
+    $$
+    Therefore,
+    $$
+    Bias(\hat{f}_{NW}(x))=\frac{1}{2}f''(x)h^2_n\mu_2(K)+r(h_n^2)
+    $$
+    \item variance
+    
+    Since
+    $$
+    \hat{f}_{NW}(x)=\sum_{i=1}^nw_i(x)f(x_i)+\sum_{i=1}^nw_i(x)\varepsilon_i
+    $$
+    then
+    $$
+    Var(\hat{f}_{NW}(x))=Var\left(\sum_{i=1}^nw_i(x)\varepsilon_i\right)=\sigma^2\sum_{i=1}^nw_i(x)^2
+    $$
+    As we know
+    $$
+    w_i(x)=\frac{K(\frac{x_i-x}{h_n})}{\sum_{j=1}^nK(\frac{x_j-x}{h_n})}\Rightarrow \sum_{i=1}^nw_i(x)^2
+    =\frac{\sum_{i=1}^nK^2(\frac{x_i-x}{h_n})}{\left[\sum_{j=1}^nK(\frac{x_j-x}{h_n})\right]^2}
+    \approx \frac{nh_n\int K^2(u)du}{\left[nh_n\int K(u)du\right]^2}
+    =\frac{nh_nR(K)}{(nh_n)^2}=\frac{R(K)}{nh_n}
+    $$
+    Therefore,
+    $$
+    Var(\hat{f}_{NW}(x))=\frac{\sigma^2R(K)}{nh_n}+r(\frac{1}{nh_n})
+    $$
+    \item MSE
+    
+    Since
+    $$
+    MSE(\hat{f}_{NW}(x))=Bias^2(\hat{f}_{NW}(x))+Var(\hat{f}_{NW}(x))
+    $$
+    The results from (1) \& (2), we have
+    \begin{align*}
+        MSE(\hat{f}_{NW}(x))
+        &=\left[\frac{1}{2}f''(x)h^2_n\mu_2(K)+r(h_n^2)\right]^2+\left[\frac{\sigma^2R(K)}{nh_n}+r(\frac{1}{nh_n})\right] \\
+        &=\frac{1}{4}[f''(x)]^2h^4_n\mu_2(K)^2+\frac{\sigma^2R(K)}{nh_n}+r(h_n^4)+r(\frac{1}{nh_n})
+    \end{align*}
+\end{enumerate}
 
 \end{document}
