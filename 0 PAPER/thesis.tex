@@ -762,32 +762,27 @@
 
 			% 上排
 			\node[io] (read) {資料\\讀取};
-			\node[box, right=2.5cm of read] (prep) {資料前處理};
-			\node[box, right=2.5cm of prep] (cluster) {分群};
-			% \node[box, right=of cluster, minimum width=3.6cm] (keep) {保留原始資料};
+			\node[box, right=2.5cm of read] (prep) {資料\\前處理};
+			\node[box, right=2.5cm of prep, minimum width=2.6cm] (cluster) {分群};
 
 			% 下排
-			\node[box, below=3.2cm of read, xshift=0.2cm] (blackbox) {訓練預測模型};
-			\node[box, right=1.8cm of blackbox, yshift=1.2cm] (compare) {比較群間差異};
-			\node[box, right=1.8cm of blackbox, yshift=-1.2cm] (local) {建立\\局部刻劃模型};
-			\node[box, right=1.8cm of compare, yshift=-1.2cm] (result) {結果與討論};
-			\node[roundbox, right=of result, minimum width=2.6cm] (conclusion) {結論};
+			\node[box, below=2.8cm of read, xshift=0.2cm] (blackbox) {訓練\\預測模型};
+			\node[box, right=1cm of blackbox] (local) {建立\\局部刻劃模型};
+			\node[box, right=1cm of local] (result) {結果與討論};
+			\node[roundbox, right=1cm of result, minimum width=2.6cm] (conclusion) {結論};
 
 			% 上排箭頭
 			\draw[line] (read) -- (prep);
 			\draw[line] (prep) -- (cluster);
-			% \draw[line] (cluster) -- (keep);
 
-			% 從 keep 繞到 blackbox
-			\draw[line] (cluster.south) |- ([yshift=2.2cm]blackbox.north) -| (blackbox.north);
+			% 從 cluster 繞到 blackbox
+			\draw[line] (cluster.south) |- ([yshift=1.5cm]blackbox.north) -| (blackbox.north);
 
-			% blackbox 分叉
-			\draw[line] (blackbox.east) -- ++(0.8,0) |- (compare.west);
-			\draw[line] (blackbox.east) -- ++(0.8,0) |- (local.west);
+			% blackbox -> local
+			\draw[line] (blackbox) -- (local);
 
-			% compare / local 匯入 result
-			\draw[line] (compare.east) -- ++(0.8,0) |- (result.west);
-			\draw[line] (local.east) -- ++(0.8,0) |- (result.west);
+			% local -> result
+			\draw[line] (local) -- (result);
 
 			% result -> conclusion
 			\draw[line] (result) -- (conclusion);

@@ -82,9 +82,7 @@
 \providecommand{\tabularnewline}{\\}
 }
 
-% 正式口試時請改成論文正式題目
-% 高維半導體製程資料之分群式預測模型局部刻劃方法
-\title{碩士論文口試\\[0.3em]\large }
+\title{預測模型局部決策因子之刻劃：以半導體製程資料為例\\[0.3em]\large }
 \author{學生　黃丞暘 \\　\\ 指導教授　曹振海}
 \institute{國立東華大學應用數學系統計碩士班}
 \date{2026 年 X 月 XX 日}
@@ -265,7 +263,7 @@
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{\textbf{比較文獻預測模型}}
+\begin{frame}{\textbf{比較文獻與本研究預測結果}}
   \vspace{0.5cm}
   \centering
   \scalebox{0.9}{
@@ -375,32 +373,27 @@
 
     % 上排
     \node[io] (read) {資料\\讀取};
-    \node[box, right=2.5cm of read] (prep) {資料前處理};
-    \node[box, right=2.5cm of prep] (cluster) {分群};
-    % \node[box, right=of cluster, minimum width=3.6cm] (keep) {保留原始資料};
+    \node[box, right=2.5cm of read] (prep) {資料\\前處理};
+    \node[box, right=2.5cm of prep, minimum width=2.6cm] (cluster) {分群};
 
     % 下排
-    \node[box, below=3.2cm of read, xshift=0.2cm] (blackbox) {訓練預測模型};
-    \node[box, right=1.8cm of blackbox, yshift=1.2cm] (compare) {比較群間差異};
-    \node[box, right=1.8cm of blackbox, yshift=-1.2cm] (local) {建立\\局部刻劃模型};
-    \node[box, right=1.8cm of compare, yshift=-1.2cm] (result) {結果與討論};
-    \node[roundbox, right=of result, minimum width=2.6cm] (conclusion) {結論};
+    \node[box, below=2.8cm of read, xshift=0.2cm] (blackbox) {訓練\\預測模型};
+    \node[box, right=1cm of blackbox] (local) {建立\\局部刻劃模型};
+    \node[box, right=1cm of local] (result) {結果與討論};
+    \node[roundbox, right=1cm of result, minimum width=2.6cm] (conclusion) {結論};
 
     % 上排箭頭
     \draw[line] (read) -- (prep);
     \draw[line] (prep) -- (cluster);
-    % \draw[line] (cluster) -- (keep);
 
-    % 從 keep 繞到 blackbox
-    \draw[line] (cluster.south) |- ([yshift=2.2cm]blackbox.north) -| (blackbox.north);
+    % 從 cluster 繞到 blackbox
+    \draw[line] (cluster.south) |- ([yshift=1.5cm]blackbox.north) -| (blackbox.north);
 
-    % blackbox 分叉
-    \draw[line] (blackbox.east) -- ++(0.8,0) |- (compare.west);
-    \draw[line] (blackbox.east) -- ++(0.8,0) |- (local.west);
+    % blackbox -> local
+    \draw[line] (blackbox) -- (local);
 
-    % compare / local 匯入 result
-    \draw[line] (compare.east) -- ++(0.8,0) |- (result.west);
-    \draw[line] (local.east) -- ++(0.8,0) |- (result.west);
+    % local -> result
+    \draw[line] (local) -- (result);
 
     % result -> conclusion
     \draw[line] (result) -- (conclusion);
@@ -541,6 +534,9 @@
 			\end{tabular}
       }
 	\end{table}
+  \begin{itemize}
+    \item 選取 $\hat{p}$ 接近 0.5 的樣本，作為預測模型在決策邊界附近的樣本點
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{局部刻劃方法}}
@@ -554,7 +550,7 @@
         \item $\delta$ 為各維度相同的位移步長
         \item $\mathbf{m}=(m_1,\dots,m_p)$ 為位移向量，且$m_j\in\{-k,-k+1,\dots,0,\dots,k-1,k\}$
       \end{itemize}
-    \item 共有 $(2k+1)^p$ 個格子點
+    \item 理論上共有 $(2k+1)^p$ 個格子點
     \end{itemize}
 \end{frame}
 
@@ -592,10 +588,11 @@
   \begin{itemize}
     \item 以預測模型對格子點輸出的機率作為應變數
     \item 本研究：$p=459$、$k=2$
+    \item 實作上以抽樣來擬合模型
   \end{itemize} 
 \end{frame}
 
-\begin{frame}{\textbf{擬和局部刻劃模型流程}}
+\begin{frame}{\textbf{擬合局部刻劃模型流程}}
   \vspace{0.3cm}
   \centering
   \resizebox{0.55\textwidth}{!}{
@@ -632,44 +629,38 @@
 
 \begin{frame}{\textbf{群 0 的局部刻劃模型與擬合結果}}
   \small{
-  $$\hat{y}_{\text{local}}^{(0)}(x)=
-  1.0051
-  +0.0340x_{291}
-  -0.0299x_{7}
-  -0.0282x_{141}
-  +0.0230x_{87}
-  +\cdots$$}
+  \begin{align*}
+    \hat{y}_{\text{local}}^{(0)}(x)= {} & 1.0051 +0.0340x_{291} -0.0299x_{7} \\
+    & -0.0282x_{141} +0.0230x_{87} +\cdots
+  \end{align*}
+  }
   \begin{columns}[T]
     \begin{column}{0.4\textwidth}
-      \vspace{0.2cm}
+      \centering
       $$R^2 = 0.58$$
     \end{column}
     \begin{column}{0.6\textwidth}
       \centering
-      \includegraphics[width=0.8\linewidth]{img/g0onG0vsf0(G0).png}
+      \includegraphics[width=0.72\linewidth]{img/g0onG0vsf0(G0).png}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}{\textbf{群 1 的局部刻劃模型與擬合結果}}
   \small{
-  $$
-  \hat{y}_{\text{local}}^{(1)}(x)=
-  0.9966
-  +0.0167x_{386}
-  -0.0126x_{117}
-  -0.0118x_{420}
-  +0.0106x_{456}
-  +\cdots
-  $$}
+  \begin{align*}
+  \hat{y}_{\text{local}}^{(1)}(x)= {} & 0.9966 +0.0167x_{386} -0.0126x_{117} \\
+  & -0.0118x_{420} +0.0106x_{456} +\cdots
+  \end{align*}
+  }
   \begin{columns}[T]
     \begin{column}{0.4\textwidth}
-      \vspace{0.2cm}
+      \centering
       $$R^2 = 0.59$$
     \end{column}
     \begin{column}{0.6\textwidth}
       \centering
-      \includegraphics[width=0.8\linewidth]{img/g1onG1vsf1(G1).png}
+      \includegraphics[width=0.72\linewidth]{img/g1onG1vsf1(G1).png}
     \end{column}
   \end{columns}
 \end{frame}
@@ -686,7 +677,7 @@
   \begin{itemize}
     \item 建立一套從資料前處理、分群、建模到局部線性刻劃的分析流程
     \vspace{1cm}
-    \item 先分群再建模，可避免不同型態樣本的判斷規則混合，提升後續局部刻劃的清晰性
+    \item 先分群再建模，可避免不同型態樣本的判斷規則混合，使後續局部刻劃模型更清楚
     \vspace{1cm}
     \item 在設定的局部範圍內，各群預測模型可藉由線性模型作一定程度的刻劃
     % \item 本研究提出一套適用於高維、缺失嚴重且類別不平衡製程資料的分析流程
@@ -698,12 +689,14 @@
 \end{frame}
 
 \begin{frame}{\textbf{未來工作}}
-% \begin{itemize}
-  % \item 比較不同分群方法與群數選擇對局部刻劃結果的影響。
-  % \item 進一步分析步長 $\delta$、候選樣本門檻與抽樣策略對局部模型穩定性的敏感度。
-  % \item 與 LIME、SHAP 等事後解釋方法進行系統性比較。
-  % \item 若可取得具實際製程意義的變數名稱，可提升結果在工程端的可解讀性與應用價值。
-% \end{itemize}
+  \begin{itemize}
+    \item 比較不同分群方法與群數選擇對局部刻劃結果的影響
+    \vspace{1cm}
+    \item 進一步分析中心點選取、位移步長（$\delta$）對局部模型穩定性的敏感度
+    \vspace{1cm}
+    \item 與 LIME、SHAP 等事後解釋方法進行系統性比較
+    % \item 若可取得具實際製程意義的變數名稱，可提升結果在工程端的可解讀性與應用價值。
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{\textbf{謝謝聆聽}}
