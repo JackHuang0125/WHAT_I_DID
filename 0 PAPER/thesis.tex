@@ -174,21 +174,17 @@
 	此類資料通常具有量測變數多、缺失比例高、類別分布不平衡，
 	以及樣本取得不易等特性，
 	增加預測與解釋的困難。
-	
 	本研究以 UCI 的半導體製程資料 SECOM 為研究對象，
 	建立一套兼顧預測與局部解釋的分析流程。
 	透過 KMeans 將資料分為兩群，
-	並於各群中結合 SMOTE 與交叉驗證建立 XGBoost 預測模型；
-	最後於關注的局部範圍內建立局部刻劃模型，
-	描述預測模型在局部範圍內的決策行為，
-	說明各變數影響之方向與相對大小。
-
+	並於各群中結合 SMOTE 與交叉驗證建立 XGBoost 預測模型。
 	研究結果顯示，
 	各群預測模型的分類準確度分別為 88.46\% 及 94.82\%。
-	局部刻劃模型之決定係數約為 0.6 ，
-	顯示其在局部範圍內可有效刻劃預測模型之決策行為，
-	能提供局部決策因子之具體資訊，
-	並作為後續製程監控與改善之依據。
+	並且進一步在各群中選定關注的局部範圍，
+	建立局部刻劃模型，
+	其決定係數約為 0.6 ，
+	後續將進一步討論各變數之意義與影響。
+	
 
 	% put to bottom
 	\vfill
@@ -207,21 +203,19 @@
 		\section*{Abstract}
 	\end{center}
 	
-	Semiconductor manufacturing data have attracted increasing attention with the growth of the semiconductor industry.
-	These data often contain many measured variables, 
+	Semiconductor manufacturing data have attracted much attention with the growth of the semiconductor industry.
+	These data often contain many variables, 
 	a high proportion of missing values, 
 	imbalanced class distribution, 
 	and limited sample size.
 	These characteristics increase the difficulty of prediction and interpretation.
-
-	This study uses the UCI SECOM dataset and develops an analytical framework for prediction and local explanation.
+	This study uses the UCI SECOM dataset and develops an framework for prediction and local explanation.
 	KMeans divides the data into two clusters.
 	XGBoost models are built with SMOTE and cross-validation on the training data.
-	A local characterization model is constructed through a data generation approach to describe the local decision behavior and to analyze the direction and relative magnitude of the variable effects.
-
-	The results show classification accuracies of 88.46\% and 94.82\% for the clustered XGBoost models. 
-	The local characterization model has an $R^2$ value of about 0.6.
-	The framework identifies local decision behavior and supports process monitoring and improvement.
+	Our two clustered models archive classification accuracies of 88.46\% and 94.82\%, respectively.
+	Local characterization models are constructed through a data generation approach to describe the relation and relative magnitude between failure probability and the variables.
+	The $R^2$ values are about 0.6 for both models.
+	Their significance and implications will be discussed.
 
 	% put to bottom
 	\vfill
@@ -1405,44 +1399,9 @@
 	雖然本研究是由接近決策邊界的樣本為基礎建立局部中心點，
 	但在中心點附近生成的局部格子點，
 	其預測模型輸出不一定落在決策邊界附近。
-	
-	此現象反映預測模型本身具有非線性特性。
-	對於 XGBoost 而言，
-	即使某一中心點的預測機率接近 0.5，
-	其附近樣本在高維特徵空間中經過小幅度的位移後，
-	所對應之預測模型輸出仍可能主要落在決策邊界的某一側。
-	換言之，
-	本研究所控制的是特徵空間中的局部距離，
-	而非模型輸出空間中的距離，
-	因此接近某一樣本點，
-	並不代表其預測模型輸出必然接近該點的預測值。
-	
-	綜合而言，
-	本研究的局部刻劃模型並不保證該局部範圍的預測模型輸出分布皆於 0.5 附近。
-	亦即，
-	局部格子點代入預測模型後的輸出未必落在決策邊界附近，
-	但局部刻劃模型仍可在該局部範圍內，
-	對預測模型輸出的變化趨勢提供一定程度的刻劃，
-	進而作為理解其局部決策行為的依據。
-
-	% \begin{table}[H]
-	% 	\centering
-	% 	\caption{各群的局部刻劃模型於群內與跨群套用下之評估結果}
-	% 	\vspace{0.15cm}
-	% 	\label{tab:跨群比較}
-	% 	\renewcommand{\arraystretch}{1}
-	% 	\setlength{\tabcolsep}{8pt}
-	% 	\begin{tabular}{c|ccc}
-	% 		\hline
-	% 		設置 & \textbf{$R^2$} & \textbf{$\rho$} \\
-	% 		\hline
-	% 		$f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^0_\mathbf{m})$ & 0.58  & 0.76 \\
-	% 		$f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^1_\mathbf{m})$ & 0.64  & 0.80 \\
-	% 		$f_1(\mathbf{x}^1_\mathbf{m})\text{ vs. }g_0(\mathbf{x}^1_\mathbf{m})$ & -4.15 & 0.22 \\
-	% 		$f_0(\mathbf{x}^0_\mathbf{m})\text{ vs. }g_1(\mathbf{x}^0_\mathbf{m})$ & -2.02 & 0.05 \\
-	% 		\hline
-	% 	\end{tabular}
-	% \end{table}
+	儘管如此，
+	局部刻劃模型仍可反映預測模型輸出的變化趨勢，
+	顯示其在局部範圍內仍具有一定刻劃能力。
 
 	\chapter{結論}
 	\section{總結}
@@ -1450,11 +1409,10 @@
 	本研究建立一套從資料前處理、
 	分群、
 	預測模型建構，
-	到局部刻劃模型擬合的分析流程。
+	到擬合局部刻劃模型的分析流程。
 	透過選取接近決策邊界的樣本來建立中心點，
 	並於中心點附近作為局部範圍內生成的格子點，
-	以降低外插風險，
-	再利用局部刻劃模型來近似預測模型在該範圍內的輸出函數，
+	再利用線性模型來刻劃預測模型在該範圍內的輸出函數，
 	以掌握模型的局部決策行為。
 	研究結果顯示：
 
@@ -1469,32 +1427,43 @@
 		先對資料進行分群，
 		有助於將原本具有異質性的整體資料加以區分，
 		使得後續在預測模型與局部刻劃模型的建立能在較一致的群內進行，
-		進而提升局部刻劃結果的穩定性與可解釋性。
-		
-		\item 
-		在各群內分別建立預測模型及其對應的局部刻劃模型後，
-		可觀察到各群的重要特徵及其影響大小與方向並不相同，
-		顯示不同子群在局部的決策行為上存在明顯差異。
-		此結果說明，
-		若僅以整體模型進行解釋，
-		容易忽略群與群之間在決策行為上的差異，
-		因而降低對模型局部決策行為的掌握程度。
 		因此，
-		分群後再進行局部刻劃，
-		較有助於呈現不同子群在局部範圍內的判斷依據。
+		分群不僅有助於提升預測分析的適切性，
+		也使後續以線性模型進行局部刻劃時，
+		較能直接且明白地聚焦於局部的決策行為，
+		進而提升局部刻劃結果的穩定性與可解釋性。
 
 		\item 
-		相較於僅關注模型預測的準確度之分析方式，
-		本研究所建立的局部刻劃模型，
-		可提供局部範圍內較明確的特徵影響資訊，
+		本研究進一步建立局部刻劃模型，
+		並嘗試描述局部範圍內自變數與模型輸出之間的關係，
+		此作法可提供局部範圍內較明確的特徵影響資訊，
 		使原本難以直接說明的預測結果，
 		轉化為由係數方向與大小所表示的決策描述，
 		有助於提升模型在半導體製程資料分析中的可解釋性與應用價值。
+		
 		此外，
-		局部格子點代入預測模型後的輸出未必集中於決策邊界附近，
-		顯示預測模型在局部範圍內仍可能具有明顯的非線性特徵；
-		然而，
-		局部刻劃模型仍可對該局部範圍內的主要變化趨勢提供一定程度的刻畫。
+		即使局部中心點是由接近決策邊界之樣本所建立，
+		其附近生成之局部格子點代入預測模型後的輸出，
+		仍未必集中於決策邊界附近。
+		此結果表示，
+		在高維特徵空間中彼此接近的資料點，
+		其模型輸出未必落在同樣範圍內。
+		對於 XGBoost 此類非線性預測模型而言，
+		即使自變數僅有小幅變動，
+		模型輸出亦可能產生明顯差異，
+		顯示預測模型的局部結構可能較原先假設更為複雜，
+		未必能由簡單線性方式充分刻劃。
+		雖然局部刻劃模型無法充分反映預測模型在局部範圍內較複雜的輸出結構，
+		但對該局部範圍內的主要變化趨勢，
+		仍可提供一定程度的刻劃。
+
+		整體而言，
+		此分析流程的重點不僅在於評估模型預測準確度或辨識重要變數，
+		亦在於進一步呈現局部範圍內自變數與模型輸出之間的對應關係。
+		相較於既有研究多著重於變數重要性的討論，
+		較少直接處理局部範圍內變數與模型輸出之關係，
+		本研究提供了另一種理解 XGBoost 此類預測模型局部決策行為的分析角度。
+
 	\end{enumerate}
 
 	\section{未來工作}
