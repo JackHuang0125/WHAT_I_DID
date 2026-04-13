@@ -1,4 +1,0 @@
-\beamer@sectionintoc {1}{介紹}{3}{0}{1}
-\beamer@sectionintoc {2}{目的}{11}{0}{2}
-\beamer@sectionintoc {3}{方法流程與結果討論}{15}{0}{3}
-\beamer@sectionintoc {4}{結論}{29}{0}{4}
