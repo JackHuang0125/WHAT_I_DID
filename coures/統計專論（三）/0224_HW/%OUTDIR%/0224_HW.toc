@@ -1,6 +1,0 @@
-\beamer@sectionintoc {1}{Weibull Distribution}{3}{0}{1}
-\beamer@subsectionintoc {1}{1}{PDF \& Parameters}{3}{0}{1}
-\beamer@subsectionintoc {1}{2}{Reliability \& Hazard}{4}{0}{1}
-\beamer@sectionintoc {2}{Poisson Distribution}{5}{0}{2}
-\beamer@subsectionintoc {2}{1}{PMF \& Properties}{5}{0}{2}
-\beamer@subsectionintoc {2}{2}{PMF \& Lambda}{6}{0}{2}
