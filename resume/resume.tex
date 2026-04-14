@@ -1,0 +1,189 @@
+\documentclass[12pt,aspectratio=169]{beamer}
+
+% 自訂字體的封包
+\usepackage{fontspec}
+
+% 導入圖形與表格的封包
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+
+% 提供進階數學環境與公式排版
+\usepackage{mathtools, amsmath, amsfonts}
+
+% 設定中文字體
+\usepackage{xeCJK}
+\setCJKmainfont{微軟正黑體}
+\setmainfont{Times New Roman}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+% 自訂字體顏色的封包
+\usepackage{color}
+
+% 圖表自動編號的封包
+\usepackage{caption}
+% \usepackage{siunitx}
+
+% 可指定表格排版的封包
+\usepackage{array}
+\usepackage{makecell}
+
+% 序列標號
+\usepackage{enumerate}
+
+% 設定自動編號
+\setbeamertemplate{caption}[numbered]
+
+% 自訂顏色
+\definecolor{MyBlue}{RGB}{33, 73, 120}
+\setbeamercolor{structure}{fg=MyBlue}
+\setbeamercolor{title}{fg=MyBlue}
+
+% (動畫)字會若隱若現的顯示
+\beamersetuncovermixins{\opaqueness<1->{45}}{\opaqueness<1->{95}}
+
+% 設定中文的標籤
+\renewcommand{\figurename}{圖}
+\renewcommand{\tablename}{表}
+
+% 排版形式 
+\mode<presentation>{
+% 主題風格
+\usetheme{Madrid}
+% 主題顏色
+\usecolortheme{Default}
+% 主題字體
+\usefonttheme{professionalfonts}
+% itemize 及 item 的形狀
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[square]
+
+% 調整外框形式的字體大小
+\setbeamerfont{headline}{size=\scriptsize}
+\setbeamerfont{footline}{size=\scriptsize}
+% 取消右下方的跳轉工具列
+\setbeamertemplate{navigation symbols}{} 
+% 自定義2：清除外框下緣但僅出頁碼
+\setbeamertemplate{footline}[page number] 
+% 設定頁面邊界
+\setbeamersize{text margin left=0.8cm, text margin right=0.8cm}
+\special{papersize=\the\paperwidth,\the\paperheight}
+\providecommand{\tabularnewline}{\\}
+}
+
+\title{黃丞暘｜面試簡報}
+\author{國立東華大學應用數學研究所}
+\institute{應徵職位：軟體研發 / 資料分析 / 演算法 相關職缺}
+\date{\today}
+
+\begin{document}
+
+% 封面
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% 目錄
+\begin{frame}{\textbf{目錄}}
+  \tableofcontents
+\end{frame}
+
+%---------------------------------
+\section{自介}
+
+\begin{frame}{\textbf{自介}}
+  \begin{itemize}
+    \item 學歷背景：國立東華大學應用數學研究所碩二，中山醫學大學心理學系
+    \item 具 5 年以上教學經驗，以及助教、專案助理、軟硬體維護實務經驗
+    \item 工作特質：具教學溝通、問題整理與專案協作能力
+  \end{itemize}
+\end{frame}
+
+%---------------------------------
+\section{技能}
+
+\begin{frame}{\textbf{技能}}
+  \begin{block}{硬實力}
+    \begin{itemize}
+      \item Python: 資料分析、統計檢定、機器學習、軟體研發（學習中）
+      \item R / SQL: 基本語法、PostgreSQL ( 學習中 )
+      \item AI 工具：ChatGPT 輔助程式開發與學習
+      \item 英文能力：多益 815（2025）
+      \item 其他：GitHub、Latex、文書處理
+    \end{itemize}
+  \end{block}
+  \begin{block}{軟實力}
+    \begin{itemize}
+      \item 溝通表達
+      \item 快速學習
+      \item 問題整理
+      \item 專案協作
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+%---------------------------------
+\section{經驗與成果}
+
+\begin{frame}{\textbf{經驗與成果}}
+  \begin{block}{教育大數據校內競賽（金牌）}
+    \begin{itemize}
+      \item 負責資料清理、資料分析與視覺化
+      \item 協助團隊規劃進度與整合分析結果
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{統計諮詢課程}
+    \begin{itemize}
+      \item 學習需求釐清、問題定義、Gage R\&R 與 SPC 基礎概念
+      \item 建立統計方法連結實務問題的初步能力
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{個人小型專案}
+    \begin{itemize}
+      \item 練習 Python 後端開發與 PostgreSQL 串接
+      \item 嘗試建置口袋式記帳系統，累積資料庫與系統整合經驗
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+%---------------------------------
+\section{論文研究}
+
+\begin{frame}{\textbf{論文研究}}
+  \begin{itemize}
+    \item 研究主題：半導體製程資料中的模型局部決策因子分析
+    \item 核心問題：資料複雜，機器學習模型的內部決策過程不易理解
+    \item 我的方法：以簡單線性迴歸刻劃模型，分析特定樣本附近的重要變數
+    \item 研究價值：協助工程人員理解複雜製程資料中的關鍵因子
+  \end{itemize}
+\end{frame}
+%---------------------------------
+\section{未來規劃}
+
+\begin{frame}{\textbf{未來規劃}}
+  \begin{block}{就職前準備}
+    \begin{itemize}
+      \item 持續以 AI 工具輔助學習 Python/Go 後端開發與 SQL 應用
+      \item 強化英文技術閱讀與基本溝通能力
+    \end{itemize}
+  \end{block}
+  \begin{block}{未來 3 年目標}
+    \begin{itemize}
+      \item 累積專案經驗，具備參與海外專案與外派支援的能力
+      \item 強化英文溝通能力，提升技術會議與工作交流的表達能力
+      \item 希望在工作中結合技術能力與國際合作經驗，拓展職涯發展方向
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \centering
+  \Huge{\textbf{謝謝聆聽}}
+\end{frame}
+
+\end{document}
