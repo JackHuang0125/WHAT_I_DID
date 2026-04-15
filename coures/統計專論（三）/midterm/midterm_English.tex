@@ -133,26 +133,26 @@
 \end{frame}
 
 %================================================
-\begin{frame}{Example: Sample Proportion}
-    目標: 估計 $\mu$,假設 $\quad X_1, \dots,X_n \sim (\mu, \sigma^2)$
+\begin{frame}{Example}
+    Goal: Estimate $\mu$, assuming\,$X_1, \dots,X_n \sim (\mu, \sigma^2)$
 
     \vspace{0.5em}
-    考慮兩個估計量: $\quad\hat{\mu}_1=\bar X, \quad\hat{\mu}_2=0.8\bar X$
+    Consider two estimators: $\quad\hat{\mu}_1=\bar X, \quad\hat{\mu}_2=0.8\bar X$
 
     \vspace{0.5em}
-    \textbf{第一個估計量: } $E(\hat{\mu}_1)=\mu, \quad\mathrm{Var}(\hat{\mu}_1)=\frac{\sigma^2}{n}, \quad\text{則\quad}\mathrm{MSE}(\hat{\mu}_1)=\frac{\sigma^2}{n}$
+    \textbf{First estimator:} $E(\hat{\mu}_1)=\mu, \quad\mathrm{Var}(\hat{\mu}_1)=\frac{\sigma^2}{n}, \quad\text{thus\quad}\mathrm{MSE}(\hat{\mu}_1)=\frac{\sigma^2}{n}$
 
     \vspace{0.5em}
-    \textbf{第二個估計量: }
+    \textbf{Second estimator:}
     \vspace{-0.8em}
     \begin{align*}
     &E(\hat{\mu}_2)=0.8\mu, \quad\mathrm{Var}(\hat{\mu}_2)=0.8^2\mathrm{Var}(\bar X)=0.64\frac{\sigma^2}{n}\\
-    &\text{且}\quad\mathrm{Bias}(\hat{\mu}_2, \mu)=0.8\mu-\mu=-0.2\mu, \\
-    &\text{則}\quad\mathrm{MSE}(\hat{\mu}_2)=0.64\frac{\sigma^2}{n}+(0.2\mu)^2
+    &\mathrm{Bias}(\hat{\mu}_2, \mu)=0.8\mu-\mu=-0.2\mu, \\
+    &\text{Therefore},\, \mathrm{MSE}(\hat{\mu}_2)=0.64\frac{\sigma^2}{n}+(0.2\mu)^2
     \end{align*}
 
-    \textbf{結論: }
-    biased estimator 仍可能因 variance 較小而有更低的 MSE
+    \textbf{Conclusion:}
+    A biased estimator may still have a smaller MSE if its variance is sufficiently reduced
 \end{frame}
 
 % %================================================
@@ -199,98 +199,98 @@
 % \end{frame}
 
 %================================================
-\begin{frame}{Consistency: 樣本變大時,估計會不會靠近真值?}
-    \textbf{定義: }
-    若估計量序列 $\hat{\theta}_n$ 滿足 $$\hat{\theta}_n \xrightarrow{P} \theta$$
-    則稱 $\hat{\theta}_n$ 是 $\theta$ 的 \textbf{consistent estimator}
+\begin{frame}{Consistency: Does the Estimator Approach the True Value as the Sample Size Increases?}
+    \textbf{Definition:}
+    If a sequence of estimators $\hat{\theta}_n$ satisfies $$\hat{\theta}_n \xrightarrow{P} \theta$$
+    then $\hat{\theta}_n$ is called a \textbf{consistent estimator} of $\theta$
 
     \vspace{0.8em}
-    也就是對任意 $\varepsilon>0$: $\qquad P(|\hat{\theta}_n-\theta|>\varepsilon)\to 0\quad (n\to\infty)$
+    That is, for any $\varepsilon>0$: $\qquad P(|\hat{\theta}_n-\theta|>\varepsilon)\to 0\quad (n\to\infty)$
 
     \vspace{0.8em}
-    \textbf{直觀意義: }
+    \textbf{Interpretation:}
     \begin{itemize}
-        \item 小樣本時,估計量可能誤差很大
-        \item 當樣本越來越多,估計量應該越來越穩定地貼近真值
+        \item With a small sample size, the estimator may have a large error
+        \item As the sample size increases, the estimator should become increasingly stable and closer to the true value
     \end{itemize}
 
     \vspace{0.8em}
-    \textbf{一個常見的充分條件: }
-    \vspace{-1.25em}
-    $$E(\hat{\theta}_n)\to \theta\quad\text{且}\quad\mathrm{Var}(\hat{\theta}_n)\to 0,$$
+    \textbf{A Common Sufficient Condition:}\quad $E(\hat{\theta}_n)\to \theta\quad\text{and}\quad\mathrm{Var}(\hat{\theta}_n)\to 0$
 % 則通常可推出 consistency。
 \end{frame}
 
 %================================================
-\begin{frame}{例子: Bernoulli}
-設 $$X_1, \dots,X_n \overset{iid}{\sim}\mathrm{Bernoulli}(\pi)$$
-其中 $$P(X_i=1)=\pi, \quad P(X_i=0)=1-\pi$$
-
-樣本比例 $\hat p=\bar X=\frac1n\sum_{i=1}^n X_i$
-
-\vspace{0.5em}
-\textbf{性質: }
-$$
-E(\hat p)=\pi
-$$
-所以 $\hat p$ 是 unbiased estimator。
-
-又因為
-$$
-\mathrm{Var}(X_i)=\pi(1-\pi),
-$$
-故
-$$
-\mathrm{Var}(\hat p)=\frac{\pi(1-\pi)}{n}\to 0
-$$
-因此
-$$
-\hat p \xrightarrow{P} \pi
-$$
-即 $\hat p$ 是 consistent。
+\begin{frame}{Example: Bernoulli Distribution}
+Suppose
+\vspace{-1.2em}
+$$X_1, \dots,X_n \overset{iid}{\sim}\mathrm{Bernoulli}(\pi)$$
+where $P(X_i=1)=\pi, \quad P(X_i=0)=1-\pi$
 
 \vspace{0.8em}
-\textbf{更進一步: }
+The sample proportion is $\hat p=\bar X=\frac1n\sum_{i=1}^n X_i$ and $E(\hat p)=\pi,$
+\,$\hat{p}$ is an unbiased estimator
+
+\vspace{0.8em}
+Also
+\vspace{-1.2em}
+$$\mathrm{Var}(X_i)=\pi(1-\pi)$$
+
+\vspace{1.2em}
+Hence
+\vspace{-1.4em}
+$$\mathrm{Var}(\hat p)=\frac{\pi(1-\pi)}{n}\to 0$$
+Therefore
+$$
+\hat{p}
+\overset{P}{\longrightarrow}
+\pi
+$$
+So $\hat{p}$ is consistent
+
+\vspace{0.8em}
+\textbf{Furthermore:}
 $$
 T=\sum_{i=1}^n X_i \sim \mathrm{Binomial}(n, \pi)
 $$
-而 $\hat p=T/n$ 是 $T$ 的 unbiased function,因此它是 $\pi$ 的 UMVUE。
+Since $\hat{p} = T/n$ is an unbiased function of $T$, it is the UMVUE of $\pi$
 \end{frame}
 
 %================================================
-\begin{frame}{從估計到 SPC: Phase I 的核心}
-    在 SPC 的 Phase I,我們需要先建立 in-control baseline
+\begin{frame}{From Estimation to SPC: The Core of Phase I}
+    In Phase I SPC, we first need to establish an in-control baseline
 
     \vspace{0.5em}
-    以 $\bar X$-chart 為例,若已知 $\mu_0,\, \sigma_0$,控制界限可寫成
+    For an $\bar{X}$-chart, if $\mu_0$ and $\sigma_0$ are known, the control limits are
     $$
     UCL=\mu_0+z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}},
     \quad
     LCL=\mu_0-z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}}
     $$
-    但實務上通常未知,因此改用估計量: $\hat{\mu}_0,\, \hat{\sigma}_0$
-
+    However, in practice these quantities are usually unknown, so we replace them with estimators $\hat{\mu}_0$ and $\hat{\sigma}_0$.
+    
     \vspace{0.5em}
-    則實際的控制界限為
+    Thus, the actual control limits become
     $$
     \widehat{UCL}=\hat{\mu}_0+z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}},
     \quad
     \widehat{LCL}=\hat{\mu}_0-z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}}
     $$
-    \textbf{考慮問題: }
+    \textbf{Potential issues:}
     \begin{itemize}
-        \item 若 $\hat{\mu}_0$ 有偏,則中心線位置偏移
-        \item 若 $\hat{\sigma}_0$ 變異大,則界限不穩定
-        \item 若估計不一致,則無法建立可靠基準
+        \item If $\hat{\mu}_0$ is biased, the center line shifts.
+        \item If $\hat{\sigma}_0$ has large variance, the control limits become unstable.
+        \item If the estimators are not consistent, we cannot establish a reliable baseline.
     \end{itemize}
 \end{frame}
 
 %================================================
-\begin{frame}{估計量品質如何影響監控: 以 p-chart 為例}
-    若每批樣本大小為 $n$,不良率為 $\pi$,則 $$\hat p=\frac{X}{n}, \quad X\sim\mathrm{Binomial}(n, \pi)$$
-    在 Phase I 中,通常用 $\bar p$ 作為 $\pi_0$ 的估計
+\begin{frame}{How Estimator Quality Affects Monitoring: Example of a p-Chart}
+    Suppose each subgroup has sample size $n$, and the defect rate is $\pi$
+    Then $$\hat p=\frac{X}{n}, \quad X\sim\mathrm{Binomial}(n, \pi)$$
+    In Phase I, we usually use $\bar{p}$ to estimate $\pi_0$ 
 
-    對應的 p-chart 控制界限常寫為
+    The control limits of the p-chart are often written as
+
     $$
     UCL=\bar p + z\sqrt{\frac{\bar p(1-\bar p)}{n}},
     \quad
@@ -333,30 +333,32 @@ $$
 \end{frame}
 
 \begin{frame}
-    \centering\Huge{\textbf{謝謝聆聽}}
-\end{frame}
-%================================================
-\begin{frame}{備用頁: 可能 Q\&A}
-\textbf{Q1. 為什麼 unbiased 不一定最好?}
-
-因為 unbiased 只表示平均不偏,但若 variance 很大,估計仍可能很不穩。  
-因此更完整的衡量是
-$$
-\mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2
-$$
-
-\vspace{0.8em}
-\textbf{Q2. consistency 和 unbiased 有什麼差別?}
-
-\begin{itemize}
-    \item unbiased: 有限樣本下的平均正確性
-    \item consistency: 大樣本下是否收斂到真值
-\end{itemize}
-
-\vspace{0.8em}
-\textbf{Q3. 這和 SPC 最直接的連結是什麼?}
-
-Phase I 必須估計 in-control baseline；估計品質會直接影響 control limits,進而影響監控表現。
+    \centering\Huge{\textbf{Thank You}}
 \end{frame}
 
 \end{document}
+
+%================================================
+% \begin{frame}{備用頁: 可能 Q\&A}
+% \textbf{Q1. 為什麼 unbiased 不一定最好?}
+
+% 因為 unbiased 只表示平均不偏,但若 variance 很大,估計仍可能很不穩。  
+% 因此更完整的衡量是
+% $$
+% \mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2
+% $$
+
+% \vspace{0.8em}
+% \textbf{Q2. consistency 和 unbiased 有什麼差別?}
+
+% \begin{itemize}
+%     \item unbiased: 有限樣本下的平均正確性
+%     \item consistency: 大樣本下是否收斂到真值
+% \end{itemize}
+
+% \vspace{0.8em}
+% \textbf{Q3. 這和 SPC 最直接的連結是什麼?}
+
+% Phase I 必須估計 in-control baseline；估計品質會直接影響 control limits,進而影響監控表現。
+% \end{frame}
+
