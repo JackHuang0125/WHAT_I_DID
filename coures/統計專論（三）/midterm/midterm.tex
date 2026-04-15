@@ -1,6 +1,12 @@
 \documentclass[aspectratio=169,12pt]{beamer}
 
-\usepackage[UTF8]{ctex}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{微軟正黑體}
+\setmainfont{Times New Roman}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
 \usepackage{amsmath, amssymb, bm}
 \usepackage{booktabs}
 \usepackage{array}
@@ -9,9 +15,9 @@
 \usetheme{Madrid}
 \usecolortheme{default}
 
-\title{Estimation: Bias, MSE, Consistency\\從估計量品質到 SPC 基準建立}
+\title{Topic 6: Estimation}
 \author{黃丞暘}
-\institute{統計專論（三）期中報告}
+\institute{統計專論 (III) 期中報告}
 \date{2026/04/21}
 
 \begin{document}
@@ -22,470 +28,324 @@
 \end{frame}
 
 %================================================
-\begin{frame}{1. 報告目標與主線}
-\textbf{主題：} Estimation --- Bias, MSE, Consistency
-
-\vspace{0.5em}
-\textbf{核心問題：}
-\begin{itemize}
-    \item 當母體參數未知時，我們如何用樣本去估計？
-    \item 什麼叫做一個「好的估計量」？
-    \item 為什麼估計量的品質會直接影響 SPC 的監控效果？
-\end{itemize}
-
-\vspace{0.5em}
-\textbf{本報告主線：}
-\[
-\text{Estimator}
-\;\Longrightarrow\;
-\text{Bias / Variance / MSE}
-\;\Longrightarrow\;
-\text{Consistency}
-\;\Longrightarrow\;
-\text{Phase I estimation in SPC}
-\]
-
-\vspace{0.8em}
-\textbf{結構：}
-\begin{enumerate}
-    \item 理論定義
-    \item 數學推導
-    \item 統計解釋
-    \item SPC 應用
-\end{enumerate}
-\end{frame}
-
-%================================================
-\begin{frame}{2. 為什麼「估計」在 SPC 中重要？}
-在 SPC 中，製程的 in-control 狀態通常以基準參數描述，例如：
-\[
-\mu_0,\quad \sigma_0
-\]
-
-但實務上這些量通常 \textbf{未知}，必須由 Phase I 歷史資料估計。
-
-\vspace{0.8em}
-\textbf{關鍵事實：}
-\begin{itemize}
-    \item 若 \(\hat{\mu}_0\) 估錯，中心線會偏移
-    \item 若 \(\hat{\sigma}_0\) 估錯，控制界限會過寬或過窄
-    \item 界限錯誤會導致：
+\begin{frame}{核心問題}
+    \vspace{0.5em}
     \begin{itemize}
-        \item false alarm 過多
-        \item 真正 shift 時偵測太慢
+        \item 什麼叫做一個「好的估計量」？
+        \item 當母體參數未知時，我們如何用樣本去估計？
+        \item 為什麼估計量的品質會直接影響 SPC 的監控效果？
     \end{itemize}
-\end{itemize}
-
-\vspace{0.8em}
-因此，SPC 不是只要會畫圖，而是先要回答：
-
-\[
-\text{How good is the estimator?}
-\]
+    \vspace{0.8em}
+    \textbf{結構：}
+    \begin{enumerate}
+        \item 理論定義
+        \item 數學推導
+        \item 統計解釋
+        \item SPC 應用
+    \end{enumerate}
 \end{frame}
 
 %================================================
-\begin{frame}{3. 估計量與抽樣分配}
-設
-\[
-X_1,\dots,X_n \overset{iid}{\sim} F_\theta
-\]
-其中 \(\theta\) 是未知參數。
+\begin{frame}{為什麼「估計」在 SPC 中重要？}
+    在 SPC 中，製程的 in-control 狀態通常以基準參數描述，例如：$\mu_0,\, \sigma_0$
 
-\vspace{0.5em}
-\textbf{估計量（estimator）}是樣本的函數：
-\[
-\hat{\theta}=T(X_1,\dots,X_n)
-\]
+    \vspace{0.8em}
+    但實務上這些量通常 \textbf{未知}，必須由 Phase I 歷史資料估計
 
-\vspace{0.8em}
-因為 \(X_1,\dots,X_n\) 是隨機的，所以 \(\hat{\theta}\) 也是隨機變數。  
-因此我們不能只問「算出多少」，而要問：
+    \vspace{0.8em}
+    \textbf{關鍵：}
+        \begin{itemize}
+            \item 若 $\hat{\mu}_0$ 估錯，中心線會偏移
+            \item 若 $\hat{\sigma}_0$ 估錯，控制界限會過寬或過窄
+            \item 界限錯誤會導致：
+            \begin{itemize}
+                \item false alarm 過多
+                \item 異常偵測延遲
+            \end{itemize}
+        \end{itemize}
 
-\begin{itemize}
-    \item \(E(\hat{\theta})\) 是多少？
-    \item \(\mathrm{Var}(\hat{\theta})\) 是多少？
-    \item \(\hat{\theta}\) 會不會隨 \(n\to\infty\) 趨近真值 \(\theta\)？
-\end{itemize}
+    因此，SPC 不是只要會畫圖，而是先要回答：
 
-\vspace{0.8em}
-\textbf{這三個問題對應到：}
-\[
-\text{Bias},\qquad \text{MSE},\qquad \text{Consistency}
-\]
+    \uncover<2->{
+    {\centering
+    \Huge\textbf{How good is the estimator?}\par}
+    }
 \end{frame}
 
 %================================================
-\begin{frame}{4. Bias：估計量是否系統性偏離真值？}
-\textbf{定義：}
-\[
-\mathrm{Bias}(\hat{\theta},\theta)=E(\hat{\theta})-\theta
-\]
+\begin{frame}{估計量與抽樣分配}
+    設 $$X_1, \dots,X_n \overset{iid}{\sim} F_\theta$$ 其中 $\theta$ 是未知參數
 
-\vspace{0.5em}
-若對所有 \(\theta\) 都有
-\[
-E(\hat{\theta})=\theta,
-\]
-則稱 \(\hat{\theta}\) 為 \textbf{unbiased estimator}。
-
-\vspace{0.8em}
-\textbf{解釋：}
-\begin{itemize}
-    \item Bias 衡量的是「平均而言估太高還是估太低」
-    \item Bias \(>0\)：平均高估
-    \item Bias \(<0\)：平均低估
-    \item Bias \(=0\)：沒有系統性偏差
-\end{itemize}
-
-\vspace{0.8em}
-\textbf{例：樣本平均估計母體平均}
-若
-\[
-E(X_i)=\mu,
-\quad
-\bar X=\frac1n\sum_{i=1}^n X_i,
-\]
-則
-\[
-E(\bar X)=\mu
-\]
-所以 \(\bar X\) 是 \(\mu\) 的 unbiased estimator。
+    \vspace{0.5em}
+    \textbf{估計量（estimator）}是樣本的函數：
+    $$\hat{\theta}=T(X_1, \dots,X_n)$$ 因為 $X_1, \dots,X_n$ 是隨機的，
+    所以 $\hat{\theta}$ 也是隨機變數。
+    因此我們不能只問「算出多少」，
+    而是要問：
+        \begin{itemize}
+            \item $E(\hat{\theta})$ 是多少？
+            \item $\mathrm{Var}(\hat{\theta})$ 是多少？
+            \item $\hat{\theta}$ 會不會隨 $n\to\infty$ 趨近真值 $\theta$？
+        \end{itemize}
+    % \vspace{0.8em}
+    % \textbf{這三個問題對應到：}
+    % $$
+    % \text{Bias}, \quad \text{MSE}, \quad \text{Consistency}
+    % $$
 \end{frame}
 
 %================================================
-\begin{frame}{5. MSE：只看 unbiased 還不夠}
-除了偏差，估計量還有波動程度。
+\begin{frame}{Bias：估計量是否系統性偏離真值？}
+    \textbf{定義：}
+    $$\mathrm{Bias}(\hat{\theta}, \theta)=E(\hat{\theta})-\theta$$ % 長期平均誤差
+    若對所有 $\theta$ 都有 
+    $$E(\hat{\theta})=\theta$$ % 若長期平均誤差不偏, 則是unbiased
+    則稱 $\hat{\theta}$ 為 \textbf{unbiased estimator}
 
-\vspace{0.5em}
-\textbf{Mean Squared Error 定義：}
-\[
-\mathrm{MSE}(\hat{\theta},\theta)=E\big[(\hat{\theta}-\theta)^2\big]
-\]
-
-展開可得：
-\[
-\mathrm{MSE}(\hat{\theta},\theta)
-=
-\mathrm{Var}(\hat{\theta})
-+
-\mathrm{Bias}^2(\hat{\theta},\theta)
-\]
-
-\vspace{0.8em}
-\textbf{推導：}
-\[
-\hat{\theta}-\theta
-=
-(\hat{\theta}-E\hat{\theta})+(E\hat{\theta}-\theta)
-\]
-所以
-\[
-E[(\hat{\theta}-\theta)^2]
-=
-E[(\hat{\theta}-E\hat{\theta})^2]
-+
-(E\hat{\theta}-\theta)^2
-\]
-因為交叉項期望為 0，因此
-\[
-\boxed{
-\mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2
-}
-\]
-
-\vspace{0.8em}
-\textbf{意義：}
-一個估計量就算 unbiased，若 variance 很大，仍然可能不好。
+    \vspace{0.8em}
+    \textbf{解釋：}Bias 衡量的是「平均而言估太高還是估太低」
+                    % Bias $>0$：平均高估
+                    % Bias $<0$：平均低估
+                    % Bias $=0$：沒有系統性偏差
+    
+    \vspace{0.8em}
+    \textbf{例：}
+    樣本平均估計母體平均若 $E(X_i)=\mu, \quad\bar X=\frac1n\sum_{i=1}^n X_i, \quad$則$E(\bar X)=\mu$
+    
+    \vspace{0.8em}
+    所以 $\bar X$ 是 $\mu$ 的 unbiased estimator
 \end{frame}
 
 %================================================
-\begin{frame}{6. Bias--Variance Tradeoff：簡單例子}
-目標：估計 \(\mu\)，假設
-\[
-X_1,\dots,X_n \sim (\mu,\sigma^2)
-\]
-
-考慮兩個估計量：
-\[
-\hat{\mu}_1=\bar X,
-\qquad
-\hat{\mu}_2=0.8\bar X
-\]
-
-\vspace{0.5em}
-\textbf{第一個估計量：}
-\[
-E(\hat{\mu}_1)=\mu,\qquad
-\mathrm{Var}(\hat{\mu}_1)=\frac{\sigma^2}{n}
-\]
-所以
-\[
-\mathrm{MSE}(\hat{\mu}_1)=\frac{\sigma^2}{n}
-\]
-
-\vspace{0.5em}
-\textbf{第二個估計量：}
-\[
-E(\hat{\mu}_2)=0.8\mu
-\]
-所以
-\[
-\mathrm{Bias}(\hat{\mu}_2,\mu)=0.8\mu-\mu=-0.2\mu
-\]
-且
-\[
-\mathrm{Var}(\hat{\mu}_2)=0.8^2\mathrm{Var}(\bar X)=0.64\frac{\sigma^2}{n}
-\]
-因此
-\[
-\mathrm{MSE}(\hat{\mu}_2)=0.64\frac{\sigma^2}{n}+(0.2\mu)^2
-\]
-
-\vspace{0.5em}
-\textbf{結論：}
-biased estimator 仍可能因 variance 較小而有更低的 MSE。
+\begin{frame}{MSE：只看 unbiased 還不夠}
+    \vspace{-1em}
+    \textbf{Mean Squared Error 定義：}
+    \vspace{-0.8em}
+    $$\mathrm{MSE}(\hat{\theta}, \theta)=E\big[(\hat{\theta}-\theta)^2\big]$$
+    % 單次估計誤差
+    \textbf{推導：}
+    $$\hat{\theta}-\theta=(\hat{\theta}-E\hat{\theta})+(E\hat{\theta}-\theta)$$
+    取期望值後，因為交叉項期望為 0，所以
+    \vspace{-0.8em}
+    $$E[(\hat{\theta}-\theta)^2]=E[(\hat{\theta}-E\hat{\theta})^2]+(E\hat{\theta}-\theta)^2$$
+    因此
+    % \vspace{-0.5em}
+    $$\boxed{\mathrm{MSE}(\hat{\theta}, \theta)=\mathrm{Var}(\hat{\theta})+\mathrm{Bias}^2(\hat{\theta}, \theta)}$$
+    \textbf{意義：}一個估計量就算是 unbiased，若 variance 很大，仍然不是很好的估計量
 \end{frame}
 
 %================================================
-\begin{frame}{7. 數值例子：biased estimator 可能更好}
-令
-\[
-\sigma^2=4,\qquad n=100,\qquad \mu=0.2
-\]
+\begin{frame}{例子}
+    目標：估計 $\mu$，假設 $\quad X_1, \dots,X_n \sim (\mu, \sigma^2)$
 
-則
-\[
-\mathrm{MSE}(\hat{\mu}_1)=\frac{4}{100}=0.04
-\]
+    \vspace{0.5em}
+    考慮兩個估計量：$\quad\hat{\mu}_1=\bar X, \quad\hat{\mu}_2=0.8\bar X$
 
-而
-\[
-\mathrm{MSE}(\hat{\mu}_2)
-=
-0.64\cdot \frac{4}{100} + (0.2\times 0.2)^2
-\]
-\[
-=
-0.0256+0.0016=0.0272
-\]
+    \vspace{0.5em}
+    \textbf{第一個估計量：} $E(\hat{\mu}_1)=\mu, \quad\mathrm{Var}(\hat{\mu}_1)=\frac{\sigma^2}{n}, \quad\text{則\quad}\mathrm{MSE}(\hat{\mu}_1)=\frac{\sigma^2}{n}$
 
-因此
-\[
-0.0272<0.04
-\]
+    \vspace{0.5em}
+    \textbf{第二個估計量：}
+    \vspace{-0.8em}
+    \begin{align*}
+    &E(\hat{\mu}_2)=0.8\mu, \quad\mathrm{Var}(\hat{\mu}_2)=0.8^2\mathrm{Var}(\bar X)=0.64\frac{\sigma^2}{n}\\
+    &\text{且}\quad\mathrm{Bias}(\hat{\mu}_2, \mu)=0.8\mu-\mu=-0.2\mu, \\
+    &\text{則}\quad\mathrm{MSE}(\hat{\mu}_2)=0.64\frac{\sigma^2}{n}+(0.2\mu)^2
+    \end{align*}
 
-\vspace{0.8em}
-\textbf{統計解釋：}
-\begin{itemize}
-    \item \(\hat{\mu}_1=\bar X\) 沒有 bias，但 variance 較大
-    \item \(\hat{\mu}_2=0.8\bar X\) 有一點 bias，但 variance 明顯下降
-    \item 當 bias 很小、variance 減少很多時，MSE 反而更小
-\end{itemize}
+    \textbf{結論：}
+    biased estimator 仍可能因 variance 較小而有更低的 MSE
+\end{frame}
 
-\vspace{0.8em}
-\textbf{結論：}
-\[
-\text{「unbiased」不是唯一標準，MSE 才是更完整的品質衡量。}
-\]
+% %================================================
+% \begin{frame}{Numerical example：biased estimator 可能更好}
+% 令
+% $$
+% \sigma^2=4, \quad n=100, \quad \mu=0.2
+% $$
+
+% 則
+% $$
+% \mathrm{MSE}(\hat{\mu}_1)=\frac{4}{100}=0.04
+% $$
+
+% 而
+% $$
+% \mathrm{MSE}(\hat{\mu}_2)
+% =
+% 0.64\cdot \frac{4}{100} + (0.2\times 0.2)^2
+% $$
+% $$
+% =
+% 0.0256+0.0016=0.0272
+% $$
+
+% 因此
+% $$
+% 0.0272<0.04
+% $$
+
+% \vspace{0.8em}
+% \textbf{統計解釋：}
+% \begin{itemize}
+%     \item $\hat{\mu}_1=\bar X$ 沒有 bias，但 variance 較大
+%     \item $\hat{\mu}_2=0.8\bar X$ 有一點 bias，但 variance 明顯下降
+%     \item 當 bias 很小、variance 減少很多時，MSE 反而更小
+% \end{itemize}
+
+% \vspace{0.8em}
+% \textbf{結論：}
+% $$
+% \text{「unbiased」不是唯一標準，MSE 才是更完整的品質衡量。}
+% $$
+% \end{frame}
+
+%================================================
+\begin{frame}{Consistency：樣本變大時，估計會不會靠近真值？}
+    \textbf{定義：}
+    若估計量序列 $\hat{\theta}_n$ 滿足 $$\hat{\theta}_n \xrightarrow{P} \theta$$
+    則稱 $\hat{\theta}_n$ 是 $\theta$ 的 \textbf{consistent estimator}
+
+    \vspace{0.8em}
+    也就是對任意 $\varepsilon>0$：$\qquad P(|\hat{\theta}_n-\theta|>\varepsilon)\to 0\quad (n\to\infty)$
+
+    \vspace{0.8em}
+    \textbf{直觀意義：}
+    \begin{itemize}
+        \item 小樣本時，估計量可能誤差很大
+        \item 當樣本越來越多，估計量應該越來越穩定地貼近真值
+    \end{itemize}
+
+    \vspace{0.8em}
+    \textbf{一個常見的充分條件：}
+    \vspace{-1.25em}
+    $$E(\hat{\theta}_n)\to \theta\quad\text{且}\quad\mathrm{Var}(\hat{\theta}_n)\to 0,$$
+% 則通常可推出 consistency。
 \end{frame}
 
 %================================================
-\begin{frame}{8. Consistency：樣本變大時，估計會不會靠近真值？}
-\textbf{定義：}
-若估計量序列 \(\hat{\theta}_n\) 滿足
-\[
-\hat{\theta}_n \xrightarrow{P} \theta,
-\]
-則稱 \(\hat{\theta}_n\) 是 \(\theta\) 的 \textbf{consistent estimator}。
+\begin{frame}{例子：Bernoulli}
+設 $$X_1, \dots,X_n \overset{iid}{\sim}\mathrm{Bernoulli}(\pi)$$
+其中 $$P(X_i=1)=\pi, \quad P(X_i=0)=1-\pi$$
 
-\vspace{0.8em}
-也就是對任意 \(\varepsilon>0\)，
-\[
-P(|\hat{\theta}_n-\theta|>\varepsilon)\to 0
-\quad (n\to\infty)
-\]
-
-\vspace{0.8em}
-\textbf{直觀意義：}
-\begin{itemize}
-    \item 小樣本時，估計量可能誤差很大
-    \item 當樣本越來越多，估計量應該越來越穩定地貼近真值
-\end{itemize}
-
-\vspace{0.8em}
-\textbf{一個常見充分條件：}
-若
-\[
-E(\hat{\theta}_n)\to \theta
-\quad\text{且}\quad
-\mathrm{Var}(\hat{\theta}_n)\to 0,
-\]
-則通常可推出 consistency。
-\end{frame}
-
-%================================================
-\begin{frame}{9. Bernoulli 比例估計：unbiased、UMVUE、consistent}
-設
-\[
-X_1,\dots,X_n \overset{iid}{\sim}\mathrm{Bernoulli}(\pi)
-\]
-其中
-\[
-P(X_i=1)=\pi,\qquad P(X_i=0)=1-\pi
-\]
-
-考慮樣本比例
-\[
-\hat p=\bar X=\frac1n\sum_{i=1}^n X_i
-\]
+樣本比例 $\hat p=\bar X=\frac1n\sum_{i=1}^n X_i$
 
 \vspace{0.5em}
 \textbf{性質：}
-\[
+$$
 E(\hat p)=\pi
-\]
-所以 \(\hat p\) 是 unbiased estimator。
+$$
+所以 $\hat p$ 是 unbiased estimator。
 
 又因為
-\[
+$$
 \mathrm{Var}(X_i)=\pi(1-\pi),
-\]
+$$
 故
-\[
+$$
 \mathrm{Var}(\hat p)=\frac{\pi(1-\pi)}{n}\to 0
-\]
+$$
 因此
-\[
+$$
 \hat p \xrightarrow{P} \pi
-\]
-即 \(\hat p\) 是 consistent。
+$$
+即 $\hat p$ 是 consistent。
 
 \vspace{0.8em}
 \textbf{更進一步：}
-\[
-T=\sum_{i=1}^n X_i \sim \mathrm{Binomial}(n,\pi)
-\]
-而 \(\hat p=T/n\) 是 \(T\) 的 unbiased function，因此它是 \(\pi\) 的 UMVUE。
+$$
+T=\sum_{i=1}^n X_i \sim \mathrm{Binomial}(n, \pi)
+$$
+而 $\hat p=T/n$ 是 $T$ 的 unbiased function，因此它是 $\pi$ 的 UMVUE。
 \end{frame}
 
 %================================================
-\begin{frame}{10. 從估計走到 SPC：Phase I 的核心}
-在 SPC 的 Phase I，我們需要先建立 in-control baseline。
+\begin{frame}{從估計到 SPC：Phase I 的核心}
+    在 SPC 的 Phase I，我們需要先建立 in-control baseline
 
-\vspace{0.5em}
-以 \(\bar X\)-chart 為例，若已知 \(\mu_0,\sigma_0\)，控制界限可寫成
-\[
-UCL=\mu_0+z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}},
-\qquad
-CL=\mu_0,
-\qquad
-LCL=\mu_0-z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}}
-\]
+    \vspace{0.5em}
+    以 $\bar X$-chart 為例，若已知 $\mu_0,\, \sigma_0$，控制界限可寫成
+    $$
+    UCL=\mu_0+z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}},
+    \quad
+    LCL=\mu_0-z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}}
+    $$
+    但實務上通常未知，因此改用估計量：$\hat{\mu}_0,\, \hat{\sigma}_0$
 
-但實務上通常未知，因此改用估計量：
-\[
-\hat{\mu}_0,\qquad \hat{\sigma}_0
-\]
-
-則實際界限變成
-\[
-\widehat{UCL}=\hat{\mu}_0+z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}},
-\qquad
-\widehat{LCL}=\hat{\mu}_0-z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}}
-\]
-
-\vspace{0.8em}
-\textbf{問題：}
-\begin{itemize}
-    \item 若 \(\hat{\mu}_0\) 有偏，中心線位置會錯
-    \item 若 \(\hat{\sigma}_0\) 變異大，界限不穩定
-    \item 若估計不一致，樣本再多也無法建立可靠基準
-\end{itemize}
+    \vspace{0.5em}
+    則實際的控制界限為
+    $$
+    \widehat{UCL}=\hat{\mu}_0+z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}},
+    \quad
+    \widehat{LCL}=\hat{\mu}_0-z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}}
+    $$
+    \textbf{考慮問題：}
+    \begin{itemize}
+        \item 若 $\hat{\mu}_0$ 有偏，則中心線位置偏移
+        \item 若 $\hat{\sigma}_0$ 變異大，則界限不穩定
+        \item 若估計不一致，則無法建立可靠基準
+    \end{itemize}
 \end{frame}
 
 %================================================
-\begin{frame}{11. p-chart 的例子：估計量品質如何影響監控}
-對屬性資料，若每批樣本大小為 \(n\)，不良率為 \(\pi\)，則
-\[
-\hat p=\frac{X}{n},\qquad X\sim\mathrm{Binomial}(n,\pi)
-\]
+\begin{frame}{估計量品質如何影響監控：以 p-chart 為例}
+    若每批樣本大小為 $n$，不良率為 $\pi$，則 $$\hat p=\frac{X}{n}, \quad X\sim\mathrm{Binomial}(n, \pi)$$
+    在 Phase I 中，通常用 $\bar p$ 作為 $\pi_0$ 的估計
 
-在 Phase I 中，通常用
-\[
-\bar p
-\]
-作為 \(\pi_0\) 的估計。
+    對應的 p-chart 控制界限常寫為
+    $$
+    UCL=\bar p + z\sqrt{\frac{\bar p(1-\bar p)}{n}},
+    \quad
+    LCL=\bar p - z\sqrt{\frac{\bar p(1-\bar p)}{n}}
+    $$
 
-對應的 p-chart 控制界限常寫為
-\[
-UCL=\bar p + z\sqrt{\frac{\bar p(1-\bar p)}{n}},
-\qquad
-LCL=\bar p - z\sqrt{\frac{\bar p(1-\bar p)}{n}}
-\]
-
-\vspace{0.8em}
-\textbf{這裡的統計邏輯是：}
-\begin{enumerate}
-    \item 先用樣本估計 \(\pi_0\)
-    \item 再用估計的變異建立控制界限
-    \item 最後用新資料判定是否 out-of-control
-\end{enumerate}
-
-\vspace{0.8em}
-\textbf{因此：}
-\[
-\text{Estimation quality}
-\;\Longrightarrow\;
-\text{Control limit quality}
-\;\Longrightarrow\;
-\text{Monitoring quality}
-\]
+    % \vspace{0.8em}
+    % \textbf{這裡的統計邏輯是：}
+    % \begin{enumerate}
+    %     \item 先用樣本估計 $\pi_0$
+    %     \item 再用估計的變異建立控制界限
+    %     \item 最後判定新資料是否 out-of-control
+    % \end{enumerate}
 \end{frame}
 
 %================================================
-\begin{frame}{12. 結論}
-\textbf{本報告的核心結論有三個：}
+\begin{frame}{結論}
+    \vspace{0.2cm}
+    \textbf{(1) 一個好的估計量不能只看 unbiased}
+    \begin{itemize}
+        \item $\mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2$
+    \end{itemize}
+    % estimator 的品質來自偏差與波動的共同作用。
 
-\vspace{0.5em}
-\textbf{(1) 一個好的估計量不能只看 unbiased}
-\[
-\mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2
-\]
-因此 estimator 的品質來自偏差與波動的共同作用。
+    \vspace{0.8em}
+    \textbf{(2) consistency 是長期可靠性的要求}
+    \begin{itemize}
+        \item $\hat{\theta}_n \xrightarrow{P} \theta$
+    \end{itemize}
+    % 表示樣本變大後，估計量應穩定逼近真值。
 
-\vspace{0.8em}
-\textbf{(2) consistency 是長期可靠性的要求}
-\[
-\hat{\theta}_n \xrightarrow{P} \theta
-\]
-表示樣本變大後，估計量應穩定逼近真值。
-
-\vspace{0.8em}
-\textbf{(3) 在 SPC 中，估計不是前置小步驟，而是監控的基礎}
-\begin{itemize}
-    \item Phase I 要估 \(\mu_0,\sigma_0\) 或 \(\pi_0\)
-    \item 這些估計決定 control limits
-    \item control limits 又決定 false alarm 與 detection power
-\end{itemize}
-
-\vspace{0.8em}
-\[
-\boxed{
-\text{若估計基準不可靠，則整個 SPC 監控系統都不可靠。}
-}
-\]
+    \vspace{0.8em}
+    \textbf{(3) 在 SPC 中，估計是監控的基礎}
+    \begin{itemize}
+        \item Phase I 要估 $\mu_0, \sigma_0$，用來決定 control limits
+        \item control limits 又決定 false alarm 與 detection power
+    \end{itemize}
+    \vspace{0.8em}
+    \uncover<2->{$$\boxed{\text{若估計基準不可靠，則整個 SPC 監控系統都不可靠。}}$$}
 \end{frame}
 
+\begin{frame}
+    \centering\Huge{\textbf{謝謝聆聽}}
+\end{frame}
 %================================================
 \begin{frame}{備用頁：可能 Q\&A}
 \textbf{Q1. 為什麼 unbiased 不一定最好？}
 
 因為 unbiased 只表示平均不偏，但若 variance 很大，估計仍可能很不穩。  
 因此更完整的衡量是
-\[
+$$
 \mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2
-\]
+$$
 
 \vspace{0.8em}
 \textbf{Q2. consistency 和 unbiased 有什麼差別？}

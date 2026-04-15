@@ -1,10 +1,14 @@
 # Fdb version 4
-["xdvipdfmx"] 1761801148.4378 "Midterm.xdv" "Midterm.pdf" "Midterm" 1761801148.86746 0
-  "Midterm.xdv" 1761801148 39384 ee716e51645808d3ec16babb1d9be9be "xelatex"
+["xdvipdfmx"] 1776227814.47969 "Midterm.xdv" "Midterm.pdf" "Midterm" 1776227814.99853 0
+  "Midterm.xdv" 1776227814 39428 c1fb4a39b0dc61e4bf4d4082700b95b1 "xelatex"
   (generated)
   "Midterm.pdf"
   (rewritten before read)
-["xelatex"] 1761801146.69354 "c:/Users/No/Documents/GitHub/psychic-spoon/統計諮詢/Midterm/Midterm.tex" "Midterm.xdv" "Midterm" 1761801148.86223 0
+["xelatex"] 1776227812.71656 "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（二）/midterm/tex/Midterm.tex" "Midterm.xdv" "Midterm" 1776227814.99279 0
+  "../figures/Q.png" 1772001725 46112 45c2631e67a48409be31dce374771ca6 ""
+  "../figures/boxplot.png" 1772001725 13064 2890cd58f63944bfa655a88b33908313 ""
+  "../figures/result2.png" 1772001725 23483 c0a5ed5f24270a056163b944ae7db426 ""
+  "../figures/流程.png" 1772001725 19015 4080b3126d706b8ce1f8b20778905dc0 ""
   "C:/Users/No/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758243793 27011562 5a194f1f729f3c84b35029ea57eb0ca7 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -216,15 +220,11 @@
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "Midterm.aux" 1761801148 1534 73b05aa7ae1d963406a1d379d65407e6 "xelatex"
-  "Midterm.nav" 1761801148 835 b5c49ba28d3d2049d1773682fb2767a8 "xelatex"
-  "Midterm.out" 1761801147 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
-  "Midterm.tex" 1761801032 4895 9738f00995ba672c4b5c42a1b241bf80 ""
-  "Q.png" 1761701227 46112 45c2631e67a48409be31dce374771ca6 ""
-  "boxplot.png" 1761801145 13064 2890cd58f63944bfa655a88b33908313 ""
-  "c:/Users/No/Documents/GitHub/psychic-spoon/統計諮詢/Midterm/Midterm.tex" 1761801032 4895 9738f00995ba672c4b5c42a1b241bf80 ""
-  "result2.png" 1761800396 23483 c0a5ed5f24270a056163b944ae7db426 ""
-  "流程.png" 1761800189 19015 4080b3126d706b8ce1f8b20778905dc0 ""
+  "Midterm.aux" 1776227814 1534 73b05aa7ae1d963406a1d379d65407e6 "xelatex"
+  "Midterm.nav" 1776227814 835 b5c49ba28d3d2049d1773682fb2767a8 "xelatex"
+  "Midterm.out" 1776227813 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
+  "Midterm.tex" 1776227812 4939 07900f1560d3f615f6672d03103b19e5 ""
+  "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（二）/midterm/tex/Midterm.tex" 1776227812 4939 07900f1560d3f615f6672d03103b19e5 ""
   (generated)
   "Midterm.aux"
   "Midterm.log"
