@@ -1,0 +1,362 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{微軟正黑體}
+\setmainfont{Times New Roman}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\usepackage{amsmath, amssymb, bm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{mathtools}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\title{Topic 6: Estimation}
+\author{Huang, Cheng-Yang}
+\institute{Statistics (III) Midterm}
+\date{2026/04/21}
+
+\begin{document}
+
+%================================================
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%================================================
+\begin{frame}{Core Questions} % 核心問題
+    \vspace{0.5em}
+    \begin{itemize}
+        \item What makes an estimator a ``good'' estimator?
+        \item When population parameters are unknown, how do we estimate them from a sample? 
+        \item Why does the quality of an estimator directly affect SPC monitoring performance?
+    \end{itemize}
+    \vspace{0.8em}
+    \textbf{Outlines:}
+    \begin{enumerate}
+        \item Theoretical Definitions 
+        \item Mathematical Derivation 
+        \item Statistical Interpretation
+        \item SPC Applications
+    \end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{Why Is Estimation Important in SPC?}
+    In SPC, the in-control state of a process is usually described by baseline parameters such as $\mu_0,\, \sigma_0$
+
+    \vspace{0.8em}
+    However, in practice these quantities are usually \textbf{unknown} and must be estimated from Phase I historical data
+
+    \vspace{0.8em}
+    \textbf{Key points:}
+        \begin{itemize}
+            \item If $\hat{\mu}_0$ is estimated incorrectly, the center line will shift
+            \item If $\hat{\sigma}_0$ is estimated incorrectly, the control limits will become too wide or too narrow
+            \item Incorrect limits may lead to: 
+            \begin{itemize}
+                \item Too many false alarms
+                \item Delayed detection of abnormal changes
+            \end{itemize}
+        \end{itemize}
+
+    Therefore, SPC is not only about drawing charts. The first question is:
+
+    \uncover<2->{
+    {\centering
+    \Huge\textbf{How good is the estimator?}\par}
+    }
+\end{frame}
+
+%================================================
+\begin{frame}{Estimators and Sampling Distributions}
+    Suppose $$X_1, \dots,X_n \overset{iid}{\sim} F_\theta$$ where $\theta$ is an unknown parameter
+
+    \vspace{0.5em}
+    An \textbf{estimator}is a function of the sample:
+    $$\hat{\theta}=T(X_1, \dots,X_n)$$ 
+    Since $X_1, \dots, X_n$ are random, $\hat{\theta}$ is also a random variable
+
+    Therefore, we should not only ask “what value do we get?”, but also ask:
+        \begin{itemize}
+            \item What is $E(\hat{\theta})$?
+            \item What is $\mathrm{Var}(\hat{\theta})$?
+            \item Does $\hat{\theta}$ converge to the true value $\theta$ as $n \to \infty$?
+        \end{itemize}
+    % \vspace{0.8em}
+    % \textbf{這三個問題對應到: }
+    % $$
+    % \text{Bias}, \quad \text{MSE}, \quad \text{Consistency}
+    % $$
+\end{frame}
+
+%================================================
+\begin{frame}{Bias: Does the Estimator Systematically Deviate from the Truth?}
+    \textbf{Definition: }
+    $$\mathrm{Bias}(\hat{\theta}, \theta)=E(\hat{\theta})-\theta$$ % 長期平均誤差
+    If for all $\theta$
+    $$E(\hat{\theta})=\theta$$ % 若長期平均誤差不偏, 則是unbiased
+    then $\hat{\theta}$ is called an \textbf{unbiased estimator}
+
+    \vspace{0.8em}
+    \textbf{Interpretation: } Bias measures whether the estimator tends to overestimate or underestimate the true value on average
+                    % Bias $>0$: 平均高估
+                    % Bias $<0$: 平均低估
+                    % Bias $=0$: 沒有系統性偏差
+    
+    \vspace{0.8em}
+    \textbf{Example:}
+    Suppose $E(X_i)=\mu$ and $\bar X=\frac1n\sum_{i=1}^n X_i.$ Then $E(\bar X)=\mu$
+    
+    \vspace{0.8em}
+    Therefore, $\bar X$ is an unbiased estimator of $\mu$
+\end{frame}
+
+%================================================
+\begin{frame}{MSE: Unbiasedness Is Not Enough}
+    \vspace{-1em}
+    The \textbf{Mean Squared Error} is defined as
+    \vspace{-0.8em}
+    $$\mathrm{MSE}(\hat{\theta}, \theta)=E\big[(\hat{\theta}-\theta)^2\big]$$
+    % 單次估計誤差
+    It can be \textbf{decomposed} into
+    $$\boxed{\mathrm{MSE}(\hat{\theta}, \theta)=\mathrm{Var}(\hat{\theta})+\mathrm{Bias}^2(\hat{\theta}, \theta)}$$
+    \textbf{Key message: }
+    \begin{itemize}
+        \item An estimator can be unbiased but still have very large variance
+        \item A slightly biased estimator may have a much smaller MSE
+    \end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Example: Sample Proportion}
+    目標: 估計 $\mu$,假設 $\quad X_1, \dots,X_n \sim (\mu, \sigma^2)$
+
+    \vspace{0.5em}
+    考慮兩個估計量: $\quad\hat{\mu}_1=\bar X, \quad\hat{\mu}_2=0.8\bar X$
+
+    \vspace{0.5em}
+    \textbf{第一個估計量: } $E(\hat{\mu}_1)=\mu, \quad\mathrm{Var}(\hat{\mu}_1)=\frac{\sigma^2}{n}, \quad\text{則\quad}\mathrm{MSE}(\hat{\mu}_1)=\frac{\sigma^2}{n}$
+
+    \vspace{0.5em}
+    \textbf{第二個估計量: }
+    \vspace{-0.8em}
+    \begin{align*}
+    &E(\hat{\mu}_2)=0.8\mu, \quad\mathrm{Var}(\hat{\mu}_2)=0.8^2\mathrm{Var}(\bar X)=0.64\frac{\sigma^2}{n}\\
+    &\text{且}\quad\mathrm{Bias}(\hat{\mu}_2, \mu)=0.8\mu-\mu=-0.2\mu, \\
+    &\text{則}\quad\mathrm{MSE}(\hat{\mu}_2)=0.64\frac{\sigma^2}{n}+(0.2\mu)^2
+    \end{align*}
+
+    \textbf{結論: }
+    biased estimator 仍可能因 variance 較小而有更低的 MSE
+\end{frame}
+
+% %================================================
+% \begin{frame}{Numerical example: biased estimator 可能更好}
+% 令
+% $$
+% \sigma^2=4, \quad n=100, \quad \mu=0.2
+% $$
+
+% 則
+% $$
+% \mathrm{MSE}(\hat{\mu}_1)=\frac{4}{100}=0.04
+% $$
+
+% 而
+% $$
+% \mathrm{MSE}(\hat{\mu}_2)
+% =
+% 0.64\cdot \frac{4}{100} + (0.2\times 0.2)^2
+% $$
+% $$
+% =
+% 0.0256+0.0016=0.0272
+% $$
+
+% 因此
+% $$
+% 0.0272<0.04
+% $$
+
+% \vspace{0.8em}
+% \textbf{統計解釋: }
+% \begin{itemize}
+%     \item $\hat{\mu}_1=\bar X$ 沒有 bias,但 variance 較大
+%     \item $\hat{\mu}_2=0.8\bar X$ 有一點 bias,但 variance 明顯下降
+%     \item 當 bias 很小、variance 減少很多時,MSE 反而更小
+% \end{itemize}
+
+% \vspace{0.8em}
+% \textbf{結論: }
+% $$
+% \text{「unbiased」不是唯一標準,MSE 才是更完整的品質衡量。}
+% $$
+% \end{frame}
+
+%================================================
+\begin{frame}{Consistency: 樣本變大時,估計會不會靠近真值?}
+    \textbf{定義: }
+    若估計量序列 $\hat{\theta}_n$ 滿足 $$\hat{\theta}_n \xrightarrow{P} \theta$$
+    則稱 $\hat{\theta}_n$ 是 $\theta$ 的 \textbf{consistent estimator}
+
+    \vspace{0.8em}
+    也就是對任意 $\varepsilon>0$: $\qquad P(|\hat{\theta}_n-\theta|>\varepsilon)\to 0\quad (n\to\infty)$
+
+    \vspace{0.8em}
+    \textbf{直觀意義: }
+    \begin{itemize}
+        \item 小樣本時,估計量可能誤差很大
+        \item 當樣本越來越多,估計量應該越來越穩定地貼近真值
+    \end{itemize}
+
+    \vspace{0.8em}
+    \textbf{一個常見的充分條件: }
+    \vspace{-1.25em}
+    $$E(\hat{\theta}_n)\to \theta\quad\text{且}\quad\mathrm{Var}(\hat{\theta}_n)\to 0,$$
+% 則通常可推出 consistency。
+\end{frame}
+
+%================================================
+\begin{frame}{例子: Bernoulli}
+設 $$X_1, \dots,X_n \overset{iid}{\sim}\mathrm{Bernoulli}(\pi)$$
+其中 $$P(X_i=1)=\pi, \quad P(X_i=0)=1-\pi$$
+
+樣本比例 $\hat p=\bar X=\frac1n\sum_{i=1}^n X_i$
+
+\vspace{0.5em}
+\textbf{性質: }
+$$
+E(\hat p)=\pi
+$$
+所以 $\hat p$ 是 unbiased estimator。
+
+又因為
+$$
+\mathrm{Var}(X_i)=\pi(1-\pi),
+$$
+故
+$$
+\mathrm{Var}(\hat p)=\frac{\pi(1-\pi)}{n}\to 0
+$$
+因此
+$$
+\hat p \xrightarrow{P} \pi
+$$
+即 $\hat p$ 是 consistent。
+
+\vspace{0.8em}
+\textbf{更進一步: }
+$$
+T=\sum_{i=1}^n X_i \sim \mathrm{Binomial}(n, \pi)
+$$
+而 $\hat p=T/n$ 是 $T$ 的 unbiased function,因此它是 $\pi$ 的 UMVUE。
+\end{frame}
+
+%================================================
+\begin{frame}{從估計到 SPC: Phase I 的核心}
+    在 SPC 的 Phase I,我們需要先建立 in-control baseline
+
+    \vspace{0.5em}
+    以 $\bar X$-chart 為例,若已知 $\mu_0,\, \sigma_0$,控制界限可寫成
+    $$
+    UCL=\mu_0+z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}},
+    \quad
+    LCL=\mu_0-z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}}
+    $$
+    但實務上通常未知,因此改用估計量: $\hat{\mu}_0,\, \hat{\sigma}_0$
+
+    \vspace{0.5em}
+    則實際的控制界限為
+    $$
+    \widehat{UCL}=\hat{\mu}_0+z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}},
+    \quad
+    \widehat{LCL}=\hat{\mu}_0-z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}}
+    $$
+    \textbf{考慮問題: }
+    \begin{itemize}
+        \item 若 $\hat{\mu}_0$ 有偏,則中心線位置偏移
+        \item 若 $\hat{\sigma}_0$ 變異大,則界限不穩定
+        \item 若估計不一致,則無法建立可靠基準
+    \end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{估計量品質如何影響監控: 以 p-chart 為例}
+    若每批樣本大小為 $n$,不良率為 $\pi$,則 $$\hat p=\frac{X}{n}, \quad X\sim\mathrm{Binomial}(n, \pi)$$
+    在 Phase I 中,通常用 $\bar p$ 作為 $\pi_0$ 的估計
+
+    對應的 p-chart 控制界限常寫為
+    $$
+    UCL=\bar p + z\sqrt{\frac{\bar p(1-\bar p)}{n}},
+    \quad
+    LCL=\bar p - z\sqrt{\frac{\bar p(1-\bar p)}{n}}
+    $$
+
+    % \vspace{0.8em}
+    % \textbf{這裡的統計邏輯是: }
+    % \begin{enumerate}
+    %     \item 先用樣本估計 $\pi_0$
+    %     \item 再用估計的變異建立控制界限
+    %     \item 最後判定新資料是否 out-of-control
+    % \end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{Conclusion}
+    \vspace{0.2cm}
+    \textbf{(1) A good estimator should not be judged only by unbiasedness}
+    \begin{itemize}
+        \item $\mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2$
+    \end{itemize}
+    % estimator 的品質來自偏差與波動的共同作用。
+
+    \vspace{0.8em}
+    \textbf{(2) Consistency is a requirement for long-run reliability}
+    \begin{itemize}
+        \item $\hat{\theta}_n \xrightarrow{P} \theta$
+    \end{itemize}
+    % 表示樣本變大後,估計量應穩定逼近真值。
+
+    \vspace{0.8em}
+    \textbf{(3) In SPC, estimation is the foundation of monitoring}
+    \begin{itemize}
+        \item Phase I requires estimation of $\mu_0$ and $\sigma_0$ in order to determine control limits
+        \item Control limits determine false alarm rates and detection power
+    \end{itemize}
+    \vspace{0.8em}
+    \uncover<2->{$$\boxed{\begin{array}{c}\text{If the baseline estimation is unreliable,} \\\text{then the entire SPC monitoring system becomes unreliable.}\end{array}}$$}
+\end{frame}
+
+\begin{frame}
+    \centering\Huge{\textbf{謝謝聆聽}}
+\end{frame}
+%================================================
+\begin{frame}{備用頁: 可能 Q\&A}
+\textbf{Q1. 為什麼 unbiased 不一定最好?}
+
+因為 unbiased 只表示平均不偏,但若 variance 很大,估計仍可能很不穩。  
+因此更完整的衡量是
+$$
+\mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2
+$$
+
+\vspace{0.8em}
+\textbf{Q2. consistency 和 unbiased 有什麼差別?}
+
+\begin{itemize}
+    \item unbiased: 有限樣本下的平均正確性
+    \item consistency: 大樣本下是否收斂到真值
+\end{itemize}
+
+\vspace{0.8em}
+\textbf{Q3. 這和 SPC 最直接的連結是什麼?}
+
+Phase I 必須估計 in-control baseline；估計品質會直接影響 control limits,進而影響監控表現。
+\end{frame}
+
+\end{document}
