@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1776242061.79275 "midterm.xdv" "midterm.pdf" "midterm" 1776242062.12358 0
-  "midterm.xdv" 1776242061 213960 34a77e2849f2dbc487b7c810d69cc89b "xelatex"
+["xdvipdfmx"] 1776586041.3181 "midterm.xdv" "midterm.pdf" "midterm" 1776586041.63372 0
+  "midterm.xdv" 1776586041 213916 9a13a9ed228b1cb965085a5d5b29e6a9 "xelatex"
   (generated)
   "midterm.pdf"
   (rewritten before read)
-["xelatex"] 1776242060.02618 "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（三）/midterm/midterm.tex" "midterm.xdv" "midterm" 1776242062.11638 0
+["xelatex"] 1776586039.51701 "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（三）/midterm/midterm.tex" "midterm.xdv" "midterm" 1776586041.62876 0
   "C:/Users/No/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758243793 27011562 5a194f1f729f3c84b35029ea57eb0ca7 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1233951848 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -209,11 +209,11 @@
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（三）/midterm/midterm.tex" 1776242059 11866 5378fe21e30d140d9db7022166e15f4a ""
-  "midterm.aux" 1776242061 2719 ebb3b4b3fa9fc910c85dfa69efa805ee "xelatex"
-  "midterm.nav" 1776242061 1485 c468e7f0f7c2f789ef8e6456bda214f7 "xelatex"
-  "midterm.out" 1776242061 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
-  "midterm.tex" 1776242059 11866 5378fe21e30d140d9db7022166e15f4a ""
+  "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（三）/midterm/midterm.tex" 1776586039 11858 f9e2e8fea5760cb4f2fa1a11f9826770 ""
+  "midterm.aux" 1776586041 2719 ebb3b4b3fa9fc910c85dfa69efa805ee "xelatex"
+  "midterm.nav" 1776586041 1485 c468e7f0f7c2f789ef8e6456bda214f7 "xelatex"
+  "midterm.out" 1776586040 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
+  "midterm.tex" 1776586039 11858 f9e2e8fea5760cb4f2fa1a11f9826770 ""
   (generated)
   "midterm.aux"
   "midterm.log"

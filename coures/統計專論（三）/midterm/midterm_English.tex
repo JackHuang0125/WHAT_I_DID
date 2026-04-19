@@ -29,20 +29,20 @@
 
 %================================================
 \begin{frame}{Core Questions} % 核心問題
-    \vspace{0.5em}
+    \vspace{-2cm}
     \begin{itemize}
         \item What makes an estimator a ``good'' estimator?
-        \item When population parameters are unknown, how do we estimate them from a sample? 
-        \item Why does the quality of an estimator directly affect SPC monitoring performance?
+        \item When population parameters are unknown, how do we estimate them from samples? 
+        \item Why does the quality of an estimator directly affect SPC?
     \end{itemize}
-    \vspace{0.8em}
-    \textbf{Outlines:}
-    \begin{enumerate}
-        \item Theoretical Definitions 
-        \item Mathematical Derivation 
-        \item Statistical Interpretation
-        \item SPC Applications
-    \end{enumerate}
+    % \vspace{0.8em}
+    % \textbf{Outlines:}
+    % \begin{enumerate}
+        % \item Theoretical Definitions 
+        % \item Mathematical Derivation 
+        % \item Statistical Interpretation
+        % \item SPC Applications
+    % \end{enumerate}
 \end{frame}
 
 %================================================
@@ -50,7 +50,7 @@
     In SPC, the in-control state of a process is usually described by baseline parameters such as $\mu_0,\, \sigma_0$
 
     \vspace{0.8em}
-    However, in practice these quantities are usually \textbf{unknown} and must be estimated from Phase I historical data
+    In practice, they are usually \textbf{unknown} and must be estimated from Phase I data
 
     \vspace{0.8em}
     \textbf{Key points:}
@@ -85,7 +85,7 @@
         \begin{itemize}
             \item What is $E(\hat{\theta})$?
             \item What is $\mathrm{Var}(\hat{\theta})$?
-            \item Does $\hat{\theta}$ converge to the true value $\theta$ as $n \to \infty$?
+            \item Does $\hat{\theta}$ converge to $\theta$ as $n \to \infty$?
         \end{itemize}
     % \vspace{0.8em}
     % \textbf{這三個問題對應到: }
@@ -95,11 +95,11 @@
 \end{frame}
 
 %================================================
-\begin{frame}{Bias: Does the Estimator Systematically Deviate from the Truth?}
+\begin{frame}{Bias: Does the Estimator Deviate from the True Value?}
     \textbf{Definition: }
     $$\mathrm{Bias}(\hat{\theta}, \theta)=E(\hat{\theta})-\theta$$ % 長期平均誤差
-    If for all $\theta$
-    $$E(\hat{\theta})=\theta$$ % 若長期平均誤差不偏, 則是unbiased
+    If
+    $$E(\hat{\theta})=\theta,\quad \forall \theta$$ % 若長期平均誤差不偏, 則是unbiased
     then $\hat{\theta}$ is called an \textbf{unbiased estimator}
 
     \vspace{0.8em}
@@ -119,7 +119,7 @@
 %================================================
 \begin{frame}{MSE: Unbiasedness Is Not Enough}
     \vspace{-1em}
-    The \textbf{Mean Squared Error} is defined as
+    \textbf{Mean Squared Error} is defined as
     \vspace{-0.8em}
     $$\mathrm{MSE}(\hat{\theta}, \theta)=E\big[(\hat{\theta}-\theta)^2\big]$$
     % 單次估計誤差
@@ -140,7 +140,7 @@
     Consider two estimators: $\quad\hat{\mu}_1=\bar X, \quad\hat{\mu}_2=0.8\bar X$
 
     \vspace{0.5em}
-    \textbf{First estimator:} $E(\hat{\mu}_1)=\mu, \quad\mathrm{Var}(\hat{\mu}_1)=\frac{\sigma^2}{n}, \quad\text{thus\quad}\mathrm{MSE}(\hat{\mu}_1)=\frac{\sigma^2}{n}$
+    \textbf{First estimator:} $E(\hat{\mu}_1)=\mu, \quad\mathrm{Var}(\hat{\mu}_1)=\frac{\sigma^2}{n}, \quad\text{then\quad}\mathrm{MSE}(\hat{\mu}_1)=\frac{\sigma^2}{n}$
 
     \vspace{0.5em}
     \textbf{Second estimator:}
@@ -148,11 +148,11 @@
     \begin{align*}
     &E(\hat{\mu}_2)=0.8\mu, \quad\mathrm{Var}(\hat{\mu}_2)=0.8^2\mathrm{Var}(\bar X)=0.64\frac{\sigma^2}{n}\\
     &\mathrm{Bias}(\hat{\mu}_2, \mu)=0.8\mu-\mu=-0.2\mu, \\
-    &\text{Therefore},\, \mathrm{MSE}(\hat{\mu}_2)=0.64\frac{\sigma^2}{n}+(0.2\mu)^2
+    &\text{Then},\, \mathrm{MSE}(\hat{\mu}_2)=0.64\frac{\sigma^2}{n}+(0.2\mu)^2
     \end{align*}
 
     \textbf{Conclusion:}
-    A biased estimator may still have a smaller MSE if its variance is sufficiently reduced
+    A biased estimator may still have a smaller MSE if its variance is less
 \end{frame}
 
 % %================================================
@@ -205,13 +205,13 @@
     then $\hat{\theta}_n$ is called a \textbf{consistent estimator} of $\theta$
 
     \vspace{0.8em}
-    That is, for any $\varepsilon>0$: $\qquad P(|\hat{\theta}_n-\theta|>\varepsilon)\to 0\quad (n\to\infty)$
+    That is, $\qquad \qquad \qquad P(|\hat{\theta}_n-\theta|>\varepsilon)\to 0\quad (n\to\infty),\quad \forall \varepsilon>0$
 
     \vspace{0.8em}
     \textbf{Interpretation:}
     \begin{itemize}
-        \item With a small sample size, the estimator may have a large error
-        \item As the sample size increases, the estimator should become increasingly stable and closer to the true value
+        \item The estimator may have a large error when the sample size is small
+        \item The estimator should become increasingly stable and closer to the true value when the sample size increases 
     \end{itemize}
 
     \vspace{0.8em}
@@ -220,60 +220,45 @@
 \end{frame}
 
 %================================================
-\begin{frame}{Example: Bernoulli Distribution}
+\begin{frame}{Example}
 Suppose
 \vspace{-1.2em}
-$$X_1, \dots,X_n \overset{iid}{\sim}\mathrm{Bernoulli}(\pi)$$
-where $P(X_i=1)=\pi, \quad P(X_i=0)=1-\pi$
+$$X_1, \dots,X_n \overset{iid}{\sim}\mathrm{Bernoulli}(p)$$
+where $P(X_i=1)=p, \quad P(X_i=0)=1-p, \quad E(X)=p, \quad Var(X)=p(1-p)$
 
 \vspace{0.8em}
-The sample proportion is $\hat p=\bar X=\frac1n\sum_{i=1}^n X_i$ and $E(\hat p)=\pi,$
-\,$\hat{p}$ is an unbiased estimator
+Since $\hat p=\bar X=\frac1n\sum_{i=1}^n X_i\Rightarrow E(\hat p)=E(\frac1n\sum_{i=1}^n X_i)=\frac1n*n*p=p$
 
 \vspace{0.8em}
-Also
-\vspace{-1.2em}
-$$\mathrm{Var}(X_i)=\pi(1-\pi)$$
+$\qquad\qquad\qquad\qquad\qquad\quad\mathrm{Var}(\hat{p})=\frac{1}{n^2}*n*p(1-p)=\frac{p(1-p)}{n}$
 
 \vspace{1.2em}
-Hence
-\vspace{-1.4em}
-$$\mathrm{Var}(\hat p)=\frac{\pi(1-\pi)}{n}\to 0$$
 Therefore
-$$
-\hat{p}
-\overset{P}{\longrightarrow}
-\pi
-$$
-So $\hat{p}$ is consistent
-
-\vspace{0.8em}
-\textbf{Furthermore:}
-$$
-T=\sum_{i=1}^n X_i \sim \mathrm{Binomial}(n, \pi)
-$$
-Since $\hat{p} = T/n$ is an unbiased function of $T$, it is the UMVUE of $\pi$
+\vspace{-1.4em}
+$$E(\hat p)\to p\,\,\,\text{and}\,\,\,\mathrm{Var}(\hat p)=\frac{p(1-p)}{n}\to 0\quad \text{as}\quad n\to\infty$$
+So $$\hat{p}\overset{P}{\longrightarrow}p\Rightarrow\hat{p}\,\,\, \text{is consistent}$$ 
+%\Rightarrow\hat{p}$ is an unbiased estimator
 \end{frame}
 
 %================================================
 \begin{frame}{From Estimation to SPC: The Core of Phase I}
-    In Phase I SPC, we first need to establish an in-control baseline
+    In Phase I, we first establish an in-control baseline
 
     \vspace{0.5em}
     For an $\bar{X}$-chart, if $\mu_0$ and $\sigma_0$ are known, the control limits are
     $$
-    UCL=\mu_0+z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}},
+    UCL=\mu_0+z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{n}},
     \quad
-    LCL=\mu_0-z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{m}}
+    LCL=\mu_0-z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{n}}
     $$
-    However, in practice these quantities are usually unknown, so we replace them with estimators $\hat{\mu}_0$ and $\hat{\sigma}_0$.
+    We replace them with estimators $\hat{\mu}_0$ and $\hat{\sigma}_0$
     
     \vspace{0.5em}
     Thus, the actual control limits become
     $$
-    \widehat{UCL}=\hat{\mu}_0+z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}},
+    \widehat{UCL}=\hat{\mu}_0+z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{n}},
     \quad
-    \widehat{LCL}=\hat{\mu}_0-z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{m}}
+    \widehat{LCL}=\hat{\mu}_0-z_{1-\alpha/2}\frac{\hat{\sigma}_0}{\sqrt{n}}
     $$
     \textbf{Potential issues:}
     \begin{itemize}
@@ -284,10 +269,10 @@ Since $\hat{p} = T/n$ is an unbiased function of $T$, it is the UMVUE of $\pi$
 \end{frame}
 
 %================================================
-\begin{frame}{How Estimator Quality Affects Monitoring: Example of a p-Chart}
-    Suppose each subgroup has sample size $n$, and the defect rate is $\pi$
-    Then $$\hat p=\frac{X}{n}, \quad X\sim\mathrm{Binomial}(n, \pi)$$
-    In Phase I, we usually use $\bar{p}$ to estimate $\pi_0$ 
+\begin{frame}{How Estimator Affects Monitoring: Example of a p-Chart}
+    Suppose each subgroup has sample size $n$, and the defect rate is $p_0$
+    Then $$\hat p=\frac{X}{n}, \quad X\sim\mathrm{Binomial}(n, p_0)$$
+    In Phase I, we usually use $\bar{p}=\frac1m\sum^m_{i=1}\hat{p_i}$ to estimate $p_0$ 
 
     The control limits of the p-chart are often written as
 
@@ -300,7 +285,7 @@ Since $\hat{p} = T/n$ is an unbiased function of $T$, it is the UMVUE of $\pi$
     % \vspace{0.8em}
     % \textbf{這裡的統計邏輯是: }
     % \begin{enumerate}
-    %     \item 先用樣本估計 $\pi_0$
+    %     \item 先用樣本估計 $p_0$
     %     \item 再用估計的變異建立控制界限
     %     \item 最後判定新資料是否 out-of-control
     % \end{enumerate}
@@ -323,7 +308,7 @@ Since $\hat{p} = T/n$ is an unbiased function of $T$, it is the UMVUE of $\pi$
     % 表示樣本變大後,估計量應穩定逼近真值。
 
     \vspace{0.8em}
-    \textbf{(3) In SPC, estimation is the foundation of monitoring}
+    \textbf{(3) In SPC, estimation is the foundation}
     \begin{itemize}
         \item Phase I requires estimation of $\mu_0$ and $\sigma_0$ in order to determine control limits
         \item Control limits determine false alarm rates and detection power
