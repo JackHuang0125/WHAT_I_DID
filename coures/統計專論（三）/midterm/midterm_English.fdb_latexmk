@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1776587763.45237 "midterm_English.xdv" "midterm_English.pdf" "midterm_English" 1776587763.74809 0
-  "midterm_English.xdv" 1776587763 216556 a9feb6bb053e0aad3fdabe931adc5755 "xelatex"
+["xdvipdfmx"] 1776609496.08191 "midterm_English.xdv" "midterm_English.pdf" "midterm_English" 1776609496.44361 0
+  "midterm_English.xdv" 1776609495 216576 c6bac535a997a5220fb73f7e7503aa60 "xelatex"
   (generated)
   "midterm_English.pdf"
   (rewritten before read)
-["xelatex"] 1776587761.70722 "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（三）/midterm/midterm_English.tex" "midterm_English.xdv" "midterm_English" 1776587763.74318 0
+["xelatex"] 1776609492.38143 "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（三）/midterm/midterm_English.tex" "midterm_English.xdv" "midterm_English" 1776609496.43793 0
   "C:/Users/No/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758243793 27011562 5a194f1f729f3c84b35029ea57eb0ca7 ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1233951848 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -209,11 +209,11 @@
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/No/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（三）/midterm/midterm_English.tex" 1776587761 12337 38ddc9c1913dd3079220f80e28856553 ""
-  "midterm_English.aux" 1776587763 2548 79ef6332afeb100130186c88a75dc74a "xelatex"
-  "midterm_English.nav" 1776587763 1392 8728b76d195444f5008f3224adca9036 "xelatex"
-  "midterm_English.out" 1776587762 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
-  "midterm_English.tex" 1776587761 12337 38ddc9c1913dd3079220f80e28856553 ""
+  "c:/Users/No/Documents/GitHub/WHAT_I_DID/coures/統計專論（三）/midterm/midterm_English.tex" 1776609491 12338 478cfaafcdc84d062320b48ab718808c ""
+  "midterm_English.aux" 1776609495 2548 79ef6332afeb100130186c88a75dc74a "xelatex"
+  "midterm_English.nav" 1776609495 1392 8728b76d195444f5008f3224adca9036 "xelatex"
+  "midterm_English.out" 1776609495 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
+  "midterm_English.tex" 1776609491 12338 478cfaafcdc84d062320b48ab718808c ""
   (generated)
   "midterm_English.aux"
   "midterm_English.log"
