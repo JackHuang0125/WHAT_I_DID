@@ -201,13 +201,13 @@
 %================================================
 \begin{frame}{Consistency: Does the Estimator Approach the True Value as the Sample Size Increases?}
     \textbf{Definition:}
-    If a sequence of estimators $\hat{\theta}_n$ satisfies $$\hat{\theta}_n \xrightarrow{P} \theta$$
+    $$\hat{\theta}_n \xrightarrow{P} \theta$$
     then $\hat{\theta}_n$ is called a \textbf{consistent estimator} of $\theta$
 
     \vspace{0.8em}
-    That is, $\qquad \qquad \qquad P(|\hat{\theta}_n-\theta|>\varepsilon)\to 0\quad (n\to\infty),\quad \forall \varepsilon>0$
-
-    \vspace{0.8em}
+    That is
+    \vspace{-1.2em}
+    $$\lim_{n\to\infty} P(|\hat{\theta}_n-\theta|>\varepsilon)=0,\quad \forall \varepsilon>0$$
     \textbf{Interpretation:}
     \begin{itemize}
         \item The estimator may have a large error when the sample size is small
@@ -251,7 +251,7 @@ So $$\hat{p}\overset{P}{\longrightarrow}p\Rightarrow\hat{p}\,\,\, \text{is consi
     \quad
     LCL=\mu_0-z_{1-\alpha/2}\frac{\sigma_0}{\sqrt{n}}
     $$
-    We replace them with estimators $\hat{\mu}_0$ and $\hat{\sigma}_0$
+    Usually, we replace them with estimators $\hat{\mu}_0$ and $\hat{\sigma}_0$
     
     \vspace{0.5em}
     Thus, the actual control limits become
