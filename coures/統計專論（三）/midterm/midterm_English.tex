@@ -35,14 +35,6 @@
         \item When population parameters are unknown, how do we estimate them from samples? 
         \item Why does the quality of an estimator directly affect SPC?
     \end{itemize}
-    % \vspace{0.8em}
-    % \textbf{Outlines:}
-    % \begin{enumerate}
-        % \item Theoretical Definitions 
-        % \item Mathematical Derivation 
-        % \item Statistical Interpretation
-        % \item SPC Applications
-    % \end{enumerate}
 \end{frame}
 
 %================================================
@@ -84,14 +76,9 @@
     Therefore, we should not only ask “what value do we get?”, but also ask:
         \begin{itemize}
             \item What is $E(\hat{\theta})$?
-            \item What is $\mathrm{Var}(\hat{\theta})$?
+            \item What is $Var(\hat{\theta})$?
             \item Does $\hat{\theta}$ converge to $\theta$ as $n \to \infty$?
         \end{itemize}
-    % \vspace{0.8em}
-    % \textbf{這三個問題對應到: }
-    % $$
-    % \text{Bias}, \quad \text{MSE}, \quad \text{Consistency}
-    % $$
 \end{frame}
 
 %================================================
@@ -104,9 +91,6 @@
 
     \vspace{0.8em}
     \textbf{Interpretation: } Bias measures whether the estimator tends to overestimate or underestimate the true value on average
-                    % Bias $>0$: 平均高估
-                    % Bias $<0$: 平均低估
-                    % Bias $=0$: 沒有系統性偏差
     
     \vspace{0.8em}
     \textbf{Example:}
@@ -121,10 +105,9 @@
     \vspace{-1em}
     \textbf{Mean Squared Error} is defined as
     \vspace{-0.8em}
-    $$\mathrm{MSE}(\hat{\theta}, \theta)=E\big[(\hat{\theta}-\theta)^2\big]$$
-    % 單次估計誤差
+    $$ MSE(\hat{\theta}, \theta)=E\big[(\hat{\theta}-\theta)^2\big]$$
     It can be \textbf{decomposed} into
-    $$\boxed{\mathrm{MSE}(\hat{\theta}, \theta)=\mathrm{Var}(\hat{\theta})+\mathrm{Bias}^2(\hat{\theta}, \theta)}$$
+    $$\boxed{ MSE(\hat{\theta}, \theta)=Var(\hat{\theta})+\mathrm{Bias}^2(\hat{\theta}, \theta)}$$
     \textbf{Key message: }
     \begin{itemize}
         \item An estimator can be unbiased but still have very large variance
@@ -140,63 +123,20 @@
     Consider two estimators: $\quad\hat{\mu}_1=\bar X, \quad\hat{\mu}_2=0.8\bar X$
 
     \vspace{0.5em}
-    \textbf{First estimator:} $E(\hat{\mu}_1)=\mu, \quad\mathrm{Var}(\hat{\mu}_1)=\frac{\sigma^2}{n}, \quad\text{then\quad}\mathrm{MSE}(\hat{\mu}_1)=\frac{\sigma^2}{n}$
+    \textbf{First estimator:} $E(\hat{\mu}_1)=\mu, \quad Var(\hat{\mu}_1)=\frac{\sigma^2}{n}, \quad\text{then\quad} MSE(\hat{\mu}_1)=\frac{\sigma^2}{n}$
 
     \vspace{0.5em}
     \textbf{Second estimator:}
     \vspace{-0.8em}
     \begin{align*}
-    &E(\hat{\mu}_2)=0.8\mu, \quad\mathrm{Var}(\hat{\mu}_2)=0.8^2\mathrm{Var}(\bar X)=0.64\frac{\sigma^2}{n}\\
+    &E(\hat{\mu}_2)=0.8\mu, \quad Var(\hat{\mu}_2)=0.8^2 Var(\bar X)=0.64\frac{\sigma^2}{n}\\
     &\mathrm{Bias}(\hat{\mu}_2, \mu)=0.8\mu-\mu=-0.2\mu, \\
-    &\text{Then},\, \mathrm{MSE}(\hat{\mu}_2)=0.64\frac{\sigma^2}{n}+(0.2\mu)^2
+    &\text{Then},\,  MSE(\hat{\mu}_2)=0.64\frac{\sigma^2}{n}+(0.2\mu)^2
     \end{align*}
 
     \textbf{Conclusion:}
     A biased estimator may still have a smaller MSE if its variance is less
 \end{frame}
-
-% %================================================
-% \begin{frame}{Numerical example: biased estimator 可能更好}
-% 令
-% $$
-% \sigma^2=4, \quad n=100, \quad \mu=0.2
-% $$
-
-% 則
-% $$
-% \mathrm{MSE}(\hat{\mu}_1)=\frac{4}{100}=0.04
-% $$
-
-% 而
-% $$
-% \mathrm{MSE}(\hat{\mu}_2)
-% =
-% 0.64\cdot \frac{4}{100} + (0.2\times 0.2)^2
-% $$
-% $$
-% =
-% 0.0256+0.0016=0.0272
-% $$
-
-% 因此
-% $$
-% 0.0272<0.04
-% $$
-
-% \vspace{0.8em}
-% \textbf{統計解釋: }
-% \begin{itemize}
-%     \item $\hat{\mu}_1=\bar X$ 沒有 bias,但 variance 較大
-%     \item $\hat{\mu}_2=0.8\bar X$ 有一點 bias,但 variance 明顯下降
-%     \item 當 bias 很小、variance 減少很多時,MSE 反而更小
-% \end{itemize}
-
-% \vspace{0.8em}
-% \textbf{結論: }
-% $$
-% \text{「unbiased」不是唯一標準,MSE 才是更完整的品質衡量。}
-% $$
-% \end{frame}
 
 %================================================
 \begin{frame}{Consistency: Does the Estimator Approach the True Value as the Sample Size Increases?}
@@ -215,8 +155,54 @@
     \end{itemize}
 
     \vspace{0.8em}
-    \textbf{A Common Sufficient Condition:}\quad $E(\hat{\theta}_n)\to \theta\quad\text{and}\quad\mathrm{Var}(\hat{\theta}_n)\to 0$
-% 則通常可推出 consistency。
+    \textbf{A Common Sufficient Condition:}\quad $E(\hat{\theta}_n)\to \theta\quad\text{and}\quad Var(\hat{\theta}_n)\to 0$
+\end{frame}
+
+%================================================
+\begin{frame}{Consistency of the Sample Mean}
+Suppose $$X_1,\dots,X_n \overset{iid}{\sim} (\mu,\sigma^2)$$
+and consider the sample mean $$\bar{X}=\frac1n\sum_{i=1}^nX_i$$
+We have $$E(\bar{X})=\mu,\quad  Var(\bar{X})=\frac{\sigma^2}{n}\to0$$
+Then, by Chebyshev's inequality,
+$$P(|\bar{X}-\mu|>\varepsilon)\le\frac{\sigma^2/n}{\varepsilon^2}=\frac{\sigma^2}{n\varepsilon^2}\to0,\quad \forall \varepsilon>0$$
+Therefore $$\bar{X}\xrightarrow{P}\mu$$
+\end{frame}
+
+\begin{frame}{Consistency of the Sample Variance}
+Consider the sample variance
+
+\vspace{-1em}
+$$S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2$$
+
+\vspace{-1em}
+We have
+
+\vspace{-1em}
+$$E(S^2)=\sigma^2,\quad\mathrm{Var}(S^2)\to 0$$
+Then, by Chebyshev's inequality,
+
+\vspace{-1em}
+$$
+P(|S^2-\sigma^2|>\varepsilon)
+\le
+\frac{E[(S^2-\sigma^2)^2]}{\varepsilon^2}
+=
+\frac{MSE(S^2)}{\varepsilon^2}
+$$
+
+Since \(E(S^2)=\sigma^2\), \(S^2\) is unbiased, so
+
+\vspace{-1em}
+$$
+P(|S^2-\sigma^2|>\varepsilon)
+\le
+\frac{\mathrm{Var}(S^2)}{\varepsilon^2}
+\to 0,
+\qquad \forall \varepsilon>0
+$$
+
+Therefore
+$$S^2 \xrightarrow{P} \sigma^2$$
 \end{frame}
 
 %================================================
@@ -224,20 +210,19 @@
 Suppose
 \vspace{-1.2em}
 $$X_1, \dots,X_n \overset{iid}{\sim}\mathrm{Bernoulli}(p)$$
-where $P(X_i=1)=p, \quad P(X_i=0)=1-p, \quad E(X)=p, \quad Var(X)=p(1-p)$
+where $P(X_i=1)=p, \quad P(X_i=0)=1-p, \quad E(X)=p, \quad  Var(X)=p(1-p)$
 
 \vspace{0.8em}
 Since $\hat p=\bar X=\frac1n\sum_{i=1}^n X_i\Rightarrow E(\hat p)=E(\frac1n\sum_{i=1}^n X_i)=\frac1n*n*p=p$
 
 \vspace{0.8em}
-$\qquad\qquad\qquad\qquad\qquad\quad\mathrm{Var}(\hat{p})=\frac{1}{n^2}*n*p(1-p)=\frac{p(1-p)}{n}$
+$\qquad\qquad\qquad\qquad\qquad\quad Var(\hat{p})=\frac{1}{n^2}*n*p(1-p)=\frac{p(1-p)}{n}$
 
 \vspace{1.2em}
 Therefore
 \vspace{-1.4em}
-$$E(\hat p)\to p\,\,\,\text{and}\,\,\,\mathrm{Var}(\hat p)=\frac{p(1-p)}{n}\to 0\quad \text{as}\quad n\to\infty$$
+$$E(\hat p)\to p\,\,\,\text{and}\,\,\, Var(\hat p)=\frac{p(1-p)}{n}\to 0\quad \text{as}\quad n\to\infty$$
 So $$\hat{p}\overset{P}{\longrightarrow}p\Rightarrow\hat{p}\,\,\, \text{is consistent}$$ 
-%\Rightarrow\hat{p}$ is an unbiased estimator
 \end{frame}
 
 %================================================
@@ -281,14 +266,6 @@ So $$\hat{p}\overset{P}{\longrightarrow}p\Rightarrow\hat{p}\,\,\, \text{is consi
     \quad
     LCL=\bar p - z\sqrt{\frac{\bar p(1-\bar p)}{n}}
     $$
-
-    % \vspace{0.8em}
-    % \textbf{這裡的統計邏輯是: }
-    % \begin{enumerate}
-    %     \item 先用樣本估計 $p_0$
-    %     \item 再用估計的變異建立控制界限
-    %     \item 最後判定新資料是否 out-of-control
-    % \end{enumerate}
 \end{frame}
 
 %================================================
@@ -296,16 +273,14 @@ So $$\hat{p}\overset{P}{\longrightarrow}p\Rightarrow\hat{p}\,\,\, \text{is consi
     \vspace{0.2cm}
     \textbf{(1) A good estimator should not be judged only by unbiasedness}
     \begin{itemize}
-        \item $\mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2$
+        \item $ MSE= Var+\mathrm{Bias}^2$
     \end{itemize}
-    % estimator 的品質來自偏差與波動的共同作用。
 
     \vspace{0.8em}
     \textbf{(2) Consistency is a requirement for long-run reliability}
     \begin{itemize}
         \item $\hat{\theta}_n \xrightarrow{P} \theta$
     \end{itemize}
-    % 表示樣本變大後,估計量應穩定逼近真值。
 
     \vspace{0.8em}
     \textbf{(3) In SPC, estimation is the foundation}
@@ -322,28 +297,3 @@ So $$\hat{p}\overset{P}{\longrightarrow}p\Rightarrow\hat{p}\,\,\, \text{is consi
 \end{frame}
 
 \end{document}
-
-%================================================
-% \begin{frame}{備用頁: 可能 Q\&A}
-% \textbf{Q1. 為什麼 unbiased 不一定最好?}
-
-% 因為 unbiased 只表示平均不偏,但若 variance 很大,估計仍可能很不穩。  
-% 因此更完整的衡量是
-% $$
-% \mathrm{MSE}=\mathrm{Var}+\mathrm{Bias}^2
-% $$
-
-% \vspace{0.8em}
-% \textbf{Q2. consistency 和 unbiased 有什麼差別?}
-
-% \begin{itemize}
-%     \item unbiased: 有限樣本下的平均正確性
-%     \item consistency: 大樣本下是否收斂到真值
-% \end{itemize}
-
-% \vspace{0.8em}
-% \textbf{Q3. 這和 SPC 最直接的連結是什麼?}
-
-% Phase I 必須估計 in-control baseline；估計品質會直接影響 control limits,進而影響監控表現。
-% \end{frame}
-
