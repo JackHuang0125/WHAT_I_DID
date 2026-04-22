@@ -1,5 +1,0 @@
-\beamer@sectionintoc {1}{自介}{3}{0}{1}
-\beamer@sectionintoc {2}{技能}{4}{0}{2}
-\beamer@sectionintoc {3}{經驗與成果}{5}{0}{3}
-\beamer@sectionintoc {4}{論文研究}{6}{0}{4}
-\beamer@sectionintoc {5}{未來規劃}{7}{0}{5}

@@ -6,8 +6,6 @@
 % 導入圖形與表格的封包
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 
 % 提供進階數學環境與公式排版
 \usepackage{mathtools, amsmath, amsfonts}
@@ -21,20 +19,6 @@
 
 % 自訂字體顏色的封包
 \usepackage{color}
-
-% 圖表自動編號的封包
-\usepackage{caption}
-% \usepackage{siunitx}
-
-% 可指定表格排版的封包
-\usepackage{array}
-\usepackage{makecell}
-
-% 序列標號
-\usepackage{enumerate}
-
-% 設定自動編號
-\setbeamertemplate{caption}[numbered]
 
 % 自訂顏色
 \definecolor{MyBlue}{RGB}{33, 73, 120}
@@ -74,10 +58,11 @@
 \providecommand{\tabularnewline}{\\}
 }
 
-\title{黃丞暘｜面試簡報}
-\author{國立東華大學應用數學研究所}
-\institute{應徵職位：軟體研發 / 資料分析 / 演算法 相關職缺}
-\date{\today}
+\title{黃丞暘}
+\author{國立東華大學應用數學系統計碩士班}
+% \institute{應徵職位：軟體研發 / 資料系統整合}
+\institute{應徵職位：瀚品數位科技有限公司|機率工程師}
+\date{2026.04.23}
 
 \begin{document}
 
@@ -86,101 +71,148 @@
   \titlepage
 \end{frame}
 
-% 目錄
-\begin{frame}{\textbf{目錄}}
-  \tableofcontents
-\end{frame}
-
 %---------------------------------
-\section{自介}
-
 \begin{frame}{\textbf{自介}}
-  \begin{itemize}
-    \item 學歷背景：國立東華大學應用數學研究所碩二，中山醫學大學心理學系
-    \item 具 5 年以上教學經驗，以及助教、專案助理、軟硬體維護實務經驗
-    \item 工作特質：具教學溝通、問題整理與專案協作能力
-  \end{itemize}
+  \begin{columns}[T]
+      % 左欄：文字
+      \begin{column}{0.8\textwidth}
+          \begin{itemize}
+              \item 國立東華大學應用數學系統計碩士班\\\vspace{0.5em}中山醫學大學心理學系
+              \vspace{0.8em}
+              \item 快速上手、溝通表達、環境適應、主動解決、主動探索
+              \vspace{0.8em}
+              \item 語言：多益 815（2025.12）
+              \vspace{0.8em}
+              \item Python、PostgreSQL
+              \vspace{0.8em}
+              \item 具 5 年以上教學經驗，助教、軟硬體維護、專案助理
+          \end{itemize}
+      \end{column}
+
+      % 右欄：頭像 + GitHub
+      \begin{column}{0.25\textwidth}
+          \centering
+          \includegraphics[width=0.6\linewidth]{大頭照_去背.jpg}
+
+          \vspace{1em}
+
+          {\small \href{https://github.com/JackHuang0125/WHAT_I_DID}{GitHub}}
+      \end{column}
+  \end{columns}
 \end{frame}
 
 %---------------------------------
-\section{技能}
-
 \begin{frame}{\textbf{技能}}
-  \begin{block}{硬實力}
+  \begin{block}{統計分析}
     \begin{itemize}
-      \item Python: 資料分析、統計檢定、機器學習、軟體研發（學習中）
-      \item R / SQL: 基本語法、PostgreSQL ( 學習中 )
-      \item AI 工具：ChatGPT 輔助程式開發與學習
-      \item 英文能力：多益 815（2025）
-      \item 其他：GitHub、Latex、文書處理
+      \item 假設檢定、統計推論、迴歸分析、ANOVA、SPC
     \end{itemize}
   \end{block}
-  \begin{block}{軟實力}
+
+  \begin{block}{Python}
     \begin{itemize}
-      \item 溝通表達
-      \item 快速學習
-      \item 問題整理
-      \item 專案協作
+      \item pandas、NumPy、matplotlib、scikit-learn
+      \item 機器學習模型、模型評估
+      \item 軟體研發（學習中）
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{資料庫}
+    \begin{itemize}
+      \item FastAPI 串接、SQL、PostgreSQL（學習中）
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{其他}
+    \begin{itemize}
+      \item R 基本語法、GitHub 版控、LaTex、文書處理
     \end{itemize}
   \end{block}
 \end{frame}
 
 %---------------------------------
-\section{經驗與成果}
-
 \begin{frame}{\textbf{經驗與成果}}
   \begin{block}{教育大數據校內競賽（金牌）}
     \begin{itemize}
-      \item 負責資料清理、資料分析與視覺化
-      \item 協助團隊規劃進度與整合分析結果
+      \item 擔任隊長，使用 Python 進行資料分析、視覺化與統計檢定
     \end{itemize}
   \end{block}
 
-  \begin{block}{統計諮詢課程}
+  % \begin{block}{統計諮詢課程}
+  %   \begin{itemize}
+  %     \item 學習需求釐清、問題定義、Gage R\&R 與 SPC 基礎概念
+  %     \item 建立統計方法連結實務問題的初步能力
+  %   \end{itemize}
+  % \end{block}
+
+    \begin{block}{兼職－課程助教｜國⽴東華⼤學應⽤數學系}
     \begin{itemize}
-      \item 學習需求釐清、問題定義、Gage R\&R 與 SPC 基礎概念
-      \item 建立統計方法連結實務問題的初步能力
+      \item 基礎機率、統計軟體、統計學
+      \item 輔導學生理解統計⽅法、資料分析⽅法
     \end{itemize}
   \end{block}
 
   \begin{block}{個人小型專案}
     \begin{itemize}
-      \item 練習 Python 後端開發與 PostgreSQL 串接
+      \item 練習 Python 後端開發與 FastAPI、PostgreSQL 串接
       \item 嘗試建置口袋式記帳系統，累積資料庫與系統整合經驗
     \end{itemize}
   \end{block}
 \end{frame}
 
 %---------------------------------
-\section{論文研究}
-
 \begin{frame}{\textbf{論文研究}}
   \begin{itemize}
-    \item 研究主題：半導體製程資料中的模型局部決策因子分析
-    \item 核心問題：資料複雜，機器學習模型的內部決策過程不易理解
-    \item 我的方法：以簡單線性迴歸刻劃模型，分析特定樣本附近的重要變數
-    \item 研究價值：協助工程人員理解複雜製程資料中的關鍵因子
-  \end{itemize}
+    \item 主題：預測模型解釋－以半導體製程資料為例
+    \vspace{1em}
+    \item 資料： 590 項特徵、缺失值、類別不平衡
+    \vspace{1em}
+    \item 問題：機器學習模型的計算過程
+    \vspace{1em}
+    \item 方法：建立 XGBoost 預測模型，以簡單線性迴歸刻劃模型，分析特定樣本附近的重要變數
+    \vspace{1em}
+    \item 結果：預測模型準確度達 9 成，刻劃模型解釋力達 7 成
+    \vspace{1em}
+    \item 價值：提供實務決策參考
+    \end{itemize}
 \end{frame}
-%---------------------------------
-\section{未來規劃}
 
+%---------------------------------
 \begin{frame}{\textbf{未來規劃}}
   \begin{block}{就職前準備}
     \begin{itemize}
-      \item 持續以 AI 工具輔助學習 Python/Go 後端開發與 SQL 應用
-      \item 強化英文技術閱讀與基本溝通能力
+      \item 持續學習貴公司所需技能，例如：後端開發邏輯、資料庫底層架構
     \end{itemize}
   \end{block}
-  \begin{block}{未來 3 年目標}
+  \begin{block}{短期目標}
     \begin{itemize}
-      \item 累積專案經驗，具備參與海外專案與外派支援的能力
-      \item 強化英文溝通能力，提升技術會議與工作交流的表達能力
-      \item 希望在工作中結合技術能力與國際合作經驗，拓展職涯發展方向
+      \item 熟悉日常業務、團隊開發流程
+      \item 提升程式開發能力、系統整合能力、英文閱讀與溝通能力
+    \end{itemize}
+  \end{block}
+  \begin{block}{中期目標}
+    \begin{itemize}
+      \item 能承接專案，負責小型軟體開發、資料分析處理流程
+      \item 接受外派訓練並實際參與外派
+      \item 成為兼具分析、開發與跨部⾨溝通能⼒的專業⼈員
     \end{itemize}
   \end{block}
 \end{frame}
 
+%---------------------------------
+\begin{frame}{\textbf{價值}}
+  \begin{itemize}
+    \item 具數學與統計背景
+    \vspace{1em}
+    \item 具程式與資料庫基本使用概念
+    \vspace{1em}
+    \item 具多年教學經驗，能清楚表達並協助團隊溝通
+    \vspace{1em}
+    \item 善用工具，快速整理問題並補強所需技能
+  \end{itemize}
+\end{frame}
+
+%---------------------------------
 \begin{frame}
   \centering
   \Huge{\textbf{謝謝聆聽}}
