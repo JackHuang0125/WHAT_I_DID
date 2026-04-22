@@ -159,6 +159,32 @@
 \end{frame}
 
 %================================================
+\begin{frame}{From Sufficient Condition to Mean Square Consistency}
+
+    If \quad $E(\hat{\theta}_n)\to\theta\quad\text{and}\quad Var(\hat{\theta}_n)\to 0$
+
+    then
+    $$
+    E\left[(\hat{\theta}_n-\theta)^2\right]
+    =Var(\hat{\theta}_n)+\left(E(\hat{\theta}_n)-\theta\right)^2\to0
+    $$
+    We call that
+    \textbf{L2 (Mean Square) Consistency:}
+    $$
+    \hat{\theta}_n \xrightarrow{L^2} \theta
+    $$
+
+    \textbf{Strength (Strongest to Weakest):}
+    $$
+    \hat{\theta}_n \xrightarrow{a.s.} \theta\quad\text{or}\quad\hat{\theta}_n \xrightarrow{L^2} \theta
+    \quad\Rightarrow\quad
+    \hat{\theta}_n \xrightarrow{P} \theta
+    \quad\Rightarrow\quad
+    \hat{\theta}_n \xrightarrow{d} \theta
+    $$
+\end{frame}
+
+%================================================
 \begin{frame}{Consistency of the Sample Mean}
 Suppose $$X_1,\dots,X_n \overset{iid}{\sim} (\mu,\sigma^2)$$
 and consider the sample mean $$\bar{X}=\frac1n\sum_{i=1}^nX_i$$
