@@ -1,0 +1,93 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{微軟正黑體}
+\setmainfont{Times New Roman}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\usepackage{amsmath, amssymb, bm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{mathtools}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\begin{document}
+
+%================================================
+\begin{frame}{From Sufficient Condition to Mean Square Consistency}
+
+    If \quad $E(\hat{\theta}_n)\to\theta\quad\text{and}\quad Var(\hat{\theta}_n)\to 0$
+
+    then
+    $$
+    E\left[(\hat{\theta}_n-\theta)^2\right]
+    =Var(\hat{\theta}_n)+\left(E(\hat{\theta}_n)-\theta\right)^2\to0
+    $$
+    We call that
+    \textbf{L2 (Mean Square) Consistency:}
+    $$
+    \hat{\theta}_n \xrightarrow{L^2} \theta
+    $$
+
+    \textbf{Strength (Strongest to Weakest):}
+    $$
+    \hat{\theta}_n \xrightarrow{a.s.} \theta\quad\text{or}\quad\hat{\theta}_n \xrightarrow{L^2} \theta
+    \quad\Rightarrow\quad
+    \hat{\theta}_n \xrightarrow{P} \theta
+    \quad\Rightarrow\quad
+    \hat{\theta}_n \xrightarrow{d} \theta
+    $$
+\end{frame}
+
+%================================================
+\begin{frame}{Consistency of the Sample Mean}
+Suppose $$X_1,\dots,X_n \overset{iid}{\sim} (\mu,\sigma^2)$$
+and consider the sample mean $$\bar{X}=\frac1n\sum_{i=1}^nX_i$$
+We have $$E(\bar{X})=\mu,\quad  Var(\bar{X})=\frac{\sigma^2}{n}\to0$$
+Then, by Chebyshev's inequality,
+$$P(|\bar{X}-\mu|>\varepsilon)\le\frac{\sigma^2/n}{\varepsilon^2}=\frac{\sigma^2}{n\varepsilon^2}\to0,\quad \forall \varepsilon>0$$
+Therefore $$\bar{X}\xrightarrow{P}\mu$$
+\end{frame}
+
+\begin{frame}{Consistency of the Sample Variance}
+Consider the sample variance
+
+\vspace{-1em}
+$$S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2$$
+
+\vspace{-1em}
+We have
+
+\vspace{-1em}
+$$E(S^2)=\sigma^2,\quad\mathrm{Var}(S^2)\to 0$$
+Then, by Chebyshev's inequality,
+
+\vspace{-1em}
+$$
+P(|S^2-\sigma^2|>\varepsilon)
+\le
+\frac{E[(S^2-\sigma^2)^2]}{\varepsilon^2}
+=
+\frac{MSE(S^2)}{\varepsilon^2}
+$$
+
+Since \(E(S^2)=\sigma^2\), \(S^2\) is unbiased, so
+
+\vspace{-1em}
+$$
+P(|S^2-\sigma^2|>\varepsilon)
+\le
+\frac{\mathrm{Var}(S^2)}{\varepsilon^2}
+\to 0,
+\qquad \forall \varepsilon>0
+$$
+
+Therefore
+$$S^2 \xrightarrow{P} \sigma^2$$
+\end{frame}
+
+\end{document}
