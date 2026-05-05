@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 
+\setlength{\parindent}{0pt}
 % 序列標號
 \usepackage{enumerate}
 
@@ -33,27 +34,485 @@
 
 \section*{3.1}
 \textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+    
+$$
+H_0:\mu=\mu_0
+\qquad \text{versus} \qquad
+H_1:\mu\neq \mu_0
+$$
+
+Under \(H_0\),
+$$
+\bar X_i \sim N\left(\mu_0,\frac{\sigma^2}{m}\right)
+$$
+
+Hence,
+$$
+Z_i=\frac{\bar X_i-\mu_0}{\sigma/\sqrt m}\sim N(0,1)
+$$
+
+For a two-sided test with significance level $\alpha$,
+$$
+P_{H_0}\left(|Z_i|>z_{1-\frac{\alpha}{2}}\right)=\alpha
+$$
+
+Therefore, the rejection region is
+$$
+|Z_i|>z_{1-\frac{\alpha}{2}}
+$$
+
+$$
+\Rightarrow\left|\frac{\bar X_i-\mu_0}{\sigma/\sqrt m}\right|>z_{1-\frac{\alpha}{2}}
+$$
+
+$$
+\Rightarrow
+\frac{\bar X_i-\mu_0}{\sigma/\sqrt m}>z_{1-\frac{\alpha}{2}}
+\quad
+\text{or}
+\quad
+\frac{\bar X_i-\mu_0}{\sigma/\sqrt m}<-z_{1-\frac{\alpha}{2}}
+$$
+
+Since \(\sigma/\sqrt m>0\),
+$$
+\bar X_i-\mu_0>z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m}
+\quad
+\text{or}
+\quad
+\bar X_i-\mu_0<-z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m}
+$$
+
+$$
+\Rightarrow
+\bar X_i>\mu_0+z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m}
+\quad
+\text{or}
+\quad
+\bar X_i<\mu_0-z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m}
+$$
+
+Let
+$$
+U=\mu_0+z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m},
+\qquad
+L=\mu_0-z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m}
+$$
+
+Therefore,
+$$
+|Z_i|>z_{1-\frac{\alpha}{2}}
+\iff
+\text{Reject }H_0
+\iff
+\bar X_i<L
+\quad \text{or} \quad
+\bar X_i>U
+$$
 
 \section*{3.3}
 \textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+\subsection*{(i)}
+Assume
+$$
+\mu_i=
+\begin{cases}
+\mu_0, & i<\tau \\
+\mu_1, & i\ge \tau
+\end{cases}
+$$
 
+where
+$$
+\mu_1=\mu_0+\delta,\qquad \delta\neq 0
+$$
+
+From equation \((3.4)\),
+$$
+\hat{\mu}_0=\bar{\bar X}=\frac{1}{n}\sum_{i=1}^{n}\bar X_i
+$$
+
+Since there are \(\tau-1\) subgroups with mean \(\mu_0\), and \(n-\tau+1\) subgroups with mean \(\mu_1\),
+$$
+E(\bar X_i)=
+\begin{cases}
+\mu_0, & i<\tau \\
+\mu_1, & i\ge \tau
+\end{cases}
+$$
+
+Therefore,
+\begin{align*}
+E(\hat{\mu}_0)
+&=E\left(\frac{1}{n}\sum_{i=1}^{n}\bar X_i\right) 
+=\frac{1}{n}\sum_{i=1}^{n}E(\bar X_i)
+=\frac{1}{n}\left[(\tau-1)\mu_0+(n-\tau+1)\mu_1\right] \\
+&=\frac{1}{n}\left[(\tau-1)\mu_0+(n-\tau+1)(\mu_0+\delta)\right]
+=\frac{1}{n}\left[n\mu_0+(n-\tau+1)\delta\right] \\
+&=\mu_0+\frac{n-\tau+1}{n}\delta
+\end{align*}
+
+Thus,
+$$
+\operatorname{Bias}(\hat{\mu}_0)=E(\hat{\mu}_0)-\mu_0=\frac{n-\tau+1}{n}\delta
+$$
+
+Since
+$$
+\delta\neq 0\quad \text{and}\quad 1<\tau\le n
+$$
+
+we have
+$$
+\frac{n-\tau+1}{n}\delta\neq 0\Rightarrow E(\hat{\mu}_0)\neq \mu_0
+$$
+
+Therefore,
+$$
+\hat{\mu}_0\text{ is not an unbiased estimator of }\mu_0
+$$
+
+\subsection*{(ii)}
+For the sampling distribution, assume
+
+$$
+X_{ij}\sim N(\mu_i,\sigma^2)
+$$
+
+Then
+$$
+\bar X_i\sim N\left(\mu_i,\frac{\sigma^2}{m}\right)
+$$
+
+Since $\hat{\mu}_0=\frac{1}{n}\sum_{i=1}^{n}\bar X_i$ and \(\bar X_1,\ldots,\bar X_n\) are independent normal random variables,
+$$
+\hat{\mu}_0\sim N\left(E(\hat{\mu}_0),Var(\hat{\mu}_0)\right)
+$$
+
+Compute
+$$
+Var(\hat{\mu}_0)=Var\left(\frac{1}{n}\sum_{i=1}^{n}\bar X_i\right)
+=\frac{1}{n^2}\sum_{i=1}^{n}Var(\bar X_i)
+=\frac{1}{n^2}\sum_{i=1}^{n}\frac{\sigma^2}{m}
+=\frac{\sigma^2}{mn}
+$$
+
+Therefore,
+$$
+\hat{\mu}_0\sim N\left(\mu_0+\frac{n-\tau+1}{n}\delta,\frac{\sigma^2}{mn}\right)
+$$
+    
 \section*{3.5}
 \textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+$$
+n=10,\quad m=5,\quad \alpha=0.0027\Rightarrow z_{1-\frac{\alpha}{2}}\approx 3
+$$
+
+\subsection*{(i)}
+
+\begin{align*}
+\bar{\bar X}
+&=\frac{1}{10}\sum_{i=1}^{10}\bar X_i
+=\frac{35.53+36.01+34.74+35.30+35.80+34.41+35.35+35.19+35.05+35.66}{10} \\
+&=35.304
+\end{align*}
+
+\begin{align*}
+\bar R
+&=\frac{1}{10}\sum_{i=1}^{10}R_i
+=\frac{2.41+3.24+2.24+3.16+1.06+1.80+1.60+1.42+1.77+1.42}{10} \\
+&=2.012
+\end{align*}
+
+For subgroup size \(m=5\),
+$$
+d_1(5)=2.326,\qquad d_2(5)=0.864
+$$
+
+The $\bar X$ chart,
+$$
+U_{\bar X}
+=\bar{\bar X}+\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)\sqrt m}\bar R
+=35.304+\frac{3}{2.326\sqrt 5}\cdot2.012
+\approx 36.465
+$$
+$$
+C_{\bar X}=\bar{\bar X}=35.304
+$$
+$$
+L_{\bar X}
+=\bar{\bar X}-\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)\sqrt m}\bar R
+=35.304-\frac{3}{2.326\sqrt 5}\cdot2.012
+\approx 34.143
+$$
+
+Hence,
+$$
+34.143<\bar X_i<36.465,\qquad i=1,2,\ldots,10
+$$
+
+The $R$ chart,
+$$
+U_R
+=\left(1+\frac{z_{1-\frac{\alpha}{2}}d_2(m)}{d_1(m)}\right)\bar R
+=\left(1+\frac{3\cdot 0.864}{2.326}\right)\cdot 2.012
+\approx 4.254
+$$
+
+$$
+C_R=\bar R=2.012
+$$
+
+$$
+L_R
+=\left(1-\frac{z_{1-\frac{\alpha}{2}}d_2(m)}{d_1(m)}\right)\bar R
+=\left(1-\frac{3\cdot 0.864}{2.326}\right)\cdot 2.012
+\approx -0.23\Rightarrow L_R=0
+$$
+
+Hence,
+$$
+0<R_i<4.254,\qquad i=1,2,\ldots,10
+$$
+
+In conclusion, the process seems to be in statistical control.
+
+\subsection*{(ii)}
+
+The IC mean is estimated by
+$$
+\hat{\mu}_0=\bar{\bar X}=35.304
+$$
+
+The IC standard deviation is estimated by
+$$
+\hat{\sigma}
+=\frac{\bar R}{d_1(m)}
+=\frac{2.012}{2.326}
+=0.865
+$$
+
+Therefore,
+$$
+\hat{\mu}_0=35.304,\quad \hat{\sigma}=0.865
+$$
+
+\subsection*{(iii)}
+
+When the true process mean is not shifted,
+
+$$
+\bar X
+\sim
+N\left(
+\hat{\mu}_0,
+\frac{\hat{\sigma}^2}{m}
+\right)
+$$
+
+The \(\bar X\) chart gives a signal if
+
+$$
+\bar X<L_{\bar X}
+\quad \text{or} \quad
+\bar X>U_{\bar X}
+$$
+
+Thus,
+\begin{align*}
+P(\text{signal})
+&=P\left(\bar X<L_{\bar X}\right)+P\left(\bar X>U_{\bar X}\right)\\
+&=P\left(Z<\frac{L_{\bar X}-\hat{\mu}_0}{\hat{\sigma}/\sqrt m}\right)+P\left(Z>\frac{U_{\bar X}-\hat{\mu}_0}{\hat{\sigma}/\sqrt m}\right) \\
+&=P(Z<-3)+P(Z>3)=2[1-\Phi(3)]=0.0027
+\end{align*}
+
+\subsection*{(iv)}
+
+Under the IC process,
+$$
+ARL_0=\frac{1}{\alpha}=\frac{1}{0.0027}=370.37
+$$
+
+For a mean shift of size \(1\),
+$$
+\mu_1=\mu_0+k\sigma=\mu_0+1\Rightarrow k=\frac{\mu_1-\mu_0}{\hat{\sigma}}=\frac{1}{0.865}=1.156
+$$
+
+Then
+$$
+\bar X\sim N\left(\mu_0+1,\frac{\hat{\sigma}^2}{m}\right)
+$$
+
+The probability of no signal after the shift is
+\begin{align*}
+\beta
+&=P\left(\mu_0-z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m}<\bar X<\mu_0+z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m}\right) \\
+&=P\left(-k\sqrt m-z_{1-\frac{\alpha}{2}}<\frac{\bar X-\mu_1}{\sigma/\sqrt m}<-k\sqrt m+z_{1-\frac{\alpha}{2}}\right) \\
+&=\Phi\left(-k\sqrt m+z_{1-\frac{\alpha}{2}}\right)-\Phi\left(-k\sqrt m-z_{1-\frac{\alpha}{2}}\right) \\
+&=\Phi\left(-1.156\sqrt 5+3\right)-\Phi\left(-1.156\sqrt 5-3\right) \\
+&=\Phi(0.415)-\Phi(-5.585) 
+\approx 0.6609
+\end{align*}
+
+Therefore,
+$$
+ARL_1=\frac{1}{1-\beta}=\frac{1}{1-0.6609}=2.949
+$$
 
 \section*{3.6}
 \textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+
+From Exercise 3.5,
+$$
+\bar{\bar X}=35.304
+\quad\text{and}\quad
+\bar R=2.012
+$$
+
+$$
+\bar s
+=\frac{1}{10}\sum_{i=1}^{10}s_i
+=\frac{0.99+1.28+0.97+1.25+0.43+0.70+0.77+0.53+0.66+0.63}{10}
+=0.821
+$$
+
+For subgroup size \(m=5\),
+$$
+c_4(5)=0.9400,\quad A_3=1.427,\quad B_3=0,\quad B_4=2.089,\quad d_1(5)=2.326,\quad d_2(5)=0.864
+$$
+
+\subsection*{(i)}
+
+The \(\bar X\) chart based on \(s\)
+$$
+U_{\bar X}=\bar{\bar X}+A_3\bar s=35.304+1.427\cdot 0.821\approx 36.476
+$$
+
+$$
+C_{\bar X}=\bar{\bar X}=35.304
+$$
+
+$$
+L_{\bar X}=\bar{\bar X}-A_3\bar s=35.304-1.427\cdot 0.821\approx 34.132
+$$
+
+Hence,
+$$
+34.132<\bar X\text{-}s<36.476
+$$
+
+The \(s\) chart,
+
+$$
+U_s=B_4\bar s=2.089(0.821)=1.715
+$$
+
+$$
+C_s=\bar s=0.821
+$$
+
+$$
+L_s=B_3\bar s=0(0.821)=0
+$$
+
+Hence,
+$$
+0<s_i<1.715
+$$
+
+In conclusion, the process seems to be in statistical control.
+\\
+
+\subsection*{(ii)}
+
+The \(\bar X\) chart based on $R$,
+$$
+U_{\bar X,R}=\bar{\bar X}+\frac{3}{d_1(5)\sqrt{5}}\bar R=35.304+\frac{3}{2.326\sqrt{5}}(2.012)=36.465
+$$
+
+$$
+L_{\bar X,R}=\bar{\bar X}-\frac{3}{d_1(5)\sqrt{5}}\bar R=35.304-\frac{3}{2.326\sqrt{5}}(2.012)=34.144
+$$
+
+Hence,
+$$
+34.144<\bar X<36.465
+$$
+
+The \(R\) chart,
+$$
+U_R=\left(1+3\frac{d_2(5)}{d_1(5)}\right)\bar R=\left(1+3\frac{0.864}{2.326}\right)(2.012)=4.254
+$$
+
+$$
+C_R=\bar R=2.012
+$$
+
+$$
+L_R=\left(1-3\frac{d_2(5)}{d_1(5)}\right)\bar R=\left(1-3\frac{0.864}{2.326}\right)(2.012)=-0.229\Rightarrow D_3=0
+$$
+
+Hence,
+$$
+0<R<4.254
+$$
+
+The two \(\bar X\) charts have limits
+$$
+\bar X\text{-}s:
+\quad
+[34.132,\ 36.476]
+$$
+
+$$
+\bar X\text{-}R:
+\quad
+[34.144,\ 36.465]
+$$
+
+These limits are almost identical.
+
+Both the \(s\) chart and the \(R\) chart show no out-of-control signal.
+
+Both methods suggest that the process is in statistical control
+
+\subsection*{(iii)}
+
+Estimators of \(\sigma\)
+
+The range-based estimator is
+
+$$
+\hat\sigma_R=\frac{\bar R}{d_1(m)}=\frac{2.012}{2.326}=0.8650
+$$
+
+The sample-standard-deviation-based estimator is
+
+$$
+\hat\sigma_s=\frac{\bar s}{c_4(m)}=\frac{0.821}{0.9400}=0.8734
+$$
+
+The combined-sample standard deviation is
+
+$$
+\hat\sigma_{\mathrm{combined}}=s_{\mathrm{combined}}=
+\sqrt{
+\frac{1}{N-1}
+\sum_{i=1}^{10}\sum_{j=1}^{5}
+\left(X_{ij}-\bar X_{\mathrm{all}}\right)^2
+}
+=
+0.9099
+$$
+
+The range-based estimator is simple, 
+but it uses only the minimum and maximum values in each subgroup.
+The \(s\)-based estimator uses all observations inside each subgroup and is usually more efficient.
+The combined-sample estimator uses all observations,
+but it mixes within-subgroup and between-subgroup variation;
+therefore,
+it may overestimate the natural process variation when subgroup means differ over time.
+$\text{For SPC}, \hat\sigma_R \text{ and } \hat\sigma_s \text{ are more appropriate for estimating within-subgroup variation}$
 
 \section*{3.7}
 \textbf{Sol.}
