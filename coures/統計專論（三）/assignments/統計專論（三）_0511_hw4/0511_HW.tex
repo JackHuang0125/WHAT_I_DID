@@ -60,11 +60,9 @@ Therefore, the rejection region is
 $$
 |Z_i|>z_{1-\frac{\alpha}{2}}
 $$
-
 $$
 \Rightarrow\left|\frac{\bar X_i-\mu_0}{\sigma/\sqrt m}\right|>z_{1-\frac{\alpha}{2}}
 $$
-
 $$
 \Rightarrow
 \frac{\bar X_i-\mu_0}{\sigma/\sqrt m}>z_{1-\frac{\alpha}{2}}
@@ -82,7 +80,6 @@ $$
 \quad
 \bar X_i-\mu_0<-z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m}
 $$
-
 $$
 \Rightarrow
 \bar X_i>\mu_0+z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt m}
@@ -159,7 +156,9 @@ $$
 
 Since
 $$
-\delta\neq 0\quad \text{and}\quad 1<\tau\le n
+\delta\neq 0
+\quad\text{and}\quad
+1<\tau\le n
 $$
 
 we have
@@ -174,7 +173,6 @@ $$
 
 \subsection*{(ii)}
 For the sampling distribution, assume
-
 $$
 X_{ij}\sim N(\mu_i,\sigma^2)
 $$
@@ -258,7 +256,6 @@ U_R
 =\left(1+\frac{3\cdot 0.864}{2.326}\right)\cdot 2.012
 \approx 4.254
 $$
-
 $$
 C_R=\bar R=2.012
 $$
@@ -300,7 +297,6 @@ $$
 \subsection*{(iii)}
 
 When the true process mean is not shifted,
-
 $$
 \bar X
 \sim
@@ -311,7 +307,6 @@ N\left(
 $$
 
 The \(\bar X\) chart gives a signal if
-
 $$
 \bar X<L_{\bar X}
 \quad \text{or} \quad
@@ -368,7 +363,6 @@ $$
 \quad\text{and}\quad
 \bar R=2.012
 $$
-
 $$
 \bar s
 =\frac{1}{10}\sum_{i=1}^{10}s_i
@@ -378,46 +372,41 @@ $$
 
 For subgroup size \(m=5\),
 $$
-c_4(5)=0.9400,\quad A_3=1.427,\quad B_3=0,\quad B_4=2.089,\quad d_1(5)=2.326,\quad d_2(5)=0.864
+\quad d_1(5)=2.326,\quad d_2(5)=0.864,\quad d_3(5)=0.940
 $$
 
 \subsection*{(i)}
 
 The \(\bar X\) chart based on \(s\)
 $$
-U_{\bar X}=\bar{\bar X}+A_3\bar s=35.304+1.427\cdot 0.821\approx 36.476
+U_{\bar X,s}=\bar{\bar X}+\frac{z_{1-\frac{\alpha}{2}}}{d_3(m)\sqrt m}\bar s=35.304+\frac{3}{0.94\sqrt 5}(0.821)\approx 36.476
 $$
-
 $$
 C_{\bar X}=\bar{\bar X}=35.304
 $$
-
 $$
-L_{\bar X}=\bar{\bar X}-A_3\bar s=35.304-1.427\cdot 0.821\approx 34.132
+L_{\bar X,s}=\bar{\bar X}-\frac{z_{1-\frac{\alpha}{2}}}{d_3(m)\sqrt m}\bar s=35.304-\frac{3}{0.94\sqrt 5}(0.821)\approx 34.132
 $$
 
 Hence,
 $$
-34.132<\bar X\text{-}s<36.476
+34.132<\bar X_i<36.476,\quad i=1,\ldots,10
 $$
 
 The \(s\) chart,
-
 $$
-U_s=B_4\bar s=2.089(0.821)=1.715
+U_s=\left(1+\frac{z_{1-\frac{\alpha}{2}}\sqrt{1-d_3^2(m)}}{d_3(m)}\right)\bar s=\left(1+\frac{3\sqrt{1-0.94^2}}{0.94}\right)(2.012)\approx 1.715
 $$
-
 $$
 C_s=\bar s=0.821
 $$
-
 $$
-L_s=B_3\bar s=0(0.821)=0
+L_s=\left(1-\frac{z_{1-\frac{\alpha}{2}}\sqrt{1-d_3^2(m)}}{d_3(m)}\right)\bar s=\left(1-\frac{3\sqrt{1-0.94^2}}{0.94}\right)(0.821)\approx -0.076\Rightarrow L_s=0 \text{ as } s_i\ge0
 $$
 
 Hence,
 $$
-0<s_i<1.715
+0<s_i<1.715,\quad i=1,\ldots,10
 $$
 
 In conclusion, the process seems to be in statistical control.
@@ -427,34 +416,34 @@ In conclusion, the process seems to be in statistical control.
 
 The \(\bar X\) chart based on $R$,
 $$
-U_{\bar X,R}=\bar{\bar X}+\frac{3}{d_1(5)\sqrt{5}}\bar R=35.304+\frac{3}{2.326\sqrt{5}}(2.012)=36.465
+U_{\bar X,R}=\bar{\bar X}+\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)\sqrt{m}}\bar R=35.304+\frac{3}{2.326\sqrt{5}}(2.012)\Rightarrow 36.465
 $$
-
 $$
-L_{\bar X,R}=\bar{\bar X}-\frac{3}{d_1(5)\sqrt{5}}\bar R=35.304-\frac{3}{2.326\sqrt{5}}(2.012)=34.144
+C_{\bar X,R}=\bar{\bar X}=35.304
+$$
+$$
+L_{\bar X,R}=\bar{\bar X}-\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)\sqrt{m}}\bar R=35.304-\frac{3}{2.326\sqrt{5}}(2.012)\Rightarrow 34.144
 $$
 
 Hence,
 $$
-34.144<\bar X<36.465
+34.144<\bar X_i<36.465,\quad i=1,\ldots,10
 $$
 
 The \(R\) chart,
 $$
-U_R=\left(1+3\frac{d_2(5)}{d_1(5)}\right)\bar R=\left(1+3\frac{0.864}{2.326}\right)(2.012)=4.254
+U_R=\left(1+\frac{z_{1-\frac{\alpha}{2}}d_2(m)}{d_1(m)}\right)\bar R=\left(1+\frac{3\cdot 0.864}{2.326}\right)(2.012)\Rightarrow 4.254
 $$
-
 $$
 C_R=\bar R=2.012
 $$
-
 $$
-L_R=\left(1-3\frac{d_2(5)}{d_1(5)}\right)\bar R=\left(1-3\frac{0.864}{2.326}\right)(2.012)=-0.229\Rightarrow D_3=0
+L_R=\left(1-\frac{z_{1-\frac{\alpha}{2}}d_2(m)}{d_1(m)}\right)\bar R=\left(1-\frac{3\cdot 0.864}{2.326}\right)(2.012)\Rightarrow -0.229\Rightarrow L_R=0 \text{ as } R_i\ge0
 $$
 
 Hence,
 $$
-0<R<4.254
+0<R_i<4.254,\quad i=1,\ldots,10
 $$
 
 The two \(\bar X\) charts have limits
@@ -463,7 +452,6 @@ $$
 \quad
 [34.132,\ 36.476]
 $$
-
 $$
 \bar X\text{-}R:
 \quad
@@ -481,72 +469,805 @@ Both methods suggest that the process is in statistical control
 Estimators of \(\sigma\)
 
 The range-based estimator is
-
 $$
-\hat\sigma_R=\frac{\bar R}{d_1(m)}=\frac{2.012}{2.326}=0.8650
+\hat\sigma_R=\frac{\bar R}{d_1(m)}=\frac{2.012}{2.326}\approx 0.865
 $$
 
 The sample-standard-deviation-based estimator is
-
 $$
-\hat\sigma_s=\frac{\bar s}{c_4(m)}=\frac{0.821}{0.9400}=0.8734
+\hat\sigma_s=\frac{\bar s}{d_3(m)}=\frac{0.821}{0.94}\approx 0.873
 $$
 
 The combined-sample standard deviation is
-
 $$
-\hat\sigma_{\mathrm{combined}}=s_{\mathrm{combined}}=
-\sqrt{
-\frac{1}{N-1}
-\sum_{i=1}^{10}\sum_{j=1}^{5}
-\left(X_{ij}-\bar X_{\mathrm{all}}\right)^2
-}
-=
-0.9099
+\hat\sigma_{\mathrm{combined}}=s_{\mathrm{combined}}=\sqrt{\frac{1}{N-1}\sum_{i=1}^{10}\sum_{j=1}^{5}\left(X_{ij}-\bar X_{\mathrm{all}}\right)^2}\approx 0.91
 $$
 
-The range-based estimator is simple, 
+The $R$-based estimator is simple, 
 but it uses only the minimum and maximum values in each subgroup.
 The \(s\)-based estimator uses all observations inside each subgroup and is usually more efficient.
 The combined-sample estimator uses all observations,
-but it mixes within-subgroup and between-subgroup variation;
-therefore,
-it may overestimate the natural process variation when subgroup means differ over time.
-$\text{For SPC}, \hat\sigma_R \text{ and } \hat\sigma_s \text{ are more appropriate for estimating within-subgroup variation}$
+it mixes within-subgroup and between-subgroup variation,
+it may overestimate.
+For SPC,
+$$
+\hat\sigma_R
+\quad\text{and}\quad
+\hat\sigma_s
+$$
+are more appropriate for estimating within-subgroup variation.
 
 \section*{3.7}
-\textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+\textbf{Sol}
+
+The overall probability of Type I error is
+$$
+\tilde{\alpha}=1-(1-\alpha)^n
+\Rightarrow
+1-\tilde{\alpha}=(1-\alpha)^n
+\Rightarrow
+(1-\tilde{\alpha})^{1/n}=1-\alpha
+\Rightarrow
+\alpha=1-(1-\tilde{\alpha})^{1/n}
+$$
+
+\subsection*{(i)}
+
+When
+$$
+\tilde{\alpha}=0.001
+\text{ and }
+n=10
+$$
+$$
+\Rightarrow \alpha=1-(1-0.001)^{1/10}=1-(0.999)^{1/10}\approx 0.0001
+$$
+$$
+\Rightarrow z_{1-\frac{\alpha}{2}}\approx 3.890
+$$
+
+When
+$$
+\tilde{\alpha}=0.001
+\text{ and }
+n=100
+$$
+$$\Rightarrow \alpha=1-(1-0.001)^{1/100}=1-(0.999)^{1/100}\approx 0.00001
+$$
+$$
+\Rightarrow z_{1-\frac{\alpha}{2}}\approx 4.417
+$$
+
+When $n$ increases from 10 to 100, $\alpha$ must become smaller.
+The \(\bar X\) chart based on \(R\) has limits
+$
+U_{\bar X,R}=\bar{\bar X}+\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)\sqrt m}\bar R
+\text{ and }
+L_{\bar X,R}=\bar{\bar X}-\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)\sqrt m}\bar R
+$
+Since $z_{1-\frac{\alpha}{2}}$ is larger when $n=100$, the control limits become wider.
+
+\subsection*{(ii)}
+
+When
+$$
+\tilde{\alpha}=0.0001
+\text{ and }
+n=10
+$$
+$$
+\Rightarrow \alpha=1-(1-0.0001)^{1/10}=1-(0.9999)^{1/10}\approx 0.00001
+$$
+$$
+\Rightarrow z_{1-\frac{\alpha}{2}}\approx 4.417
+$$
+
+When
+$$
+\tilde{\alpha}=0.0001
+\text{ and }
+n=100
+$$
+$$
+\Rightarrow \alpha=1-(1-0.0001)^{1/100}=1-(0.9999)^{1/100}\approx 0.000001
+$$
+$$
+\Rightarrow z_{1-\frac{\alpha}{2}}\approx 4.892
+$$
+
+Compared with part \(i\), 
+$\tilde{\alpha}$ is reduced from $0.001$ to $0.0001$, 
+so the corresponding $\alpha$ also becomes smaller.
+The corresponding quantile $z_{1-\frac{\alpha}{2}}$ becomes larger,
+so the \(\bar X\) chart limits become wider.
+Therefore,
+$$
+\tilde{\alpha}\downarrow
+\quad\Rightarrow\quad
+\alpha\downarrow
+\quad\Rightarrow\quad
+z_{1-\frac{\alpha}{2}}\uparrow
+\quad\Rightarrow\quad
+\text{wider control limits}
+$$
 
 \section*{3.8}
-\textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+\textbf{Sol}
+
+\subsection*{(i)}
+
+Phase I data:
+
+$\bar X_1,\ldots,\bar X_{10}=80.22,\ 78.31,\ 81.40,\ 78.53,\ 81.32,\ 80.54,\ 77.33,\ 79.24,\ 81.44,\ 77.76$
+
+$s_1,\ldots,s_{10}=3.99,\ 5.35,\ 4.79,\ 4.68,\ 3.79,\ 5.78,\ 3.52,\ 4.51,\ 5.16,\ 4.81$
+
+$$
+\bar{\bar X}=\frac{1}{10}\sum_{i=1}^{10}\bar X_i=79.609
+\quad\text{and}\quad
+\bar s=\frac{1}{10}\sum_{i=1}^{10}s_i=4.638
+$$
+
+For subgroup size \(m=5\),
+$$
+d_3(5)=0.940,\quad z_{1-\frac{\alpha}{2}}=3
+$$
+
+The \(\bar X\) chart based on \(s\)
+$$
+U_{\bar X}=\bar{\bar X}+\frac{z_{1-\frac{\alpha}{2}}}{d_3(m)\sqrt{m}}\bar s=79.609+\frac{3}{0.94\sqrt{5}}(4.638)\approx 86.229
+$$
+$$
+C_{\bar X}=\bar{\bar X}=79.609
+$$
+$$
+L_{\bar X}=\bar{\bar X}-\frac{z_{1-\frac{\alpha}{2}}}{d_3(m)\sqrt{m}}\bar s=79.609-\frac{3}{0.94\sqrt{5}}(4.638)\approx 72.989
+$$
+
+Hence,
+$$
+72.989<\bar X_i<86.229,\quad i=1,\ldots,10
+$$
+
+The \(s\) chart
+$$
+U_s=\left(1+\frac{z_{1-\frac{\alpha}{2}}\sqrt{1-d_3(m)^2}}{d_3(m)}\right)\bar s=\left(1+\frac{3\sqrt{1-0.94^2}}{0.94}\right)(4.638)\approx 9.688$$
+$$
+C_s=\bar s=4.638
+$$
+$$
+L_s=\max\left\{0,\left(1-\frac{z_{1-\frac{\alpha}{2}}\sqrt{1-d_3(m)^2}}{d_3(m)}\right)\bar s\right\}=0
+$$
+
+Hence,
+$$
+0\le s_i<9.688,\quad i=1,\ldots,10
+$$
+
+Therefore, 
+the first 10 samples show no out-of-control signal.
+The process seems to be in statistical control in Phase I.
+
+Then
+$$
+\bar X_{11}=79.48,\quad
+\bar X_{12}=76.74,\quad
+\bar X_{13}=81.12,\quad
+\bar X_{14}=86.79
+$$
+$$
+s_{11}=4.56,\quad
+s_{12}=7.35,\quad
+s_{13}=3.91,\quad
+s_{14}=6.31
+$$
+
+For the \(\bar X\) chart,
+$$
+\bar X_{11}, \,X_{12}, X_{13}\,\in[72.989,\ 86.229]
+\quad \text{and}\quad
+\bar X_{14}\notin[72.989,\ 86.229]
+$$
+
+Thus, $\bar X_{14}$ gives an out-of-control signal in the \(\bar X\) chart.
+
+For the \(s\) chart,
+$$
+0\le s_{11},s_{12},s_{13},s_{14}<9.688
+$$
+
+Thus, no signal is found in the \(s\) chart.
+
+\subsection*{(ii)}
+
+For the first 10 samples,
+$$
+\overline{s^2}=\frac{1}{10}\sum_{i=1}^{10}s_i^2=21.965
+$$
+
+Since
+$$
+\frac{(m-1)s_i^2}{\sigma^2}\sim \chi^2_{m-1}\Rightarrow E(s_i^2)=\sigma^2\Rightarrow Var(s_i^2)=\frac{2\sigma^4}{m-1}\Rightarrow \hat{s_i^2}=\bar {s^2}\sqrt{\frac{2}{m-1}}
+$$
+
+So the \(s^2\) chart
+$$
+U_{s^2}
+=\left(1+z_{1-\frac{\alpha}{2}}\sqrt{\frac{2}{m-1}}\right)\overline{s^2}
+=\left(1+3\sqrt{\frac{2}{5-1}}\right)(21.965)\approx 68.561
+$$
+$$
+C_{s^2}=\overline{s^2}=21.965
+$$
+$$
+L_{s^2}
+=\left(1-z_{1-\frac{\alpha}{2}}\sqrt{\frac{2}{m-1}}\right)\overline{s^2}
+=\left(1-3\sqrt{\frac{2}{5-1}}\right)(21.965)\approx -24.631\Rightarrow L_{s^2}=0 \text{ as } s_i^2\ge0
+$$
+
+Hence,
+$$
+0\le s_i^2<68.561,\quad i=1,\ldots,10
+$$
+
+The process variability seems to be in statistical control at the first 10 time points
+
+For Phase II,
+$
+s_{11}^2=4.56^2=20.794
+　　\text{and}　　
+s_{12}^2=7.35^2=54.023
+　　\text{and}　　
+s_{13}^2=3.91^2=15.288
+　　\text{and}　　
+s_{14}^2=6.31^2=39.816
+$
+
+All satisfy
+$$
+0\le s_i^2<68.561,\quad i=11,12,13,14
+$$
+
+Therefore,
+The $s^2$ chart gives no out-of-control signal in Phase II
+
+\subsection*{(iii)}
+
+Taking the square root of the control limits of the \(s^2\) chart gives a new \(s\) chart
+$$
+U_s^*
+=
+\sqrt{U_{s^2}}
+=
+\sqrt{68.561}
+\approx 8.280
+$$
+$$
+C_s^*
+=
+\sqrt{C_{s^2}}
+=
+\sqrt{21.965}
+\approx 4.687
+$$
+$$
+L_s^*
+=
+\sqrt{L_{s^2}}
+=
+0
+$$
+
+Thus, the new \(s\) chart is $0\le s_i<8.280$. Square-root $s^2$ chart:[0,\ 8.280]
+
+The original \(s\) chart in part \(i\) is $0\le s_i<9.688$. Original $s$ chart: [0,\ 9.688]
+
+The square-root version has a smaller upper control limit.
+
+For Phase I,
+$$
+s_i<8.280,\quad i=1,\ldots,10
+$$
+
+both \(s\) charts give no out-of-control signal.
+
+For Phase II,
+$$
+s_{11}=4.56,\quad
+s_{12}=7.35,\quad
+s_{13}=3.91,\quad
+s_{14}=6.31
+$$
+
+all satisfy
+$$
+s_i<8.280,\quad i=11,12,13,14
+$$
+
+The square-root version also gives no out-of-control signal in Phase II.
 
 \section*{3.9}
-\textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+\textbf{Sol}
+
+$$
+\bar X=\frac{1}{20}\sum_{i=1}^{20}X_i=24.500
+$$
+
+\subsection*{(i)}
+
+For moving window size $\tilde m=2$
+
+$$
+d_1(2)=1.128,\quad d_2(2)=0.853
+$$
+
+The moving ranges are
+$$
+MR_i=|X_{i+1}-X_i|,\quad i=1,\ldots,19
+$$
+$$
+MR_i=1,\ 15,\ 13,\ 1,\ 3,\ 2,\ 3,\ 7,\ 4,\ 0,\ 2,\ 6,\ 10,\ 1,\ 1,\ 5,\ 4,\ 2,\ 1
+$$
+$$
+\overline{MR}=\frac{1}{19}\sum_{i=1}^{19}R_i\approx 4.263
+$$
+
+The \(\bar X\) chart
+$$
+U_{\bar X}=\bar X+\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)}\overline{MR}=24.500+\frac{3}{1.128}(4.263)\approx 35.838
+$$
+$$
+C_{\bar X}=\bar X=24.500
+$$
+$$
+L_{\bar X}=\bar X-\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)}\overline{MR}=24.500-\frac{3}{1.128}(4.263)\approx 13.162
+$$
+
+Hence
+$$
+13.162<X_i<35.838,\quad i=1,\ldots,20
+$$
+
+But
+$$
+X_3=39>35.838
+$$
+
+Thus the \(\bar X\) chart gives an out-of-control signal at \(X_3\).
+
+The \(R\) chart
+$$
+U_R=\left(1+z_{1-\frac{\alpha}{2}}\frac{d_2(2)}{d_1(2)}\right)\overline{MR}=\left(1+3\frac{0.853}{1.128}\right)(4.263)\approx 13.935
+$$
+$$
+C_R=\overline{MR}=4.263
+$$
+$$
+L_R=\left(1-z_{1-\frac{\alpha}{2}}\frac{d_2(2)}{d_1(2)}\right)\overline{MR}=\left(1-3\frac{0.853}{1.128}\right)(4.263)\approx -5.408\Rightarrow L_R=0 \text{ as } R_i\ge0
+$$
+
+Hence
+$$
+0\le R_i<13.935,\quad i=1,\ldots,19
+$$
+
+But
+$$
+R_2=|X_3-X_2|=|39-24|=15>13.935
+$$
+
+Thus the \(R\) chart gives an out-of-control signal at moving window \(R_2\).
+
+\subsection*{(ii)}
+
+For moving window size $\tilde m=5$
+$$
+d_1(5)=2.326,\quad d_2(5)=0.864
+$$
+
+The moving ranges are
+$$
+MR_i=\max\{X_i,\ldots,X_{i+4}\}-\min\{X_i,\ldots,X_{i+4}\},\quad i=1,\ldots,16
+$$
+$$
+MR_i=15,\ 17,\ 17,\ 5,\ 7,\ 7,\ 7,\ 7,\ 12,\ 10,\ 10,\ 10,\ 10,\ 5,\ 5,\ 5
+$$
+$$
+\overline{MR}=\frac{1}{16}\sum_{i=1}^{16}R_i\approx 9.313
+$$
+
+The \(\bar X\) chart
+$$
+U_{\bar X}=\bar X+\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)}\overline{MR}=24.500+\frac{3}{2.326}(9.313)\approx 36.511
+$$
+$$
+C_{\bar X}=\bar X=24.500
+$$
+$$
+L_{\bar X}=\bar X-\frac{z_{1-\frac{\alpha}{2}}}{d_1(m)}\overline{MR}=24.500-\frac{3}{2.326}(9.313)\approx 12.489
+$$
+
+Hence
+$$
+12.489<X_i<36.511,\quad i=1,\ldots,20
+$$
+
+But
+$$
+X_3=39>36.511
+$$
+
+Thus the \(\bar X\) chart gives an out-of-control signal at \(X_3\).
+
+The \(R\) chart
+$$
+U_R=\left(1+z_{1-\frac{\alpha}{2}}\frac{d_2(m)}{d_1(m)}\right)\bar R=\left(1+3\frac{0.864}{2.326}\right)(9.313)\approx 19.690
+$$
+$$
+C_R=\bar R=9.313
+$$
+$$
+L_R=\left(1-z_{1-\frac{\alpha}{2}}\frac{d_2(m)}{d_1(m)}\right)\bar R=\left(1-3\frac{0.864}{2.326}\right)(9.313)\approx -1.065\Rightarrow L_R=0 \text{ as } R_i\ge0
+$$
+
+Hence
+$$
+0\le R_i<19.690,\quad i=1,\ldots,16
+$$
+
+All moving ranges satisfy
+$$
+0\le R_i<19.690
+$$
+
+Thus the \(R\) chart gives no out-of-control signal.
+
+For \(\tilde m=2\)
+$$
+\bar X\text{ chart gives a signal at }X_3=39
+$$
+$$
+R\text{ chart gives a signal at }R_2=15
+$$
+
+For \(\tilde m=5\)
+$$
+\bar X\text{ chart gives a signal at }X_3=39
+$$
+$$
+R\text{ chart gives no signal}
+$$
+
+The major finding is $X_3=39$,it is an unusually large observation. 
+The moving window size \(m=2\) is more sensitive to local jumps between adjacent observations.
+The moving window size \(m=5\) produces a larger average moving range and wider \(R\) chart limits.
+
 
 \section*{3.11}
-\textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+\textbf{Sol}
+
+\subsection*{(i)}
+
+The sample proportions are
+$$
+p_i=\frac{X_i}{100},\quad i=1,\ldots,20
+$$
+
+The average sample proportion is
+$$
+\bar p=\frac{\sum_{i=1}^{20}X_i}{20(100)}=\frac{392}{2000}\approx0.196
+$$
+
+The \(p\) chart is
+$$
+U_p=\bar p+z_{1-\frac{\alpha}{2}}\sqrt{\frac{\bar p(1-\bar p)}{m}}=0.196+3\sqrt{\frac{0.196(1-0.196)}{100}}\approx0.315
+$$
+$$
+C_p=\bar p=0.196
+$$
+$$
+L_p=\bar p-z_{1-\frac{\alpha}{2}}\sqrt{\frac{\bar p(1-\bar p)}{m}}=0.196-3\sqrt{\frac{0.196(1-0.196)}{100}}\approx0.077
+$$
+
+Hence,
+$$
+0.077<p_i<0.315
+\Rightarrow
+7.691<X_i<31.509,\quad i=1,\ldots,20
+$$
+
+All samples are within the control limits, the process seems to be in statistical control.
+
+\subsection*{(ii)}
+
+Assume the IC proportion is $\pi_0=0.19$ and the shifted proportion is $\pi_1=0.29$.
+
+Using the \(p\) chart based on formula \((3.19)\),
+$$
+U_p=\pi_0+z_{1-\frac{\alpha}{2}}\sqrt{\frac{\pi_0(1-\pi_0)}{m}}
+$$
+
+To detect the upward shift with probability \(0.9\), require
+$$
+P_{\pi_1}
+\left(
+\hat p>U_p
+\right)
+\ge 0.90
+$$
+
+We know that
+$$
+\hat p\sim N\left(\pi_1,\frac{\pi_1(1-\pi_1)}{m}\right)
+$$
+
+Thus,
+$$
+P_{\pi_1}\left(\hat p>U_p\right)=0.90
+\Rightarrow \frac{\pi_1-U_p}{\sqrt{\frac{\pi_1(1-\pi_1)}{m}}}=z_{0.90}
+\Rightarrow \frac{\pi_1-\pi_0-z_{1-\frac{\alpha}{2}}\sqrt{\frac{\pi_0(1-\pi_0)}{m}}}{\sqrt{\frac{\pi_1(1-\pi_1)}{m}}}=z_{0.90}
+$$
+$$
+\Rightarrow \sqrt m(\pi_1-\pi_0)=z_{1-\frac{\alpha}{2}}\sqrt{\pi_0(1-\pi_0)}+z_{0.90}\sqrt{\pi_1(1-\pi_1)}
+$$
+$$
+\Rightarrow m=\left[\frac{z_{1-\frac{\alpha}{2}}\sqrt{\pi_0(1-\pi_0)}+z_{0.90}\sqrt{\pi_1(1-\pi_1)}}{\pi_1-\pi_0}\right]^2
+$$
+$$
+\Rightarrow m=\left[\frac{3\sqrt{0.19(1-0.19)}+1.282\sqrt{0.29(1-0.29)}}{0.29-0.19}\right]^2\approx 309.205
+$$
+
+Hence, the minimum sample size is $m=310$.
 
 \section*{3.13}
-\textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+\textbf{Sol}
+
+$$
+\sum_{i=1}^{20}X_i=82
+\quad\text{and}\quad
+\bar p=\frac{\sum_{i=1}^{20}X_i}{nm}=\frac{82}{20(50)}=0.082
+$$
+
+\subsection*{(i)}
+
+$$
+U_p=\bar p+z_{1-\frac{\alpha}{2}}\sqrt{\frac{\bar p(1-\bar p)}{m}}=0.082+3\sqrt{\frac{0.082(1-0.082)}{50}}\approx 0.198
+$$
+$$
+C_p=\bar p=0.082
+$$
+$$
+L_p=\bar p-z_{1-\frac{\alpha}{2}}\sqrt{\frac{\bar p(1-\bar p)}{m}}=0.082-3\sqrt{\frac{0.082(1-0.082)}{50}}\approx -0.034\Rightarrow L_p=0 \text{ as } p_i\ge 0
+$$
+
+Hence
+$$
+0\le p_i<0.198,\quad i=1,\ldots,20
+$$
+
+The process seems to be in statistical control.
+
+\subsection*{(ii)}
+
+Because
+$$
+m\bar p=50(0.082)=4.100\Rightarrow m\bar p<5
+$$
+
+The large-sample condition is not satisfied, so use the binomial distribution directly.
+
+Let
+$$
+X\sim Binomial(50,0.082)
+$$
+
+The exact lower limit is
+$$
+L_p^*=\frac{\max\{a:P(X\le a)\le \frac{\alpha}{2}\}}{m}=\frac{\max\{a:P(X\le a)\le 0.00135\}}{50}
+$$
+
+Since
+$$
+P(X\le 0)\approx 0.014>0.00135
+$$
+
+Then
+$$
+L_p^*=0
+$$
+
+The exact upper limit is
+
+$$
+U_p^*=\frac{\min\{a:P(X\ge a)\le \frac{\alpha}{2}\}}{m}=\frac{\min\{a:P(X\ge a)\le 0.00135\}}{50}
+$$
+
+Since
+$$
+P(X\ge 11)\approx 0.002>0.00135
+\quad\text{and}\quad
+P(X\ge 12)\approx 0.001<0.00135
+$$
+
+Then
+$$
+U_p^*=\frac{12}{50}=0.24
+$$
+
+The exact \(p\) chart is
+$$
+L_p^*=0,\quad C_p=0.082,\quad U_p^*=0.24
+$$
+
+Since
+$$
+0\le p_i<0.24,\quad i=1,\ldots,20
+$$
+
+there is no out-of-control signal.
+
+Compared with part \((i)\), 
+the exact binomial chart has a wider upper control limit.
+
+\subsection*{(iii)}
+
+The actual Type I error probability is
+$$
+\alpha'=P(X<mL_p^*)+P(X>mU_p^*)=P(X<0)+P(X>12)=0+P(X\ge 13)\approx 0.000147
+$$
+
+\subsection*{(iv)}
+
+Using the control limits in \((3.22)\)
+
+$$
+\tilde m=m+z_{1-\frac{\alpha}{2}}^2=50+3^2=59
+$$
+$$
+\tilde p=\frac{m\bar p+\frac{z_{1-\frac{\alpha}{2}}^2}{2}}{\tilde m}=\frac{50(0.082)+\frac{9}{2}}{59}\approx 0.146
+$$
+
+The control limit is
+$$
+U_p=\tilde p+z_{1-\frac{\alpha}{2}}\sqrt{\frac{\tilde p(1-\tilde p)}{\tilde m}}=0.146+3\sqrt{\frac{0.146(1-0.146)}{59}}\approx 0.284
+$$
+$$
+C_p=\tilde p=0.146
+$$
+$$
+L_p=\tilde p-z_{1-\frac{\alpha}{2}}\sqrt{\frac{\tilde p(1-\tilde p)}{\tilde m}}=0.146-3\sqrt{\frac{0.146(1-0.146)}{59}}\approx 0.008
+$$
+
+Since
+$$
+0.008\le p_i<0.284,\quad i=1,\ldots,20
+$$
+
+there is no out-of-control signal.
+
+In conclusion, 
+All three charts show no out-of-control signal.
+The (i) gives the narrowest upper control limit.
+The (iv) gives the widest upper control limit.
 
 \section*{3.20}
-\textbf{Sol.}
-    \begin{enumerate}[i.]
-        \item 
-    \end{enumerate}
+\textbf{Sol}
+
+The target value is
+$$
+T=\frac{USL+LSL}{2}
+=
+\frac{2300+2100}{2}
+=
+2200
+$$
+
+\subsection*{(i)}
+
+The point estimate of \(C_p\) is
+$$
+\hat C_p
+=
+\frac{USL-LSL}{6s}
+=
+\frac{2300-2100}{6(50)}
+=
+\frac{200}{300}
+\approx 0.667
+$$
+
+The point estimate of \(C_{pk}\) is
+$$
+\hat C_{pk}
+=
+\min\left\{
+\frac{USL-\bar X}{3s},
+\frac{\bar X-LSL}{3s}
+\right\}
+=
+\min\left\{
+\frac{2300-2250}{3(50)},
+\frac{2250-2100}{3(50)}
+\right\}
+=
+\min\left\{
+\frac{50}{150},
+\frac{150}{150}
+\right\}
+=
+0.333
+$$
+
+The point estimate of \(C_{pm}\) is
+$$
+\hat C_{pm}
+=
+\frac{USL-LSL}
+{6\sqrt{s^2+(\bar X-T)^2}}
+=
+\frac{200}
+{6\sqrt{50^2+(2250-2200)^2}}
+=
+\frac{200}
+{6\sqrt{2500+2500}}
+\approx 0.471
+$$
+
+Between \(C_p\) and \(C_{pk}\), \(C_{pk}\) is more appropriate here.
+Because $\bar X=2250\ne T=2200$,
+the process mean is not centered at the target,
+\(C_p\) only measures spread, while \(C_{pk}\) considers both spread and process centering.
+
+\subsection*{(ii)}
+
+Since
+$$
+\frac{(n-1)s^2}{\sigma^2}\sim \chi^2_{n-1}
+\quad \text{and}\quad
+\hat C_p=\frac{USL-LSL}{6s}
+$$
+
+We have
+$$
+P\left(\chi^2_{\alpha/2,n-1}\le\frac{(n-1)s^2}{\sigma^2}\le\chi^2_{1-\alpha/2,n-1}\right)=1-\alpha
+\iff
+P\left(\hat{C_p}\sqrt{\frac{\chi^2_{\alpha/2,n-1}}{n-1}}\le C_p\le \hat{C_p}\sqrt{\frac{\chi^2_{\alpha/2,n-1}}{n-1}}\right)=1-\alpha
+$$
+So the \(95\%\) confidence interval for \(C_p\) is
+$$
+\left[
+\hat C_p
+\sqrt{
+\frac{\chi^2_{0.025,n-1}}{n-1}
+},
+\quad
+\hat C_p
+\sqrt{
+\frac{\chi^2_{0.975,n-1}}{n-1}
+}
+\right]
+=
+\left[
+0.667\sqrt{\frac{31.555}{49}},
+\quad
+0.667\sqrt{\frac{70.222}{49}}
+\right]
+\approx
+[0.535,\ 0.798]
+$$
+
+\subsection*{(iii)}
+
+We know $X\sim N(2250,50^2)$ anda defective product occurs when $X<2100\quad\text{or}\quad X>2300$
+
+Thus
+\begin{align*}
+P(\text{defective})
+&=P(X<2100)+P(X>2300)
+ =\frac{2100-2250}{50}+\frac{2300-2250}{50} \\
+&=P(Z<-3)+P(Z>1)
+ =0.001+0.159 \\
+&=0.16
+\end{align*}
+
 \end{document}
