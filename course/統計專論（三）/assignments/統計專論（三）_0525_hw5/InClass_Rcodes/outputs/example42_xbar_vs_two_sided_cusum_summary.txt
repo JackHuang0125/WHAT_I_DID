@@ -1,0 +1,20 @@
+Example 4.2-like simulation: Xbar chart vs Two-sided DI-CUSUM
+
+m = 5 
+mu0 = 0 
+sigma = 1 
+tau = 11 
+delta = 0.5 
+k = 0.25 
+h = 5.597 
+
+Xbar UCL = 1.3416 
+Xbar CL  = 0 
+Xbar LCL = -1.3416 
+
+Xbar signal time =  NA 
+CUSUM upper signal time =  14 
+CUSUM lower signal time =  NA 
+
+max Cplus = 11.2676 
+min Cminus = -2.8189 
