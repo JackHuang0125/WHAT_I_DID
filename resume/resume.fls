@@ -350,6 +350,9 @@ INPUT .\resume.nav
 INPUT .\resume.nav
 INPUT resume.nav
 OUTPUT resume.xdv
+INPUT .\大頭照_去背.jpg
+INPUT .\大頭照_去背.jpg
+INPUT .\大頭照_去背.jpg
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi12.tfm
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi8.tfm
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi6.tfm
@@ -374,9 +377,6 @@ INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbol
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
 INPUT C:\Users\No\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
-INPUT .\大頭照_去背.jpg
-INPUT .\大頭照_去背.jpg
-INPUT .\大頭照_去背.jpg
 OUTPUT resume.nav
 OUTPUT resume.toc
 OUTPUT resume.snm
