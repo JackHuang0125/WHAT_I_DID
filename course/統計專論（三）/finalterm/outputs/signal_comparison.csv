@@ -1,0 +1,10 @@
+method,target,first_signal_index,signal_count,setting_or_diagnosis
+Individuals Shewhart,mean,773,10,
+Mean EWMA,mean,743,17,"lambda=0.1, rho=2.454 (ARL0 approx 200)"
+Variance EWMA,variance,719,719,"lambda=0.1, rhoU=2.595, rhoL=1.580"
+Adaptive EWMA,mean,743,32,"eta1 case (ii): lambda=0.1813, u=2.5752, h=0.7874"
+Mean CUSUM,mean,743,13,"standardized k=0.5, h=4.095"
+Variance CUSUM,variance,773,59,"k_up=1.848, h_up=7.416; k_down=0.462, h_down=-2.446"
+CPD mean chart,mean,749,118,estimated r=1212
+CPD variance chart,variance,761,78,estimated r=1229
+CPD joint chart,mean/variance,762,71,estimated r=1229

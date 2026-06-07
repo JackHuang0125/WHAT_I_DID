@@ -1,0 +1,236 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{Microsoft JhengHei}
+\setmainfont{Times New Roman}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\usepackage{amsmath, amssymb, bm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}[numbered]
+
+\title{Phase I/II Statistical Process Monitoring\\SECOM Data}
+\author{黃丞暘}
+\institute{統計專論 (III) Final Report}
+\date{2026/06/16}
+
+\begin{document}
+
+%================================================
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%================================================
+\begin{frame}{Project Objective}
+\begin{itemize}
+    \item Dataset: UCI SECOM semiconductor manufacturing data.
+    \item Objective: construct a complete SPC workflow.
+    \[
+        \text{Phase I diagnosis}
+        \rightarrow
+        \text{control chart design}
+        \rightarrow
+        \text{Phase II monitoring}
+    \]
+    \item Main comparison: Shewhart, EWMA, CUSUM, and CPD charts.
+    \item Final question: which chart signals first, and whether the pattern suggests mean shift, variance shift, or structural change.
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Selected Variable and Preprocessing}
+\begin{block}{Variable}
+Selected process variable: \textbf{x297}.
+\end{block}
+
+\begin{itemize}
+    \item Reason for selection: low missing rate, high number of distinct values, and sufficient process variation.
+    \item Raw observations: 1567.
+    \item Missing observations removed: 2.
+    \item Outlier rule: global 1.5 IQR filter after dropping missing values.
+    \item Outliers removed: 128.
+    \item Cleaned observations: 1437.
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Variable Summary}
+\begin{table}
+\centering
+\begin{tabular}{lrrrrrrr}
+\toprule
+Mean & SD & Min & Q1 & Median & Q3 & Max \\
+\midrule
+1410.91 & 1126.51 & 0.00 & 556.99 & 1061.44 & 1995.39 & 4945.92 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item The cleaned variable remains right-skewed with large dispersion.
+    \item Since this is an individual process variable, all charts are built for individual observations.
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Phase I / Phase II Split}
+\[
+    m = \lfloor 0.5n \rfloor = \lfloor 0.5(1437) \rfloor = 718.
+\]
+
+\begin{table}
+\centering
+\begin{tabular}{lrr}
+\toprule
+Phase & Observations & Mean / SD \\
+\midrule
+Phase I & 718 & 1403.64 / 1105.53 \\
+Phase II & 719 & 1418.18 / 1147.80 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Phase I is used as the in-control reference sample.
+    \item Phase II is monitored sequentially using the chart limits estimated from Phase I.
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Cleaned Series and Phase Split}
+\centering
+\includegraphics[width=0.94\linewidth]{outputs/series_phase_split.png}
+\end{frame}
+
+%================================================
+\begin{frame}{Phase I RS/P Diagnosis}
+\begin{block}{Recursive segmentation + permutation result}
+\[
+    p_{\text{level}} = 0.8675,\qquad
+    p_{\text{scale}} = 0.8325.
+\]
+\end{block}
+
+\begin{itemize}
+    \item Both p-values are much larger than 0.05.
+    \item Phase I shows no strong evidence of level or scale instability after preprocessing.
+    \item The Phase I sample is therefore treated as the IC reference for Phase II charts.
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Chart Design}
+\begin{table}
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+Method & Target & Main setting \\
+\midrule
+Individuals Shewhart & Mean & 3-sigma limits \\
+Mean EWMA & Mean & $\lambda=0.1,\ \rho=2.454$ \\
+Variance EWMA & Variance & $\lambda=0.1,\ \rho_U=2.595,\ \rho_L=1.580$ \\
+Adaptive EWMA & Mean & eta1 case (ii), $h=0.7874$ \\
+Mean CUSUM & Mean & $k=0.5,\ h=4.095$ \\
+Variance CUSUM & Variance & $k_U=1.848,\ h_U=7.416$; $k_L=0.462,\ h_L=-2.446$ \\
+CPD charts & Mean / variance / joint & $\alpha=0.005$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item EWMA and CUSUM settings follow the in-class R code.
+    \item CPD limits follow Chapter 6 approximations for mean, variance, and joint charts.
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Mean-Shift Monitoring Results}
+\centering
+\includegraphics[height=0.78\textheight]{outputs/monitoring_mean_methods.png}
+\end{frame}
+
+%================================================
+\begin{frame}{Variance and Joint Monitoring Results}
+\centering
+\includegraphics[height=0.78\textheight]{outputs/monitoring_variance_joint_methods.png}
+\end{frame}
+
+%================================================
+\begin{frame}{Signal Comparison}
+\begin{table}
+\centering
+\scriptsize
+\begin{tabular}{lrrl}
+\toprule
+Chart & First signal & Signal count & Target \\
+\midrule
+Variance EWMA & 719 & 719 & variance \\
+Mean EWMA & 743 & 17 & mean \\
+Adaptive EWMA & 743 & 32 & mean \\
+Mean CUSUM & 743 & 13 & mean \\
+CPD mean chart & 749 & 118 & mean \\
+CPD variance chart & 761 & 78 & variance \\
+CPD joint chart & 762 & 71 & mean/variance \\
+Individuals Shewhart & 773 & 10 & mean \\
+Variance CUSUM & 773 & 59 & variance \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Earliest signal: variance EWMA at cleaned index 719, the first Phase II observation.
+    \item Among mean-sensitive charts, EWMA, AEWMA, and CUSUM signal first at index 743.
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{CPD Post-Signal Interpretation}
+\begin{itemize}
+    \item CPD mean chart first signals at index 749.
+    \item CPD variance chart first signals at index 761.
+    \item CPD joint chart first signals at index 762.
+    \item The strongest CPD variance and joint signals estimate the likely change location around:
+    \[
+        \widehat{r} \approx 1229.
+    \]
+    \item The strongest CPD mean signal estimates:
+    \[
+        \widehat{r} \approx 1212.
+    \]
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Interpretation}
+\begin{itemize}
+    \item Phase I RS/P diagnosis does not reject stability, so the reference sample is usable.
+    \item Phase II mean changes are detected by EWMA, AEWMA, CUSUM, and CPD mean chart.
+    \item Variance-sensitive methods are more aggressive, especially variance EWMA.
+    \item CPD variance and joint charts locate later structural changes around indices 1229.
+    \item Overall pattern suggests not a single isolated mean shift only, but a combination of mean instability and variance/structural change.
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Conclusion}
+\begin{enumerate}
+    \item The selected SECOM variable x297 is usable after missing-value removal and IQR outlier filtering.
+    \item Phase I RS/P results support using the first 718 cleaned observations as the IC reference.
+    \item The earliest signal is variance EWMA at the first Phase II observation.
+    \item For mean-shift detection, mean EWMA, AEWMA, and mean CUSUM signal earliest at index 743.
+    \item CPD charts provide additional localization and suggest later structural changes around indices 1212--1229.
+\end{enumerate}
+\end{frame}
+
+\end{document}
