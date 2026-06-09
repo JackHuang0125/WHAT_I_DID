@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1780806419.69082 "finalterm_textreport.xdv" "finalterm_textreport.pdf" "finalterm_textreport" 1780806421.61873 0
-  "finalterm_textreport.xdv" 1780806419 89376 ecf98d156d01db7556719a242926f446 "xelatex"
+["xdvipdfmx"] 1781023884.21564 "finalterm_textreport.xdv" "finalterm_textreport.pdf" "finalterm_textreport" 1781023886.06259 0
+  "finalterm_textreport.xdv" 1781023884 83608 2bf7d2cb874e8b2e984780d1fe23abd2 "xelatex"
   (generated)
   "finalterm_textreport.pdf"
   (rewritten before read)
-["xelatex"] 1780806418.26905 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" "finalterm_textreport.xdv" "finalterm_textreport" 1780806421.61386 0
+["xelatex"] 1781023882.85354 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" "finalterm_textreport.xdv" "finalterm_textreport" 1781023886.05753 0
   "../outputs/monitoring_mean_methods.png" 1780706777 614930 0966e04d69a3cb9031bd06f19f900c11 ""
   "../outputs/monitoring_variance_joint_methods.png" 1780706777 353622 3166ceafb488785a8e383865c9be6bbc ""
   "../outputs/series_phase_split.png" 1780706776 311554 1a3aea4261157767ef6bff51b1821643 ""
@@ -99,8 +99,8 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/amsmath/amsmath.sty" 1750428995 88401 0c3d1897569ad77cb9d8fb25b0bdf668 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/amsmath/amsopn.sty" 1750428994 4474 c510a88aa5f51b8c773b50a7ee92befd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/amsmath/amstext.sty" 1750428995 2444 9983e1d0683f102e3b190c64a49313aa ""
-  "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/base/article.cls" 1749467999 20144 b966087dda3b194755eb460d32e2ef75 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/base/fontenc.sty" 1749467999 5275 2f50a1b91fdc3c2c6ff41843a6854061 ""
+  "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/base/report.cls" 1749467999 23203 f495085ac76be4e20c5e1e88646a241e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/base/size12.clo" 1749467999 8449 8dc66c6c313c8eb2d774af83bca435dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/booktabs/booktabs.sty" 1579093635 6253 f1cb470c9199e7110a27851508ed7a5c ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/cjk/CJKfntef.sty" 1670582841 12851 25a9b5cc006609feb5c9a20ce24a5392 ""
@@ -166,9 +166,9 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" 1780806416 12542 876bbb8a3da3d4a369070cebdb0bcfd0 ""
-  "finalterm_textreport.aux" 1780806419 2709 7316995818fa47d8a4db2fea7cf701e7 "xelatex"
-  "finalterm_textreport.tex" 1780806416 12542 876bbb8a3da3d4a369070cebdb0bcfd0 ""
+  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" 1781023882 12804 c60ab062dee47e004822d9eb71a4751d ""
+  "finalterm_textreport.aux" 1781023884 2929 b298f4a754f7d4081c0cb44c61c6a065 "xelatex"
+  "finalterm_textreport.tex" 1781023882 12804 c60ab062dee47e004822d9eb71a4751d ""
   (generated)
   "finalterm_textreport.aux"
   "finalterm_textreport.log"
