@@ -284,36 +284,35 @@ Variance EWMA 在 Phase II 第一個觀測點即發出訊號，
 \chapter{訊號比較}
 
 各管制圖的 first signal index 與 signal count 如表 \ref{tab:signal} 所示。
-此處 index 是清理後資料的整體觀測順序，
-因此 Phase II 的第一個觀測點為 index 719。
 
 \begin{table}[H]
-\centering
-\caption{各管制圖訊號比較}
-\label{tab:signal}
-\begin{tabular}{|l|l|r|r|}
-\hline
-方法 & 監控目標 & First signal index & Signal count \\
-\hline
-Variance EWMA & variance & 719 & 719 \\
-\hline
-Mean EWMA & mean & 743 & 17 \\
-\hline
-Adaptive EWMA & mean & 743 & 32 \\
-\hline
-Mean CUSUM & mean & 743 & 13 \\
-\hline
-CPD mean chart & mean & 749 & 118 \\
-\hline
-CPD variance chart & variance & 761 & 78 \\
-\hline
-CPD joint chart & mean/variance & 762 & 71 \\
-\hline
-Individuals Shewhart & mean & 773 & 10 \\
-\hline
-Variance CUSUM & variance & 773 & 59 \\
-\hline
-\end{tabular}
+  \centering
+  \caption{各管制圖訊號比較}
+  \vspace{0.5em}
+  \label{tab:signal}
+  \begin{tabular}{|l|l|r|r|}
+    \hline
+    方法 & 監控目標 & First signal index & Signal count \\
+    \hline
+    Individuals Shewhart & mean & 773 & 10 \\
+    \hline
+    Mean EWMA & mean & 743 & 17 \\
+    \hline
+    Variance EWMA & variance & 719 & 719 \\
+    \hline
+    Adaptive EWMA & mean & 743 & 32 \\
+    \hline
+    Mean CUSUM & mean & 743 & 13 \\
+    \hline
+    Variance CUSUM & variance & 773 & 59 \\
+    \hline
+    CPD mean chart & mean & 749 & 118 \\
+    \hline
+    CPD variance chart & variance & 761 & 78 \\
+    \hline
+    CPD joint chart & mean/variance & 762 & 71 \\
+    \hline
+  \end{tabular}
 \end{table}
 
 最早發出訊號的方法是 variance EWMA，

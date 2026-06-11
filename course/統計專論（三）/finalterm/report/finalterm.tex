@@ -168,148 +168,154 @@ CPD charts & Mean / variance / joint & $\alpha=0.005$ \\
 
 %================================================
 \begin{frame}{Mean-Shift Monitoring Results {\small (Main Mean Charts)}}
+    \scriptsize
+    \begin{columns}[T,totalwidth=\linewidth]
+        % 左欄：文字結果
+        \begin{column}{0.3\linewidth}
+            \normalsize
+            \centering
+            \vspace{0.3cm}
+            \textbf{Mean EWMA}\\
+            First signal: 743\\
+            Signal count: 17
 
-\scriptsize
-\renewcommand{\arraystretch}{0.8}
+            \vspace{0.8cm}
+            \textbf{Adaptive EWMA}\\
+            First signal: 743\\
+            Signal count: 32
 
-\begin{tabular}{p{0.62\linewidth} p{0.32\linewidth}}
+            \vspace{1cm}
+            \textbf{Mean CUSUM}\\
+            First signal: 743\\
+            Signal count: 13
+        \end{column}
+        
+        % EWMA、AEWMA 與 CUSUM 皆於 743 發出訊號
 
-\includegraphics[width=0.5\linewidth]{mean_ewma.png}
-&
-\textbf{Mean EWMA}\\
-First signal: 743\\
-Signal count: 17
-\\[-0.2em]
-
-\includegraphics[width=0.5\linewidth]{adaptive_ewma.png}
-&
-\textbf{Adaptive EWMA}\\
-First signal: 743\\
-Signal count: 32
-\\[-0.2em]
-
-\includegraphics[width=0.5\linewidth]{mean_cusum.png}
-&
-\textbf{Mean CUSUM}\\
-First signal: 743\\
-Signal count: 13
-
-\end{tabular}
-
+        % 右欄：三張圖
+        \hspace{1.5em}
+        \begin{column}{0.8\linewidth}
+            \vspace{-0.5em}
+            \includegraphics[width=0.65\linewidth]{mean_ewma.png}\\[-0.4em]
+            \includegraphics[width=0.65\linewidth]{adaptive_ewma.png}\\[-0.4em]
+            \includegraphics[width=0.65\linewidth]{mean_cusum.png}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 %================================================
 
 \begin{frame}{Mean-Shift Monitoring Results {\small (Supplementary Charts)}}
+    \begin{columns}[T,totalwidth=\linewidth]
+        % 左欄：文字結果
+        \begin{column}{0.25\linewidth}
+            \centering
+            \vspace{0.3cm}
+            \textbf{Individuals Shewhart}\\
+            First signal: 773\\
+            Signal count: 10
 
-\scriptsize
-\renewcommand{\arraystretch}{0.8}
+            \vspace{1.5cm}
+            \textbf{CPD Mean}\\
+            First signal: 749\\
+            Signal count: 118
+        \end{column}
 
-\begin{tabular}{p{0.8\linewidth} p{0.3\linewidth}}
-\textbf{Individuals Shewhart}
-\includegraphics[width=0.8\linewidth]{mean_shewhart.png}
-&
-\\
-First signal: 773\\
-Signal count: 10
+        % Shewhart 較晚，CPD mean chart 則顯示較高的訊號頻率
 
-\textbf{CPD mean chart}
-\includegraphics[width=0.8\linewidth]{cpd_mean.png}
-&
-\\
-First signal: 749\\
-Signal count: 118
-
-\end{tabular}
-
-\vspace{0.4em}
-
-{\scriptsize
-EWMA、AEWMA 與 CUSUM 皆於 743 發出訊號；Shewhart 較晚，CPD mean chart 則顯示較高的訊號頻率。
-}
-
+        % 右欄：二張圖
+        \hspace{1em}
+        \begin{column}{1.1\linewidth}
+            \vspace{-0.5em}
+            \includegraphics[width=0.65\linewidth]{mean_shewhart.png}\\[-0.4em]
+            \includegraphics[width=0.65\linewidth]{cpd_mean.png}\\[-0.4em]
+        \end{column}
+    \end{columns}
 \end{frame}
+
 %================================================
 \begin{frame}{Variance-Shift Monitoring Results {\small (Target: Variance)}}
+    \begin{columns}[T,totalwidth=\linewidth]
+        % 左欄：文字結果
+        \begin{column}{0.25\linewidth}
+            \centering
+            \vspace{0.5cm}
+            \textbf{Variance EWMA}\\
+            First signal: 719\\
+            Signal count: 719
 
-\scriptsize
-\renewcommand{\arraystretch}{0.8}
+            \vspace{1.8cm}
+            \textbf{Variance CUSUM}\\
+            First signal: 773\\
+            Signal count: 59
+        \end{column}
+        
+        % Variance EWMA 於 Phase II 第一筆觀測即發出訊號
+        
+        % 表示變異數偏移是最早出現的異常型態。
 
-\begin{tabular}{p{0.62\linewidth} p{0.32\linewidth}}
-
-\includegraphics[width=\linewidth]{variance_ewma.png}
-&
-\textbf{Variance EWMA}\\
-First signal: 719\\
-Signal count: 719
-\\[-0.2em]
-
-\includegraphics[width=\linewidth]{variance_cusum.png}
-&
-\textbf{Variance CUSUM}\\
-First signal: 773\\
-Signal count: 59
-
-\end{tabular}
-
-\vspace{0.4em}
-
-{\scriptsize
-Variance EWMA 於 Phase II 第一筆觀測即發出訊號，表示變異數偏移是最早出現的異常型態。
-}
-
+        % 右欄：二張圖
+        \hspace{1em}
+        \begin{column}{1.1\linewidth}
+            \vspace{-0.5em}
+            \includegraphics[width=0.65\linewidth]{variance_ewma.png}\\[-0.4em]
+            \includegraphics[width=0.65\linewidth]{variance_cusum.png}\\[-0.4em]
+        \end{column}
+    \end{columns}
 \end{frame}
+
 %================================================
+
 \begin{frame}{CPD and Joint Monitoring Results}
+    \begin{columns}[T,totalwidth=\linewidth]
+        % 左欄：文字結果
+        \begin{column}{0.25\linewidth}
+            \centering
+            \vspace{0.5cm}
+            \textbf{CPD joint}\\
+            First signal: 762\\
+            Signal count: 71
 
-\scriptsize
-\renewcommand{\arraystretch}{0.8}
+            \vspace{1.8cm}
+            \textbf{CPD variance}\\
+            First signal: 761\\
+            Signal count: 78
+        \end{column}
 
-\begin{tabular}{p{0.62\linewidth} p{0.32\linewidth}}
+        % CPD variance 與 CPD joint chart 的訊號時間接近
+        
+        % 表示製程可能同時存在變異數改變與結構性變化
 
-\includegraphics[width=\linewidth]{cpd_joint.png}
-&
-\textbf{CPD joint chart}\\
-First signal: 762\\
-Signal count: 71
-\\[-0.2em]
+        % 右欄：二張圖
+        \hspace{1em}
+        \begin{column}{1.1\linewidth}
+            \vspace{-0.5em}
+            \includegraphics[width=0.65\linewidth]{cpd_joint.png}\\[-0.4em]
+            \includegraphics[width=0.65\linewidth]{cpd_variance.png}\\[-0.4em]
+        \end{column}
+    \end{columns}
 
-\includegraphics[width=\linewidth]{cpd_variance.png}
-&
-\textbf{CPD variance chart}\\
-First signal: 761\\
-Signal count: 78
-
-\end{tabular}
-
-\vspace{0.4em}
-
-{\scriptsize
-CPD variance 與 CPD joint chart 的訊號時間接近，表示製程可能同時存在變異數改變與結構性變化。
-}
-
-The earliest signal is produced by the variance EWMA chart at index 719,
-suggesting that the process change first appears as a variance shift.
-Mean-sensitive charts later signal at index 743, indicating that a mean shift
-also emerges after the initial variance instability.
-CPD-based charts further suggest persistent structural changes in Phase II.
+% The earliest signal is produced by the variance EWMA chart at index 719,
+% suggesting that the process change first appears as a variance shift.
+% Mean-sensitive charts later signal at index 743, indicating that a mean shift
+% also emerges after the initial variance instability.
+% CPD-based charts further suggest persistent structural changes in Phase II.
 
 \end{frame}
+
 %================================================
+
 \begin{frame}{CPD Post-Signal Interpretation}
-\begin{itemize}
-    \item CPD mean chart first signals at index 749
-    \item CPD variance chart first signals at index 761
-    \item CPD joint chart first signals at index 762
-    \item The strongest CPD variance and joint signals estimate the likely change location around:
-    \[
-        \widehat{r} \approx 1229.
-    \]
-    \item The strongest CPD mean signal estimates:
-    \[
-        \widehat{r} \approx 1212
-    \]
-\end{itemize}
+    \begin{itemize}
+        \item The strongest CPD variance and joint signals estimate the likely change location around:
+        \[
+            \widehat{r} \approx 1229.
+        \]
+        \item The strongest CPD mean signal estimates:
+        \[
+            \widehat{r} \approx 1212
+        \]
+    \end{itemize}
 \end{frame}
 
 %================================================

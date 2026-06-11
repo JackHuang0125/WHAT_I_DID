@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1781111805.92787 "finalterm.xdv" "finalterm.pdf" "finalterm" 1781111808.17867 0
-  "finalterm.xdv" 1781111805 135780 16407dea73a1dc3bc7c7dff2d759f2a9 "xelatex"
+["xdvipdfmx"] 1781195804.03847 "finalterm.xdv" "finalterm.pdf" "finalterm" 1781195806.38702 0
+  "finalterm.xdv" 1781195803 132176 f36727b6f426f77cd40119c32c7867d2 "xelatex"
   (generated)
   "finalterm.pdf"
   (rewritten before read)
-["xelatex"] 1781111803.66911 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm.tex" "finalterm.xdv" "finalterm" 1781111808.17168 0
+["xelatex"] 1781195801.79433 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm.tex" "finalterm.xdv" "finalterm" 1781195806.38017 0
   "../outputs/adaptive_ewma.png" 1781108029 152418 0d0bbe48776398e27890f8589f1918dd ""
   "../outputs/cpd_joint.png" 1781110469 101820 9a129aa5f8106ba8af4007d44a7b0304 ""
   "../outputs/cpd_mean.png" 1781108029 95929 22c8a169701aa6ffc3af59f2a880e542 ""
@@ -254,11 +254,11 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm.tex" 1781111803 9549 d7e43be77c81d94853542abaf6b799a0 ""
-  "finalterm.aux" 1781111805 2885 71614416a8ce7d825d858d57be5a4bbf "xelatex"
-  "finalterm.nav" 1781111805 1574 f5abf7444d939a8c2cd188b6df8c9c87 "xelatex"
-  "finalterm.out" 1781111805 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
-  "finalterm.tex" 1781111803 9549 d7e43be77c81d94853542abaf6b799a0 ""
+  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm.tex" 1781195800 10962 807d142166264ae6c7e7d893114109bf ""
+  "finalterm.aux" 1781195803 2885 71614416a8ce7d825d858d57be5a4bbf "xelatex"
+  "finalterm.nav" 1781195803 1574 f5abf7444d939a8c2cd188b6df8c9c87 "xelatex"
+  "finalterm.out" 1781195803 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
+  "finalterm.tex" 1781195800 10962 807d142166264ae6c7e7d893114109bf ""
   (generated)
   "finalterm.aux"
   "finalterm.log"
