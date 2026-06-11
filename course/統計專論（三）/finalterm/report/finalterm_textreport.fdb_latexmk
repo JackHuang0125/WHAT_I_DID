@@ -1,13 +1,14 @@
 # Fdb version 4
-["xdvipdfmx"] 1781023884.21564 "finalterm_textreport.xdv" "finalterm_textreport.pdf" "finalterm_textreport" 1781023886.06259 0
-  "finalterm_textreport.xdv" 1781023884 83608 2bf7d2cb874e8b2e984780d1fe23abd2 "xelatex"
+["xdvipdfmx"] 1781081619.04441 "finalterm_textreport.xdv" "finalterm_textreport.pdf" "finalterm_textreport" 1781081621.04296 0
+  "finalterm_textreport.xdv" 1781081618 83608 70641a103b08cf8febb75b795b7f2793 "xelatex"
   (generated)
   "finalterm_textreport.pdf"
   (rewritten before read)
-["xelatex"] 1781023882.85354 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" "finalterm_textreport.xdv" "finalterm_textreport" 1781023886.05753 0
+["xelatex"] 1781081617.51457 "./finalterm_textreport.tex" "finalterm_textreport.xdv" "finalterm_textreport" 1781081621.03871 0
   "../outputs/monitoring_mean_methods.png" 1780706777 614930 0966e04d69a3cb9031bd06f19f900c11 ""
   "../outputs/monitoring_variance_joint_methods.png" 1780706777 353622 3166ceafb488785a8e383865c9be6bbc ""
   "../outputs/series_phase_split.png" 1780706776 311554 1a3aea4261157767ef6bff51b1821643 ""
+  "./finalterm_textreport.tex" 1781023882 12804 c60ab062dee47e004822d9eb71a4751d ""
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -166,8 +167,7 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" 1781023882 12804 c60ab062dee47e004822d9eb71a4751d ""
-  "finalterm_textreport.aux" 1781023884 2929 b298f4a754f7d4081c0cb44c61c6a065 "xelatex"
+  "finalterm_textreport.aux" 1781081618 2929 b298f4a754f7d4081c0cb44c61c6a065 "xelatex"
   "finalterm_textreport.tex" 1781023882 12804 c60ab062dee47e004822d9eb71a4751d ""
   (generated)
   "finalterm_textreport.aux"

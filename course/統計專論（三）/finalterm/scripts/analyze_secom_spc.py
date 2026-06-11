@@ -260,7 +260,7 @@ def first_signal(signal, offset):
 def plot_series(cleaned, m, mu, sigma):
     fig, ax = plt.subplots(figsize=(11, 4.5))
     ax.plot(cleaned["t"], cleaned["x"], lw=0.8, color="#2f6f8f")
-    ax.axvline(m, color="#9b2226", ls="--", lw=1.3, label="Phase split")
+    ax.axvline(m, color="#9b2226", ls="--", lw=1.3, label=f"Phase split: {m} / {m + 1}")
     ax.axhline(mu, color="#222222", lw=1, label="Phase I mean")
     ax.axhline(mu + 3 * sigma, color="#b23a48", ls=":", lw=1, label="3-sigma limits")
     ax.axhline(mu - 3 * sigma, color="#b23a48", ls=":", lw=1)
@@ -281,7 +281,7 @@ def plot_monitoring(cleaned, m, charts):
     axes[0].axhline(-3, color="#ae2012", ls="--", lw=1)
     axes[0].set_ylabel("Shewhart z")
 
-    axes[1].plot(t2, charts["mean_ewma"], color="#0a9396", lw=0.8, label="mean EWMA")
+    axes[1].plot(t2, charts["mean_ewma"], color="#0a9396", lw=0.8, label="EWMA")
     axes[1].axhline(charts["ewma_mean_target"] + charts["ewma_mean_width"], color="#ae2012", ls="--", lw=1)
     axes[1].axhline(charts["ewma_mean_target"] - charts["ewma_mean_width"], color="#ae2012", ls="--", lw=1)
     axes[1].set_ylabel("Mean EWMA")
@@ -310,6 +310,46 @@ def plot_monitoring(cleaned, m, charts):
     fig.savefig(OUT / "monitoring_mean_methods.png", dpi=180)
     plt.close(fig)
 
+    mean_panels = [
+        ("monitoring_mean_shewhart.png", "Shewhart z"),
+        ("monitoring_mean_ewma.png", "Mean EWMA"),
+        ("monitoring_mean_aewma.png", "AEWMA"),
+        ("monitoring_mean_cusum.png", "Mean CUSUM"),
+        ("monitoring_mean_cpd.png", "CPD mean"),
+    ]
+    for source_ax, (filename, ylabel) in zip(axes, mean_panels):
+        single_fig, single_ax = plt.subplots(figsize=(10, 3.2))
+        for line in source_ax.get_lines():
+            xdata = line.get_xdata()
+            ydata = line.get_ydata()
+            if len(xdata) == 2 and np.allclose(xdata, [0, 1]) and np.allclose(ydata[0], ydata[1]):
+                single_ax.axhline(
+                    ydata[0],
+                    color=line.get_color(),
+                    lw=line.get_linewidth(),
+                    ls=line.get_linestyle(),
+                    label=line.get_label(),
+                )
+            else:
+                single_ax.plot(
+                    xdata,
+                    ydata,
+                    color=line.get_color(),
+                    lw=line.get_linewidth(),
+                    ls=line.get_linestyle(),
+                    label=line.get_label(),
+                )
+        single_ax.set_xlabel("Cleaned observation index")
+        single_ax.set_ylabel(ylabel)
+        single_ax.set_xlim(source_ax.get_xlim())
+        handles, labels = single_ax.get_legend_handles_labels()
+        visible = [(h, label) for h, label in zip(handles, labels) if not label.startswith("_")]
+        if visible:
+            single_ax.legend(*zip(*visible), fontsize=8)
+        single_fig.tight_layout()
+        single_fig.savefig(OUT / filename, dpi=180)
+        plt.close(single_fig)
+
     fig, axes = plt.subplots(3, 1, figsize=(11, 7.5), sharex=True)
     axes[0].plot(t2, charts["var_ewma"], color="#0a9396", lw=0.8)
     axes[0].axhline(charts["ewma_var_width"][1], color="#ae2012", ls="--", lw=1)
@@ -336,6 +376,60 @@ def plot_monitoring(cleaned, m, charts):
     fig.tight_layout()
     fig.savefig(OUT / "monitoring_variance_joint_methods.png", dpi=180)
     plt.close(fig)
+
+    variance_panels = [
+        ("monitoring_variance_ewma.png", "Variance EWMA"),
+        ("monitoring_variance_cusum.png", "Variance CUSUM"),
+        ("monitoring_cpd_variance_joint.png", "CPD B/J"),
+    ]
+    for source_ax, (filename, ylabel) in zip(axes, variance_panels):
+        single_fig, single_ax = plt.subplots(figsize=(10, 3.2))
+        for line in source_ax.get_lines():
+            xdata = line.get_xdata()
+            ydata = line.get_ydata()
+            if len(xdata) == 2 and np.allclose(xdata, [0, 1]) and np.allclose(ydata[0], ydata[1]):
+                single_ax.axhline(
+                    ydata[0],
+                    color=line.get_color(),
+                    lw=line.get_linewidth(),
+                    ls=line.get_linestyle(),
+                    label=line.get_label(),
+                )
+            else:
+                single_ax.plot(
+                    xdata,
+                    ydata,
+                    color=line.get_color(),
+                    lw=line.get_linewidth(),
+                    ls=line.get_linestyle(),
+                    label=line.get_label(),
+                )
+        single_ax.set_xlabel("Cleaned observation index")
+        single_ax.set_ylabel(ylabel)
+        single_ax.set_xlim(source_ax.get_xlim())
+        handles, labels = single_ax.get_legend_handles_labels()
+        visible = [(h, label) for h, label in zip(handles, labels) if not label.startswith("_")]
+        if visible:
+            single_ax.legend(*zip(*visible), fontsize=8)
+        single_fig.tight_layout()
+        single_fig.savefig(OUT / filename, dpi=180)
+        plt.close(single_fig)
+
+    cpd_split_panels = [
+        ("monitoring_cpd_variance.png", "CPD variance", [charts["bmax"], charts["h_b"]], ["Bmax,n", "variance h_n"], ["#005f73", "#ae2012"], ["-", "--"], [0.8, 0.9]),
+        ("monitoring_cpd_joint.png", "CPD joint", [charts["jmax"], charts["h_j"]], ["Jmax,n", "joint h_n"], ["#6a4c93", "#bb3e03"], ["-", "--"], [0.8, 0.9]),
+    ]
+    for filename, ylabel, series, labels, colors, linestyles, widths in cpd_split_panels:
+        single_fig, single_ax = plt.subplots(figsize=(10, 3.2))
+        for ydata, label, color, linestyle, width in zip(series, labels, colors, linestyles, widths):
+            single_ax.plot(n, ydata, color=color, ls=linestyle, lw=width, label=label)
+        single_ax.set_xlabel("Cleaned observation index")
+        single_ax.set_ylabel(ylabel)
+        single_ax.set_xlim(axes[2].get_xlim())
+        single_ax.legend(fontsize=8)
+        single_fig.tight_layout()
+        single_fig.savefig(OUT / filename, dpi=180)
+        plt.close(single_fig)
 
 
 def main():

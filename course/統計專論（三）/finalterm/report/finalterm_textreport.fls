@@ -1,6 +1,6 @@
-PWD c:\Users\USER\Documents\GitHub\WHAT_I_DID\course\統計專論（三）\finalterm\report
+PWD C:\Users\USER\Documents\GitHub\WHAT_I_DID\course\統計專論（三）\finalterm\report
 INPUT C:\Users\USER\AppData\Local\MiKTeX\miktex\data\le\xetex\xelatex.fmt
-INPUT c:\Users\USER\Documents\GitHub\WHAT_I_DID\course\統計專論（三）\finalterm\report\finalterm_textreport.tex
+INPUT finalterm_textreport.tex
 OUTPUT finalterm_textreport.log
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\base\report.cls
 INPUT C:\Users\USER\AppData\Local\Programs\MiKTeX\tex\latex\base\report.cls
