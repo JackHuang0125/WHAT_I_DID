@@ -7,6 +7,8 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 
+\usepackage{makecell}
+
 \usepackage[most]{tcolorbox}
 \usepackage{xcolor}
 \newtcolorbox{codeblock}{
@@ -65,8 +67,8 @@
 \setmainfont{Times New Roman}
 \setCJKmainfont{標楷體}
 
-\title{\textbf{SECOM 半導體製程資料之 Phase I/II 統計製程監控分析}}
-\author{黃丞暘 \quad 611211106\\統計專論 (III) Final Report}
+\title{\textbf{半導體製程資料之統計製程監控分析}}
+\author{黃丞暘 \quad 611211106\\統計專論 (III) 期末報告}
 \date{2026 年 6 月 16 日}
 
 \begin{document}
@@ -74,30 +76,30 @@
 
 \chapter{目的}
 
-針對 SEmi-COnductor manufacturing (SECOM) 半導體製程資料建立一套完整的 Phase I/II 統計製程監控流程。
+針對 SEmi-COnductor manufacturing (SECOM) 半導體製程資料建立一套完整的第一階段（以下稱 Phase I）及第二階段監控（以下稱 Phase II）統計製程監控流程。
 分析流程包含：
 
 \begin{enumerate}[label=(\arabic*)]
   \item 選擇一個可用的變數
   \item 移除缺失值與離群值
   \item 依 \(m=\lfloor 0.5n \rfloor\) 將資料分為 Phase I 與 Phase II
-  \item 於 Phase I 使用 RS/P 方法檢查 level 與 scale 穩定性
+  \item 於 Phase I 使用 RS/P 方法檢查是否有水準偏移（level shift）或尺度偏移（scale shift）
   \item 於 Phase II 建立 Shewhart、EWMA、CUSUM 與 CPD 管制圖
-  \item 比較各方法的 first signal time 與 signal frequency
-  \item 解釋製程型態較可能為 mean-shift、variance-shift 或 structural change
+  \item 比較各方法第一次出現訊號的時間（first signal）與發出訊號的總次數（signal counts）
+  \item 解釋製程型態較可能為平均數偏移（mean shift）、變異數偏移（variance shift）或結構性改變（structural change）
 \end{enumerate}
 
-核心問題是哪一張管制圖最早發出訊號？
-這個訊號比較像是平均數的改變、變異數的改變，還是製程結構的改變？
+核心問題是哪一張管制圖最早發出訊號（signal）？
+這個訊號比較像是平均數偏移、變異數偏移，還是結構性改變？
 
 \chapter{資料介紹}
 
 \section*{資料來源}
 
 使用 UCI 的 SECOM。
-資料共有 1567 筆樣本與 590 個變數，
+資料共有 1567 筆樣本與 590 個變數。
 另外，
-包含時間欄位與 pass/fail 標記。
+包含時間欄位與 Pass/Fail 的標記。
 
 \section*{變數選擇}
 
@@ -112,7 +114,7 @@
 \section*{資料前處理}
 
 先刪除 \(x_{297}\) 的缺失值，
-再使用 1.5 IQR 的規則刪除離群值。
+再使用 $1.5 IQR$ 的規則刪除離群值。
 若樣本低於 \(Q_1-1.5IQR\) 或高於 \(Q_3+1.5IQR\)，
 則視為離群值並刪除。
 如表 \ref{tab:preprocessing} 所示，
@@ -157,7 +159,9 @@
   \end{tabular}
 \end{table}
 
-\chapter{Phase I 與 Phase II 切分}
+\chapter{建立 Phase I 與 Phase II}
+
+\section*{切分}
 
 令
 \[
@@ -173,6 +177,7 @@
 \begin{table}[H]
   \centering
   \caption{Phase I / Phase II 摘要}
+  \vspace{0.5em}
   \begin{tabular}{|l|r|r|r|}
     \hline
      & 樣本數 & 平均數 & 標準差 \\
@@ -194,57 +199,62 @@
   \label{fig:series}
 \end{figure}
 
-\chapter{Phase I RS/P 穩定性診斷}
+\section*{Phase I RS/P 穩定性診斷}
 
-Phase I 的目的在於建立 in-control reference sample，
-因此必須先檢查 Phase I 是否具有明顯的 level shift 或 scale shift。
-使用 RS/P recursive segmentation + permutation 方法進行診斷。
+Phase I 的目的在於建立管制界線內的參考樣本，
+因此必須先檢查 Phase I 是否具有明顯的水準偏移或尺度偏移。
+使用遞迴分割（Recursive Segmentation, 以下稱 RS）及置換校準（Permutation Calibration, 以下稱 P） 的方法進行診斷。
+分別以 $p_{\text{level}}$ 、 $p_{\text{scale}}$ 與 $0.05$ 的關係來確認 Phase I 的資料是否穩定，若小於，則不穩定，反之，則穩定。其診斷結果如下：
 
-RS/P 診斷結果如下：
 \[
   p_{\text{level}} = 0.8675,\qquad
   p_{\text{scale}} = 0.8325.
 \]
 
 兩個 p-value 皆遠大於 0.05，
-因此沒有足夠證據拒絕 Phase I level 或 scale 穩定的假設。
+因此沒有足夠證據拒絕 Phase I 的水準或尺度是穩定的假設。
 也就是說，
-Phase I 可視為合理的 IC reference sample，
+Phase I 可視為合理的參考樣本，
 並可用來估計 Phase II 管制圖所需要的基準平均數與標準差。
 
-\chapter{Phase II 管制圖設計}
+\section*{Phase II 管制圖設計}
 
-Phase II 監控使用 Phase I 估計的 \(\mu_0=1403.64\) 與 \(\sigma_0=1105.53\) 作為 IC 參數。本文比較的管制圖與參數設定如表 \ref{tab:settings} 所示。EWMA 與 CUSUM 參數主要參考課堂 InClass R code；CPD charts 則依照 Chapter 6 的公式與控制界限近似。
+Phase II 使用 Phase I 估計的 \(\mu_0=1403.64\) 與 \(\sigma_0=1105.53\) 作為管制界線的參數。
+各管制圖的參數設定如表 \ref{tab:settings} 所示。
 
 \begin{table}[H]
   \centering
-  \caption{Phase II 管制圖與參數設定}
+  \caption{Phase II 各管制圖之參數設定}
+  \vspace{0.5em}
   \label{tab:settings}
   \small
   \begin{tabular}{|l|l|l|}
     \hline
-    方法 & 監控目標 & 主要設定 \\
+    方法 & 監控目標 & 參數 \\
     \hline
-    Individuals Shewhart & mean & 3-sigma limits \\
+    Individuals Shewhart & 平均數 & 3-sigma limits \\
     \hline
-    Mean EWMA & mean & \(\lambda=0.1,\ \rho=2.454\) \\
+    Mean EWMA & 平均數 & \(\lambda=0.1,\ \rho=2.454\) \\
     \hline
-    Variance EWMA & variance & \(\lambda=0.1,\ \rho_U=2.595,\ \rho_L=1.580\) \\
+    Variance EWMA & 變異數 & \(\lambda=0.1,\ \rho_U=2.595,\ \rho_L=1.580\) \\
     \hline
-    Adaptive EWMA & mean & eta1 case (ii), \(\lambda=0.1813,\ u=2.5752,\ h=0.7874\) \\
+    Adaptive EWMA & 平均數 & \makecell[l]{\(\eta_1(e_n)\): \(\mu_1=1,\ \mu_2=4,\ ARL_0=100\),\\
+                            \(h=0.7874,\ \lambda=0.1813,\ u=2.5752\)} \\
     \hline
-    Mean CUSUM & mean & \(k=0.5,\ h=4.095\) \\
+    Mean CUSUM & 平均數 & \(k=0.5,\ h=4.095\) \\
     \hline
-    Variance CUSUM & variance & \(k_U=1.848,\ h_U=7.416;\ k_L=0.462,\ h_L=-2.446\) \\
+    Variance CUSUM & 變異數 & \(k_U=1.848,\ h_U=7.416;\ k_L=0.462,\ h_L=-2.446\) \\
     \hline
-    CPD mean chart & mean & \(\alpha=0.005\) \\
+    CPD mean chart & 平均數 & \(\alpha=0.005\) \\
     \hline
-    CPD variance chart & variance & \(\alpha=0.005\) \\
+    CPD variance chart & 變異數 & \(\alpha=0.005\) \\
     \hline
-    CPD joint chart & mean/variance & \(\alpha=0.005\) \\
+    CPD joint chart & 平均數／變異數 & \(\alpha=0.005\) \\
     \hline
   \end{tabular}
 \end{table}
+
+\chapter{結果}
 
 \section*{Mean charts}
 
@@ -255,14 +265,14 @@ Mean charts 包含 Individuals Shewhart、mean EWMA、adaptive EWMA、mean CUSUM
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.95\linewidth]{monitoring_mean_methods.png}
-  \caption{Mean Phase II 監控圖}
+  \caption{Phase II 監控圖 - Mean}
   \label{fig:meanmethods}
 \end{figure}
 
 由圖可知，
 EWMA、adaptive EWMA 與 CUSUM 皆能在 Phase II 前段發現 mean-related 異常；
-CPD mean chart 稍晚發出訊號，
-但它能同時提供變化點位置估計，
+CPD mean chart 較晚發出訊號，
+但它能提供變化點位置估計，
 對後續解釋更有幫助。
 
 \section*{Variance 與 joint charts}
@@ -272,7 +282,7 @@ Variance charts 包含 variance EWMA、variance CUSUM 與 CPD variance chart；j
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\linewidth]{monitoring_variance_joint_methods.png}
-\caption{Variance 與 joint Phase II 監控圖}
+\caption{Phase II 監控圖 - Variance/joint}
 \label{fig:varmethods}
 \end{figure}
 
@@ -281,9 +291,9 @@ Variance EWMA 在 Phase II 第一個觀測點即發出訊號，
 相比之下，variance CUSUM 與 CPD variance chart 較晚發出訊號，
 但其訊號更集中於較明顯的變異或結構性變化。
 
-\chapter{訊號比較}
+\section*{signal 比較}
 
-各管制圖的 first signal index 與 signal count 如表 \ref{tab:signal} 所示。
+各管制圖的第一次發出訊號的時間點與發出訊號的總次數如表 \ref{tab:signal} 所示。
 
 \begin{table}[H]
   \centering
@@ -292,31 +302,31 @@ Variance EWMA 在 Phase II 第一個觀測點即發出訊號，
   \label{tab:signal}
   \begin{tabular}{|l|l|r|r|}
     \hline
-    方法 & 監控目標 & First signal index & Signal count \\
+    方法 & 監控目標 & 第一次發出訊號的時間點 & 發出訊號的總次數 \\
     \hline
-    Individuals Shewhart & mean & 773 & 10 \\
+    Individuals Shewhart & 平均數 & 773 & 10 \\
     \hline
-    Mean EWMA & mean & 743 & 17 \\
+    Mean EWMA & 平均數 & 743 & 17 \\
     \hline
-    Variance EWMA & variance & 719 & 719 \\
+    Variance EWMA & 變異數 & 719 & 719 \\
     \hline
-    Adaptive EWMA & mean & 743 & 32 \\
+    Adaptive EWMA & 平均數 & 743 & 32 \\
     \hline
-    Mean CUSUM & mean & 743 & 13 \\
+    Mean CUSUM & 平均數 & 743 & 13 \\
     \hline
-    Variance CUSUM & variance & 773 & 59 \\
+    Variance CUSUM & 變異數 & 773 & 59 \\
     \hline
-    CPD mean chart & mean & 749 & 118 \\
+    CPD mean chart & 平均數 & 749 & 118 \\
     \hline
-    CPD variance chart & variance & 761 & 78 \\
+    CPD variance chart & 變異數 & 761 & 78 \\
     \hline
-    CPD joint chart & mean/variance & 762 & 71 \\
+    CPD joint chart & 平均數／變異數 & 762 & 71 \\
     \hline
   \end{tabular}
 \end{table}
 
 最早發出訊號的方法是 variance EWMA，
-其 first signal index 為 719，
+其第一次出現訊號的時間為 719，
 也就是 Phase II 的第一筆樣本。
 此結果顯示 variance EWMA 對於 Phase II 初期的變異型態非常敏感。
 然而，
@@ -325,52 +335,49 @@ Variance EWMA 在 Phase II 第一個觀測點即發出訊號，
 因此此方法雖然非常敏感，
 但也可能過度反應。
 
-若只比較偵測 mean-shift 的方法，
-mean EWMA、adaptive EWMA 與 mean CUSUM 都在 index 743 發出第一個訊號，
-早於 Individuals Shewhart 的 index 773。
+若只比較偵測平均數偏移的方法，
+mean EWMA、adaptive EWMA 與 mean CUSUM 都在樣本編號 743 發出第一個訊號，
+早於 Individuals Shewhart 的樣本編號 773。
 這符合 EWMA 與 CUSUM 的設計特性：
 相較 Shewhart 只看單點是否超界，
 EWMA 與 CUSUM 會累積歷史資訊，
 因此對持續性小幅變化較敏感。
 
-\chapter{CPD 結果與變化點解釋}
-
 CPD charts 的優點是除了發出訊號外，
-也能估計最可能的變化點位置。
+也能估計最可能的變化點位置，
+也就是第一次出現訊號的點。
 其結果如下：
 
 \begin{itemize}
-  \item CPD mean chart first signal index 為 749
-  \item CPD variance chart first signal index 為 761
-  \item CPD joint chart first signal index 為 762
+  \item CPD mean chart 為 749
+  \item CPD variance chart 為 761
+  \item CPD joint chart 為 762
   \item CPD mean chart 最強訊號對應的估計變化點約為 \(\widehat{r}=1212\)
   \item CPD variance 與 joint charts 最強訊號對應的估計變化點約為 \(\widehat{r}=1229\)
 \end{itemize}
 
-此結果表示 Phase II 中可能不只存在單一早期 shift。
+此結果表示 Phase II 中可能不只存在單一早期平移。
 前段 mean charts 很快發現平均水準的偏離，
-而 CPD variance 與 joint charts 則指出後段約 index 1229 附近可能有更明顯的變異或結構性改變。
-因此，CPD 的結果提供了比單純 first signal 更豐富的診斷資訊。
-
-\chapter{結論}
-
+而 CPD variance 與 joint charts 則指出後段約在樣本編號為 1229 的附近可能有更明顯的變異或結構性改變。
+因此，
+CPD 的結果提供了比單純第一次出現訊號，
+更豐富的診斷資訊。
 整體而言，
 分析結果可分為三個層次解釋。
 
 第一，
-Phase I RS/P 結果並未顯示明顯 level 或 scale 不穩定，
-因此將 Phase I 當作 IC reference 是合理的。
-這一點很重要，
+Phase I 的 RS/P 結果並未顯示明顯的水準或尺度不穩定，
+因此將 Phase I 當作管制界線的參考樣本是合理的。
 因為若 Phase I 本身已經不穩定，
 後續 Phase II 的管制界限將不可靠。
 
 第二，
 Phase II 的 mean charts 皆顯示某種程度的平均水準偏移。
-Mean EWMA、adaptive EWMA 與 mean CUSUM 都在 index 743 發出訊號，
-而 Shewhart 到 index 773 才發出訊號。
+Mean EWMA、adaptive EWMA 與 mean CUSUM 都在樣本編號 743 發出訊號，
+而 Shewhart 到樣本編號 773 才發出訊號。
 這代表變化可能不是單一極端點，
 而是具有持續性，
-因此累積型方法較早偵測到異常。
+因此這類方法較早偵測到異常。
 
 第三，
 variance charts 的結果顯示變異結構也可能改變。
@@ -378,8 +385,10 @@ Variance EWMA 從 Phase II 第一點即發出訊號，
 說明 Phase II 的標準化平方偏差相對於 Phase I 參考分布有明顯差異。
 不過，由於 variance EWMA 過於敏感，
 解釋時應搭配 variance CUSUM 與 CPD variance chart。
-CPD variance 與 joint charts 將較強變化位置指向 index 1229 附近，
+CPD variance 與 joint charts 將較強變化位置指向樣本編號 1229 附近，
 暗示後段可能有結構性改變。
+
+\chapter{結論}
 
 針對 SECOM 資料中的 \(x_{297}\) 變數建立完整的 Phase I/II SPC 分析流程。
 資料經缺失值移除與 1.5 IQR 離群值過濾後，
@@ -390,16 +399,16 @@ Phase I RS/P 診斷得到 \(p_{\text{level}}=0.8675\) 與 \(p_{\text{scale}}=0.8
 顯示 Phase I 沒有明顯 level 或 scale 不穩定，
 可作為 IC reference。
 Phase II 監控中，
-variance EWMA 最早於 index 719 發出訊號；
-偵測 mean-shift 的方法 中，
-mean EWMA、adaptive EWMA 與 mean CUSUM 皆於 index 743 發出訊號；
+variance EWMA 最早於樣本編號 719 發出訊號；
+偵測平均數偏移的方法中，
+mean EWMA、adaptive EWMA 與 mean CUSUM 皆於樣本編號 743 發出訊號；
 CPD charts 則於稍後發出訊號，
 但提供了重要的變化點定位資訊。
 
 綜合各方法結果，
-本文認為 \(x_{297}\) 的 Phase II 型態不宜解釋為單純平均數位移，
-較合理的判斷是：
+我們認為 \(x_{297}\) 的 Phase II 型態不宜解釋為單純平均數位移，
+較合理的判斷是，
 Phase II 同時存在平均水準不穩定與變異或結構性變化，
-其中後段約 index 1212 至 1229 附近可能是主要變化區域。
+其中後段約樣本編號 1212 至 1229 附近可能是主要變化區域。
 
 \end{document}

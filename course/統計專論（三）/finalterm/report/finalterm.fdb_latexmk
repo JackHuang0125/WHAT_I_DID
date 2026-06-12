@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1781195804.03847 "finalterm.xdv" "finalterm.pdf" "finalterm" 1781195806.38702 0
-  "finalterm.xdv" 1781195803 132176 f36727b6f426f77cd40119c32c7867d2 "xelatex"
+["xdvipdfmx"] 1781277067.24409 "finalterm.xdv" "finalterm.pdf" "finalterm" 1781277069.61799 0
+  "finalterm.xdv" 1781277066 132176 506fa465f1e21e017f78d6ce9300362e "xelatex"
   (generated)
   "finalterm.pdf"
   (rewritten before read)
-["xelatex"] 1781195801.79433 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm.tex" "finalterm.xdv" "finalterm" 1781195806.38017 0
+["xelatex"] 1781277061.68225 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm.tex" "finalterm.xdv" "finalterm" 1781277069.60641 0
   "../outputs/adaptive_ewma.png" 1781108029 152418 0d0bbe48776398e27890f8589f1918dd ""
   "../outputs/cpd_joint.png" 1781110469 101820 9a129aa5f8106ba8af4007d44a7b0304 ""
   "../outputs/cpd_mean.png" 1781108029 95929 22c8a169701aa6ffc3af59f2a880e542 ""
@@ -12,7 +12,7 @@
   "../outputs/mean_cusum.png" 1781108029 152047 39edda9a175bb6efff5ce0d126b9aeed ""
   "../outputs/mean_ewma.png" 1781108029 143562 c9e621a0321057ae1023b6f962857304 ""
   "../outputs/mean_shewhart.png" 1781108029 184261 0a88015c7a11671e0e49c5adc6374da2 ""
-  "../outputs/series_phase_split.png" 1781110462 313447 1d2629c123603740d2b099cc2e8ebec8 ""
+  "../outputs/series_phase_split.png" 1781277048 318330 bfb079b69f7c1d0f2c5527d1dcd6dbfa ""
   "../outputs/variable_distribution_x297.png" 1781104087 89819 84f8c5b28f9b12910b702424fd07d8b8 ""
   "../outputs/variance_cusum.png" 1781108030 124292 814fff01843e78910554847a9b7654a5 ""
   "../outputs/variance_ewma.png" 1781108030 110215 bd2123b4ded138299d1e127fa453080d ""
@@ -254,11 +254,11 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm.tex" 1781195800 10962 807d142166264ae6c7e7d893114109bf ""
-  "finalterm.aux" 1781195803 2885 71614416a8ce7d825d858d57be5a4bbf "xelatex"
-  "finalterm.nav" 1781195803 1574 f5abf7444d939a8c2cd188b6df8c9c87 "xelatex"
-  "finalterm.out" 1781195803 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
-  "finalterm.tex" 1781195800 10962 807d142166264ae6c7e7d893114109bf ""
+  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm.tex" 1781277060 10962 807d142166264ae6c7e7d893114109bf ""
+  "finalterm.aux" 1781277066 2885 71614416a8ce7d825d858d57be5a4bbf "xelatex"
+  "finalterm.nav" 1781277066 1574 f5abf7444d939a8c2cd188b6df8c9c87 "xelatex"
+  "finalterm.out" 1781277065 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
+  "finalterm.tex" 1781277060 10962 807d142166264ae6c7e7d893114109bf ""
   (generated)
   "finalterm.aux"
   "finalterm.log"

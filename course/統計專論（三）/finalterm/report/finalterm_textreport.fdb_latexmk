@@ -1,13 +1,13 @@
 # Fdb version 4
-["xdvipdfmx"] 1781195997.81737 "finalterm_textreport.xdv" "finalterm_textreport.pdf" "finalterm_textreport" 1781195999.72243 0
-  "finalterm_textreport.xdv" 1781195997 82856 ab574eecc314e0435672208fa6dd70a5 "xelatex"
+["xdvipdfmx"] 1781284259.29824 "finalterm_textreport.xdv" "finalterm_textreport.pdf" "finalterm_textreport" 1781284261.11467 0
+  "finalterm_textreport.xdv" 1781284259 82720 f47f6c7d6572c0d847122a0f8ca5a9fc "xelatex"
   (generated)
   "finalterm_textreport.pdf"
   (rewritten before read)
-["xelatex"] 1781195996.39577 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" "finalterm_textreport.xdv" "finalterm_textreport" 1781195999.71764 0
-  "../outputs/monitoring_mean_methods.png" 1781110464 614930 0966e04d69a3cb9031bd06f19f900c11 ""
-  "../outputs/monitoring_variance_joint_methods.png" 1781110467 353622 3166ceafb488785a8e383865c9be6bbc ""
-  "../outputs/series_phase_split.png" 1781110462 313447 1d2629c123603740d2b099cc2e8ebec8 ""
+["xelatex"] 1781284257.91479 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" "finalterm_textreport.xdv" "finalterm_textreport" 1781284261.11042 0
+  "../outputs/monitoring_mean_methods.png" 1781277014 620820 596f56a7e54d44c61cc7813368160512 ""
+  "../outputs/monitoring_variance_joint_methods.png" 1781277030 346730 04bb26d2aa071bad187f5c6592062412 ""
+  "../outputs/series_phase_split.png" 1781277048 318330 bfb079b69f7c1d0f2c5527d1dcd6dbfa ""
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -130,6 +130,7 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/listings/listings.sty" 1741168182 81640 997090b6c021dc4af9ee00a97b85c5b4 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstmisc.sty" 1741168182 77051 be68720e5402397a830abb9eed5a2cb4 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstpatch.sty" 1741168182 353 9024412f43e92cd5b21fe9ded82d0610 ""
+  "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/makecell/makecell.sty" 1250677107 16155 2dd7dde1ec1c2a3d0c85bc3b273e04d8 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/pdfcol/pdfcol.sty" 1663942424 8086 ac143843b6ea88d172677dc3ed532925 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/pgf/basiclayer/pgf.sty" 1756451144 1090 bae35ef70b3168089ef166db3e66f5b2 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/pgf/basiclayer/pgfcore.sty" 1756451144 373 00b204b1d7d095b892ad31a7494b0373 ""
@@ -159,6 +160,7 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/tcolorbox/tcolorbox.sty" 1757420976 107259 3c38511e5ceddbe87267f1b979466a7a ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/tikzfill/tikzfill.image.sty" 1776944018 1128 fcb8e0a841fdd8e8bb2494b8f61dd28f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/tikzfill/tikzlibraryfill.image.code.tex" 1776944018 11087 a8e863ed8feeea219c8e48e5ac59d76d ""
+  "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/tools/array.sty" 1749468414 15698 f5f20b24886bb50156054c53e19b13fd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1749468414 7532 26d26e9d8f2ca784270d5da8ec7d102b ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/trimspaces/trimspaces.sty" 1253169183 1380 971a51b00a14503ddf754cab24c3f209 ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
@@ -166,9 +168,9 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" 1781195995 12805 4c983b8de68a400de07676ebd57cdb64 ""
-  "finalterm_textreport.aux" 1781195997 2929 b298f4a754f7d4081c0cb44c61c6a065 "xelatex"
-  "finalterm_textreport.tex" 1781195995 12805 4c983b8de68a400de07676ebd57cdb64 ""
+  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/course/統計專論（三）/finalterm/report/finalterm_textreport.tex" 1781284257 13435 787d60018fa4df532100ea0b4777b3d3 ""
+  "finalterm_textreport.aux" 1781284259 2328 31a71eafea11ec99990c2595ca93e17a "xelatex"
+  "finalterm_textreport.tex" 1781284257 13435 787d60018fa4df532100ea0b4777b3d3 ""
   (generated)
   "finalterm_textreport.aux"
   "finalterm_textreport.log"
