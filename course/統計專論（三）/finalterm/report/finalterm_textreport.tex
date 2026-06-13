@@ -262,6 +262,11 @@ Mean charts 包含 Individuals Shewhart、mean EWMA、adaptive EWMA、mean CUSUM
 這些方法主要用來偵測製程中心位置是否發生變化。
 圖 \ref{fig:meanmethods} 顯示各方法於 Phase II 的監控結果。
 
+EWMA、adaptive EWMA 與 CUSUM 皆能在 Phase II 前段發現異常；
+CPD mean chart 則稍晚才發出訊號，
+但它能提供變化點位置估計，
+對後續解釋更有幫助。
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.95\linewidth]{monitoring_mean_methods.png}
@@ -269,15 +274,19 @@ Mean charts 包含 Individuals Shewhart、mean EWMA、adaptive EWMA、mean CUSUM
   \label{fig:meanmethods}
 \end{figure}
 
-由圖可知，
-EWMA、adaptive EWMA 與 CUSUM 皆能在 Phase II 前段發現 mean-related 異常；
-CPD mean chart 較晚發出訊號，
-但它能提供變化點位置估計，
-對後續解釋更有幫助。
+
 
 \section*{Variance 與 joint charts}
 
-Variance charts 包含 variance EWMA、variance CUSUM 與 CPD variance chart；joint chart 則使用 CPD joint statistic 同時考慮 mean 與 variance 變化。圖 \ref{fig:varmethods} 顯示 variance 與 joint 監控結果。
+Variance charts 包含 variance EWMA、variance CUSUM 與 CPD variance chart；
+joint chart 則使用 CPD joint statistic 同時考慮 mean 與 variance 變化。
+圖 \ref{fig:varmethods} 顯示 variance 與 joint 監控結果。
+
+Variance EWMA 在 Phase II 第一個觀測點即發出訊號，
+表示此方法對 Phase II 一開始非常敏感。
+相比之下，
+variance CUSUM 與 CPD variance chart 較晚發出訊號，
+但其訊號更集中於較明顯的變異或結構性變化。
 
 \begin{figure}[H]
 \centering
@@ -286,12 +295,8 @@ Variance charts 包含 variance EWMA、variance CUSUM 與 CPD variance chart；j
 \label{fig:varmethods}
 \end{figure}
 
-Variance EWMA 在 Phase II 第一個觀測點即發出訊號，
-表示此方法對 Phase II 一開始的平方標準化偏差非常敏感。
-相比之下，variance CUSUM 與 CPD variance chart 較晚發出訊號，
-但其訊號更集中於較明顯的變異或結構性變化。
 
-\section*{signal 比較}
+\section*{訊號監控比較}
 
 各管制圖的第一次發出訊號的時間點與發出訊號的總次數如表 \ref{tab:signal} 所示。
 
@@ -345,48 +350,33 @@ EWMA 與 CUSUM 會累積歷史資訊，
 
 CPD charts 的優點是除了發出訊號外，
 也能估計最可能的變化點位置，
-也就是第一次出現訊號的點。
-其結果如下：
+也就是製程開始改變的位置。
+由表 \ref{tab:signal} 可知，
+CPD mean chart、CPD variance chart、CPD joint chart 第一次發出訊號的時間點分別是 749、761、762，
+也就是這幾個方法發現第一次異常分別是在樣本編號 749、761、762；
+然而，
+三者在最可能的變化點位置估計方式如下：
 
 \begin{itemize}
-  \item CPD mean chart 為 749
-  \item CPD variance chart 為 761
-  \item CPD joint chart 為 762
-  \item CPD mean chart 最強訊號對應的估計變化點約為 \(\widehat{r}=1212\)
-  \item CPD variance 與 joint charts 最強訊號對應的估計變化點約為 \(\widehat{r}=1229\)
+  \item CPD mean chart 的最強訊號是根據 $T_{max,n}$ 判定，
+        也就是在所有監控時間 $n$ 中找出最大的 $T_{max,n}$。
+        該時間點下使 $T_{r,n}$ 最大的 $r$，即為最強訊號所對應的估計變化點。
+  \item CPD variance chart 的最強訊號是根據 $B_{max,n}$ 判定，
+        也就是在所有監控時間 $n$ 中找出最大的 $B_{max,n}$。
+        該時間點下使 $B_{r,n}$ 最大的 $r$，即為最強訊號所對應的估計變化點。
+  \item CPD joint chart 的最強訊號則是根據 $J_{max,n}$ 判定，
+        也就是在所有監控時間 $n$ 中找出最大的 $J_{max,n}$。
+        該時間點下使 $J_{r,n}$ 最大的 $r$，即為最強訊號所對應的估計變化點。
 \end{itemize}
 
-此結果表示 Phase II 中可能不只存在單一早期平移。
-前段 mean charts 很快發現平均水準的偏離，
-而 CPD variance 與 joint charts 則指出後段約在樣本編號為 1229 的附近可能有更明顯的變異或結構性改變。
+由此計算可得 CPD mean chart 的 $r$ 約為 1212，
+這表示前段訊號可視為平均數偏離的早期警告，
+而整段資料中最明顯的平均數結構性改變則可能發生在樣本編號 1213 附近。
+CPD variance chart 與 CPD joint chart 的 $r$ 皆約為 1229，
+表示後段約在樣本編號 1229 附近可能有更明顯的變異改變或結構性改變。
 因此，
 CPD 的結果提供了比單純第一次出現訊號，
 更豐富的診斷資訊。
-整體而言，
-分析結果可分為三個層次解釋。
-
-第一，
-Phase I 的 RS/P 結果並未顯示明顯的水準或尺度不穩定，
-因此將 Phase I 當作管制界線的參考樣本是合理的。
-因為若 Phase I 本身已經不穩定，
-後續 Phase II 的管制界限將不可靠。
-
-第二，
-Phase II 的 mean charts 皆顯示某種程度的平均水準偏移。
-Mean EWMA、adaptive EWMA 與 mean CUSUM 都在樣本編號 743 發出訊號，
-而 Shewhart 到樣本編號 773 才發出訊號。
-這代表變化可能不是單一極端點，
-而是具有持續性，
-因此這類方法較早偵測到異常。
-
-第三，
-variance charts 的結果顯示變異結構也可能改變。
-Variance EWMA 從 Phase II 第一點即發出訊號，
-說明 Phase II 的標準化平方偏差相對於 Phase I 參考分布有明顯差異。
-不過，由於 variance EWMA 過於敏感，
-解釋時應搭配 variance CUSUM 與 CPD variance chart。
-CPD variance 與 joint charts 將較強變化位置指向樣本編號 1229 附近，
-暗示後段可能有結構性改變。
 
 \chapter{結論}
 
@@ -395,10 +385,10 @@ CPD variance 與 joint charts 將較強變化位置指向樣本編號 1229 附�
 共保留 1437 筆樣本。
 前 718 筆作為 Phase I，後 719 筆作為 Phase II。
 
-Phase I RS/P 診斷得到 \(p_{\text{level}}=0.8675\) 與 \(p_{\text{scale}}=0.8325\)，
+Phase I 的 RS/P 診斷得到 \(p_{\text{level}}=0.8675\) 與 \(p_{\text{scale}}=0.8325\)，
 顯示 Phase I 沒有明顯 level 或 scale 不穩定，
-可作為 IC reference。
-Phase II 監控中，
+可作為監控的參考。
+在 Phase II 監控中，
 variance EWMA 最早於樣本編號 719 發出訊號；
 偵測平均數偏移的方法中，
 mean EWMA、adaptive EWMA 與 mean CUSUM 皆於樣本編號 743 發出訊號；

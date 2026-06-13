@@ -11,6 +11,8 @@
 \usepackage[most]{tcolorbox}
 \usepackage{xcolor}
 
+\usepackage{makecell}
+
 % figures and tables
 \usepackage{graphicx}
 \usepackage{float}
@@ -31,7 +33,7 @@
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{caption}[numbered]
 
-\title{Phase I/II Statistical Process Monitoring\\SECOM Data}
+\title{Phase I/II Statistical Process Monitoring}
 \author{黃丞暘}
 \institute{統計專論 (III) Final Report}
 \date{2026/06/16}
@@ -48,7 +50,9 @@
     \begin{itemize}
         \item Dataset: UCI SECOM
         \item Objective: Construct SPC workflow % a conflict
-        \[
+        \[  
+            \text{Preprocessing}
+            \rightarrow
             \text{Phase I} % diagnosis
             \rightarrow
             \text{Control chart design}
@@ -127,12 +131,14 @@
 
 %================================================
 \begin{frame}{Phase I RS/P Diagnosis}
-\begin{block}{Recursive segmentation + permutation result}
+\begin{block}{Recursive Segmentation + Permutation Calibration}
 \[
     p_{\text{level}} = 0.8675,\quad
     p_{\text{scale}} = 0.8325
 \]
 \end{block}
+
+% \item Phase I RS/P diagnosis does not reject stability, so the reference sample is usable.
 
 \begin{itemize}
     \item Phase I shows no signifacant evidence of level or scale change
@@ -152,7 +158,8 @@ Method & Target & Main setting \\
 Individuals Shewhart & Mean & 3-sigma limits \\
 Mean EWMA & Mean & $\lambda=0.1,\ \rho=2.454$ \\
 Variance EWMA & Variance & $\lambda=0.1,\ \rho_U=2.595,\ \rho_L=1.580$ \\
-Adaptive EWMA & Mean & eta1 case (ii), $h=0.7874$ \\
+Adaptive EWMA & Mean & \makecell[l]{\(\eta_1(e_n)\): \(\mu_1=1,\ \mu_2=4,\ ARL_0=100\),\\
+                        \(h=0.7874,\ \lambda=0.1813,\ u=2.5752\)} \\
 Mean CUSUM & Mean & $k=0.5,\ h=4.095$ \\
 Variance CUSUM & Variance & $k_U=1.848,\ h_U=7.416$; $k_L=0.462,\ h_L=-2.446$ \\
 CPD charts & Mean / variance / joint & $\alpha=0.005$ \\
@@ -160,10 +167,6 @@ CPD charts & Mean / variance / joint & $\alpha=0.005$ \\
 \end{tabular}
 \end{table}
 
-\begin{itemize}
-    \item EWMA and CUSUM settings follow the in-class R code.
-    \item CPD limits follow Chapter 6 approximations for mean, variance, and joint charts.
-\end{itemize}
 \end{frame}
 
 %================================================
@@ -244,6 +247,8 @@ CPD charts & Mean / variance / joint & $\alpha=0.005$ \\
             First signal: 719\\
             Signal count: 719
 
+            % \item Variance-sensitive methods are more aggressive, especially variance EWMA.
+
             \vspace{1.8cm}
             \textbf{Variance CUSUM}\\
             First signal: 773\\
@@ -307,36 +312,30 @@ CPD charts & Mean / variance / joint & $\alpha=0.005$ \\
 
 \begin{frame}{CPD Post-Signal Interpretation}
     \begin{itemize}
-        \item The strongest CPD variance and joint signals estimate the likely change location around:
-        \[
-            \widehat{r} \approx 1229.
-        \]
         \item The strongest CPD mean signal estimates:
         \[
             \widehat{r} \approx 1212
         \]
+        \item The strongest CPD variance and joint signals estimate:
+        \[
+            \widehat{r} \approx 1229
+        \]
     \end{itemize}
-\end{frame}
 
-%================================================
-\begin{frame}{Interpretation}
-\begin{itemize}
-    \item Phase I RS/P diagnosis does not reject stability, so the reference sample is usable.
-    \item Phase II mean changes are detected by EWMA, AEWMA, CUSUM, and CPD mean chart.
-    \item Variance-sensitive methods are more aggressive, especially variance EWMA.
-    \item CPD variance and joint charts locate later structural changes around indices 1229.
-    \item Overall pattern suggests not a single isolated mean shift only, but a combination of mean instability and variance/structural change.
-\end{itemize}
+    % \item CPD variance and joint charts locate later structural changes around indices 1229.
+
 \end{frame}
 
 %================================================
 \begin{frame}{Conclusion}
 \begin{enumerate}
-    \item The selected SECOM variable $x_{297}$ is usable after missing-value removal and IQR outlier filtering.
-    \item Phase I RS/P results support using the first 718 cleaned samples as the IC reference.
-    \item The earliest signal is variance EWMA at the first Phase II observation.
-    \item For mean-shift detection, mean EWMA, AEWMA, and mean CUSUM signal earliest at index 743.
-    \item CPD charts provide additional localization and suggest later structural changes around indices 1212--1229.
+    \item The selected SECOM variable $x_{297}$ is usable
+    \vspace{0.5em}
+    \item Phase I RS/P results support using the first 718 samples as the IC reference
+    \vspace{0.5em}
+    \item The variance EWMA is very sensitive
+    \vspace{0.5em}
+    \item CPD charts suggest structural changes around indices 1212--1229
 \end{enumerate}
 \end{frame}
 
