@@ -1,347 +1,155 @@
 \documentclass[aspectratio=169,12pt]{beamer}
-
 \usepackage{fontspec}
 \usepackage{xeCJK}
-
-% math tools
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-
-\usepackage[most]{tcolorbox}
-\usepackage{xcolor}
-
-\usepackage{makecell}
-
-% figures and tables
-\usepackage{graphicx}
-\usepackage{float}
 \usepackage{booktabs}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
-
+\usepackage{graphicx}
 \graphicspath{{../outputs/}}
 
-% Chinese
-\xeCJKsetup{AutoFakeBold=true, AutoFakeSlant=true}
-\setmainfont{Times New Roman}
-\setCJKmainfont{標楷體}
-
-% Beamer theme
 \usetheme{Madrid}
 \usecolortheme{default}
+\setmainfont{Times New Roman}
+\setCJKmainfont{Microsoft JhengHei}
+\setCJKsansfont{Microsoft JhengHei}
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{caption}[numbered]
 
-\title{Phase I/II Statistical Process Monitoring}
-\author{黃丞暘}
-\institute{統計專論 (III) Final Report}
-\date{2026/06/16}
+\title{SECOM Phase I/II SPC 修正版分析}
+\subtitle{先切 Phase I/II、Phase I 前處理、Phase II RS/P 診斷}
+\author{611211106}
+\date{2026 年 6 月 17 日}
 
 \begin{document}
 
-%================================================
 \begin{frame}
-    \titlepage
+\titlepage
 \end{frame}
 
-%================================================
-\begin{frame}{Project Objective}
-    \begin{itemize}
-        \item Dataset: UCI SECOM
-        \item Objective: Construct SPC workflow % a conflict
-        \[  
-            \text{Preprocessing}
-            \rightarrow
-            \text{Phase I} % diagnosis
-            \rightarrow
-            \text{Control chart design}
-            \rightarrow
-            \text{Phase II} % monitoring
-        \]
-        \item Main comparison: Shewhart, EWMA, CUSUM, and CPD charts
-        \item Final:
-        \begin{enumerate}[1.]
-            \item Which chart signals first ?
-            \item Whether the pattern suggests mean shift, variance shift, or structural change ?
-        \end{enumerate}
-    \end{itemize}
-\end{frame}
-
-%================================================
-\begin{frame}{Selected Variable and Preprocessing}
-    \begin{block}{Variable}
-        Selected process variable: \textbf{$x_{297}$}
-    \end{block}
-    \begin{itemize}
-        \item Reason: Low missing, High distinct
-        \item Samples: 1567
-        \item Missing samples removed: 2
-        \item Outlier: 1.5 IQR filter after dropping missing values
-        \item Outliers removed: 128
-        \item Cleaned samples: \textbf{1437}
-    \end{itemize}
-\end{frame}
-
-%================================================
-\begin{frame}{Variable Summary}
-    \begin{table}
-        \centering
-        \begin{tabular}{lrrrrrrr}
-            \toprule
-            Mean & SD & Min & Q1 & Median & Q3 & Max \\
-            \midrule
-            1410.91 & 1126.51 & 0 & 556.99 & 1061.44 & 1995.39 & 4945.92 \\
-            \bottomrule
-        \end{tabular}
-    \end{table}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.7\linewidth]{variable_distribution_x297.png}
-    \end{figure}
-\end{frame}
-
-%================================================
-\begin{frame}{Phase I / Phase II Split}
-\[
-    m = \lfloor 0.5n \rfloor = \lfloor 0.5(1437) \rfloor = 718
-\]
-    \begin{table}
-        \centering
-        \begin{tabular}{lrr}
-            \toprule
-            Phase & samples & Mean / SD \\
-            \midrule
-            Phase I & 718 & 1403.64 / 1105.53 \\
-            Phase II & 719 & 1418.18 / 1147.80 \\
-            \bottomrule
-        \end{tabular}
-    \end{table}
-    \begin{itemize}
-        \item Phase I is used as the in-control reference sample
-        \item Phase II is monitored sequentially using the chart limits estimated from Phase I
-    \end{itemize}
-\end{frame}
-
-%================================================
-\begin{frame}{Cleaned Series and Phase Split}
-\centering
-\includegraphics[width=0.94\linewidth]{series_phase_split.png}
-\end{frame}
-
-%================================================
-\begin{frame}{Phase I RS/P Diagnosis}
-\begin{block}{Recursive Segmentation + Permutation Calibration}
-\[
-    p_{\text{level}} = 0.8675,\quad
-    p_{\text{scale}} = 0.8325
-\]
-\end{block}
-
-% \item Phase I RS/P diagnosis does not reject stability, so the reference sample is usable.
-
+\begin{frame}{老師建議後的修正方向}
 \begin{itemize}
-    \item Phase I shows no signifacant evidence of level or scale change
-    \item Phase I data can be regarded as stable
+  \item 原始資料先切分 Phase I 與 Phase II。
+  \item 只在 Phase I 做前處理：刪除缺失值，並用 3 倍 IQR 移除離群值。
+  \item Phase II 視為新取得資料，不做離群值刪除。
+  \item \(x_{297}\) 嚴重右偏，不再用常態型 EWMA、CUSUM、CPD 界線做 Phase II 管制圖。
+  \item Individuals Shewhart 改用 Gamma 上界，下界設為 0。
+  \item Phase II 主要以整段 RS/P 無母數診斷檢查 level 與 scale。
 \end{itemize}
 \end{frame}
 
-%================================================
-\begin{frame}{Chart Design}
+\begin{frame}{資料切分與 Phase I 前處理}
+\begin{columns}[T]
+\begin{column}{0.48\linewidth}
 \begin{table}
 \centering
-\scriptsize
-\begin{tabular}{p{0.28\linewidth}p{0.17\linewidth}p{0.42\linewidth}}
+\begin{tabular}{lr}
 \toprule
-Method & Target & Main setting \\
+項目 & 數值 \\
 \midrule
-Individuals Shewhart & Mean & 3-sigma limits \\
-Mean EWMA & Mean & $\lambda=0.1,\ \rho=2.454$ \\
-Variance EWMA & Variance & $\lambda=0.1,\ \rho_U=2.595,\ \rho_L=1.580$ \\
-Adaptive EWMA & Mean & \makecell[l]{\(\eta_1(e_n)\): \(\mu_1=1,\ \mu_2=4,\ ARL_0=100\),\\
-                        \(h=0.7874,\ \lambda=0.1813,\ u=2.5752\)} \\
-Mean CUSUM & Mean & $k=0.5,\ h=4.095$ \\
-Variance CUSUM & Variance & $k_U=1.848,\ h_U=7.416$; $k_L=0.462,\ h_L=-2.446$ \\
-CPD charts & Mean / variance / joint & $\alpha=0.005$ \\
+原始總筆數 & 1567 \\
+Phase I 原始筆數 & 783 \\
+Phase II 原始筆數 & 784 \\
+Phase I 缺失值刪除 & 2 \\
+Phase I 3 IQR 離群值刪除 & 24 \\
+Phase I 清理後筆數 & 757 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{column}
+\begin{column}{0.48\linewidth}
+\begin{table}
+\centering
+\begin{tabular}{lr}
+\toprule
+Phase I 統計量 & 數值 \\
+\midrule
+平均數 & 1629.34 \\
+標準差 & 1478.01 \\
+Q1 & 598.12 \\
+中位數 & 1141.48 \\
+Q3 & 2109.16 \\
+最大值 & 7189.73 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{原始切分與 Gamma 界線}
+\centering
+\includegraphics[width=0.92\linewidth]{series_phase_split.png}
+\end{frame}
+
+\begin{frame}{Phase I RS/P 診斷}
+\begin{table}
+\centering
+\begin{tabular}{lrrr}
+\toprule
+診斷 & p-value & 最大統計量 & 估計切點 \\
+\midrule
+Level & 0.9650 & 1.5446 & 82 \\
+Scale & 0.7450 & 2.7315 & 34 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\vspace{0.8em}
+兩個 p-value 皆大於 0.05，因此清理後 Phase I 沒有明顯 level 或 scale 不穩定，可作為建立管制界線的參考樣本。
 \end{frame}
 
-%================================================
-\begin{frame}{Mean-Shift Monitoring Results {\small (Main Mean Charts)}}
-    \scriptsize
-    \begin{columns}[T,totalwidth=\linewidth]
-        % 左欄：文字結果
-        \begin{column}{0.3\linewidth}
-            \normalsize
-            \centering
-            \vspace{0.3cm}
-            \textbf{Mean EWMA}\\
-            First signal: 743\\
-            Signal count: 17
-
-            \vspace{0.8cm}
-            \textbf{Adaptive EWMA}\\
-            First signal: 743\\
-            Signal count: 32
-
-            \vspace{1cm}
-            \textbf{Mean CUSUM}\\
-            First signal: 743\\
-            Signal count: 13
-        \end{column}
-        
-        % EWMA、AEWMA 與 CUSUM 皆於 743 發出訊號
-
-        % 右欄：三張圖
-        \hspace{1.5em}
-        \begin{column}{0.8\linewidth}
-            \vspace{-0.5em}
-            \includegraphics[width=0.65\linewidth]{mean_ewma.png}\\[-0.4em]
-            \includegraphics[width=0.65\linewidth]{adaptive_ewma.png}\\[-0.4em]
-            \includegraphics[width=0.65\linewidth]{mean_cusum.png}
-        \end{column}
-    \end{columns}
+\begin{frame}{Gamma Individuals Shewhart}
+\begin{columns}[T]
+\begin{column}{0.42\linewidth}
+\begin{table}
+\centering
+\begin{tabular}{lr}
+\toprule
+參數 & 數值 \\
+\midrule
+Gamma shape & 1.3607 \\
+Gamma scale & 1199.0099 \\
+LCL & 0 \\
+UCL & 7338.8437 \\
+Phase II 超 UCL 筆數 & 23 \\
+第一個超 UCL index & 842 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{column}
+\begin{column}{0.56\linewidth}
+\includegraphics[width=\linewidth]{phaseii_gamma_shewhart.png}
+\end{column}
+\end{columns}
 \end{frame}
 
-%================================================
+\begin{frame}{Phase II 整段 RS/P 診斷}
+\begin{table}
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+診斷 & p-value & 最大統計量 & Phase II 切點 & 原始 index \\
+\midrule
+Level & 0.0575 & 6.9002 & 776 & 1559 \\
+Scale & 0.1000 & 17.5997 & 776 & 1559 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\begin{frame}{Mean-Shift Monitoring Results {\small (Supplementary Charts)}}
-    \begin{columns}[T,totalwidth=\linewidth]
-        % 左欄：文字結果
-        \begin{column}{0.25\linewidth}
-            \centering
-            \vspace{0.3cm}
-            \textbf{Individuals Shewhart}\\
-            First signal: 773\\
-            Signal count: 10
-
-            \vspace{1.5cm}
-            \textbf{CPD Mean}\\
-            First signal: 749\\
-            Signal count: 118
-        \end{column}
-
-        % Shewhart 較晚，CPD mean chart 則顯示較高的訊號頻率
-
-        % 右欄：二張圖
-        \hspace{1em}
-        \begin{column}{1.1\linewidth}
-            \vspace{-0.5em}
-            \includegraphics[width=0.65\linewidth]{mean_shewhart.png}\\[-0.4em]
-            \includegraphics[width=0.65\linewidth]{cpd_mean.png}\\[-0.4em]
-        \end{column}
-    \end{columns}
+\vspace{0.5em}
+在 0.05 顯著水準下尚未拒絕整段 Phase II 無 level 或 scale 改變的假設，但 level p-value 接近 0.05，後段值得進一步分段檢查。
 \end{frame}
 
-%================================================
-\begin{frame}{Variance-Shift Monitoring Results {\small (Target: Variance)}}
-    \begin{columns}[T,totalwidth=\linewidth]
-        % 左欄：文字結果
-        \begin{column}{0.25\linewidth}
-            \centering
-            \vspace{0.5cm}
-            \textbf{Variance EWMA}\\
-            First signal: 719\\
-            Signal count: 719
-
-            % \item Variance-sensitive methods are more aggressive, especially variance EWMA.
-
-            \vspace{1.8cm}
-            \textbf{Variance CUSUM}\\
-            First signal: 773\\
-            Signal count: 59
-        \end{column}
-        
-        % Variance EWMA 於 Phase II 第一筆觀測即發出訊號
-        
-        % 表示變異數偏移是最早出現的異常型態。
-
-        % 右欄：二張圖
-        \hspace{1em}
-        \begin{column}{1.1\linewidth}
-            \vspace{-0.5em}
-            \includegraphics[width=0.65\linewidth]{variance_ewma.png}\\[-0.4em]
-            \includegraphics[width=0.65\linewidth]{variance_cusum.png}\\[-0.4em]
-        \end{column}
-    \end{columns}
+\begin{frame}{Phase II RS/P 診斷位置}
+\centering
+\includegraphics[width=0.92\linewidth]{phaseii_rsp_diagnosis.png}
 \end{frame}
 
-%================================================
-
-\begin{frame}{CPD and Joint Monitoring Results}
-    \begin{columns}[T,totalwidth=\linewidth]
-        % 左欄：文字結果
-        \begin{column}{0.25\linewidth}
-            \centering
-            \vspace{0.5cm}
-            \textbf{CPD joint}\\
-            First signal: 762\\
-            Signal count: 71
-
-            \vspace{1.8cm}
-            \textbf{CPD variance}\\
-            First signal: 761\\
-            Signal count: 78
-        \end{column}
-
-        % CPD variance 與 CPD joint chart 的訊號時間接近
-        
-        % 表示製程可能同時存在變異數改變與結構性變化
-
-        % 右欄：二張圖
-        \hspace{1em}
-        \begin{column}{1.1\linewidth}
-            \vspace{-0.5em}
-            \includegraphics[width=0.65\linewidth]{cpd_joint.png}\\[-0.4em]
-            \includegraphics[width=0.65\linewidth]{cpd_variance.png}\\[-0.4em]
-        \end{column}
-    \end{columns}
-
-% The earliest signal is produced by the variance EWMA chart at index 719,
-% suggesting that the process change first appears as a variance shift.
-% Mean-sensitive charts later signal at index 743, indicating that a mean shift
-% also emerges after the initial variance instability.
-% CPD-based charts further suggest persistent structural changes in Phase II.
-
-\end{frame}
-
-%================================================
-
-\begin{frame}{CPD Post-Signal Interpretation}
-    \begin{itemize}
-        \item The strongest CPD mean signal estimates:
-        \[
-            \widehat{r} \approx 1212
-        \]
-        \item The strongest CPD variance and joint signals estimate:
-        \[
-            \widehat{r} \approx 1229
-        \]
-    \end{itemize}
-
-    % \item CPD variance and joint charts locate later structural changes around indices 1229.
-
-\end{frame}
-
-%================================================
-\begin{frame}{Conclusion}
-\begin{enumerate}
-    \item The selected SECOM variable $x_{297}$ is usable
-    \vspace{0.5em}
-    \item Phase I RS/P results support using the first 718 samples as the IC reference
-    \vspace{0.5em}
-    \item The variance EWMA is very sensitive
-    \vspace{0.5em}
-    \item CPD charts suggest structural changes around indices 1212--1229
-\end{enumerate}
-\end{frame}
-
-\begin{frame}
-    \centering
-    \Huge\textbf{Thank you for listening}    
+\begin{frame}{結論}
+\begin{itemize}
+  \item 修正後流程符合 Phase I/Phase II 監控：先切資料，只清理 Phase I。
+  \item \(x_{297}\) 右偏且非負，因此不用常態 3-sigma 對稱界線。
+  \item Gamma Individuals Shewhart 給出 UCL = 7338.84，Phase II 有 23 筆超界。
+  \item 整段 Phase II RS/P 尚未在 0.05 水準顯著，但 level 診斷接近顯著。
+  \item 後續建議針對 Phase II 後段做滑動視窗或分批 RS/P 診斷。
+\end{itemize}
 \end{frame}
 
 \end{document}

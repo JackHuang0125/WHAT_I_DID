@@ -4,6 +4,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy import stats
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,33 +23,50 @@ def load_series():
     df = pd.read_csv(DATA_PATH, sep="\t", parse_dates=["Time"])
     raw = df[["Time", VARIABLE, "Pass/Fail"]].copy()
     raw = raw.rename(columns={VARIABLE: "x"})
-    n_raw = len(raw)
-    n_missing = int(raw["x"].isna().sum())
-    raw = raw.dropna(subset=["x"]).sort_values("Time").reset_index(drop=True)
+    raw = raw.sort_values("Time").reset_index(drop=True)
+    raw["t"] = np.arange(1, len(raw) + 1)
 
-    q1, q3 = raw["x"].quantile([0.25, 0.75])
+    n_raw = len(raw)
+    m_raw = n_raw // 2
+    phase_i_raw = raw.iloc[:m_raw].copy()
+    phase_ii_raw = raw.iloc[m_raw:].copy()
+
+    phase_i_no_missing = phase_i_raw.dropna(subset=["x"]).copy()
+    q1, q3 = phase_i_no_missing["x"].quantile([0.25, 0.75])
     iqr = q3 - q1
-    lower = q1 - 1.5 * iqr
-    upper = q3 + 1.5 * iqr
-    cleaned = raw[(raw["x"] >= lower) & (raw["x"] <= upper)].reset_index(drop=True)
-    cleaned["t"] = np.arange(1, len(cleaned) + 1)
+    lower = q1 - 3.0 * iqr
+    upper = q3 + 3.0 * iqr
+    phase_i_clean = phase_i_no_missing[
+        (phase_i_no_missing["x"] >= lower) & (phase_i_no_missing["x"] <= upper)
+    ].copy()
+    phase_ii_observed = phase_ii_raw.dropna(subset=["x"]).copy()
 
     summary = {
         "variable": VARIABLE,
         "raw_n": n_raw,
-        "missing_removed": n_missing,
-        "outlier_rule": "global 1.5 IQR filter after dropping missing values",
-        "outliers_removed": int(len(raw) - len(cleaned)),
-        "clean_n": int(len(cleaned)),
-        "mean": float(cleaned["x"].mean()),
-        "std": float(cleaned["x"].std(ddof=1)),
-        "min": float(cleaned["x"].min()),
-        "q1": float(cleaned["x"].quantile(0.25)),
-        "median": float(cleaned["x"].median()),
-        "q3": float(cleaned["x"].quantile(0.75)),
-        "max": float(cleaned["x"].max()),
+        "raw_phase_i_n": int(len(phase_i_raw)),
+        "raw_phase_ii_n": int(len(phase_ii_raw)),
+        "phase_i_missing_removed": int(phase_i_raw["x"].isna().sum()),
+        "phase_ii_missing_count_not_preprocessed": int(phase_ii_raw["x"].isna().sum()),
+        "outlier_rule": "Phase I only: 3 IQR filter after dropping Phase I missing values",
+        "phase_i_outlier_lower": float(lower),
+        "phase_i_outlier_upper": float(upper),
+        "phase_i_outliers_removed": int(len(phase_i_no_missing) - len(phase_i_clean)),
+        "phase_i_clean_n": int(len(phase_i_clean)),
+        "phase_ii_observed_n_for_diagnostics": int(len(phase_ii_observed)),
+        "phase_i_mean": float(phase_i_clean["x"].mean()),
+        "phase_i_std": float(phase_i_clean["x"].std(ddof=1)),
+        "phase_i_min": float(phase_i_clean["x"].min()),
+        "phase_i_q1": float(phase_i_clean["x"].quantile(0.25)),
+        "phase_i_median": float(phase_i_clean["x"].median()),
+        "phase_i_q3": float(phase_i_clean["x"].quantile(0.75)),
+        "phase_i_max": float(phase_i_clean["x"].max()),
+        "phase_ii_raw_mean": float(phase_ii_observed["x"].mean()),
+        "phase_ii_raw_std": float(phase_ii_observed["x"].std(ddof=1)),
+        "phase_ii_raw_min": float(phase_ii_observed["x"].min()),
+        "phase_ii_raw_max": float(phase_ii_observed["x"].max()),
     }
-    return cleaned, summary
+    return raw, phase_i_clean, phase_ii_raw, phase_ii_observed, summary
 
 
 def robust_segment_stats(x):
@@ -61,32 +79,50 @@ def max_segment_stat(x, mode):
     n = len(x)
     if n < 12:
         return 0.0, 0
-    best = -np.inf
-    best_j = 0
-    for j in range(6, n - 5):
-        left = x[:j]
-        right = x[j:]
-        if mode == "level":
-            scale = np.sqrt(np.var(left, ddof=1) / len(left) + np.var(right, ddof=1) / len(right))
-            val = abs(np.mean(left) - np.mean(right)) / scale if scale > 0 else 0.0
-        else:
-            v0 = np.var(left, ddof=1)
-            v1 = np.var(right, ddof=1)
-            val = max(v0, v1) / min(v0, v1) if min(v0, v1) > 0 else 0.0
-        if val > best:
-            best = val
-            best_j = j
-    return float(best), int(best_j)
+    cuts = np.arange(6, n - 5)
+    csum = np.cumsum(x)
+    csum2 = np.cumsum(x * x)
+    total = csum[-1]
+    total2 = csum2[-1]
+
+    left_n = cuts
+    right_n = n - cuts
+    left_sum = csum[cuts - 1]
+    right_sum = total - left_sum
+    left_mean = left_sum / left_n
+    right_mean = right_sum / right_n
+
+    left_sse = csum2[cuts - 1] - (left_sum * left_sum / left_n)
+    right_sse = (total2 - csum2[cuts - 1]) - (right_sum * right_sum / right_n)
+    left_var = left_sse / (left_n - 1)
+    right_var = right_sse / (right_n - 1)
+
+    if mode == "level":
+        scale = np.sqrt(left_var / left_n + right_var / right_n)
+        vals = np.divide(
+            np.abs(left_mean - right_mean),
+            scale,
+            out=np.zeros_like(scale),
+            where=scale > 0,
+        )
+    else:
+        var_min = np.minimum(left_var, right_var)
+        var_max = np.maximum(left_var, right_var)
+        vals = np.divide(var_max, var_min, out=np.zeros_like(var_max), where=var_min > 0)
+
+    best_idx = int(np.argmax(vals))
+    return float(vals[best_idx]), int(cuts[best_idx])
 
 
-def rsp_permutation(phase_i):
-    x = np.asarray(phase_i, dtype=float)
+def rsp_permutation(values, seed=611211106):
+    x = np.asarray(values, dtype=float)
+    rng = np.random.default_rng(seed)
     level_obs, level_j = max_segment_stat(x, "level")
     scale_obs, scale_j = max_segment_stat(x, "scale")
     level_perm = np.empty(N_PERM)
     scale_perm = np.empty(N_PERM)
     for b in range(N_PERM):
-        xp = RNG.permutation(x)
+        xp = rng.permutation(x)
         level_perm[b], _ = max_segment_stat(xp, "level")
         scale_perm[b], _ = max_segment_stat(xp, "scale")
     p_level = (1 + np.sum(level_perm >= level_obs)) / (N_PERM + 1)
@@ -101,10 +137,28 @@ def rsp_permutation(phase_i):
     }
 
 
-def shewhart(x2, mu, sigma):
-    z = (x2 - mu) / sigma
-    signal = np.abs(z) > 3
-    return z, signal
+def gamma_shewhart_limits(phase_i):
+    x = np.asarray(phase_i, dtype=float)
+    positive = x[x > 0]
+    shape, loc, scale = stats.gamma.fit(positive, floc=0)
+    ucl = float(stats.gamma.ppf(1 - ALPHA, shape, loc=loc, scale=scale))
+    return {
+        "distribution": "gamma",
+        "shape": float(shape),
+        "loc": float(loc),
+        "scale": float(scale),
+        "alpha": ALPHA,
+        "lcl": 0.0,
+        "ucl": ucl,
+        "positive_fit_n": int(len(positive)),
+        "zero_count_excluded_from_fit": int(np.sum(x == 0)),
+    }
+
+
+def gamma_shewhart(x2, limits):
+    x = np.asarray(x2, dtype=float)
+    signal = (x < limits["lcl"]) | (x > limits["ucl"])
+    return signal
 
 
 def ewma(x2, mu, sigma, lam=0.1, kind="mean"):
@@ -257,19 +311,71 @@ def first_signal(signal, offset):
     return None if len(idx) == 0 else int(idx[0] + 1 + offset)
 
 
-def plot_series(cleaned, m, mu, sigma):
+def plot_series(raw, phase_i_clean, m_raw, limits):
     fig, ax = plt.subplots(figsize=(11, 4.5))
-    ax.plot(cleaned["t"], cleaned["x"], lw=0.8, color="#2f6f8f")
-    ax.axvline(m, color="#9b2226", ls="--", lw=1.3, label=f"Phase split: {m} / {m + 1}")
-    ax.axhline(mu, color="#222222", lw=1, label="Phase I mean")
-    ax.axhline(mu + 3 * sigma, color="#b23a48", ls=":", lw=1, label="3-sigma limits")
-    ax.axhline(mu - 3 * sigma, color="#b23a48", ls=":", lw=1)
-    ax.set_title(f"SECOM {VARIABLE}: cleaned observations and Phase I limits")
-    ax.set_xlabel("Cleaned observation index")
+    phase_i_raw = raw.iloc[:m_raw]
+    phase_ii_raw = raw.iloc[m_raw:]
+    ax.scatter(phase_i_raw["t"], phase_i_raw["x"], s=9, color="#4c78a8", alpha=0.7, label="Phase I raw")
+    ax.scatter(phase_ii_raw["t"], phase_ii_raw["x"], s=9, color="#f58518", alpha=0.7, label="Phase II raw")
+    ax.scatter(
+        phase_i_clean["t"],
+        phase_i_clean["x"],
+        s=12,
+        facecolors="none",
+        edgecolors="#1b4332",
+        linewidths=0.6,
+        label="Phase I used for limits",
+    )
+    ax.axvline(m_raw + 0.5, color="#9b2226", ls="--", lw=1.3, label=f"Raw phase split: {m_raw} / {m_raw + 1}")
+    ax.axhline(limits["lcl"], color="#b23a48", ls=":", lw=1, label="Gamma LCL = 0")
+    ax.axhline(limits["ucl"], color="#b23a48", ls=":", lw=1, label=f"Gamma UCL ({1 - ALPHA:.3f})")
+    ax.set_title(f"SECOM {VARIABLE}: raw phase split and Phase I gamma limit")
+    ax.set_xlabel("Raw time-ordered observation index")
     ax.set_ylabel(VARIABLE)
     ax.legend(loc="best", fontsize=8)
     fig.tight_layout()
     fig.savefig(OUT / "series_phase_split.png", dpi=180)
+    plt.close(fig)
+
+
+def plot_phase_ii_gamma(phase_ii_observed, limits, signal):
+    fig, ax = plt.subplots(figsize=(11, 4.2))
+    ax.plot(phase_ii_observed["t"], phase_ii_observed["x"], lw=0.8, color="#2f6f8f", label="Phase II observed")
+    if np.any(signal):
+        ax.scatter(
+            phase_ii_observed.loc[signal, "t"],
+            phase_ii_observed.loc[signal, "x"],
+            s=24,
+            color="#ae2012",
+            label="Above gamma UCL",
+            zorder=3,
+        )
+    ax.axhline(limits["lcl"], color="#b23a48", ls=":", lw=1, label="LCL = 0")
+    ax.axhline(limits["ucl"], color="#b23a48", ls="--", lw=1, label="Gamma UCL")
+    ax.set_title("Phase II observations against Phase I gamma Shewhart limit")
+    ax.set_xlabel("Raw time-ordered observation index")
+    ax.set_ylabel(VARIABLE)
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+    fig.savefig(OUT / "phaseii_gamma_shewhart.png", dpi=180)
+    plt.close(fig)
+
+
+def plot_phase_ii_rsp(phase_ii_observed, rsp):
+    fig, ax = plt.subplots(figsize=(11, 4.2))
+    ax.plot(phase_ii_observed["t"], phase_ii_observed["x"], lw=0.8, color="#2f6f8f")
+    level_t = rsp.get("level_change_raw_index")
+    scale_t = rsp.get("scale_change_raw_index")
+    if level_t:
+        ax.axvline(level_t, color="#9b2226", ls="--", lw=1.1, label=f"RS level split, p={rsp['p_level']:.4f}")
+    if scale_t:
+        ax.axvline(scale_t, color="#6a4c93", ls=":", lw=1.3, label=f"RS scale split, p={rsp['p_scale']:.4f}")
+    ax.set_title("Whole Phase II RS/P diagnostic")
+    ax.set_xlabel("Raw time-ordered observation index")
+    ax.set_ylabel(VARIABLE)
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+    fig.savefig(OUT / "phaseii_rsp_diagnosis.png", dpi=180)
     plt.close(fig)
 
 
@@ -433,60 +539,53 @@ def plot_monitoring(cleaned, m, charts):
 
 
 def main():
-    cleaned, summary = load_series()
-    x = cleaned["x"].to_numpy()
-    n = len(x)
-    m = n // 2
-    phase_i = x[:m]
-    phase_ii = x[m:]
-    mu = float(np.mean(phase_i))
-    sigma = float(np.std(phase_i, ddof=1))
-    rsp = rsp_permutation(phase_i)
+    raw, phase_i_clean, phase_ii_raw, phase_ii_observed, summary = load_series()
+    m_raw = summary["raw_phase_i_n"]
+    phase_i = phase_i_clean["x"].to_numpy()
+    phase_ii = phase_ii_observed["x"].to_numpy()
 
-    z, sig_s = shewhart(phase_ii, mu, sigma)
-    mean_ewma, sig_me, ewma_mean_target, ewma_mean_width = ewma(phase_ii, mu, sigma, kind="mean")
-    var_ewma, sig_ve, ewma_var_target, ewma_var_width = ewma(phase_ii, mu, sigma, kind="variance")
-    aewma_stat, sig_ae, aewma_h = aewma(phase_ii, mu, sigma)
-    cpos, cneg, sig_cm = cusum_mean(phase_ii, mu, sigma)
-    vcpos, vcneg, sig_cv = cusum_variance(phase_ii, mu, sigma)
-    tmax, bmax, jmax, h_t, h_b, h_j, r_t, r_b, r_j = cpd_monitor(x, start_n=m + 1)
-    sig_ct = tmax > h_t
-    sig_cb = bmax > h_b
-    sig_cj = jmax > h_j
+    phase_i_rsp = rsp_permutation(phase_i, seed=611211106)
+    phase_ii_rsp = rsp_permutation(phase_ii, seed=611211107)
+    phase_ii_rsp["level_change_raw_index"] = int(
+        phase_ii_observed["t"].iloc[phase_ii_rsp["level_change_index"] - 1]
+    ) if phase_ii_rsp["level_change_index"] else None
+    phase_ii_rsp["scale_change_raw_index"] = int(
+        phase_ii_observed["t"].iloc[phase_ii_rsp["scale_change_index"] - 1]
+    ) if phase_ii_rsp["scale_change_index"] else None
 
-    charts = {
-        "shewhart_z": z,
-        "mean_ewma": mean_ewma,
-        "var_ewma": var_ewma,
-        "aewma": aewma_stat,
-        "aewma_h": aewma_h,
-        "mean_cusum_pos": cpos,
-        "mean_cusum_neg": cneg,
-        "var_cusum_pos": vcpos,
-        "var_cusum_neg": vcneg,
-        "tmax": tmax,
-        "bmax": bmax,
-        "jmax": jmax,
-        "h_t": h_t,
-        "h_b": h_b,
-        "h_j": h_j,
-        "ewma_mean_target": ewma_mean_target,
-        "ewma_mean_width": ewma_mean_width,
-        "ewma_var_target": ewma_var_target,
-        "ewma_var_width": ewma_var_width,
-    }
+    limits = gamma_shewhart_limits(phase_i)
+    sig_gamma = gamma_shewhart(phase_ii, limits)
 
     comparison = pd.DataFrame(
         [
-            ["Individuals Shewhart", "mean", first_signal(sig_s, m), int(sig_s.sum()), ""],
-            ["Mean EWMA", "mean", first_signal(sig_me, m), int(sig_me.sum()), "lambda=0.1, rho=2.454 (ARL0 approx 200)"],
-            ["Variance EWMA", "variance", first_signal(sig_ve, m), int(sig_ve.sum()), "lambda=0.1, rhoU=2.595, rhoL=1.580"],
-            ["Adaptive EWMA", "mean", first_signal(sig_ae, m), int(sig_ae.sum()), "eta1 case (ii): lambda=0.1813, u=2.5752, h=0.7874"],
-            ["Mean CUSUM", "mean", first_signal(sig_cm, m), int(sig_cm.sum()), "standardized k=0.5, h=4.095"],
-            ["Variance CUSUM", "variance", first_signal(sig_cv, m), int(sig_cv.sum()), "k_up=1.848, h_up=7.416; k_down=0.462, h_down=-2.446"],
-            ["CPD mean chart", "mean", first_signal(sig_ct[m:], m), int(np.nansum(sig_ct[m:])), f"estimated r={r_t[np.nanargmax(np.where(sig_ct, tmax, np.nan))] if np.any(sig_ct) else ''}"],
-            ["CPD variance chart", "variance", first_signal(sig_cb[m:], m), int(np.nansum(sig_cb[m:])), f"estimated r={r_b[np.nanargmax(np.where(sig_cb, bmax, np.nan))] if np.any(sig_cb) else ''}"],
-            ["CPD joint chart", "mean/variance", first_signal(sig_cj[m:], m), int(np.nansum(sig_cj[m:])), f"estimated r={r_j[np.nanargmax(np.where(sig_cj, jmax, np.nan))] if np.any(sig_cj) else ''}"],
+            [
+                "Individuals Shewhart",
+                "upper tail",
+                first_signal(sig_gamma, m_raw),
+                int(sig_gamma.sum()),
+                f"Gamma UCL={limits['ucl']:.4f}; LCL=0; Phase I-only 3 IQR preprocessing",
+            ],
+            [
+                "Whole Phase II RS/P",
+                "level",
+                "",
+                "",
+                f"p_level={phase_ii_rsp['p_level']:.4f}; split raw index={phase_ii_rsp['level_change_raw_index']}",
+            ],
+            [
+                "Whole Phase II RS/P",
+                "scale",
+                "",
+                "",
+                f"p_scale={phase_ii_rsp['p_scale']:.4f}; split raw index={phase_ii_rsp['scale_change_raw_index']}",
+            ],
+            [
+                "EWMA/CUSUM/CPD",
+                "not used",
+                "",
+                "",
+                "Excluded for Phase II limits because the variable is strongly right-skewed and violates the normality-based assumptions used here",
+            ],
         ],
         columns=["method", "target", "first_signal_index", "signal_count", "setting_or_diagnosis"],
     )
@@ -494,21 +593,23 @@ def main():
 
     results = {
         "summary": summary,
-        "phase_i_n": int(m),
-        "phase_ii_n": int(n - m),
-        "phase_i_mean": mu,
-        "phase_i_std": sigma,
-        "phase_i_min": float(np.min(phase_i)),
-        "phase_i_max": float(np.max(phase_i)),
-        "phase_ii_mean": float(np.mean(phase_ii)),
-        "phase_ii_std": float(np.std(phase_ii, ddof=1)),
-        "rsp": rsp,
+        "gamma_shewhart_limits": limits,
+        "phase_i_rsp": phase_i_rsp,
+        "phase_ii_rsp": phase_ii_rsp,
+        "gamma_shewhart_first_signal_raw_index": first_signal(sig_gamma, m_raw),
+        "gamma_shewhart_signal_count": int(sig_gamma.sum()),
+        "excluded_phase_ii_methods": ["EWMA", "CUSUM", "CPD"],
+        "exclusion_reason": (
+            "The selected variable is strongly right-skewed, so normality-based EWMA, CUSUM, "
+            "and CPD control limits are not used for Phase II monitoring in this revision."
+        ),
         "first_signal_table": comparison.where(pd.notna(comparison), "").to_dict(orient="records"),
     }
     (OUT / "analysis_summary.json").write_text(json.dumps(results, indent=2), encoding="utf-8")
 
-    plot_series(cleaned, m, mu, sigma)
-    plot_monitoring(cleaned, m, charts)
+    plot_series(raw, phase_i_clean, m_raw, limits)
+    plot_phase_ii_gamma(phase_ii_observed, limits, sig_gamma)
+    plot_phase_ii_rsp(phase_ii_observed, phase_ii_rsp)
     print(json.dumps(results, indent=2))
 
 

@@ -2,97 +2,93 @@
   "summary": {
     "variable": "x297",
     "raw_n": 1567,
-    "missing_removed": 2,
-    "outlier_rule": "global 1.5 IQR filter after dropping missing values",
-    "outliers_removed": 128,
-    "clean_n": 1437,
-    "mean": 1410.9112352122477,
-    "std": 1126.509516644805,
-    "min": 0.0,
-    "q1": 556.9946,
-    "median": 1061.4397,
-    "q3": 1995.3859,
-    "max": 4945.9213
+    "raw_phase_i_n": 783,
+    "raw_phase_ii_n": 784,
+    "phase_i_missing_removed": 2,
+    "phase_ii_missing_count_not_preprocessed": 0,
+    "outlier_rule": "Phase I only: 3 IQR filter after dropping Phase I missing values",
+    "phase_i_outlier_lower": -4376.271000000001,
+    "phase_i_outlier_upper": 7265.769200000001,
+    "phase_i_outliers_removed": 24,
+    "phase_i_clean_n": 757,
+    "phase_ii_observed_n_for_diagnostics": 784,
+    "phase_i_mean": 1629.340831968296,
+    "phase_i_std": 1478.012872594479,
+    "phase_i_min": 0.0,
+    "phase_i_q1": 598.1218,
+    "phase_i_median": 1141.4842,
+    "phase_i_q3": 2109.1632,
+    "phase_i_max": 7189.7269,
+    "phase_ii_raw_mean": 1900.079969387755,
+    "phase_ii_raw_std": 1986.931471184398,
+    "phase_ii_raw_min": 50.9117,
+    "phase_ii_raw_max": 15559.9525
   },
-  "phase_i_n": 718,
-  "phase_ii_n": 719,
-  "phase_i_mean": 1403.6367009749301,
-  "phase_i_std": 1105.5320413536836,
-  "phase_i_min": 0.0,
-  "phase_i_max": 4945.9213,
-  "phase_ii_mean": 1418.1756518776076,
-  "phase_ii_std": 1147.7990911145741,
-  "rsp": {
-    "p_level": 0.8675,
-    "p_scale": 0.8325,
-    "level_stat": 1.7682897014482033,
-    "scale_stat": 2.0164052794967797,
-    "level_change_index": 514,
-    "scale_change_index": 711
+  "gamma_shewhart_limits": {
+    "distribution": "gamma",
+    "shape": 1.3607027766221502,
+    "loc": 0.0,
+    "scale": 1199.009859272184,
+    "alpha": 0.005,
+    "lcl": 0.0,
+    "ucl": 7338.843651357241,
+    "positive_fit_n": 756,
+    "zero_count_excluded_from_fit": 1
   },
+  "phase_i_rsp": {
+    "p_level": 0.965,
+    "p_scale": 0.745,
+    "level_stat": 1.5445559756770748,
+    "scale_stat": 2.731472189817323,
+    "level_change_index": 82,
+    "scale_change_index": 34
+  },
+  "phase_ii_rsp": {
+    "p_level": 0.0575,
+    "p_scale": 0.1,
+    "level_stat": 6.900214467731151,
+    "scale_stat": 17.599720985310462,
+    "level_change_index": 776,
+    "scale_change_index": 776,
+    "level_change_raw_index": 1559,
+    "scale_change_raw_index": 1559
+  },
+  "gamma_shewhart_first_signal_raw_index": 842,
+  "gamma_shewhart_signal_count": 23,
+  "excluded_phase_ii_methods": [
+    "EWMA",
+    "CUSUM",
+    "CPD"
+  ],
+  "exclusion_reason": "The selected variable is strongly right-skewed, so normality-based EWMA, CUSUM, and CPD control limits are not used for Phase II monitoring in this revision.",
   "first_signal_table": [
     {
       "method": "Individuals Shewhart",
-      "target": "mean",
-      "first_signal_index": 773,
-      "signal_count": 10,
-      "setting_or_diagnosis": ""
+      "target": "upper tail",
+      "first_signal_index": 842,
+      "signal_count": 23,
+      "setting_or_diagnosis": "Gamma UCL=7338.8437; LCL=0; Phase I-only 3 IQR preprocessing"
     },
     {
-      "method": "Mean EWMA",
-      "target": "mean",
-      "first_signal_index": 743,
-      "signal_count": 17,
-      "setting_or_diagnosis": "lambda=0.1, rho=2.454 (ARL0 approx 200)"
+      "method": "Whole Phase II RS/P",
+      "target": "level",
+      "first_signal_index": "",
+      "signal_count": "",
+      "setting_or_diagnosis": "p_level=0.0575; split raw index=1559"
     },
     {
-      "method": "Variance EWMA",
-      "target": "variance",
-      "first_signal_index": 719,
-      "signal_count": 719,
-      "setting_or_diagnosis": "lambda=0.1, rhoU=2.595, rhoL=1.580"
+      "method": "Whole Phase II RS/P",
+      "target": "scale",
+      "first_signal_index": "",
+      "signal_count": "",
+      "setting_or_diagnosis": "p_scale=0.1000; split raw index=1559"
     },
     {
-      "method": "Adaptive EWMA",
-      "target": "mean",
-      "first_signal_index": 743,
-      "signal_count": 32,
-      "setting_or_diagnosis": "eta1 case (ii): lambda=0.1813, u=2.5752, h=0.7874"
-    },
-    {
-      "method": "Mean CUSUM",
-      "target": "mean",
-      "first_signal_index": 743,
-      "signal_count": 13,
-      "setting_or_diagnosis": "standardized k=0.5, h=4.095"
-    },
-    {
-      "method": "Variance CUSUM",
-      "target": "variance",
-      "first_signal_index": 773,
-      "signal_count": 59,
-      "setting_or_diagnosis": "k_up=1.848, h_up=7.416; k_down=0.462, h_down=-2.446"
-    },
-    {
-      "method": "CPD mean chart",
-      "target": "mean",
-      "first_signal_index": 749,
-      "signal_count": 118,
-      "setting_or_diagnosis": "estimated r=1212"
-    },
-    {
-      "method": "CPD variance chart",
-      "target": "variance",
-      "first_signal_index": 761,
-      "signal_count": 78,
-      "setting_or_diagnosis": "estimated r=1229"
-    },
-    {
-      "method": "CPD joint chart",
-      "target": "mean/variance",
-      "first_signal_index": 762,
-      "signal_count": 71,
-      "setting_or_diagnosis": "estimated r=1229"
+      "method": "EWMA/CUSUM/CPD",
+      "target": "not used",
+      "first_signal_index": "",
+      "signal_count": "",
+      "setting_or_diagnosis": "Excluded for Phase II limits because the variable is strongly right-skewed and violates the normality-based assumptions used here"
     }
   ]
 }
