@@ -327,8 +327,8 @@ def plot_series(raw, phase_i_clean, m_raw, limits):
         label="Phase I used for limits",
     )
     ax.axvline(m_raw + 0.5, color="#9b2226", ls="--", lw=1.3, label=f"Raw phase split: {m_raw} / {m_raw + 1}")
-    ax.axhline(limits["lcl"], color="#b23a48", ls=":", lw=1, label="Gamma LCL = 0")
-    ax.axhline(limits["ucl"], color="#b23a48", ls=":", lw=1, label=f"Gamma UCL ({1 - ALPHA:.3f})")
+    # ax.axhline(limits["lcl"], color="#b23a48", ls=":", lw=1, label="Gamma LCL = 0")
+    # ax.axhline(limits["ucl"], color="#b23a48", ls=":", lw=1, label=f"Gamma UCL ({1 - ALPHA:.3f})")
     ax.set_title(f"SECOM {VARIABLE}: raw phase split and Phase I gamma limit")
     ax.set_xlabel("Raw time-ordered observation index")
     ax.set_ylabel(VARIABLE)
