@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1782170094.60329 "resume.xdv" "resume.pdf" "resume" 1782170094.88484 0
-  "resume.xdv" 1782170094 84060 e6d2b297a449782d34fb7c7e57e47a7e "xelatex"
+["xdvipdfmx"] 1782224834.32987 "resume.xdv" "resume.pdf" "resume" 1782224834.64543 0
+  "resume.xdv" 1782224834 83972 74d07ce81383085386cf19ec9e911b11 "xelatex"
   (generated)
   "resume.pdf"
   (rewritten before read)
-["xelatex"] 1782170093.0485 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/其他/resume/resume.tex" "resume.xdv" "resume" 1782170094.8797 0
+["xelatex"] 1782224832.65319 "c:/Users/USER/Documents/GitHub/WHAT_I_DID/其他/resume/resume.tex" "resume.xdv" "resume" 1782224834.63937 0
   "C:/Users/USER/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1758208108 27012390 af1f10636b3ccac481657f186250e5dd ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136743454 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -201,11 +201,11 @@
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "C:/Users/USER/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/其他/resume/resume.tex" 1782170092 8612 b3991003890d03c97329e1b293021485 ""
-  "resume.aux" 1782170094 1694 faf240ca373ef3ef0733a97b239ca99c "xelatex"
-  "resume.nav" 1782170094 923 02772eacdfe77d67b79e45a640fd18ab "xelatex"
-  "resume.out" 1782170094 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
-  "resume.tex" 1782170092 8612 b3991003890d03c97329e1b293021485 ""
+  "c:/Users/USER/Documents/GitHub/WHAT_I_DID/其他/resume/resume.tex" 1782224832 8704 0ae966ec8428236146a4c1cdcc3fb0ae ""
+  "resume.aux" 1782224834 1694 faf240ca373ef3ef0733a97b239ca99c "xelatex"
+  "resume.nav" 1782224834 923 02772eacdfe77d67b79e45a640fd18ab "xelatex"
+  "resume.out" 1782224833 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
+  "resume.tex" 1782224832 8704 0ae966ec8428236146a4c1cdcc3fb0ae ""
   "大頭照_去背.jpg" 1780072115 174232 9c45deae38ef565c962db2a7a61aae5d ""
   (generated)
   "resume.aux"
