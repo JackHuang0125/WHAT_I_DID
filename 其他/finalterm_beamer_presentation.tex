@@ -1,0 +1,141 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setmainfont{Times New Roman}
+\setCJKmainfont{Microsoft JhengHei}
+\setCJKsansfont{Microsoft JhengHei}
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{TitleBlue}{HTML}{1F3A5F}
+\definecolor{ProgressTeal}{HTML}{2A6F7A}
+\definecolor{StatusRed}{HTML}{FF0000}
+\definecolor{BodyGray}{HTML}{2D2D2D}
+
+\setbeamercolor{structure}{fg=TitleBlue}
+\setbeamercolor{frametitle}{fg=TitleBlue}
+\setbeamercolor{title}{fg=TitleBlue}
+\setbeamercolor{subtitle}{fg=ProgressTeal}
+
+\title{瀚宇博德觀音 AI 專案進度}
+\subtitle{法務合約助手、高階主管智能管理報表與 AI SERVER 管理}
+\author{黃丞暘}
+\date{}
+
+\newcommand{\progressbar}[1]{%
+  \begin{tikzpicture}[baseline=(current bounding box.center)]
+    \fill[gray!20,rounded corners=1pt] (0,0) rectangle (8,0.30);
+    \fill[ProgressTeal,rounded corners=1pt] (0,0) rectangle ({8*#1/100},0.30);
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{觀音｜項 1　法務合約助手}
+\begin{columns}[T]
+\begin{column}{0.36\textwidth}
+\vspace{1.0em}
+{\Large\color{TitleBlue}進度}\par
+\vspace{0.5em}
+{\fontsize{34}{38}\selectfont\color{ProgressTeal}90\%}\par
+\vspace{0.7em}
+\progressbar{90}
+\end{column}
+\begin{column}{0.60\textwidth}
+\begin{block}{專案資訊}
+\begin{tabular}{ll}
+狀態 & \textcolor{StatusRed}{交付測試中} \\
+分類 & 法務 \\
+負責人 & 黃丞暘 \\
+期間 & 8/11 -- 8/31 \\
+\end{tabular}
+\end{block}
+
+{\color{TitleBlue}\large 說明與子項摘要}\par
+\vspace{0.4em}
+\begin{itemize}
+\item 整體進度 90\%｜\textcolor{StatusRed}{狀態：交付測試中}｜預計 8/31
+\item 摘要：比對既有文件與知識庫文件；比對知識庫數個文件
+\item 子項目：測試項目，記錄問題
+\item 進行中：追蹤上傳 KB 文件狀況
+\item 進行中：文件是圖片檔，索取文字不易（預計 9/23）
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{觀音｜項 2　高階主管智能管理報表}
+\begin{columns}[T]
+\begin{column}{0.36\textwidth}
+\vspace{1.0em}
+{\Large\color{TitleBlue}進度}\par
+\vspace{0.5em}
+{\fontsize{34}{38}\selectfont\color{ProgressTeal}80\%}\par
+\vspace{0.7em}
+\progressbar{80}
+\end{column}
+\begin{column}{0.60\textwidth}
+\begin{block}{專案資訊}
+\begin{tabular}{ll}
+狀態 & \textcolor{StatusRed}{進行中} \\
+分類 & 研發 \\
+負責人 & 黃丞暘 \\
+期間 & 8/11 -- 9/11 \\
+\end{tabular}
+\end{block}
+
+{\color{TitleBlue}\large 說明與子項摘要}\par
+\vspace{0.4em}
+\begin{itemize}
+\item 整體進度 80\%｜\textcolor{StatusRed}{狀態：進行中}｜預計 9/11
+\item 摘要：根據提問，索取 DB，輸出敘述與圖
+\item 子項目：測試項目，記錄問題
+\item 待加入功能：多表、多圖生成；預測；查詢前先讀 SKILLS（加強 LLM 讀表）
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{觀音｜項 3　AI SERVER 管理}
+\begin{columns}[T]
+\begin{column}{0.36\textwidth}
+\vspace{1.0em}
+{\Large\color{TitleBlue}進度}\par
+\vspace{0.5em}
+{\fontsize{34}{38}\selectfont\color{ProgressTeal}0\%}\par
+\vspace{0.7em}
+\progressbar{0}
+\end{column}
+\begin{column}{0.60\textwidth}
+\begin{block}{專案資訊}
+\begin{tabular}{ll}
+狀態 & \textcolor{StatusRed}{進行中} \\
+分類 & 集團 \\
+負責人 & 黃丞暘 \\
+期間 & 無 \\
+\end{tabular}
+\end{block}
+
+{\color{TitleBlue}\large 說明與子項摘要}\par
+\vspace{0.4em}
+\begin{itemize}
+\item 整體進度 0\%｜\textcolor{StatusRed}{狀態：進行中}｜預計：無
+\item 摘要：AI-Stack 建構部署、LiteLLM 管理、Harbor 儲存 Image
+\item 子項目：確認博德、嘉聯益 AI SERVER 規格，確認 PoC 可行性（9/11 完成）
+\item 進行中：與群聯、研華討論 HCI 部署在兩台設備的可行性（CPU 48 Cores、DRAM 512 GB、VRAM 384 GB）
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\end{document}
