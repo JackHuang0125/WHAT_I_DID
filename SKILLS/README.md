@@ -1,36 +1,64 @@
-# Claude Skills
+# Dify 工作流程測試紀錄
 
-這個資料夾存放我自己的 Claude Code Skills，用 Git 在多台電腦之間同步。
+對象：Dify 應用「TEST_法務合約助手」（advanced-chat）
+網址：https://console.wise-paas.psagroups.com/app/2f18f7b8-5160-41ec-8a87-86be2b9ff3b6/workflow
 
-每個 Skill 一個資料夾，裡面至少有一個 `SKILL.md`：
+用途：保存每次測試的輸入、實際走的節點路徑、各 LLM 節點收到的 prompt 與輸出、評估結論，
+作為之後調整 LLM prompt 或節點設定的依據。
+
+## 資料夾結構
 
 ```
-SKILLS/
-├── task-orchestrator/
-│   └── SKILL.md
-└── setup.ps1
+法務合約助手/
+├─ README.md                        本說明
+├─ test-log.md                      所有測試的總表（一列一次測試，連到 report，先看這裡）
+├─ runs/YYYY-MM-DD_NN_<摘要>.md     單次修改與測試的 report（所有 report 都放這裡）
+├─ CLAUDE.md                        給 Claude 的入口：開始維護前要先讀的檔案
+├─ workflow-map.md                  流程地圖：路由、節點 id、分類器、對話變數讀寫、已知注意事項
+├─ 主管報告_使用情境清單.md           給主管看的白話情境清單（已測試／尚未遇到）
+└─ tools/extract-workflow-map.js    在 Dify 編排頁執行，擷取草稿結構以更新 workflow-map.md
 ```
 
-## 新電腦設定（只需做一次）
+Claude Code 專案：用本資料夾開啟 Claude Code，`CLAUDE.md` 會要求每次先到 GitHub 檢查 Skills 是否有更新。
 
-```powershell
-git clone https://github.com/JackHuang0125/WHAT_I_DID.git $env:USERPROFILE\WHAT_I_DID
-powershell -ExecutionPolicy Bypass -File $env:USERPROFILE\WHAT_I_DID\SKILLS\setup.ps1
-```
+## 每次修改測試後的紀錄
 
-`setup.ps1` 會把 `%USERPROFILE%\.claude\skills` 建成指向本資料夾的 Junction，
-Claude Code 會直接讀這裡的 Skills。
+只做三件事：
+1. 新增 report `runs/YYYY-MM-DD_NN_<摘要>.md`（NN 接續 test-log 的編號）。修改前後內容、測試結果、待決定事項都寫在 report 裡。
+2. 更新本 README。
+3. 在 `test-log.md` 加一列，連到 report。
 
-## 日常同步
+report 內容：
+- **修改**：哪個節點、改了什麼（修改前後）。
+- **每輪記錄**：使用者輸入、附件、實際走的節點路徑、分類器選了哪一類、if-else 結果、token 數與耗時。
+- **LLM 節點**：實際送入的 prompt 重點（變數展開後）與輸出，判斷問題出在「上游給的資料」還是「prompt 本身」。
+- **評估**：通過／部分通過／失敗，列出觀察到的問題。
+- **待決定事項**：可直接執行的修改建議。
 
-```powershell
-cd $env:USERPROFILE\WHAT_I_DID
-git pull
-```
+## 評估標準（每輪都檢查）
 
-pull 完重新開一個 Claude 對話就會載入最新的 Skills。
+| 項目 | 說明 |
+|---|---|
+| 路由 | 分類器與 if-else 是否走到預期分支 |
+| 文件定位 | 「第 N 份」「上一份」「檔名」是否對應到正確文件 |
+| 內容依據 | 回答是否只根據提供的資料，有無補造條號、金額、日期 |
+| 來源區分 | 附件與知識庫文件是否清楚區分、沒有混用 |
+| 一致性 | 回答內的數量、編號、條號前後一致，並與顯示的清單一致 |
+| 成本 | 主要 LLM 節點的 token 數與耗時是否合理 |
 
-## 新增／修改 Skill
+## 測試方式
 
-在任一台電腦請 Claude 新增或修改 Skill，Claude 會先列出變更請我確認，
-同意後才 commit 並 push 到這個 repo。
+目前由 Claude 透過瀏覽器呼叫 Dify 草稿執行 API（等同「預覽」），
+執行後再讀取 `workflow-runs/<run_id>/node-executions` 取得每個節點的輸入輸出。
+修改草稿用 `GET`／`POST /workflows/draft`（帶最新 hash），修改前先把分頁移離畫布。
+測試只影響草稿與預覽對話紀錄，不影響已發布版本。
+
+完整流程無法執行時，可用單節點試跑 `POST /workflows/draft/nodes/<node_id>/run` 驗證個別節點（會覆蓋該節點的「上次運行」紀錄）。
+
+## 目前狀態（2026-10-19）
+
+- 最新修改：#12 情境 A 完成（附件＋清單第 N 份改走找文件），#11 情境 B 完成。草稿 hash `d54a36e9…`，未發布。
+- #13 組合情境 11、14、15 已測（只測不改）：14、15 通過；新發現 R1 結合語句被條款名稱帶偏、指定公司查無資料時回答擴大到其他集團公司。
+- #14 相關段落指定單一公司時不擴大到其他集團公司（#13 發現 2）已修正並通過，草稿 hash `33c2cda8…`，未發布。
+- 未處理：#13 待決定 1（R1 結合語句被條款名稱帶偏，使用者決定暫不處理）、#09 P2-a 條號遺失、#12 待決定 2（1 份附件時「第 1 份」的歧義）、#10 待決定 4（類似文件只讀前 3 份）、#11 待決定 1～2（字典替換「華科→華新科技」的影響、集團公司清單三處維護）。
+- 暫緩構想（等本版給法務人員試用後再決定）：R6 搜尋改成只回傳清單、不讀前三份內容，由使用者指定第 N 筆再走 R5 讀全文；同時拿掉 `currentkbcontext` 等搜尋內容變數與「這幾份」追問。另一個方案是依問題類型分流：找文件、列清單、問數量時只給清單；問特定內容或條款時維持讀前 3 份。優缺點：只給清單較省負載，也不會依排錯的前 3 份回答，但內容題要多一輪，而且只靠檔名難以判斷，例如分不出「全家保全」和「全家便利商店」。
