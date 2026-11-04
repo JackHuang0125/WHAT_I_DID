@@ -33,23 +33,28 @@ Dify 畫布的頁面內容與截圖每次都有數萬 tokens，而且會留在�
 | `disconnect <app> <來源> <目標> [--handle H]` | 刪除連線 |
 | `delete-node <app> <node_id> [--force]` | 刪除節點與其連線；有其他節點引用它的變數時拒絕 |
 
-改結構的四個指令都可加 `--dry-run`，只顯示會做什麼、不寫回。
 | `run <app> "<問題>" [--inputs JSON] [--conv ID]` | 草稿執行（預覽），印每個節點摘要、回答、排隊時間。workflow 類型且只有一個輸入變數時，問題會自動填入 |
 | `run-node <app> <node_id> --inputs JSON` | 單節點試跑（只呼叫 1 次 LLM） |
+| `run-code <app> <node_id> --inputs JSON` | 在本機執行 python3 code 節點的 `main()`，不呼叫 Dify |
+| `batch <app> <案例.json> -o <結果.jsonl>` | 依序跑一批案例（code／node／多輪 turns），結果逐筆寫入；中斷後再執行會接續。`--dry-run` 先看題目、`--only` 只跑部分、`--rerun` 全部重跑 |
 | `trace <app> <run_id> [--node ID]` | 讀某次運行的節點紀錄；加 `--node` 看該節點的 inputs/outputs |
+| `conv-vars <app> <conversation_id>` | 讀某個對話目前的對話變數 |
+| `map <app> -o <檔>` | 擷取流程結構（節點重點、連線、對話變數讀取者），更新流程地圖用 |
+
+改結構的四個指令與 `batch` 都可加 `--dry-run`，只顯示會做什麼、不寫回／不送出。
 
 輸出過長會截斷，真的需要全文才加 `--full`。
 
 ## 修改流程
 
 1. 從工作區的 `CLAUDE.md` / `README.md` 取得 app_id（沒有就用 `apps <關鍵字>` 找），`nodes` 找到節點 id。
-2. `get ... -o .edit\<名稱>.txt` 取出要改的欄位到工作區的 `.edit\`（只放要寫回 Dify 的內容，不放要執行的腳本）
-   `get -o` 會自動建立資料夾，不要先執行 `New-Item` 或 `mkdir`。
-4. 用編輯工具改那個檔案（只改需要的段落）。不要用 PowerShell 的 `>` 或 `Out-File` 寫檔（會存成 UTF-16）。
-5. 先向使用者列出要改的節點、改什麼、怎麼測，**等同意後**才 `set` 寫回。
-6. 改流程結構時：`node --raw` 看類似節點當範本 → 寫 JSON 檔 → `add-node` / `connect` / `disconnect`
+2. `get ... -o .edit\<名稱>.txt` 取出要改的欄位到工作區的 `.edit\`（只放要寫回 Dify 的內容，不放要執行的腳本）。`-o` 的資料夾會自動建立，不要先執行 `New-Item` 或 `mkdir`。
+3. 用編輯工具改那個檔案（只改需要的段落）。不要用 PowerShell 的 `>` 或 `Out-File` 寫檔（會存成 UTF-16）。
+4. 先向使用者列出要改的節點、改什麼、怎麼測，**等同意後**才 `set` 寫回。
+5. 改流程結構時：`node --raw` 看類似節點當範本 → 寫 JSON 檔 → `add-node` / `connect` / `disconnect`
    先加 `--dry-run` 確認，再正式執行；最後用 `edges` 檢查連線。
-7. 測試：只驗證單一提示詞或 code 時用 `run-node`；需要看路由時才用 `run`。
+6. 測試：只驗證單一提示詞時用 `run-node`、code 用 `run-code`；需要看路由時才用 `run`；
+   有回歸集或超過 3 題時用 `batch`（案例與結果放 `.edit\`），不要一題一題手動跑。
 
 ## 工具不夠用時：在 dify_api.py 新增指令
 
