@@ -43,12 +43,13 @@ Dify 畫布的頁面內容與截圖每次都有數萬 tokens，而且會留在�
 ## 修改流程
 
 1. 從工作區的 `CLAUDE.md` / `README.md` 取得 app_id（沒有就用 `apps <關鍵字>` 找），`nodes` 找到節點 id。
-2. `get ... -o .edit\<名稱>.txt` 取出要改的欄位到工作區的 `.edit\`（只放要寫回 Dify 的內容，不放要執行的腳本）。
-3. 用編輯工具改那個檔案（只改需要的段落）。不要用 PowerShell 的 `>` 或 `Out-File` 寫檔（會存成 UTF-16）。
-4. 先向使用者列出要改的節點、改什麼、怎麼測，**等同意後**才 `set` 寫回。
-5. 改流程結構時：`node --raw` 看類似節點當範本 → 寫 JSON 檔 → `add-node` / `connect` / `disconnect`
+2. `get ... -o .edit\<名稱>.txt` 取出要改的欄位到工作區的 `.edit\`（只放要寫回 Dify 的內容，不放要執行的腳本）
+   `get -o` 會自動建立資料夾，不要先執行 `New-Item` 或 `mkdir`。
+4. 用編輯工具改那個檔案（只改需要的段落）。不要用 PowerShell 的 `>` 或 `Out-File` 寫檔（會存成 UTF-16）。
+5. 先向使用者列出要改的節點、改什麼、怎麼測，**等同意後**才 `set` 寫回。
+6. 改流程結構時：`node --raw` 看類似節點當範本 → 寫 JSON 檔 → `add-node` / `connect` / `disconnect`
    先加 `--dry-run` 確認，再正式執行；最後用 `edges` 檢查連線。
-6. 測試：只驗證單一提示詞或 code 時用 `run-node`；需要看路由時才用 `run`。
+7. 測試：只驗證單一提示詞或 code 時用 `run-node`；需要看路由時才用 `run`。
 
 ## 工具不夠用時：在 dify_api.py 新增指令
 
