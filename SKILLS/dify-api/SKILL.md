@@ -14,7 +14,7 @@ description: 用 dify_api.py 命令列工具讀取、修改、測試 Dify 工作
 Dify 畫布的頁面內容與截圖每次都有數萬 tokens，而且會留在對話裡讓之後每一輪變慢；
 點擊畫布也常失敗重試。這個工具只回傳需要的欄位，一次修改通常只用幾千 tokens。
 **不要開 Dify 網頁、不要截圖、不要用 run_playwright_code 呼叫 console API。**
-**也不要自己寫腳本或 `python -c` 直接呼叫 Dify API、讀取 cookie.txt；** 工具做不到時停下來告訴使用者。
+**也不要自己寫腳本或 `python -c` 直接呼叫 Dify API、讀取 cookie.txt（勾點會擋）；** 工具做不到時，照下方「工具不夠用時」在 dify_api.py 新增指令。
 
 ## 指令
 
@@ -43,12 +43,25 @@ Dify 畫布的頁面內容與截圖每次都有數萬 tokens，而且會留在�
 ## 修改流程
 
 1. 從工作區的 `CLAUDE.md` / `README.md` 取得 app_id（沒有就用 `apps <關鍵字>` 找），`nodes` 找到節點 id。
-2. `get ... -o %TEMP%\dify-edit\<名稱>.txt` 取出要改的欄位（暫存檔不要放進助手資料夾）。
-3. 用編輯工具改那個檔案（只改需要的段落）。
+2. `get ... -o .edit\<名稱>.txt` 取出要改的欄位到工作區的 `.edit\`（只放要寫回 Dify 的內容，不放要執行的腳本）。
+3. 用編輯工具改那個檔案（只改需要的段落）。不要用 PowerShell 的 `>` 或 `Out-File` 寫檔（會存成 UTF-16）。
 4. 先向使用者列出要改的節點、改什麼、怎麼測，**等同意後**才 `set` 寫回。
 5. 改流程結構時：`node --raw` 看類似節點當範本 → 寫 JSON 檔 → `add-node` / `connect` / `disconnect`
    先加 `--dry-run` 確認，再正式執行；最後用 `edges` 檢查連線。
 6. 測試：只驗證單一提示詞或 code 時用 `run-node`；需要看路由時才用 `run`。
+
+## 工具不夠用時：在 dify_api.py 新增指令
+
+1. 先跑 `--help` 確認沒有現成指令能做到。
+2. 向使用者說明要加的指令名稱、參數、用途，等同意後才改。
+3. 照現有寫法：用 `call` / `get_draft` / `save_draft`，不另外處理登入或 cookie；
+   會改草稿的指令要支援 `--dry-run`；在檔案開頭的說明（`--help` 內容）補上用法。
+4. 不可移除或放寬既有保護：delete-node 的引用檢查、不印出 cookie、只改 TEST 應用。
+5. 改完先執行 `python -m py_compile C:\Users\ur81260844\Documents\dify-tests\dify_api.py` 與 `--help`，
+   再用 `--dry-run` 測新指令。
+6. 驗證通過後執行 `git -C C:\Users\ur81260844\Documents\dify-tests commit -am "dify_api: 新增 <指令>"`；
+   改壞時用 `git -C C:\Users\ur81260844\Documents\dify-tests checkout dify_api.py` 還原。
+7. 把這份 SKILL.md 指令表要新增的那一列交給使用者，由使用者更新到 GitHub。
 
 ## 規則
 
