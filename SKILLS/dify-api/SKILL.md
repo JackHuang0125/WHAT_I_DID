@@ -32,7 +32,6 @@ Dify 畫布的頁面內容與截圖每次都有數萬 tokens，而且會留在�
 | `connect <app> <來源> <目標> [--handle H]` | 新增連線；if-else／問題分類器要指定分支 handle（不給會列出可用的） |
 | `disconnect <app> <來源> <目標> [--handle H]` | 刪除連線 |
 | `delete-node <app> <node_id> [--force]` | 刪除節點與其連線；有其他節點引用它的變數時拒絕 |
-
 | `run <app> "<問題>" [--inputs JSON] [--conv ID]` | 草稿執行（預覽），印每個節點摘要、回答、排隊時間。workflow 類型且只有一個輸入變數時，問題會自動填入 |
 | `run-node <app> <node_id> --inputs JSON` | 單節點試跑（只呼叫 1 次 LLM） |
 | `run-code <app> <node_id> --inputs JSON` | 在本機執行 python3 code 節點的 `main()`，不呼叫 Dify |
