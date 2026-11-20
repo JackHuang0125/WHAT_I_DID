@@ -1,0 +1,121 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\graphicspath{{../outputs/}}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setmainfont{Times New Roman}
+\setCJKmainfont{Microsoft JhengHei}
+\setCJKsansfont{Microsoft JhengHei}
+\setbeamertemplate{navigation symbols}{}
+
+\title{資訊部內部 AI Agent 方案}
+\subtitle{知識導航、需求受理、結案知識回收}
+\author{AI發展部　黃丞暘}
+\date{2026 年 9 月 29 日}
+
+\begin{document}
+% 第 1 頁：開頭
+\begin{frame}
+\titlepage
+\end{frame}
+
+% 第 2 頁：三個建議的 Agent（What）
+\begin{frame}{三個建議的 Agent｜What}
+\footnotesize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.26\textwidth}
+\begin{block}{1. 知識導航助手}
+\textbf{做什麼：}查詢新人指引、SOP、申請流程、系統窗口及開發／維運文件。\par\medskip
+\textbf{輸出：}操作說明；無資料時明確表示無法確認。
+\end{block}
+\end{column}
+\begin{column}{0.36\textwidth}
+\begin{block}{2. 需求受理與草稿助手}
+\textbf{做什麼：}整理口語問題或申請需求，反問缺少的必要資訊。\par\medskip
+\textbf{輸出：}供人工確認的工單／申請草稿，不自動送件。
+\end{block}
+\end{column}
+\begin{column}{0.32\textwidth}
+\begin{block}{3. 結案知識回收助手}
+\textbf{做什麼：}從已確認的處理紀錄產生 FAQ、Error Case 或 SOP 修訂草稿。\par\medskip
+\textbf{輸出：}標示適用範圍與待確認處，主管審核。
+\end{block}
+\end{column}
+\end{columns}
+\vspace{0.5em}
+\begin{alertblock}{範圍定位}
+新人教育訓練是知識導航助手的第一個使用情境。
+\end{alertblock}
+\end{frame}
+
+% 第 3 頁：主要原因（Why）
+\begin{frame}{選擇這三項的原因｜Why}
+\footnotesize
+\begin{tabular}{p{0.20\textwidth}p{0.35\textwidth}p{0.37\textwidth}}
+\toprule
+\textbf{方案} & \textbf{目前問題} & \textbf{導入價值} \\
+\midrule
+知識導航 & 已有文件散落各處，新人與同仁仍需反覆詢問。 & 讓有效知識找得到、查得到來源與版本。 \\
+\addlinespace[0.7em]
+需求受理 & 使用者描述不完整，資訊部需反覆追問才能處理。 & 先補齊系統、環境、時間、影響範圍與證據。 \\
+\addlinespace[0.7em]
+知識回收 & 問題雖已解決，方法可能只留在個人經驗或對話中。 & 經審核後回流 FAQ／SOP，減少下次從頭處理。 \\
+\bottomrule
+\end{tabular}
+\vspace{0.8em}
+\begin{alertblock}{三者形成循環}
+已核准知識供查詢 $\rightarrow$ 新需求完整受理 $\rightarrow$ 已解決經驗審核回收 $\rightarrow$ 更新知識。
+\end{alertblock}
+\end{frame}
+
+% 第 4 頁：輔助說明（How）
+\begin{frame}{測試與上線｜How}
+\footnotesize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.56\textwidth}
+\begin{block}{測試}
+\begin{enumerate}
+\item \textbf{知識導航：}整理有效 SOP、負責人、版本及真實測試題；回答必須附來源。
+\item \textbf{需求受理：}先收手動輸入，擷取欄位並反問缺漏，只產生草稿。
+\item \textbf{知識回收：}手動提交少量已確認案例；整理成待審核 FAQ／SOP 草稿。
+\item \textbf{迭代：}記錄錯誤、文件缺口及人工修正，再調整 Workflow。
+\end{enumerate}
+\end{block}
+\end{column}
+\begin{column}{0.41\textwidth}
+\begin{alertblock}{正式環境上線}
+\begin{itemize}
+\item 僅使用公司核准的文件與資料。
+\item 案例先去識別化。
+\item 未確認的根因不得寫成 SOP。
+\item 新知識須經主管核准才入知識庫。
+\item 不自動寄信、送簽、派案、開權限或操作 PROD。
+\end{itemize}
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+% 第 5 頁：預期目標
+\begin{frame}{預期目標與驗收方式}
+\footnotesize
+\begin{tabular}{p{0.22\textwidth}p{0.38\textwidth}p{0.32\textwidth}}
+\toprule
+\textbf{面向} & \textbf{量測方式} & \textbf{驗收條件} \\
+\midrule
+知識導航 & 可用答案取得時間、正確來源命中、有據回答與正確拒答。 & 扣除查證時間仍省時；答案可追溯。 \\
+\addlinespace[0.6em]
+需求受理 & 首次資訊完整率、補件輪數與草稿人工修正時間。 & 減少反覆詢問；送出前仍由人確認。 \\
+\addlinespace[0.6em]
+知識回收 & 草稿審核通過率、文件補齊時間、後續同類問題是否可查。 & 案例可複用；未驗證內容不入正式知識庫。 \\
+\addlinespace[0.6em]
+整體效益與風險 & 實際使用任務、覆核及維護工時、敏感資料事件。 & 有人使用，且風險可控。 \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,148 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{booktabs}
+\usetheme{Madrid}
+\usecolortheme{default}
+\setmainfont{Times New Roman}
+\setCJKmainfont{Microsoft JhengHei}
+\setCJKsansfont{Microsoft JhengHei}
+\setbeamertemplate{navigation symbols}{}
+\title[工作指引助手]{工作指引助手}
+\subtitle{行政辦理指引與 IT 系統服務導航}
+\author{AI發展部　黃丞暘}
+\date{2026 年 10 月 14 日}
+\begin{document}
+
+% 封面
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{提案}
+\small
+\begin{block}{工作指引助手}
+整合行政辦理與 IT 服務指引。
+\end{block}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+\begin{block}{行政辦理：怎麼辦、去哪拿}
+掛號信封取得、文具申請、報帳表單與填寫說明。
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{block}{IT 導航：怎麼用、該找誰}
+印表機加入指引；Sajet MES、Lotus Notes、EIP 的服務窗口與分機。
+\end{block}
+\end{column}
+\end{columns}
+\begin{alertblock}{目的}
+縮短「不知道從哪開始」到「取得可執行下一步」的時間。\\
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{方法}
+\footnotesize
+\begin{block}{查詢流程}
+同仁提問 $\rightarrow$ 必要時補問條件 $\rightarrow$ 檢索文件
+$\rightarrow$ 回答 $\rightarrow$ 同仁自行辦理／聯繫 $\rightarrow$ 紀錄感想
+\end{block}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.55\textwidth}
+\begin{block}{建議 2--4 週小規模試辦}
+\begin{enumerate}
+\item 數個行政/系統問題。
+\item 各單位與資訊部確認文件、窗口、適用範圍。
+\item 於 Dify 建立資料庫，Agent檢索回應。
+\item 試錯，修正，評估。
+\end{enumerate}
+\end{block}
+\end{column}
+\begin{column}{0.42\textwidth}
+\begin{alertblock}{回答與限制}
+\begin{itemize}
+\item 回答包含下一步、來源與更新日期。
+\item 需求不明時，補問必要條件。
+\item 查無依據、資料衝突時不猜測。
+\item 不自動送件、派案、開權限或改設定。
+\item 不提供密碼、連線字串等機敏資訊。
+\end{itemize}
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{結果}
+\centering
+\footnotesize
+\begin{tabular}{p{0.35\textwidth}p{0.35\textwidth}}
+\toprule
+目前觀察／條件 & 預期改善 \\
+\midrule
+新人不知道設備、表單或流程 & 一次取得適用指引與來源 \\
+\addlinespace[0.6em]
+不熟悉系統負責窗口與分機 & 找到對應需求的正確窗口 \\
+\addlinespace[0.6em]
+其他部門僅能使用公司內部 AI & 在核准入口使用公司工作資料 \\
+\bottomrule
+\end{tabular}
+\begin{alertblock}{預期結果}
+\begin{itemize}
+\item 詢問次數 3 $\rightarrow$ 1。 
+\item 處理時間 10 分鐘 $\rightarrow$ 5 分鐘。
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{補充1｜應用場景}
+\footnotesize
+\begin{tabular}{p{0.29\textwidth}p{0.35\textwidth}p{0.26\textwidth}}
+\toprule
+同仁怎麼問 & 預期回答內容 & 必備檢索文件 \\
+\midrule
+掛號信封去哪裡拿？ & 領取地點、時段與窗口 & 郵務用品領取指引 \\
+\addlinespace[0.5em]
+文具要怎麼申請？ & 申請入口、必要欄位及後續步驟 & 文具申請辦法 \\
+\addlinespace[0.5em]
+報帳要選哪張表？ & 依費用類型提供表單及填寫範例；未明確時補問 & 報帳規範與範本 \\
+\addlinespace[0.5em]
+我這個區域要加哪台印表機？ & 依位置提供設備名稱與加入指引 & 區域設備對照表、操作指引 \\
+\addlinespace[0.5em]
+Sajet MES／Lotus Notes／EIP 要找誰？ & 依操作、權限或異常提供核准窗口與分機 & 系統服務窗口對照表 \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{補充2｜範例檢索文件}
+\footnotesize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+\begin{block}{範例 A：掛號信封領取指引}
+文件 ID：ADM-MAIL-001\\
+適用範圍：〔待填廠區／部門〕\\
+關鍵字：掛號、信封、郵務用品\\
+領取地點／時段：〔權責單位確認〕\\
+領取方式：〔自行領取或登記〕\\
+窗口／分機：〔待確認〕\\
+來源：〔核准文件位置〕
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{block}{範例 B：Sajet MES 服務窗口}
+文件 ID：IT-CONTACT-MES-001\\
+適用範圍：〔待填廠區／使用者〕\\
+系統別名：〔核准的常見名稱〕\\
+操作諮詢：〔窗口／分機〕\\
+權限申請：〔流程／窗口〕\\
+異常回報：〔窗口／代理人〕\\
+來源：〔核准窗口表位置〕
+\end{block}
+\end{column}
+\end{columns}
+\begin{alertblock}{共通欄位與試辦需求}
+兩份文件均須記錄資料負責人、版本、更新日、覆核日及可見範圍。\\
+本次請支持：指定資料窗口、提供核准文件，安排少量同仁試用；\\
+依答案正確性、查詢時間與維護成本，決定是否擴大。
+\end{alertblock}
+\end{frame}
+\end{document}
